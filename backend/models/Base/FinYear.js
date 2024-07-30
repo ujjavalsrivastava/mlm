@@ -1,0 +1,128 @@
+const sequelize = require("../../config/sequelize");
+
+// @author Madhur
+const Fin_Year = sequelize.define(
+  "fin_year",
+  {
+    days: {
+      type: "DataTypes.FLOAT",
+      unique: false,
+      allowNull: true,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    created_by: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: false,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    entry_date: {
+      type: "DataTypes.DATE",
+      unique: false,
+      allowNull: true,
+      primaryKey: false,
+      defaultValue: "NULL::timestamp without time zone",
+      autoIncrement: false,
+    },
+    fin_year_to: {
+      type: "DataTypes.DATE",
+      unique: false,
+      allowNull: true,
+      primaryKey: false,
+      defaultValue: "NULL::timestamp without time zone",
+      autoIncrement: false,
+    },
+    default_unit: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: true,
+      primaryKey: false,
+      defaultValue: "NULL::bpchar",
+      autoIncrement: false,
+    },
+    creation_date: {
+      type: "DataTypes.DATE",
+      unique: false,
+      allowNull: false,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    fin_year_code: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: false,
+      primaryKey: true,
+      defaultValue: "NULL::character varying",
+      autoIncrement: false,
+    },
+    fin_year_from: {
+      type: "DataTypes.DATE",
+      unique: false,
+      allowNull: true,
+      primaryKey: false,
+      defaultValue: "NULL::timestamp without time zone",
+      autoIncrement: false,
+    },
+    last_updated_by: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: false,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    default_fin_year: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: false,
+      primaryKey: false,
+      defaultValue: "'NO'::character varying",
+      autoIncrement: false,
+    },
+    last_update_date: {
+      type: "DataTypes.DATE",
+      unique: false,
+      allowNull: false,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    special_entry_date: {
+      type: "DataTypes.DATE",
+      unique: false,
+      allowNull: true,
+      primaryKey: false,
+      defaultValue: "NULL::timestamp without time zone",
+      autoIncrement: false,
+    },
+    fin_year_description: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: true,
+      primaryKey: false,
+      defaultValue: "NULL::character varying",
+      autoIncrement: false,
+    },
+    object_version_number: {
+      type: "DataTypes.INTEGER",
+      unique: false,
+      allowNull: false,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+  },
+  {
+    tableName: "fin_year",
+    timestamps: true,
+    updatedAt: "updated_at",
+    createdAt: "created_at",
+  }
+);
+
+module.exports = Fin_Year;

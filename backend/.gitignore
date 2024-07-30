@@ -1,0 +1,16 @@
+/node_modules
+/public/download
+/public/expence
+/public/reports
+/public/BioDataEntry
+/storage
+/storage/logs
+/bootstrap/cache
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log

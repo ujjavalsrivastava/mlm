@@ -1,0 +1,120 @@
+const sequelize = require("../../config/sequelize");
+
+const Travel_Expense = sequelize.define(
+  "travel_expense",
+  {
+   
+    title: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: false,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    amount: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: false,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    category: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: false,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    currency: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: false,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    distance: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: true,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    created_at: {
+      type: "DataTypes.DATE",
+      unique: false,
+      allowNull: true,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    updated_at: {
+      type: "DataTypes.DATE",
+      unique: false,
+      allowNull: true,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    to_location: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: true,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    expense_date: {
+      type: "DataTypes.DATE",
+      unique: false,
+      allowNull: false,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    expense_type: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: false,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    from_location: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: true,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    project_center: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: true,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+    expense_comment: {
+      type: "DataTypes.STRING",
+      unique: false,
+      allowNull: true,
+      primaryKey: false,
+      defaultValue: null,
+      autoIncrement: false,
+    },
+  },
+  {
+    tableName: "travel_expense",
+    timestamps: true,
+    updatedAt: "updated_at",
+    createdAt: "created_at",
+  }
+);
+
+module.exports = Travel_Expense;
