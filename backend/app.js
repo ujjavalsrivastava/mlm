@@ -1,29 +1,21 @@
 const express = require("express");
 const cors = require("cors");
-const v1Router = require("./routes/v1Routes");
-const dotenv = require("dotenv").config();
+const routers = require("./routes");
 
 const app = express();
 app.use(
-	cors({
-		origin: ["http://localhost:6006", "http://192.168.1.69:6006"],
+  cors({
+    origin: ["http://localhost:6006", "http://192.168.1.69:6006"],
 
-		credentials: true,
-	}),
+    credentials: true,
+  })
 );
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-app.use(`/api/v1`, v1Router);
+app.use(`/api/`, routers);
 
 app.use("/", (req, res) => {
-	res.status(200).json({ status: "success", message: "Server Running" });
-});
-
-
-app.use((error, req, res, next) => {
-	console.log(error);
-	res.status(500).json({ error: error.message });
+  res.status(200).json({ status: "success", message: "Server Running" });
 });
 
 module.exports = app;
