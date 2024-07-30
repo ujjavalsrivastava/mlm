@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const routers = require("./routes");
+const userRoutes = require("./routes/user-route");
 
 const app = express();
 app.use(
@@ -12,7 +12,7 @@ app.use(
 );
 app.use(express.json());
 
-app.use(`/api/`, routers);
+app.use(`/api/user`, userRoutes);
 
 app.use("/", (req, res) => {
   res.status(200).json({ status: "success", message: "Server Running" });
