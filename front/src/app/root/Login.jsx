@@ -6,7 +6,7 @@ const LoginPage = () => {
 
   return (
     <>
-    <div style={{backgroundImage:`url(${backgroundImage})`}}>
+    <div style={{backgroundImage:`url(${backgroundImage})`,height:'100vh'}}>
     <div className="login-box" >
   <div className="login-box-body" >
     <h3 className="login-box-msg">Sign In</h3>
