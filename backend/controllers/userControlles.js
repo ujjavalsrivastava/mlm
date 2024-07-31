@@ -22,15 +22,20 @@ const createUser = async (req, res) => {
 
     const level = !referalCode ? 1 : referedUser ? referedUser?.level + 1 : 1;
 
-    const savedUser = await new User({
+    const userData = {
       name,
       email,
       password,
       level,
       role: level === 1 ? "associate" : "user",
-    }).save();
+    };
+    if (referedUser?._id) {
+      userData["upperLevel"] = referedUser._id;
+    }
+
+    const savedUser = await new User(userData).save();
     if (level > 1) {
-      referedUser.directChild.push(savedUser._id);
+      referedUser.lowerLevel.push(savedUser._id);
       await referedUser.save();
     }
     return res.status(200).json({ message: "user created successfully" });
@@ -55,7 +60,10 @@ const loginHandler = async (req, res) => {
       .status(400)
       .json({ error: "email id or password is incorrect", code: 802 });
 
-  const token = jwt.sign({ email, userId: user._id }, process.env.TOKEN_SECRET);
+  const token = jwt.sign(
+    { email, userId: user._id, level: user.level },
+    process.env.TOKEN_SECRET
+  );
 
   res.json({ message: "Login Successful", token });
 };

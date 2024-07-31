@@ -15,7 +15,8 @@ const userSchema = new Schema(
         if (value > 8) throw new Error("referal is not allowed above level 8");
       },
     },
-    directChild: [{ type: Types.ObjectId, ref: "User", required: false }],
+    lowerLevel: [{ type: Types.ObjectId, ref: "User", required: false }],
+    upperLevel: { type: Types.ObjectId, ref: "User", required: false },
     role: {
       type: String,
       default: "user",
