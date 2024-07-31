@@ -68,4 +68,15 @@ const loginHandler = async (req, res) => {
   res.json({ message: "Login Successful", token });
 };
 
-module.exports = { createUser, loginHandler };
+const getUserProfile = (req, res) => {
+  res.json(req.user);
+};
+
+const updateProfile = async (req, res) => {
+  const user = req.user;
+  const { name } = req.body;
+  user.name = name;
+  await user.save();
+  res.json({ message: "user data updated successfully" });
+};
+module.exports = { createUser, loginHandler, getUserProfile, updateProfile };
