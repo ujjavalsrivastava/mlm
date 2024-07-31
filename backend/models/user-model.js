@@ -7,13 +7,8 @@ const userSchema = new Schema(
     email: { type: String, required: true, unique: true },
     referalCode: {
       type: String,
-      default: "",
-    },
-    level: {
-      type: Number,
-      validate(value) {
-        if (value > 8) throw new Error("referal is not allowed above level 8");
-      },
+      required: true,
+      unique: true,
     },
     lowerLevel: [{ type: Types.ObjectId, ref: "User", required: false }],
     upperLevel: { type: Types.ObjectId, ref: "User", required: false },
