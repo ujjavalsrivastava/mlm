@@ -1,7 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
 import backgroundImage from '../../assets/img/body-bg.jpg';
+import { useState } from "react";
+import { httpAxios } from "../../helper/httpHelper";
 
 const LoginPage = () => {
+  const[data,setData]=useState(null);
+
+  const handle = (e)=>{
+    setData((pre)=>({
+      ...pre,
+      [e.target.name]:e.target.value
+    }))
+  }
+
+  const submitLogin = async(e)=>{
+    e.preventDefault();
+    const response =  await httpAxios.post('user/login',{data});
+    console.log(response);
+  }
  
 
   return (
@@ -11,12 +27,12 @@ const LoginPage = () => {
   <div className="login-box-body" >
     <h3 className="login-box-msg">Sign In</h3>
     
-    <form action="https://uxliner.com/niche/main/index.html" method="post">
+    <form onSubmit={submitLogin} method="post">
       <div className="form-group has-feedback">
-        <input type="email" className="form-control sty1" placeholder="User" />
+        <input type="email" className="form-control sty1" name="email" placeholder="User" onChange={handle} />
       </div>
       <div className="form-group has-feedback">
-        <input type="password" className="form-control sty1" placeholder="Password" />
+        <input type="password" className="form-control sty1" name="password"  onChange={handle} placeholder="Password" />
       </div>
       <div>
         <div className="col-xs-8">

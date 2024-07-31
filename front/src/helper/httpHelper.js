@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const httpAxios = axios.create({
-  baseURL: `${import.meta.env.VITE_BACKEND_URL}/api/v1`,
+  baseURL: `${import.meta.env.VITE_BACKEND_URL}/api`,
   headers: {
     "Content-Type": "application/json",
   },
@@ -10,7 +10,7 @@ export const httpAxios = axios.create({
 });
 
 export const httpFileAxios = axios.create({
-  baseURL: `${import.meta.env.VITE_BACKEND_URL}/api/v1`,
+  baseURL: `${import.meta.env.VITE_BACKEND_URL}/api`,
   headers: {
     "Content-Type": "multipart/form-data",
   },
