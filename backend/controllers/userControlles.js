@@ -1,6 +1,7 @@
 const User = require("../models/user-model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { generateReferralCode } = require("../utils/helper");
 
 const createUser = async (req, res) => {
   const { email, name, password, referalCode } = req.body;
@@ -15,26 +16,18 @@ const createUser = async (req, res) => {
       : null;
     if (referalCode && !referedUser)
       return res.status(400).json({ error: "Invalid referal code" });
-    if (referalCode && referedUser?.level === 8)
-      return res
-        .status(400)
-        .json({ error: "referal is not allowed above level 8" });
-
-    const level = !referalCode ? 1 : referedUser ? referedUser?.level + 1 : 1;
 
     const userData = {
       name,
       email,
       password,
-      level,
-      role: level === 1 ? "associate" : "user",
+      referalCode: generateReferralCode(),
     };
     if (referedUser?._id) {
       userData["upperLevel"] = referedUser._id;
     }
-
     const savedUser = await new User(userData).save();
-    if (level > 1) {
+    if (referedUser) {
       referedUser.lowerLevel.push(savedUser._id);
       await referedUser.save();
     }
@@ -60,10 +53,7 @@ const loginHandler = async (req, res) => {
       .status(400)
       .json({ error: "email id or password is incorrect", code: 802 });
 
-  const token = jwt.sign(
-    { email, userId: user._id, level: user.level },
-    process.env.TOKEN_SECRET
-  );
+  const token = jwt.sign({ email, userId: user._id }, process.env.TOKEN_SECRET);
 
   res.json({ message: "Login Successful", token ,code:801});
 };
