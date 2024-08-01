@@ -2,9 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import backgroundImage from '../../assets/img/body-bg.jpg';
 import { useState } from "react";
 import { httpAxios } from "../../helper/httpHelper";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const[data,setData]=useState(null);
+
+  const navigate =  useNavigate();
 
   const handle = (e)=>{
     setData((pre)=>({
@@ -15,8 +18,22 @@ const LoginPage = () => {
 
   const submitLogin = async(e)=>{
     e.preventDefault();
-    const response =  await httpAxios.post('user/login',{data});
-    console.log(response);
+    try{
+      const response =  await httpAxios.post('user/login',{data});
+
+    if(response.data.code == '801'){
+      localStorage.setItem('token', response.data.token);
+      navigate("/dashboard");
+      toast.success(response.data.message);
+    }else{
+      toast.error(response.data.error);
+    }
+
+    }catch(error){
+      toast.error(error.message);
+    }
+    
+      
   }
  
 

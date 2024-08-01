@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const httpAxios = axios.create({
+ const httpAxios = axios.create({
   baseURL: `${import.meta.env.VITE_BACKEND_URL}/api`,
   headers: {
     "Content-Type": "application/json",
@@ -9,7 +9,25 @@ export const httpAxios = axios.create({
   timeout: 10000,
 });
 
-export const httpFileAxios = axios.create({
+// Add a request interceptor
+httpAxios.interceptors.request.use(
+  (config) => {
+    // Get the token from local storage or state
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+
+
+ const httpFileAxios = axios.create({
   baseURL: `${import.meta.env.VITE_BACKEND_URL}/api`,
   headers: {
     "Content-Type": "multipart/form-data",
@@ -17,3 +35,5 @@ export const httpFileAxios = axios.create({
   withCredentials: true,
   timeout: 10000,
 });
+
+export {httpAxios,httpFileAxios}

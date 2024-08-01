@@ -1,0 +1,19 @@
+div:has(> .tiptap) {
+  /* Your styles here */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-color: #acacac;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.tiptap {
+  width: 100%;
+  padding: 1rem;
+  font-size: 0.875rem; /* Equivalent to text-sm */
+  color: #2d3748; /* Equivalent to text-gray-800 */
+  // background-color: #f7f7f7;
+  border: none; /* Equivalent to border-0 */
+}
