@@ -5,7 +5,7 @@ const userRoutes = require("./routes/user-route");
 const app = express();
 app.use(
   cors({
-    origin: ["http://localhost:6006", "http://192.168.1.69:6006"],
+    origin: ["http://localhost:6006", "http://192.168.1.69:6006","http://localhost:5173"],
 
     credentials: true,
   })

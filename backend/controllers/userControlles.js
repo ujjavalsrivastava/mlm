@@ -65,7 +65,7 @@ const loginHandler = async (req, res) => {
     process.env.TOKEN_SECRET
   );
 
-  res.json({ message: "Login Successful", token });
+  res.json({ message: "Login Successful", token ,code:801});
 };
 
 const getUserProfile = (req, res) => {
