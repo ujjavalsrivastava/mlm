@@ -4045,8 +4045,13 @@ table.text-center, table.text-center td, table.text-center th {
 	background-size: cover;
 }
 .login-box, .register-box {
-	width: 400px;
-	margin: 7% auto;
+	/* width: 400px;
+	margin: 7% auto; */
+	margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 .login-box.sty1, .register-box.sty1 {
 	right: 0px;
@@ -4061,6 +4066,7 @@ table.text-center, table.text-center td, table.text-center th {
 }
 }
 .login-box-body, .register-box-body {
+	width: 400px;
 	background: #fff;
 	padding: 20px;
 	border-top: 0;
