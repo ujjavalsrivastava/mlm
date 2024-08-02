@@ -3,6 +3,10 @@ import router from "./lib/routes/AppRoutes";
 import { ToastContainer, Flip } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { Provider } from "react-redux";
+
+import store from "./store";
+
 function App() {
   return (
     <>
@@ -21,7 +25,9 @@ function App() {
         theme="light"
       />
       <div id="layout-wrapper">
-        <RouterProvider router={router} />
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
       </div>
     </>
   );

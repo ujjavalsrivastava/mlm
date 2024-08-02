@@ -1,6 +1,6 @@
-import axios from "axios";
+import * as createAxios from "axios";
 
- const httpAxios = axios.create({
+const axios = createAxios.create({
   baseURL: `${import.meta.env.VITE_BACKEND_URL}/api`,
   headers: {
     "Content-Type": "application/json",
@@ -10,10 +10,10 @@ import axios from "axios";
 });
 
 // Add a request interceptor
-httpAxios.interceptors.request.use(
+axios.interceptors.request.use(
   (config) => {
     // Get the token from local storage or state
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -25,9 +25,7 @@ httpAxios.interceptors.request.use(
   }
 );
 
-
-
- const httpFileAxios = axios.create({
+const httpFileAxios = createAxios.create({
   baseURL: `${import.meta.env.VITE_BACKEND_URL}/api`,
   headers: {
     "Content-Type": "multipart/form-data",
@@ -36,4 +34,4 @@ httpAxios.interceptors.request.use(
   timeout: 10000,
 });
 
-export {httpAxios,httpFileAxios}
+export { axios, httpFileAxios };
