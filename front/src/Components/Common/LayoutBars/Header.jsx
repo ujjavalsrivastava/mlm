@@ -12,14 +12,14 @@ const Header = () => {
   }
   const[data,setdata]=useState(null)
 
-  const fetchProfile = async()=>{
-    const response = await httpAxios.get('user/profile');
-    setdata(response.data)
-  }
+//   const fetchProfile = async()=>{
+//     const response = await httpAxios.get('user/profile');
+//     setdata(response.data)
+//   }
 
-useEffect(()=>{
-  fetchProfile();
-},[])
+// useEffect(()=>{
+//   fetchProfile();
+// },[])
 
   return (
     <>

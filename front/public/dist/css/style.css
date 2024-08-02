@@ -111,7 +111,9 @@ a:hover, a:active, a:focus {
 	padding: 15px;
 	color: #444;
 	font-size: 13px;
-	border-top: 1px solid #d2d6de
+	border-top: 1px solid #d2d6de;
+	position: fixed;
+    bottom: 0;
 }
 .fixed .main-header, .fixed .main-sidebar, .fixed .left-side {
 	position: fixed
