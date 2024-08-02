@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
-import { axios } from "../../helper/httpHelper";
+import { fetchProfile } from "../../store/profileReducer";
+import { useSelector, useDispatch } from "react-redux";
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const profile = useSelector((state) => state.profile);
+
   const [data, setdata] = useState(null);
 
-  const fetchProfile = async () => {
-    const response = await axios.get("user/profile");
-    setdata(response.data);
-  };
-
   useEffect(() => {
-    fetchProfile();
+    if (profile?.status !== "succeeded") {
+      dispatch(fetchProfile());
+    }
   }, []);
+
   return (
     <>
       <div class="content-wrapper">

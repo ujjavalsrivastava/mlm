@@ -1,9 +1,10 @@
-import * as createAxios from "axios";
+import { default as createAxios } from "axios";
 
 const axios = createAxios.create({
   baseURL: `${import.meta.env.VITE_BACKEND_URL}/api`,
   headers: {
     "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
   },
   withCredentials: true,
   timeout: 10000,

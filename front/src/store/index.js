@@ -1,6 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reducer from "./reducer";
+import profileReducer from "./profileReducer";
+import levelReducer from "./lowerLevel";
 
 export default configureStore({
-  reducer,
+  reducer: {
+    profile: profileReducer,
+    levels: levelReducer,
+  },
 });
