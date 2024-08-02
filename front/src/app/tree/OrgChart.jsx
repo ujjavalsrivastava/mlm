@@ -7,6 +7,7 @@ const OrgChart = ({ data }) => {
   const renderNode = (node) => (
     
     <li key={node.id}>
+        <div class="image text-center"><img src="dist/img/img1.jpg" class="img-circle" alt="User Image" height={'50px'}/> </div>
       <div>{node.name}</div>
       {node.children && (
         <ul>
@@ -17,13 +18,11 @@ const OrgChart = ({ data }) => {
   );
 
   return (
-    <div className="custom-tree">
-        <div class="org-chart">
+
       <ul>
         {renderNode(orgData)}
       </ul>
-    </div>
-    </div>
+    
   );
 };
 

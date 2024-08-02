@@ -4,11 +4,13 @@ import './Tree.css';
 const TreeNode  = ({ data }) => {
     
   return (
-    <div className="org-chart">
+    <div className="custom-tree">
+        <div class="org-chart">
       {data.map((rootNode) => (
       
         <OrgChart key={rootNode.id} data={rootNode} />
       ))}
+    </div>
     </div>
   );
 };
