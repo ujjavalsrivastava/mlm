@@ -10,16 +10,18 @@ const {
   getLowerLevelUsers,
   getUpperLevelUsers,
 } = require("../controllers/levelController");
+const { handleProductPurchase } = require("../controllers/purchaseController");
 
 const router = express.Router();
 
-router.post("/register", createUser);
-router.post("/login", loginHandler);
+router.post("/user/register", createUser);
+router.post("/user/login", loginHandler);
 
 // auth required
-router.get("/profile", auth, getUserProfile);
-router.patch("/profile", auth, updateProfile);
-router.get("/lower-users", auth, getLowerLevelUsers);
-router.get("/upper-users", auth, getUpperLevelUsers);
+router.get("/user/profile", auth, getUserProfile);
+router.patch("/user/profile", auth, updateProfile);
+router.get("/user/lower-users", auth, getLowerLevelUsers);
+router.get("/user/upper-users", auth, getUpperLevelUsers);
+router.post("/user/purchase", auth, handleProductPurchase);
 
 module.exports = router;
