@@ -39,23 +39,20 @@ const createUser = async (req, res) => {
 };
 
 const loginHandler = async (req, res) => {
-  const { email, password } = req.body.data;
+  const { email, password } = req.body;
   if (!email || !password)
     return res
       .status(400)
       .json({ error: "email and password required to login", code: 802 });
   const user = await User.findOne({ email });
-  if (!user)
-    return res.json({ error: "User not found", code: 802 });
+  if (!user) return res.json({ error: "User not found", code: 802 });
   const passwordMatched = await bcrypt.compare(password, `${user.password}`);
   if (!passwordMatched)
-    return res
-      
-      .json({ error: "email id or password is incorrect", code: 802 });
+    return res.json({ error: "email id or password is incorrect", code: 802 });
 
   const token = jwt.sign({ email, userId: user._id }, process.env.TOKEN_SECRET);
 
-  res.json({ message: "Login Successful", token ,code:801});
+  res.json({ message: "Login Successful", token, code: 801 });
 };
 
 const getUserProfile = (req, res) => {
