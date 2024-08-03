@@ -19,8 +19,6 @@ const Tree = () => {
     allLowerLevels = lowerLevelHierarchy(flattern);
   }
 
-  //  lowerLevelHierarchy(lowerProfile.data);
-
   const dispatch = useDispatch();
   useEffect(() => {
     if (lowerProfile.status !== "succeeded") {
