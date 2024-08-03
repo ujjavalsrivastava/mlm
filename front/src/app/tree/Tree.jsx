@@ -1,5 +1,5 @@
-import React from 'react';
-import TreeNode from './TreeNode';
+import React from "react";
+import TreeNode from "./TreeNode";
 
 const Tree = () => {
 
@@ -33,11 +33,11 @@ const menuItems = [
     { id: 8, name: 'Sub-child 1.1.2', parentId: 7 },
     { id: 9, name: 'Sub-child 1.1.3', parentId: 7 }
   ];
-  
+
   function buildHierarchy(menuItems, parentId = null) {
     const hierarchy = [];
-  
-    menuItems.forEach(item => {
+
+    menuItems.forEach((item) => {
       if (item.parentId === parentId) {
         const children = buildHierarchy(menuItems, item.id);
         if (children.length) {
@@ -46,13 +46,12 @@ const menuItems = [
         hierarchy.push(item);
       }
     });
-  
+
     return hierarchy;
   }
-  
+
   // Usage
   const orgData = buildHierarchy(menuItems);
- 
 
   return (
     <div className="App">
