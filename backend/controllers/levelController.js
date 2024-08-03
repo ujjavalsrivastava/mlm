@@ -23,13 +23,9 @@ const getLowerLevelUsers = async (req, res) => {
     if (Array.isArray(allParentUserIds)) {
       await Promise.all(
         allParentUserIds.map(async (uid) => {
-          console.log(uid.id);
-
           const newUser = await User.aggregate(
             allLowerLevelUsersPipeLine(uid._id)
           );
-          console.log({ newUser });
-
           user.push(newUser);
         })
       );
