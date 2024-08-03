@@ -14,7 +14,7 @@ const OrgChart = ({ data }) => {
     }
   }, []);
   const renderNode = (node) => (
-    <li key={node.id}>
+    <li key={node._id}>
       <div class="image text-center">
         <img
           src="dist/img/img1.jpg"

@@ -8,7 +8,7 @@ const TreeNode  = ({ data }) => {
         <div className="org-chart" style={{overflow:'scroll'}}>
       {data.map((rootNode) => (
       
-        <OrgChart key={rootNode.id} data={rootNode} />
+        <OrgChart data={rootNode} />
       ))}
     </div>
     </div>
