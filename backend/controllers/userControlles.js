@@ -24,7 +24,7 @@ const createUser = async (req, res) => {
       referalCode: generateReferralCode(),
     };
     if (referedUser?._id) {
-      userData["upperLevel"] = referedUser._id;
+      userData["parentId"] = referedUser._id;
     }
     const savedUser = await new User(userData).save();
     if (referedUser) {

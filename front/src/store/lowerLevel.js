@@ -14,8 +14,7 @@ const apiSlice = createSlice({
   initialState: {
     status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
     error: null,
-    lower: {},
-    higher: {},
+    data: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -25,7 +24,7 @@ const apiSlice = createSlice({
       })
       .addCase(fetchLowerProfiles.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.lower = action.payload;
+        state.data = action.payload;
       })
       .addCase(fetchLowerProfiles.rejected, (state, action) => {
         state.status = "failed";
