@@ -257,6 +257,11 @@ const Header = () => {
                     </Link>
                   </li>
                   <li>
+                    <Link to={"/kyc"}>
+                      <i class="icon-profile-male"></i> My KYC
+                    </Link>
+                  </li>
+                  <li>
                     <a href="#">
                       <i class="icon-wallet"></i> My Balance
                     </a>

@@ -11,7 +11,7 @@ const userSchema = new Schema(
       unique: true,
     },
     lowerLevel: [{ type: Types.ObjectId, ref: "User", required: false }],
-    upperLevel: { type: Types.ObjectId, ref: "User", required: false },
+    parentId: { type: Types.ObjectId, ref: "User", required: false },
     role: {
       type: String,
       default: "user",
@@ -26,11 +26,28 @@ const userSchema = new Schema(
       },
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: (doc, ret) => {
+        delete ret.password;
+        return ret;
+      },
+    },
+    toObject: {
+      virtuals: true,
+      transform: (doc, ret) => {
+        delete ret.password;
+        return ret;
+      },
+    },
+  }
 );
 
 userSchema.pre("save", async function (next) {
   const user = this;
+  user.updatedAt = Date.now();
   if (!this.isModified("password")) {
     return next();
   }

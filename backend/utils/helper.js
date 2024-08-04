@@ -9,4 +9,41 @@ function generateReferralCode(len = 8) {
   return referralCode;
 }
 
-module.exports = { generateReferralCode };
+const allLowerLevelUsersPipeLine = (_id) => [
+  {
+    $match: {
+      _id,
+    },
+  },
+  {
+    $graphLookup: {
+      from: "users",
+      startWith: "$lowerLevel",
+      connectFromField: "lowerLevel",
+      connectToField: "_id",
+      as: "allLowerLevels",
+    },
+  },
+  {
+    $project: {
+      _id: 1,
+      name: 1,
+      email: 1,
+      referalCode: 1,
+      allLowerLevels: 1,
+      createdAt: 1,
+      updatedAt: 1,
+      allLowerLevels: {
+        _id: 1,
+        name: 1,
+        email: 1,
+        referalCode: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        parentId: 1,
+      },
+    },
+  },
+];
+
+module.exports = { generateReferralCode, allLowerLevelUsersPipeLine };
