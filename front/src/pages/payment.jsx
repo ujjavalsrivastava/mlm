@@ -27,7 +27,7 @@ const Checkout = () => {
 
   const handlePayment = () => {
     const options = {
-      key: "rzp_test_w0Mrkxsfb8hBbd", // Enter the Key ID generated from the Dashboard
+      key: import.meta.env.VITE_PAYMENT_KEY, // Enter the Key ID generated from the Dashboard
       amount: 100 * 1000, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       currency: "INR",
       name: "Merchant Name",
