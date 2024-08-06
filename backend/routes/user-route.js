@@ -4,7 +4,7 @@ const {
   loginHandler,
   getUserProfile,
   updateProfile,
-} = require("../controllers/userControlles");
+} = require("../controllers/userController");
 const { auth } = require("../middleware/auth");
 const {
   getLowerLevelUsers,

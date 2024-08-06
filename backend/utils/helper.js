@@ -1,4 +1,10 @@
 const crypto = require("crypto");
+const { Types } = require("mongoose");
+const LevelPercentage = require("../models/level-percentage-model");
+const User = require("../models/user-model");
+const PercentDistribution = require("../models/percentage-distribution-model");
+const UserPurchase = require("../models/purchase-history-model");
+const levels = Array.from({ length: 8 }, (_, i) => `level${i}`);
 
 // Function to generate a unique referral code
 function generateReferralCode(len = 8) {
@@ -9,41 +15,107 @@ function generateReferralCode(len = 8) {
   return referralCode;
 }
 
-const allLowerLevelUsersPipeLine = (_id) => [
-  {
-    $match: {
-      _id,
+// Function to recursively populate lowerLevel
+async function populateLowerLevel(user) {
+  if (!user.lowerLevel || user.lowerLevel.length === 0) {
+    return user;
+  }
+
+  await user.populate("lowerLevel");
+
+  const lowerLevelUsers = await Promise.all(
+    user.lowerLevel.map(async (lowerUser) => {
+      return populateLowerLevel(lowerUser);
+    })
+  );
+
+  user.lowerLevel = lowerLevelUsers;
+  return user;
+}
+
+const parentPipelineUpToLevel = (userId, level) => {
+  const pipeline = [
+    {
+      $match: { _id: new Types.ObjectId(userId) },
     },
-  },
-  {
-    $graphLookup: {
-      from: "users",
-      startWith: "$lowerLevel",
-      connectFromField: "lowerLevel",
-      connectToField: "_id",
-      as: "allLowerLevels",
-    },
-  },
-  {
-    $project: {
-      _id: 1,
-      name: 1,
-      email: 1,
-      referalCode: 1,
-      allLowerLevels: 1,
-      createdAt: 1,
-      updatedAt: 1,
-      allLowerLevels: {
-        _id: 1,
-        name: 1,
-        email: 1,
-        referalCode: 1,
-        createdAt: 1,
-        updatedAt: 1,
-        parentId: 1,
+    {
+      $graphLookup: {
+        from: "users",
+        startWith: "$parentId",
+        connectFromField: "parentId",
+        connectToField: "_id",
+        as: "parentUsers",
+        maxDepth: level - 2, // Fetch up to level 8-1(user)-1(zero-index) = 7 levels including the starting user
+        depthField: "level",
       },
     },
-  },
-];
+    {
+      $addFields: {
+        parentUsers: {
+          $sortArray: {
+            input: "$parentUsers",
+            sortBy: { level: 1 },
+          },
+        },
+      },
+    },
+  ];
+  return pipeline;
+};
 
-module.exports = { generateReferralCode, allLowerLevelUsersPipeLine };
+const distributeUserPercentage = async (associateId, amount) => {
+  const userLevelShare = await LevelPercentage.findOne();
+  const user = await User.aggregate(
+    parentPipelineUpToLevel(associateId, 8)
+  ).exec();
+  const parentUsers = user[0]?.parentUsers;
+  const associateUser = { ...user[0] };
+  delete associateUser.parentUsers;
+  const allUser = [associateUser, ...parentUsers];
+  const eachLevelShareList = levels.map((l) => userLevelShare[l] || 0);
+
+  for (let a = 0; a <= allUser.length; a++) {
+    const currentUser = allUser[a];
+    let [userCurrentPurchase, userPercentage] = currentUser
+      ? await Promise.all([
+          UserPurchase.findOne({
+            userId: currentUser._id,
+          }),
+          PercentDistribution.findOne({ userId: currentUser._id }),
+        ])
+      : [];
+    const calculateAmountForUser = (amount / 100) * eachLevelShareList[a];
+    if (!userCurrentPurchase && currentUser) {
+      userCurrentPurchase = await UserPurchase({ userId: currentUser._id });
+    }
+
+    if (calculateAmountForUser && userCurrentPurchase && currentUser) {
+      userCurrentPurchase.currentAmount += calculateAmountForUser;
+      userCurrentPurchase.save();
+      const dataForPerventageDistribution = {
+        percent: eachLevelShareList[a],
+        amount: calculateAmountForUser,
+        senderId: associateId,
+        receiverId: currentUser._id,
+      };
+      console.log({ userPercentage });
+
+      if (!userPercentage) {
+        await new PercentDistribution({
+          userId: currentUser._id,
+          purchaseHistory: [dataForPerventageDistribution],
+        }).save();
+      } else {
+        userPercentage.purchaseHistory.push(dataForPerventageDistribution);
+        await userPercentage.save();
+      }
+    }
+  }
+};
+
+module.exports = {
+  generateReferralCode,
+  populateLowerLevel,
+  parentPipelineUpToLevel,
+  distributeUserPercentage,
+};

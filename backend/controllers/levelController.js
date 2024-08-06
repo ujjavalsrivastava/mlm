@@ -1,7 +1,9 @@
 const User = require("../models/user-model");
-const LevelPerventage = require("../models/level-percentage-model");
-const { mongoose } = require("mongoose");
-const { allLowerLevelUsersPipeLine } = require("../utils/helper");
+const LevelPercentage = require("../models/level-percentage-model");
+const {
+  populateLowerLevel,
+  parentPipelineUpToLevel,
+} = require("../utils/helper");
 
 const getLowerLevelUsers = async (req, res) => {
   let { userId } = req.body;
@@ -10,28 +12,26 @@ const getLowerLevelUsers = async (req, res) => {
     userId = _id;
   }
 
-  let user = [];
   if (role === "user") {
-    user = await User.aggregate(allLowerLevelUsersPipeLine(userId)).exec();
+    let user = await User.findById(userId).exec();
+    user = await populateLowerLevel(user, "lowerLevel");
+    return res.json([user]);
   } else if (role === "admin") {
-    const allParentUserIds = await User.find(
-      {
-        $or: [{ parentId: { $exists: false } }, { parentId: null }],
-      },
-      { _id: 1 }
-    );
+    const allParentUserIds = await User.find({
+      $or: [{ parentId: { $exists: false } }, { parentId: null }],
+    });
+
+    const users = [];
     if (Array.isArray(allParentUserIds)) {
       await Promise.all(
-        allParentUserIds.map(async (uid) => {
-          const newUser = await User.aggregate(
-            allLowerLevelUsersPipeLine(uid._id)
-          );
-          user.push(newUser);
+        allParentUserIds.map(async (user) => {
+          const newUser = await populateLowerLevel(user);
+          users.push(newUser);
         })
       );
     }
+    return res.json(users);
   }
-  res.json(user);
 };
 
 const getUpperLevelUsers = async (req, res) => {
@@ -39,45 +39,32 @@ const getUpperLevelUsers = async (req, res) => {
   if (!userId) {
     userId = req.user._id;
   }
-  const pipeline = [
-    {
-      $match: { _id: new mongoose.Types.ObjectId(userId) },
-    },
-    {
-      $graphLookup: {
-        from: "users",
-        startWith: "$parentId",
-        connectFromField: "parentId",
-        connectToField: "_id",
-        as: "parentUsers",
-        maxDepth: 6, // Fetch up to 7 levels including the starting user
-        depthField: "level",
-      },
-    },
-    {
-      $addFields: {
-        upperLevels: {
-          $sortArray: {
-            input: "$upperLevels",
-            sortBy: { level: 1 },
-          },
-        },
-      },
-    },
-  ];
-  let user = await User.aggregate(pipeline).exec();
+  let user = await User.aggregate(parentPipelineUpToLevel(userId, 8)).exec();
   res.json({ user });
 };
 
 const getLevelPercentage = async (req, res) => {
-  const levelPercent = await LevelPerventage.find({});
+  const levelPercent = await LevelPercentage.find({});
   res.json(levelPercent);
 };
 
 const updateLevelPercentage = async (req, res) => {
   const data = req.body;
-  const saveData = await LevelPerventage(data).save();
-  res.json(saveData);
+  const levels = await LevelPercentage.findOne();
+  if (levels) {
+    const levelData = { ...levels._doc, ...data };
+    delete levelData._id;
+    const updated = await LevelPercentage.updateOne(
+      {
+        _id: levels._id,
+      },
+      { $set: levelData }
+    );
+    res.json(updated);
+  } else {
+    const saveData = await LevelPercentage({ ...levels, ...data }).save();
+    res.json(saveData);
+  }
 };
 
 module.exports = {
