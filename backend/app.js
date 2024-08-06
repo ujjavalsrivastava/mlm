@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./routes/user-route");
 const levelPercent = require("./routes/level-percentage");
+const productRoute = require("./routes/product-route");
 
 const app = express();
 app.use(
@@ -17,7 +18,7 @@ app.use(
 );
 app.use(express.json());
 
-app.use(`/api`, userRoutes, levelPercent);
+app.use(`/api`, userRoutes, levelPercent, productRoute);
 
 app.use("/", (req, res) => {
   res.status(200).json({ status: "success", message: "Server Running" });

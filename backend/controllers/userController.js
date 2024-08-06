@@ -2,6 +2,8 @@ const User = require("../models/user-model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { generateReferralCode } = require("../utils/helper");
+const UserPurchase = require("../models/purchase-history-model");
+const PercentDistribution = require("../models/percentage-distribution-model");
 
 const createUser = async (req, res) => {
   const { email, name, password, referalCode } = req.body;
@@ -31,6 +33,8 @@ const createUser = async (req, res) => {
       referedUser.lowerLevel.push(savedUser._id);
       await referedUser.save();
     }
+    await UserPurchase({ userId: savedUser._id, currentAmount: 0 }).save();
+    await PercentDistribution({ userId: savedUser._id }).save();
     return res.status(200).json({ message: "user created successfully" });
   } catch (error) {
     console.log({ error });

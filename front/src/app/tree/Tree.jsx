@@ -1,23 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLowerProfiles } from "../../store/lowerLevel";
-import { lowerLevelHierarchy } from "../../utils/helper";
 import "./Tree.css";
 
 const Tree = () => {
   const lowerProfile = useSelector((state) => state.levels);
-  let allLowerLevels = [];
-  if (Array.isArray(lowerProfile?.data)) {
-    const flattern = lowerProfile?.data.map((p) => {
-      if (Array.isArray(p)) {
-        return p[0];
-      } else {
-        return p;
-      }
-    });
-
-    allLowerLevels = lowerLevelHierarchy(flattern);
-  }
+  console.log({ lowerProfile });
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -37,8 +25,8 @@ const Tree = () => {
         />
       </div>
       <div>{node.name}</div>
-      {Array.isArray(node.children) && (
-        <ul>{node.children.map((child) => renderNode(child))}</ul>
+      {Array.isArray(node.lowerLevel) && node.lowerLevel.length > 0 && (
+        <ul>{node.lowerLevel.map((child) => renderNode(child))}</ul>
       )}
     </li>
   );
@@ -47,7 +35,7 @@ const Tree = () => {
     <div className="App">
       <div className="custom-tree">
         <div class="org-chart">
-          {allLowerLevels.map((rootNode) => (
+          {lowerProfile?.data?.map((rootNode) => (
             <ul>{renderNode(rootNode)}</ul>
           ))}
         </div>

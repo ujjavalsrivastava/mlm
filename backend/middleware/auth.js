@@ -23,7 +23,7 @@ const adminAuth = async (req, res, next) => {
     const token = req.header("Authorization").replace("Bearer ", "");
     const tokenDecoded = await jwt.verify(token, process.env.TOKEN_SECRET);
     const user = await User.findOne({
-      _id: tokenDecoded._id,
+      _id: tokenDecoded.userId,
     });
     if (!user) throw new Error();
     if (user.role !== "admin") throw new Error("Non admin user");
