@@ -1,8 +1,34 @@
 const Product = require("../models/product-model");
 const UserPurchase = require("../models/purchase-history-model");
+const { razorpay } = require("../payment/getway");
 const { distributeUserPercentage } = require("../utils/helper");
 const getProductOrder = (req, res) => {
   res.send("getProductOrder");
+};
+
+const createRazorpayOrder = async (req, res) => {
+  const { amount, currency, receipt } = req.body;
+
+  const options = {
+    amount,
+    currency,
+    receipt,
+    // receipt: "any unique id for every order",
+    payment_capture: 1,
+  };
+  try {
+    const response = await razorpay.orders.create(options);
+    res.json({
+      order_id: response.id,
+      currency: response.currency,
+      amount: response.amount,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Not able to create order. Please try again!",
+      error,
+    });
+  }
 };
 
 const createProductOrder = async (req, res) => {
@@ -64,4 +90,5 @@ module.exports = {
   getProduct,
   createProduct,
   updateProduct,
+  createRazorpayOrder,
 };
