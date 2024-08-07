@@ -78,6 +78,7 @@ const KYC = () => {
                             class="form-control"
                             placeholder="First Name"
                             type="text"
+                            name="fullname"
                             value={data && data.name}
                           />
                           <span
@@ -265,7 +266,7 @@ const KYC = () => {
                           <label class="control-label">Bank Name</label>
                           <input
                             class="form-control"
-                            placeholder="ifsc Code"
+                            placeholder="Bank Name"
                             type="text"
                             name="ifscCode"
                           />
@@ -280,7 +281,7 @@ const KYC = () => {
                           <label class="control-label">Account Holder Name</label>
                           <input
                             class="form-control"
-                            placeholder="ifsc Code"
+                            placeholder="Account Holder Name"
                             type="text"
                             name="AccName"
                           />
@@ -295,7 +296,7 @@ const KYC = () => {
                           <label class="control-label">Account Number</label>
                           <input
                             class="form-control"
-                            placeholder="ifsc Code"
+                            placeholder="Account Number"
                             type="text"
                             name="accNo"
                           />
@@ -310,7 +311,7 @@ const KYC = () => {
                           <label class="control-label">IFSC Code</label>
                           <input
                             class="form-control"
-                            placeholder="ifsc Code"
+                            placeholder="IFSC Code"
                             type="text"
                             name="ifscCode"
                           />
@@ -325,7 +326,7 @@ const KYC = () => {
                           <label class="control-label">Upload Cancel Cheque / Passbook / Bank</label>
                           <input
                             class="form-control"
-                            placeholder="ifsc Code"
+                           
                             type="file"
                             name="file"
                           />
@@ -341,7 +342,7 @@ const KYC = () => {
                           <label class="control-label">OTP Code</label>
                           <input
                             class="form-control"
-                            placeholder="ifsc Code"
+                            placeholder="OTP Code"
                             type="text"
                             name="otp"
                           />
