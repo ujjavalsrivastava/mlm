@@ -44,4 +44,15 @@ const kycUpdate =   async(req,res)=>{
     res.json(error);
   }
 }
-module.exports = { kycUpdate };
+
+const Fetchkyc = async(req,res)=>{
+    try{
+        const email = req.user.email;
+        const bank = await bankKycModel.findOne({ email });
+        res.json({ message: "fetch Successful", token, code: 801 });
+} catch (error) {
+    console.log({ error });
+    res.json(error);
+  } 
+}
+module.exports = { kycUpdate,Fetchkyc };
