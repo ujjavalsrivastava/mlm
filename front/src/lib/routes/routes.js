@@ -1,5 +1,6 @@
 import Profile from "../../app/Dashboard/Profile";
 import Dashboard from "../../app/Dashboard/Dashboard";
+import MemberDashboard from "../../app/Dashboard/MemberDashboard";
 import Tree from "../../app/tree/Tree";
 import KYC from "../../app/Dashboard/KYC";
 import payment from "../../pages/payment";
@@ -10,4 +11,5 @@ export const authRoutes = [
   { path: "/tree", Component: Tree },
   { path: "/Kyc", Component: KYC },
   { path: "/payment", Component: payment },
+  { path: "/member/dashboard", Component: MemberDashboard },
 ];

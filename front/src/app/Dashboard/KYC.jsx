@@ -1,13 +1,36 @@
 import { useEffect, useState } from "react";
 import { fetchProfile } from "../../store/profileReducer";
 import { useSelector, useDispatch } from "react-redux";
+import { axios } from "../../helper/httpHelper";
+import { toast } from "react-toastify";
 
 const KYC = () => {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile);
-
+  const [kycSave, SetkycSave] = useState(null);
   const [data, setdata] = useState(null);
 
+  const handleChange = (e)=>{
+    SetkycSave((pre)=>(
+      {
+        ...pre,
+        [e.target.name]:e.target.value
+      }
+    ))
+  }
+const saveKycData = async(e)=>{
+  try{
+    e.preventDefault();
+  const response = await axios.post('kyc-update',kycSave);
+  if(response.data.code == '801'){
+    toast.success(response.data.message)
+  }else{
+    toast.error(response.data.message)
+  }
+    }catch(error){
+      toast.error(error.message);
+    }
+}
   useEffect(() => {
     if (profile?.status !== "succeeded") {
       dispatch(fetchProfile());
@@ -34,34 +57,7 @@ const KYC = () => {
 
        
         <div class="content">
-          {/* <div class="row">
-        <div class="col-lg-12">
-          <div class="card card-outline">
-            <div class="card-header bg-blue">
-              <h5 class="text-white m-b-0">Profile Example</h5>
-            </div>
-            <div class="card-body">
-              <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" value={data && data.email} placeholder="Email" />
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
-              </div>
-              
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" />
-                  Check me out </label>
-              </div>
-              <button type="submit" class="btn btn-success">Submit</button>
-            </form>
-            </div>
-          </div>
-        </div>
-      </div> */}
+         
           <div class="row m-t-3">
             <div class="col-lg-12">
               <div class="card ">
@@ -69,7 +65,7 @@ const KYC = () => {
                   <h5 class="text-white m-b-0">User KYC</h5>
                 </div>
                 <div class="card-body">
-                  <form>
+                  <form onSubmit={saveKycData}>
                     <div class="row">
                       <div class="col-md-4">
                         <div class="form-group has-feedback">
@@ -79,7 +75,7 @@ const KYC = () => {
                             placeholder="First Name"
                             type="text"
                             name="fullname"
-                            value={data && data.name}
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-user form-control-feedback"
@@ -95,6 +91,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="E-mail"
                             type="text"
+                            name="eamil"
+                             onChange={handleChange}
                             value={data && data.email}
                           />
                           <span
@@ -110,6 +108,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="Contact Number"
                             type="text"
+                            name="fullname"
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-phone form-control-feedback"
@@ -124,7 +124,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="Document"
                             type="text"
-                            name="documentType"
+                            name="fullname"
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-briefcase form-control-feedback"
@@ -139,7 +140,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="Addhar Card"
                             type="text"
-                            name="addharCard"
+                            name="fullname"
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-globe form-control-feedback"
@@ -154,7 +156,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="Addhar Card"
                             type="text"
-                            name="addharName"
+                            name="fullname"
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-globe form-control-feedback"
@@ -169,7 +172,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="Pan Card"
                             type="text"
-                            name="panName"
+                            name="fullname"
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-globe form-control-feedback"
@@ -184,7 +188,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="Pan Card"
                             type="text"
-                            name="panNumber"
+                            name="fullname"
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-globe form-control-feedback"
@@ -200,7 +205,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="Bank Name"
                             type="text"
-                            name="bankName"
+                            name="fullname"
+                            onChange={handleChange}
                           />
                           <span
                             class="fa fa-globe form-control-feedback"
@@ -216,7 +222,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="Account Holder Name"
                             type="text"
-                            name="acoountName"
+                            name="fullname"
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-globe form-control-feedback"
@@ -231,7 +238,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="Account Card"
                             type="text"
-                            name="accountNumber"
+                            name="fullname"
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-globe form-control-feedback"
@@ -246,7 +254,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="ifsc Code"
                             type="text"
-                            name="ifscCode"
+                            name="fullname"
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-globe form-control-feedback"
@@ -268,7 +277,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="Bank Name"
                             type="text"
-                            name="ifscCode"
+                            name="fullname"
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-globe form-control-feedback"
@@ -283,7 +293,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="Account Holder Name"
                             type="text"
-                            name="AccName"
+                            name="fullname"
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-globe form-control-feedback"
@@ -298,7 +309,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="Account Number"
                             type="text"
-                            name="accNo"
+                            name="fullname"
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-globe form-control-feedback"
@@ -313,7 +325,8 @@ const KYC = () => {
                             class="form-control"
                             placeholder="IFSC Code"
                             type="text"
-                            name="ifscCode"
+                            name="fullname"
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-globe form-control-feedback"
@@ -345,6 +358,8 @@ const KYC = () => {
                             placeholder="OTP Code"
                             type="text"
                             name="otp"
+                           
+                           onChange={handleChange}
                           />
                           <span
                             class="fa fa-globe form-control-feedback"
