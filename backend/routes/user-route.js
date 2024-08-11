@@ -10,18 +10,27 @@ const {
   getLowerLevelUsers,
   getUpperLevelUsers,
 } = require("../controllers/levelController");
-const { handleProductPurchase } = require("../controllers/purchaseController");
+const {
+  handleProductPurchase,
+  getUserAccountAndPurcheseHistory,
+} = require("../controllers/purchaseController");
+const { tryCatch } = require("../utils/helper");
 
 const router = express.Router();
 
-router.post("/user/register", createUser);
-router.post("/user/login", loginHandler);
+router.post("/user/register", tryCatch(createUser));
+router.post("/user/login", tryCatch(loginHandler));
 
 // auth required
-router.get("/user/profile", auth, getUserProfile);
-router.patch("/user/profile", auth, updateProfile);
-router.get("/user/lower-users", auth, getLowerLevelUsers);
-router.get("/user/upper-users", auth, getUpperLevelUsers);
-router.post("/user/purchase", auth, handleProductPurchase);
+router.get("/user/profile", tryCatch(auth), tryCatch(getUserProfile));
+router.patch("/user/profile", tryCatch(auth), tryCatch(updateProfile));
+router.get("/user/lower-users", tryCatch(auth), tryCatch(getLowerLevelUsers));
+router.get("/user/upper-users", tryCatch(auth), tryCatch(getUpperLevelUsers));
+router.post("/user/purchase", tryCatch(auth), tryCatch(handleProductPurchase));
+router.get(
+  "/user/account-purchase",
+  tryCatch(auth),
+  tryCatch(getUserAccountAndPurcheseHistory)
+);
 
 module.exports = router;

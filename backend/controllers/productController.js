@@ -61,7 +61,7 @@ const createProductOrder = async (req, res) => {
   } else {
     userPurchaseHistory.currentAmount =
       userPurchaseHistory.currentAmount - product.price;
-    userPurchaseHistory.products.push(createProduct);
+    userPurchaseHistory.products.unshift(createProduct);
     const savedData = await userPurchaseHistory.save();
     await distributeUserPercentage(userId, product.price);
     return res.json({ message: "Order created successfull", savedData });

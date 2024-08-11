@@ -19,6 +19,11 @@ const percent = new Schema({
         ref: "User",
         required: true,
       },
+      createdAt: {
+        type: Date,
+        required: true,
+        default: new Date(),
+      },
     },
   ],
 });

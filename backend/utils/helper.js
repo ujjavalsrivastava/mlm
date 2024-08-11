@@ -6,6 +6,9 @@ const PercentDistribution = require("../models/percentage-distribution-model");
 const UserPurchase = require("../models/purchase-history-model");
 const levels = Array.from({ length: 8 }, (_, i) => `level${i}`);
 
+const handlePromiseError = async (promise) =>
+  await promise.then((data) => [null, data]).catch((error) => [error, null]);
+
 // Function to generate a unique referral code
 function generateReferralCode(len = 8) {
   const randomString = crypto.randomBytes(4).toString("hex"); // 8 characters long
@@ -23,10 +26,12 @@ async function populateLowerLevel(user) {
 
   await user.populate("lowerLevel");
 
-  const lowerLevelUsers = await Promise.all(
-    user.lowerLevel.map(async (lowerUser) => {
-      return populateLowerLevel(lowerUser);
-    })
+  const [lowerLevelUsersError, lowerLevelUsers] = await handlePromiseError(
+    Promise.all(
+      user.lowerLevel.map(async (lowerUser) => {
+        return populateLowerLevel(lowerUser);
+      })
+    )
   );
 
   user.lowerLevel = lowerLevelUsers;
@@ -64,10 +69,12 @@ const parentPipelineUpToLevel = (userId, level) => {
 };
 
 const distributeUserPercentage = async (associateId, amount) => {
-  const userLevelShare = await LevelPercentage.findOne();
-  const user = await User.aggregate(
-    parentPipelineUpToLevel(associateId, 8)
-  ).exec();
+  const [shareError, userLevelShare] = await handlePromiseError(
+    LevelPercentage.findOne()
+  );
+  const [userError, user] = await handlePromiseError(
+    User.aggregate(parentPipelineUpToLevel(associateId, 8)).exec()
+  );
   const parentUsers = user[0]?.parentUsers;
   const associateUser = { ...user[0] };
   delete associateUser.parentUsers;
@@ -86,7 +93,9 @@ const distributeUserPercentage = async (associateId, amount) => {
       : [];
     const calculateAmountForUser = (amount / 100) * eachLevelShareList[a];
     if (!userCurrentPurchase && currentUser) {
-      userCurrentPurchase = await UserPurchase({ userId: currentUser._id });
+      [_, userCurrentPurchase] = await handlePromiseError(
+        UserPurchase({ userId: currentUser._id })
+      );
     }
 
     if (calculateAmountForUser && userCurrentPurchase && currentUser) {
@@ -106,16 +115,30 @@ const distributeUserPercentage = async (associateId, amount) => {
           purchaseHistory: [dataForPerventageDistribution],
         }).save();
       } else {
-        userPercentage.purchaseHistory.push(dataForPerventageDistribution);
+        userPercentage.purchaseHistory.unshift(dataForPerventageDistribution);
         await userPercentage.save();
       }
     }
   }
 };
 
+function tryCatch(fn) {
+  return async (req, res, next) => {
+    try {
+      await fn(req, res, next);
+    } catch (error) {
+      console.log("error in tryCatch", JSON.stringify(error));
+
+      next(error);
+    }
+  };
+}
+
 module.exports = {
   generateReferralCode,
   populateLowerLevel,
   parentPipelineUpToLevel,
   distributeUserPercentage,
+  handlePromiseError,
+  tryCatch,
 };
