@@ -18,7 +18,13 @@ app.use(
 );
 app.use(express.json());
 
-app.use(`/api`, userRoutes, levelPercent, productRoute,kycRoute);
+app.use(`/api`, userRoutes, levelPercent, productRoute, kycRoute);
+
+// Global error handler middleware (for demonstration)
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send({ error: err.message });
+});
 
 app.use("/", (req, res) => {
   res.status(200).json({ status: "success", message: "Server Running" });
