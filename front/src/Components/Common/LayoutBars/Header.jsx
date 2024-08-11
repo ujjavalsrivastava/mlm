@@ -262,6 +262,11 @@ const Header = () => {
                     </Link>
                   </li>
                   <li>
+                    <Link to={"/member-dashboard"}>
+                      <i class="icon-profile-male"></i> Affiliate Panel
+                    </Link>
+                  </li>
+                  <li>
                     <a href="#">
                       <i class="icon-wallet"></i> My Balance
                     </a>

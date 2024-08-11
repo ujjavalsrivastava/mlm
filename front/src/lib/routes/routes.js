@@ -11,5 +11,5 @@ export const authRoutes = [
   { path: "/tree", Component: Tree },
   { path: "/Kyc", Component: KYC },
   { path: "/payment", Component: payment },
-  { path: "/member/dashboard", Component: MemberDashboard },
+  { path: "/member-dashboard", Component: MemberDashboard },
 ];

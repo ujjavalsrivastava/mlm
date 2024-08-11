@@ -1,10 +1,39 @@
+import { useEffect, useState } from "react";
+import { axios } from "../../helper/httpHelper";
+
 const MemberDashboard = ()=>{
+    const[totalSum,settotalSum]=useState(0);
+    const fetchPurchage = async()=>{
+        try{
+            const response = await axios.get('user/account-purchase');
+            const purchageHistry = response.data.percentDistribution.purchaseHistory;
+            var sum = 0;
+            purchageHistry.forEach(function(obj){
+           sum += obj.amount;
+         });
+         settotalSum(sum);
+        }catch(error){
+            console.log(error.message)
+        }
+    
+    }
+  
+  // const cnt = purchageHistry.length;
+  
+  
+  //  for (var i=0; i<cnt; i++) {
+  //      total += purchageHistry[i].amount;
+  //  }
+   // console.log('toatl '+ data);
+    useEffect(()=>{
+        fetchPurchage();
+    },[])
     return (
         <>
          <div class="content-wrapper"> 
   
     <div class="content-header sty-one">
-      <h1>Dashboard 4</h1>
+      <h1>Welcome Devendra kumar maurya! </h1>
       <ol class="breadcrumb">
         <li><a href="#">Home</a></li>
         <li><i class="fa fa-angle-right"></i> Dashboard </li>
@@ -54,7 +83,7 @@ const MemberDashboard = ()=>{
               <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div> <i class="ti-wallet f-20 text-green"></i>
                   <div class="info-box-content">
-                    <h1 class="f-25 text-black">8,350</h1>
+                    <h1 class="f-25 text-black">{totalSum}</h1>
                     <span class="progress-description">All Time Earning</span> </div>
                   <div class="progress">
                     <div class="progress-bar bg-green" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style={{width:'85%', height:'6px'}}> <span class="sr-only">85% Complete</span> </div>
@@ -262,107 +291,21 @@ const MemberDashboard = ()=>{
           </div>
         </div>
         <div class="col-lg-4 m-b-3">
-          <div>
-            <div class="soci-wid-box bg-twitter m-b-3">
-              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner" role="listbox">
-                  <div class="carousel-item">
-                    <div class="col-lg-12 text-center">
-                      <div class="sco-icon"><i class="ti-twitter-alt"></i></div>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent libero sed cursus ante.</p>
-                      <p class="text-italic pt-1">- John Doe -</p>
-                    </div>
-                  </div>
-                  <div class="carousel-item active carousel-item-left">
-                    <div class="col-lg-12 text-center">
-                      <div class="sco-icon"><i class="ti-twitter-alt"></i></div>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent libero sed cursus ante.</p>
-                      <p class="text-italic pt-1">- John Doe -</p>
-                    </div>
-                  </div>
-                  <div class="carousel-item carousel-item-next carousel-item-left">
-                    <div class="col-lg-12 text-center">
-                      <div class="sco-icon"><i class="ti-twitter-alt"></i></div>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent libero sed cursus ante.</p>
-                      <p class="text-italic pt-1">- John Doe -</p>
-                    </div>
-                  </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>
-            </div>
-          </div>
-          <div>
-            <div class="soci-wid-box bg-facebook m-b-3">
-              <div id="carouselExampleControls1" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner" role="listbox">
-                  <div class="carousel-item">
-                    <div class="col-lg-12 text-center">
-                      <div class="sco-icon"><i class="ti-facebook"></i></div>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent libero sed cursus ante.</p>
-                      <p class="text-italic pt-1">- John Doe -</p>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="col-lg-12 text-center">
-                      <div class="sco-icon"><i class="ti-facebook"></i></div>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent libero sed cursus ante.</p>
-                      <p class="text-italic pt-1">- John Doe -</p>
-                    </div>
-                  </div>
-                  <div class="carousel-item active">
-                    <div class="col-lg-12 text-center">
-                      <div class="sco-icon"><i class="ti-facebook"></i></div>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent libero sed cursus ante.</p>
-                      <p class="text-italic pt-1">- John Doe -</p>
-                    </div>
-                  </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls1" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#carouselExampleControls1" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>
-            </div>
-          </div>
           <div> 
            
             <div class="box box-widget widget-user-2"> 
            
               <div class="widget-user-header bg-yellow">
-                <h3>My Contacts</h3>
-                <h5>Checkout my contacts here</h5>
+                <h3>Your Recent Sales</h3>
+                {/* <h5>Checkout my contacts here</h5> */}
               </div>
               <ul class="products-list product-list-in-box">
                 <li class="item">
-                  <div class="product-img"> <img src="dist/img/img1.jpg" alt="Product Image" /> </div>
-                  <div class="product-info"> <a href="#" class="product-title">Florence Douglas</a> <span class="product-description"> <a href="#">florencedouglas@gmail.com</a> </span> </div>
+                  <div class="product-img"> <img src="./dist/img/img1.jpg" alt="Product Image" /> </div>
+                  <div class="product-info"> <a href="#" class="product-title">Admin</a> <span class="product-description"> <a href="#">₹2,000</a> </span> </div>
                 </li>
               
-                <li class="item">
-                  <div class="product-img"> <img src="dist/img/img2.jpg" alt="Product Image" /> </div>
-                  <div class="product-info"> <a href="javascript:void(0)" class="product-title">Andrew Florence </a> <span class="product-description"> <a href="#">andrewflorence@gmail.com</a> </span> </div>
-                </li>
-               
-                <li class="item">
-                  <div class="product-img"> <img src="dist/img/img3.jpg" alt="Product Image" /> </div>
-                  <div class="product-info"> <a href="javascript:void(0)" class="product-title">Florence Sr.</a> <span class="product-description"> <a href="#">florencesr.@gmail.com</a> </span> </div>
-                </li>
-               
-                <li class="item">
-                  <div class="product-img"> <img src="dist/img/img4.jpg" alt="Product Image" /> </div>
-                  <div class="product-info"> <a href="javascript:void(0)" class="product-title">Andrew Florence </a> <span class="product-description"> <a href="#">andrewflorence@gmail.com</a> </span> </div>
-                </li>
               
-                <li class="item">
-                  <div class="product-img"> <img src="dist/img/img3.jpg" alt="Product Image" /> </div>
-                  <div class="product-info"> <a href="javascript:void(0)" class="product-title">Florence Sr.</a> <span class="product-description"> <a href="#">florencesr.@gmail.com</a> </span> </div>
-                </li>
-               
-                <li class="item">
-                  <div class="product-img"> <img src="dist/img/img5.jpg" alt="Product Image" /> </div>
-                  <div class="product-info"> <a href="javascript:void(0)" class="product-title">Florence Sr.</a> <span class="product-description"> <a href="#">florencesr.@gmail.com</a> </span> </div>
-                </li>
-              
-                <li class="item">
-                  <div class="product-img"> <img src="dist/img/img1.jpg" alt="Product Image" /> </div>
-                  <div class="product-info"> <a href="javascript:void(0)" class="product-title">Florence Sr.</a> <span class="product-description"> <a href="#">florencesr.@gmail.com</a> </span> </div>
-                </li>
                
               </ul>
             </div>
