@@ -63,9 +63,37 @@ const getUserAccountAndPurcheseHistory = async (req, res) => {
   res.json({ productPurchase, percentDistribution });
 };
 
+const getUserTotalEarning = async (req, res) => {
+  let { userIds } = req.query;
+  userIds = userIds.split(",");
+
+  if (Array.isArray(userIds)) {
+    const [error, percentDistributions] = await handlePromiseError(
+      PercentDistribution.find({ userId: { $in: userIds } })
+    );
+
+    const distributions = [];
+    percentDistributions.forEach((user) => {
+      const userTotalEarning = user.purchaseHistory.reduce(
+        (pre, curr) => pre + curr.amount,
+        0
+      );
+      distributions.push({
+        userId: user.userId,
+        totalEarning: userTotalEarning,
+      });
+    });
+    return res.json(distributions);
+  }
+  res.status(400).json({
+    error: "userIds should be comma seperated user ids in query params",
+  });
+};
+
 module.exports = {
   handleProductPurchase,
   getUserAccountAndPurcheseHistory,
   getUserPercentDistribution,
   getUserProductsAndBalance,
+  getUserTotalEarning,
 };
