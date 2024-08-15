@@ -15,6 +15,7 @@ const {
   getUserAccountAndPurcheseHistory,
   getUserPercentDistribution,
   getUserProductsAndBalance,
+  getUserTotalEarning,
 } = require("../controllers/purchaseController");
 const { tryCatch } = require("../utils/helper");
 
@@ -32,5 +33,6 @@ router.post("/purchase", tryCatch(handleProductPurchase));
 router.get("/purchase", tryCatch(getUserProductsAndBalance));
 router.get("/account-purchase", tryCatch(getUserAccountAndPurcheseHistory));
 router.get("/percent-earning", tryCatch(getUserPercentDistribution));
+router.get("/total-earning", tryCatch(getUserTotalEarning));
 
 module.exports = router;
