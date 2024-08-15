@@ -16,7 +16,7 @@ const Tree = () => {
   const showBalance = async(id)=>{
     console.log({userId:id});
     
-    const response = await axios.get('user/percent-earning',{userId:id})
+    const response = await axios.get('user/percent-earning?userId='+id)
     console.log(response.data);
     setShowBal(response.data);
    
