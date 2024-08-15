@@ -8,6 +8,11 @@ const Tree = () => {
   console.log({ lowerProfile });
 
   const dispatch = useDispatch();
+
+  const showBalance = async(id)=>{
+   console.log(id);
+   
+  }
   useEffect(() => {
     if (lowerProfile.status !== "succeeded") {
       dispatch(fetchLowerProfiles());
@@ -24,7 +29,7 @@ const Tree = () => {
           height={"50px"}
         />
       </div>
-      <div>{node.name}</div>
+      <div> <a href="javascript:void(0)" data-id={node._id} onClick={() => showBalance(node._id)}>{node.name}</a></div>
       {Array.isArray(node.lowerLevel) && node.lowerLevel.length > 0 && (
         <ul>{node.lowerLevel.map((child) => renderNode(child))}</ul>
       )}

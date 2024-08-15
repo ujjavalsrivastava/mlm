@@ -1,5 +1,6 @@
 import { initDropdowns } from "flowbite";
 import { useEffect, useState } from "react";
+import { axios } from "../../../helper/httpHelper";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -8,16 +9,19 @@ const Header = () => {
     localStorage.removeItem("token");
     navigate("/login");
   };
-  const [data, setdata] = useState(null);
+  const [profile, setprofile] = useState({});
 
-  //   const fetchProfile = async()=>{
-  //     const response = await axios.get('user/profile');
-  //     setdata(response.data)
-  //   }
+    const fetchProfile = async()=>{
+      const response = await axios.get('user/profile');
+      setprofile(response.data)
+    }
 
-  // useEffect(()=>{
-  //   fetchProfile();
-  // },[])
+  useEffect(()=>{
+    fetchProfile();
+  },[])
+
+  console.log(profile);
+  
 
   return (
     <>
@@ -232,7 +236,7 @@ const Header = () => {
                     class="user-image"
                     alt="User Image"
                   />{" "}
-                  <span class="hidden-xs">Alexander Pierce</span>{" "}
+                  <span class="hidden-xs">{profile && profile.name}</span>{" "}
                 </a>
                 <ul class="dropdown-menu">
                   <li class="user-header">
@@ -244,7 +248,7 @@ const Header = () => {
                       />
                     </div>
                     <p class="text-left">
-                      Florence Douglas <small>florence@gmail.com</small>{" "}
+                      {profile && profile.name} <small> {profile && profile.email}</small>{" "}
                     </p>
                     <div class="view-link text-left">
                       <a href="#">View Profile</a>{" "}

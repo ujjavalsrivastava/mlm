@@ -5,17 +5,20 @@ const MemberDashboard = ()=>{
     const[totalSum,settotalSum]=useState(0);
     const fetchPurchage = async()=>{
         try{
-            const response = await axios.get('user/account-purchase');
-            const purchageHistry = response.data.percentDistribution.purchaseHistory;
-            var sum = 0;
-            purchageHistry.forEach(function(obj){
-           sum += obj.amount;
-         });
-         settotalSum(sum);
+            const response = await axios.get('user/percent-earning');
+          
+            settotalSum(response.data);
         }catch(error){
             console.log(error.message)
         }
     
+    }
+
+    const [user, setuser] = useState({});
+
+    const fetchProfile = async()=>{
+      const response = await axios.get('user/profile');
+      setuser(response.data)
     }
   
   // const cnt = purchageHistry.length;
@@ -27,13 +30,14 @@ const MemberDashboard = ()=>{
    // console.log('toatl '+ data);
     useEffect(()=>{
         fetchPurchage();
+        fetchProfile();
     },[])
     return (
         <>
          <div class="content-wrapper"> 
   
     <div class="content-header sty-one">
-      <h1>Welcome Devendra kumar maurya! </h1>
+      <h1>Welcome {user && user.name}! </h1>
       <ol class="breadcrumb">
         <li><a href="#">Home</a></li>
         <li><i class="fa fa-angle-right"></i> Dashboard </li>
@@ -50,7 +54,7 @@ const MemberDashboard = ()=>{
               <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div> <i class="ti-face-smile f-20 text-blue"></i>
                   <div class="info-box-content">
-                    <h1 class="f-25 text-black">1,150</h1>
+                    <h1 class="f-25 text-black">{totalSum && totalSum.oneDayEarning}</h1>
                     <span class="progress-description">Today's Earning</span> </div>
                   <div class="progress">
                     <div class="progress-bar bg-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style={{width:'40%', height:'6px'}}> <span class="sr-only">40% Complete</span> </div>
@@ -61,7 +65,7 @@ const MemberDashboard = ()=>{
               <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div> <i class="ti-bar-chart f-20 text-danger"></i>
                   <div class="info-box-content">
-                    <h1 class="f-25 text-black">2,030</h1>
+                    <h1 class="f-25 text-black">{totalSum && totalSum.oneWeekEarning}</h1>
                     <span class="progress-description">Last 7 Days Earning</span> </div>
                   <div class="progress">
                     <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style={{width:'50%', height:'6px'}}> <span class="sr-only">50% Complete</span> </div>
@@ -72,7 +76,7 @@ const MemberDashboard = ()=>{
               <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div> <i class="ti-panel f-20 text-info"></i>
                   <div class="info-box-content">
-                    <h1 class="f-25 text-black">4,250</h1>
+                    <h1 class="f-25 text-black">{totalSum && totalSum.oneMonthEarning}</h1>
                     <span class="progress-description">Last 30 Days Earning</span> </div>
                   <div class="progress">
                     <div class="progress-bar bg-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style={{width:'65%', height:'6px'}}> <span class="sr-only">65% Complete</span> </div>
@@ -83,7 +87,7 @@ const MemberDashboard = ()=>{
               <div class="col-lg-3 col-sm-6 col-xs-12">
                 <div> <i class="ti-wallet f-20 text-green"></i>
                   <div class="info-box-content">
-                    <h1 class="f-25 text-black">{totalSum}</h1>
+                    <h1 class="f-25 text-black">{totalSum && totalSum.overallEarning}</h1>
                     <span class="progress-description">All Time Earning</span> </div>
                   <div class="progress">
                     <div class="progress-bar bg-green" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style={{width:'85%', height:'6px'}}> <span class="sr-only">85% Complete</span> </div>
