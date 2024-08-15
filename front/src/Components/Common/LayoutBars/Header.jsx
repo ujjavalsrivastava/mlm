@@ -272,9 +272,9 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="#">
-                      <i class="icon-envelope"></i> Inbox
-                    </a>
+                  <Link to={"/tree"}>
+                  <i class="fa fa-tree" aria-hidden="true"></i> Hierarchy 
+                 </Link>
                   </li>
                   <li role="separator" class="divider"></li>
                   <li>

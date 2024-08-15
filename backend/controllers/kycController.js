@@ -37,11 +37,12 @@ const kycUpdate =   async(req,res)=>{
 
     };
        const bankKyc = await new bankKycModel(resquest).save();
-       return res.status(200).json({ message: "KYC created successfully" });
+       console.log(' bankKyc '+ bankKyc);
+       return res.status(200).json({code: 801, message: "KYC created successfully" });
 
 } catch (error) {
     console.log({ error });
-    res.json(error);
+    res.json({ message: error,code: 802 });
   }
 }
 
