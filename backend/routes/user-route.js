@@ -13,24 +13,24 @@ const {
 const {
   handleProductPurchase,
   getUserAccountAndPurcheseHistory,
+  getUserPercentDistribution,
+  getUserProductsAndBalance,
 } = require("../controllers/purchaseController");
 const { tryCatch } = require("../utils/helper");
 
 const router = express.Router();
 
-router.post("/user/register", tryCatch(createUser));
-router.post("/user/login", tryCatch(loginHandler));
+router.post("/register", tryCatch(createUser));
+router.post("/login", tryCatch(loginHandler));
 
 // auth required
-router.get("/user/profile", tryCatch(auth), tryCatch(getUserProfile));
-router.patch("/user/profile", tryCatch(auth), tryCatch(updateProfile));
-router.get("/user/lower-users", tryCatch(auth), tryCatch(getLowerLevelUsers));
-router.get("/user/upper-users", tryCatch(auth), tryCatch(getUpperLevelUsers));
-router.post("/user/purchase", tryCatch(auth), tryCatch(handleProductPurchase));
-router.get(
-  "/user/account-purchase",
-  tryCatch(auth),
-  tryCatch(getUserAccountAndPurcheseHistory)
-);
+router.get("/profile", tryCatch(getUserProfile));
+router.patch("/profile", tryCatch(updateProfile));
+router.get("/lower-users", tryCatch(getLowerLevelUsers));
+router.get("/upper-users", tryCatch(getUpperLevelUsers));
+router.post("/purchase", tryCatch(handleProductPurchase));
+router.get("/purchase", tryCatch(getUserProductsAndBalance));
+router.get("/account-purchase", tryCatch(getUserAccountAndPurcheseHistory));
+router.get("/percent-earning", tryCatch(getUserPercentDistribution));
 
 module.exports = router;
