@@ -6,17 +6,19 @@ const {
   updateProduct,
   createProduct,
   createRazorpayOrder,
+  getProducts,
 } = require("../controllers/productController");
 const { adminAuth, auth } = require("../middleware/auth");
 const { tryCatch } = require("../utils/helper");
 
 const router = new Router();
 
-router.get("/product/order", tryCatch(auth), tryCatch(getProductOrder));
-router.post("/product/order", tryCatch(auth), tryCatch(createProductOrder));
-router.post("/create/order", tryCatch(auth), tryCatch(createRazorpayOrder));
-router.post("/product", tryCatch(adminAuth), tryCatch(createProduct));
-router.get("/product/:id", tryCatch(auth), tryCatch(getProduct));
-router.put("/product/:id", tryCatch(adminAuth), tryCatch(updateProduct));
+router.get("/order", tryCatch(getProductOrder));
+router.post("/order", tryCatch(createProductOrder));
+router.get("/items", tryCatch(getProducts));
+router.post("/create/order", tryCatch(createRazorpayOrder));
+router.post("/", tryCatch(adminAuth), tryCatch(createProduct));
+router.get("/:id", tryCatch(getProduct));
+router.put("/:id", tryCatch(adminAuth), tryCatch(updateProduct));
 
 module.exports = router;

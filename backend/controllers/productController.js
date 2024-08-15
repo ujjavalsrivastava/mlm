@@ -1,7 +1,10 @@
 const Product = require("../models/product-model");
 const UserPurchase = require("../models/purchase-history-model");
 const { razorpay } = require("../payment/getway");
-const { distributeUserPercentage } = require("../utils/helper");
+const {
+  distributeUserPercentage,
+  handlePromiseError,
+} = require("../utils/helper");
 const getProductOrder = (req, res) => {
   res.send("getProductOrder");
 };
@@ -76,14 +79,26 @@ const getProduct = async (req, res) => {
   res.json(product);
 };
 
+const getProducts = async (_, res) => {
+  const [error, products] = await handlePromiseError(Product.find({}));
+  if (error) {
+    return res.status(400).json(error);
+  }
+  res.json({ products });
+};
+
 const createProduct = async (req, res) => {
   const { name, price } = req.body;
+  const checkName = await Product.find({ name });
+  if (checkName) throw new Error("Product already exist");
   const product = await new Product({ name, price }).save();
   res.json(product);
 };
+
 const updateProduct = (req, res) => {
   res.send("updateProduct");
 };
+
 module.exports = {
   getProductOrder,
   createProductOrder,
@@ -91,4 +106,5 @@ module.exports = {
   createProduct,
   updateProduct,
   createRazorpayOrder,
+  getProducts,
 };
