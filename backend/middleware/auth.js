@@ -1,7 +1,14 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user-model");
+const { Types } = require("mongoose");
+
+const unAuthRoutes = ["/api/user/login", "/api/user/register"];
 
 const auth = async (req, res, next) => {
+  const endpoint = req.originalUrl;
+
+  const allowWithoutAuth = unAuthRoutes.includes(endpoint);
+  if (allowWithoutAuth) return next();
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
 
@@ -14,6 +21,8 @@ const auth = async (req, res, next) => {
     req.token = token;
     next();
   } catch (error) {
+    console.log("auth.js error");
+
     res.status(401).json(error);
   }
 };
@@ -31,6 +40,7 @@ const adminAuth = async (req, res, next) => {
     req.token = token;
     next();
   } catch (error) {
+    console.log("auth.js admin error");
     res.status(401).json(error);
   }
 };

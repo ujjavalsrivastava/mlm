@@ -107,8 +107,6 @@ const distributeUserPercentage = async (associateId, amount) => {
         senderId: associateId,
         receiverId: currentUser._id,
       };
-      console.log({ userPercentage });
-
       if (!userPercentage) {
         await new PercentDistribution({
           userId: currentUser._id,
@@ -134,6 +132,8 @@ function tryCatch(fn) {
   };
 }
 
+const getUserId = (req) => req.body?.userId || req.user?._id;
+
 module.exports = {
   generateReferralCode,
   populateLowerLevel,
@@ -141,4 +141,5 @@ module.exports = {
   distributeUserPercentage,
   handlePromiseError,
   tryCatch,
+  getUserId,
 };

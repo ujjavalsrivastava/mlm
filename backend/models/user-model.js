@@ -12,7 +12,12 @@ const userSchema = new Schema(
       unique: true,
     },
     lowerLevel: [{ type: Types.ObjectId, ref: "User", required: false }],
-    parentId: { type: Types.ObjectId, ref: "User", required: false },
+    parentId: {
+      type: Types.ObjectId,
+      ref: "User",
+      required: false,
+      default: null,
+    },
     role: {
       type: String,
       default: "user",
