@@ -132,7 +132,7 @@ function tryCatch(fn) {
   };
 }
 
-const getUserId = (req) => req.body?.userId || req.user?._id;
+const getUserId = (req) => req.query?.userId || req.user?._id;
 
 module.exports = {
   generateReferralCode,
