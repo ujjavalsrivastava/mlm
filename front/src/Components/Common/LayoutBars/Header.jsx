@@ -7,21 +7,19 @@ const Header = () => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    window.location.assign("/login");
   };
   const [profile, setprofile] = useState({});
+  const fetchProfile = async () => {
+    const response = await axios.get("user/profile");
+    setprofile(response.data);
+  };
 
-    const fetchProfile = async()=>{
-      const response = await axios.get('user/profile');
-      setprofile(response.data)
-    }
-
-  useEffect(()=>{
+  useEffect(() => {
     fetchProfile();
-  },[])
+  }, []);
 
   console.log(profile);
-  
 
   return (
     <>
@@ -248,7 +246,8 @@ const Header = () => {
                       />
                     </div>
                     <p class="text-left">
-                      {profile && profile.name} <small> {profile && profile.email}</small>{" "}
+                      {profile && profile.name}{" "}
+                      <small> {profile && profile.email}</small>{" "}
                     </p>
                     <div class="view-link text-left">
                       <a href="#">View Profile</a>{" "}
@@ -276,9 +275,9 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                  <Link to={"/tree"}>
-                  <i class="fa fa-tree" aria-hidden="true"></i> Hierarchy 
-                 </Link>
+                    <Link to={"/tree"}>
+                      <i class="fa fa-tree" aria-hidden="true"></i> Hierarchy
+                    </Link>
                   </li>
                   <li role="separator" class="divider"></li>
                   <li>
