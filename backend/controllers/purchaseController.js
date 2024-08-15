@@ -64,8 +64,8 @@ const getUserAccountAndPurcheseHistory = async (req, res) => {
 };
 
 const getUserTotalEarning = async (req, res) => {
-  let { userIds } = req.query;
-  userIds = userIds.split(",");
+  const userId = getUserId(req);
+  const userIds = userId.split(",");
 
   if (Array.isArray(userIds)) {
     const [error, percentDistributions] = await handlePromiseError(

@@ -15,7 +15,7 @@ const MemberDashboard = () => {
     try {
       const response = await axios({
         method: "get",
-        url: `user/total-earning?userIds=${userIds.join(",")}`,
+        url: `user/total-earning?userId=${userIds.join(",")}`,
       });
       if (response.data?.length) {
         setUsersTotalEarnings(response.data);
