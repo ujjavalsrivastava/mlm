@@ -4,6 +4,7 @@ import {
   Route,
 } from "react-router-dom";
 import Login from "../../app/root/Login";
+import Comingsoon from "../../app/Dashboard/ComingSoon";
 import RouteAuth from "../../middleware/RouteAuth";
 import Layout from "../../app/root/Layout";
 import { authRoutes } from "./routes";
@@ -11,6 +12,7 @@ import { authRoutes } from "./routes";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+     <Route path="/" element={<Comingsoon />} />
       <Route path="/login" element={<Login />} />
       <Route element={<RouteAuth />}>
         <Route element={<Layout />}>
