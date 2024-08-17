@@ -1,5 +1,5 @@
 import '../../../public/dist/css/comingsoon.css'
-import '../../../public/dist/js/comingsoon.js'
+
 const ComingSoon =  ()=>{
     return (
         <>

@@ -4,6 +4,8 @@ import {
   Route,
 } from "react-router-dom";
 import Login from "../../app/root/Login";
+import Register from "../../app/root/Register";
+
 import Comingsoon from "../../app/Dashboard/ComingSoon";
 import RouteAuth from "../../middleware/RouteAuth";
 import Layout from "../../app/root/Layout";
@@ -14,6 +16,7 @@ const router = createBrowserRouter(
     <>
      <Route path="/" element={<Comingsoon />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route element={<RouteAuth />}>
         <Route element={<Layout />}>
           {authRoutes.map((route, idx) => (

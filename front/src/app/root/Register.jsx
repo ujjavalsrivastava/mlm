@@ -4,7 +4,7 @@ import { useState } from "react";
 import { axios } from "../../helper/httpHelper";
 import { toast } from "react-toastify";
 
-const LoginPage = () => {
+const Register = () => {
   const [data, setData] = useState(null);
 
   const navigate = useNavigate();
@@ -19,11 +19,11 @@ const LoginPage = () => {
   const submitLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("user/login", data);
-
-      if (response.data.code == "801") {
-        localStorage.setItem("token", response.data.token);
-        navigate("/dashboard");
+      const response = await axios.post("user/register", data);
+       console.log(response)
+      if (response.status == "200") {
+        
+        navigate("/login");
         toast.success(response.data.message);
       } else {
         toast.error(response.data.error);
@@ -50,12 +50,21 @@ const LoginPage = () => {
             <h3 className="login-box-msg">Sign In</h3>
 
             <form onSubmit={submitLogin} method="post">
+            <div className="form-group has-feedback">
+                <input
+                  type="text"
+                  className="form-control sty1"
+                  name="name"
+                  placeholder="Name"
+                  onChange={handle}
+                />
+              </div>
               <div className="form-group has-feedback">
                 <input
                   type="email"
                   className="form-control sty1"
                   name="email"
-                  placeholder="User"
+                  placeholder="Email"
                   onChange={handle}
                 />
               </div>
@@ -68,28 +77,23 @@ const LoginPage = () => {
                   placeholder="Password"
                 />
               </div>
+              <div className="form-group has-feedback">
+                <input
+                  type="text"
+                  className="form-control sty1"
+                  name="referalCode"
+                  placeholder="Referal Code"
+                  onChange={handle}
+                />
+              </div>
               <div>
-                <div className="col-xs-8">
-                  <div className="checkbox icheck">
-                    <label>
-                      <input type="checkbox" />
-                      Remember Me{" "}
-                    </label>
-                    <a
-                      href="pages-recover-password.html"
-                      className="pull-right"
-                    >
-                      <i className="fa fa-lock"></i> Forgot pwd?
-                    </a>{" "}
-                  </div>
-                </div>
-
+              
                 <div className="col-xs-4 m-t-1">
                   <button
                     type="submit"
                     className="btn btn-primary btn-block btn-flat"
                   >
-                    Sign In
+                    Register
                   </button>
                 </div>
               </div>
@@ -98,11 +102,11 @@ const LoginPage = () => {
 
             <div className="m-t-2">
               Don't have an account?{" "}
-              <Link to={'/register'} className="text-center">
+              <Link to={'/login'} className="text-center">
              
-             Sign Up
-           
-           </Link>
+                Sign In
+              
+              </Link>
             </div>
           </div>
         </div>
@@ -111,4 +115,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default Register;
