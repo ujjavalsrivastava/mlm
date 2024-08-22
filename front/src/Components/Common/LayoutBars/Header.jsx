@@ -260,20 +260,17 @@ const Header = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to={"/kyc"}>
-                      <i class="icon-profile-male"></i> My KYC
+                    <Link to={"/my-course"}>
+                      <i class="icon-profile-male"></i> My Course
                     </Link>
                   </li>
+                 
                   <li>
                     <Link to={"/member-dashboard"}>
                       <i class="icon-profile-male"></i> Affiliate Panel
                     </Link>
                   </li>
-                  <li>
-                    <a href="#">
-                      <i class="icon-wallet"></i> My Balance
-                    </a>
-                  </li>
+                
                   <li>
                     <Link to={"/tree"}>
                       <i class="fa fa-tree" aria-hidden="true"></i> Hierarchy

@@ -4,6 +4,7 @@ import MemberDashboard from "../../app/Dashboard/MemberDashboard";
 import Tree from "../../app/tree/Tree";
 import KYC from "../../app/Dashboard/KYC";
 import payment from "../../pages/payment";
+import MyCourse from "../../app/Dashboard/MyCourse";
 
 
 export const authRoutes = [
@@ -14,4 +15,5 @@ export const authRoutes = [
   { path: "/Kyc", Component: KYC },
   { path: "/payment", Component: payment },
   { path: "/member-dashboard", Component: MemberDashboard },
+  { path: "/my-course", Component: MyCourse },
 ];
