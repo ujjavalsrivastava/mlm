@@ -17,8 +17,8 @@ router.get("/order", tryCatch(getProductOrder));
 router.post("/order", tryCatch(createProductOrder));
 router.get("/items", tryCatch(getProducts));
 router.post("/create/order", tryCatch(createRazorpayOrder));
-router.post("/", tryCatch(adminAuth), tryCatch(createProduct));
+router.post("/", adminAuth, tryCatch(createProduct));
 router.get("/:id", tryCatch(getProduct));
-router.put("/:id", tryCatch(adminAuth), tryCatch(updateProduct));
+router.put("/:id", adminAuth, tryCatch(updateProduct));
 
 module.exports = router;

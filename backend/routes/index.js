@@ -2,13 +2,16 @@ const { Router } = require("express");
 
 const userRouter = require("./user-route");
 const productRouter = require("./product-route");
-const { tryCatch } = require("../utils/helper");
+const videoRouter = require("./video-route");
 const { auth } = require("../middleware/auth");
 
 const userRoutes = new Router();
-userRoutes.use("/user", tryCatch(auth), userRouter);
+userRoutes.use("/user", auth, userRouter);
 
 const productRoutes = new Router();
-productRoutes.use("/product", tryCatch(auth), productRouter);
+productRoutes.use("/product", auth, productRouter);
 
-module.exports = { userRoutes, productRoutes };
+const videoRoutes = new Router();
+videoRoutes.use("/vimeo", auth, videoRouter);
+
+module.exports = { userRoutes, productRoutes, videoRoutes };

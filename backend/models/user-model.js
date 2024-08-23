@@ -6,6 +6,7 @@ const userSchema = new Schema(
     name: { type: String, required: true, default: "user" },
     email: { type: String, required: true, unique: true },
     mobile: { type: Number },
+    vimeoAccessToken: { type: String, default: null },
     referalCode: {
       type: String,
       required: true,

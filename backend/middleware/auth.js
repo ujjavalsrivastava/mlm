@@ -1,13 +1,12 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user-model");
-const { Types } = require("mongoose");
 
-const unAuthRoutes = ["/api/user/login", "/api/user/register"];
+const unAuthRoutes = { "/api/user/login": true, "/api/user/register": true };
 
 const auth = async (req, res, next) => {
   const endpoint = req.originalUrl;
 
-  const allowWithoutAuth = unAuthRoutes.includes(endpoint);
+  const allowWithoutAuth = unAuthRoutes[endpoint];
   if (allowWithoutAuth) return next();
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
