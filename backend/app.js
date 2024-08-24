@@ -3,7 +3,8 @@ const cors = require("cors");
 require("dotenv").config({ path: ".env" });
 const levelPercent = require("./routes/level-percentage");
 const kycRoute = require("./routes/kyc-route");
-const { userRoutes, productRoutes } = require("./routes");
+const { userRoutes, productRoutes, videoRoutes } = require("./routes");
+
 const morgan = require("morgan");
 (async () => {
   require("./config/connection");
@@ -40,7 +41,14 @@ const morgan = require("morgan");
 
   app.use(morgan(customFormat));
 
-  app.use(`/api`, userRoutes, productRoutes, levelPercent, kycRoute);
+  app.use(
+    `/api`,
+    userRoutes,
+    productRoutes,
+    levelPercent,
+    kycRoute,
+    videoRoutes
+  );
 
   app.use((err, req, res, next) => {
     console.error("app.js", err.stack);
