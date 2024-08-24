@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
-import VimeoPlayer from "./VimeoPlayer";
+import VimeoVideo from "./VimeoVideo";
 const MyCouseDetails = () => {
 
   const [course, setcourse] = useState([]);
   const [video, setvideo] = useState(null);
+  const [videoName, setvideoName] = useState(null);
   const {id} =  useParams();
   console.log('courseId '+ id);
 
@@ -19,12 +20,11 @@ const MyCouseDetails = () => {
   }
  
  }
- const getVideo = (videoId)=>{
-  let v = videoId.replace("/videos/", "");
-  console.log(v);
-  setvideo(v)
+ const getVideo = (videoId,name)=>{
+  setvideoName(name);
+  setvideo(videoId);
  }
-
+console.log()
  useEffect(()=>{
   courseVideo();
  },[])
@@ -53,10 +53,19 @@ const MyCouseDetails = () => {
                 <div class="col-12">
                   <div class="d-flex flex-wrap">
                     <div>
-                      <h6>What is Digital Marketing</h6>
+                      <h6>{videoName && videoName}</h6>
                     </div>
                     <div class="ml-auto">
-                      {video && (<VimeoPlayer videoId={video} />)}
+                    {video && (  <iframe
+                        src={video}
+                        width="640"
+                        height="360"
+                        frameBorder="0"
+                        allow="autoplay; fullscreen"
+                        allowFullScreen
+                        title="Vimeo Video"
+                      ></iframe>)}
+                     
                     
                     </div>
                   </div>
@@ -77,7 +86,7 @@ const MyCouseDetails = () => {
                       <li class="item">
                         <div class="">
                           <img src="https://www.bizgurukul.com/Biz/members/BizPro/imgs/play-button.png" alt="Product Image" />
-                          <a href="javascript:void(0)" onClick={() => getVideo(row.uri)} class="product-title">
+                          <a href="javascript:void(0)" onClick={() => getVideo(row.player_embed_url,row.name)} class="product-title">
                            {row.name}
                           </a>
                         </div>
