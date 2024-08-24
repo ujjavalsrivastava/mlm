@@ -264,7 +264,11 @@ const Header = () => {
                       <i class="icon-profile-male"></i> My Course
                     </Link>
                   </li>
-                 
+                  <li>
+                    <Link to={"/kyc"}>
+                      <i class="icon-profile-male"></i> KYC
+                    </Link>
+                  </li>
                   <li>
                     <Link to={"/member-dashboard"}>
                       <i class="icon-profile-male"></i> Affiliate Panel

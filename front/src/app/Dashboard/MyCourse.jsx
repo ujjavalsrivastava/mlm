@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 const MyCourse = () => {
   const state = useSelector((state) => state);
   console.log({ state });
@@ -17,18 +18,12 @@ const MyCourse = () => {
             </li>
           </ol>
         </div>
-        <div class="content">
-          <div class="row">
-            <div class="col-lg-12 col-xs-12">
-                <img src="https://www.bizgurukul.com/biz/members/img/busibess-banner.png" class="responsive" style={{height:'50%'}}/>
-        
-        </div>
-        </div>
-        </div>
+       
 
         <div class="content">
           <div class="row">
             <div class="col-lg-3 col-xs-6">
+              <Link to={'/course-details'}>
             <div class="info-box">
             <div class="info-box-content">
                 <img src="https://www.bizgurukul.com/Biz/img/marketing-mastery.png" alt="" class="responsive img-fluid img-thumbnail step1" />
@@ -36,6 +31,7 @@ const MyCourse = () => {
             
               <span style={{textAligh:'center'}}>Marketing Mastery</span> 
               </div>
+              </Link>
             </div>
 
             <div class="col-lg-3 col-xs-6">

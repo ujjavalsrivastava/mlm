@@ -12,7 +12,7 @@ const Checkout = () => {
         currency: "INR",
         receipt: "xyz product purchased",
       });
-
+       console.log(response)
       setOrderId(response.data.order_id);
     } catch (error) {
       console.error("Error creating order:", error);
