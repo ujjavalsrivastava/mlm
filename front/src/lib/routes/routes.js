@@ -17,5 +17,5 @@ export const authRoutes = [
   { path: "/payment", Component: payment },
   { path: "/member-dashboard", Component: MemberDashboard },
   { path: "/my-course", Component: MyCourse },
-  { path: "/course-details", Component: MyCourseDeatils },
+  { path: "/course-details/:id", Component: MyCourseDeatils },
 ];

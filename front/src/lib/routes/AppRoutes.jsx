@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import Login from "../../app/root/Login";
 import Register from "../../app/root/Register";
-
+import Purchage from "../../app/root/Purchage";
 import Comingsoon from "../../app/Dashboard/ComingSoon";
 import RouteAuth from "../../middleware/RouteAuth";
 import Layout from "../../app/root/Layout";
@@ -14,7 +14,7 @@ import { authRoutes } from "./routes";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-     <Route path="/" element={<Comingsoon />} />
+     <Route path="/" element={<Purchage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route element={<RouteAuth />}>

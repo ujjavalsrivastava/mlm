@@ -2,19 +2,64 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
-const MyCourse = () => {
+const Purchage = () => {
   const[product,setProduct]=useState(null);
+  const [orderId, setOrderId] = useState("");
+  const [productId, setproductId] = useState("");
   const fetchProduct = async()=>{
     try{
-      const response =  await axios.get('vimeo/courses');
-      setProduct(response.data);
+      const response =  await axios.get('product/items');
+      setProduct(response.data.products);
     }catch(error){
       console.log(error)
     }
     
   }
 
- 
+  const orderCreate = async(id,price)=>{
+    try{
+
+     const response =  await axios.post('create/order',{
+        amount: price * 100,
+        currency: "INR",
+        receipt: "xyz product purchased",
+      });
+      setOrderId(response.data.order_id);
+      setproductId(id);
+    }catch(error){
+      console.log(error)
+    }
+  }
+  const handlePaymentComplete = (response) => {
+    const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
+      response;
+    console.log({ response });
+  };
+  const handlePayment = (price) => {
+    const options = {
+      key: import.meta.env.VITE_PAYMENT_KEY, // Enter the Key ID generated from the Dashboard
+      amount: price * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency: "INR",
+      name: "Merchant Name",
+      description: "Test Transaction",
+      order_id: orderId, // This is a sample Order ID. Pass the `id` obtained in the previous step
+      handler: handlePaymentComplete,
+      prefill: {
+        name: "Test User",
+        email: "test.user@example.com",
+        contact: "9999999999",
+      },
+      notes: {
+        address: "Test Address",
+      },
+      theme: {
+        color: "#F37254",
+      },
+    };
+
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
 
   useEffect(()=>{
     fetchProduct();
@@ -40,15 +85,16 @@ const MyCourse = () => {
           <div class="row">
             {product && product.map(row=>(
                   <div class="col-lg-3 col-xs-6">
-              <Link to={`/course-details/${row.courseId}`}>   
-                  <div class="info-box">
-                    <div class="info-box-content">
+                 
+                  <div class="info-box">s
+                  <div class="info-box-content">
                     <img src="https://www.bizgurukul.com/Biz/img/marketing-mastery.png" alt="" class="responsive img-fluid img-thumbnail step1" />
                     </div>
-                     <span style={{textAligh:'center'}}>{row.name}</span> 
-                 
+                  <span style={{textAligh:'center'}}>{row.name}</span> 
+                  <div>Price : {row.price}</div>
+                  <button onClick={() => orderCreate(row._id,row.price)} type="button" class="btn btn-primary btn-sm">Order Now</button>
+                  {(row._id == productId) && <button class="btn btn-info btn-sm"  onClick={() => handlePayment(row.price)}>Pay Now</button>}
                   </div>
-                  </Link>
                  
                   </div>
             ))}
@@ -799,4 +845,4 @@ const MyCourse = () => {
   );
 };
 
-export default MyCourse;
+export default Purchage;
