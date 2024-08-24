@@ -4,11 +4,12 @@ import { axios } from "../helper/httpHelper";
 const Checkout = () => {
   const [orderId, setOrderId] = useState("");
   const [paid, setPaid] = useState({});
+  const amount = 100;
 
   const createOrder = async () => {
     try {
-      const response = await axios.post("/create/order", {
-        amount: 100 * 100,
+      const response = await axios.post("/product/create/order", {
+        amount: amount * 100,
         currency: "INR",
         receipt: "xyz product purchased",
       });
@@ -22,13 +23,12 @@ const Checkout = () => {
   const handlePaymentComplete = (response) => {
     const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
       response;
-    console.log({ response });
   };
 
   const handlePayment = () => {
     const options = {
       key: import.meta.env.VITE_PAYMENT_KEY, // Enter the Key ID generated from the Dashboard
-      amount: 100 * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      amount: amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       currency: "INR",
       name: "Merchant Name",
       description: "Test Transaction",
