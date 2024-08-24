@@ -18,6 +18,7 @@ const {
   getUserTotalEarning,
 } = require("../controllers/purchaseController");
 const { tryCatch } = require("../utils/helper");
+const { getUserCourses } = require("../controllers/productController");
 
 const router = express.Router();
 
@@ -26,6 +27,7 @@ router.post("/login", tryCatch(loginHandler));
 
 // auth required
 router.get("/profile", tryCatch(getUserProfile));
+router.get("/courses", tryCatch(getUserCourses));
 router.patch("/profile", tryCatch(updateProfile));
 router.get("/lower-users", tryCatch(getLowerLevelUsers));
 router.get("/upper-users", tryCatch(getUpperLevelUsers));

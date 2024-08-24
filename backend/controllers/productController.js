@@ -1,13 +1,8 @@
 const Product = require("../models/product-model");
 const UserPurchase = require("../models/purchase-history-model");
 const { razorpay } = require("../payment/getway");
-const {
-  distributeUserPercentage,
-  handlePromiseError,
-} = require("../utils/helper");
-const getProductOrder = (req, res) => {
-  res.send("getProductOrder");
-};
+const { distributeUserPercentage, getUserId } = require("../utils/helper");
+const { getAlbumById } = require("../vimeo/helper");
 
 const createRazorpayOrder = async (req, res) => {
   const { amount, currency, receipt } = req.body;
@@ -35,10 +30,11 @@ const createRazorpayOrder = async (req, res) => {
 };
 
 const createProductOrder = async (req, res) => {
-  const { productId, transectionId, paymentMethod, status } = req.body;
-  const userId = req.user._id;
+  const { productId, paymentMethod, status, orderId, paymentId, signature } =
+    req.body;
+  const userId = getUserId(req);
   if (!productId)
-    res.status(400).json({ error: "ProductId is required to make a purchase" });
+    res.status(400).json({ error: "productId is required to make a purchase" });
   const [userPurchaseHistory, product] = await Promise.all([
     UserPurchase.findOne({ userId }),
     Product.findById(productId),
@@ -46,15 +42,15 @@ const createProductOrder = async (req, res) => {
 
   const createProduct = {
     product: product._id,
-    transectionId,
+    orderId,
+    paymentId,
+    signature,
     paymentMethod,
     status,
   };
 
   if (!userPurchaseHistory) {
-    //for older users
     const addPurchase = await new UserPurchase({
-      currentAmount: 0,
       userId,
       products: [createProduct],
     }).save();
@@ -62,8 +58,6 @@ const createProductOrder = async (req, res) => {
       return res.json({ message: "Order created successfull", addPurchase });
     }
   } else {
-    userPurchaseHistory.currentAmount =
-      userPurchaseHistory.currentAmount - product.price;
     userPurchaseHistory.products.unshift(createProduct);
     const savedData = await userPurchaseHistory.save();
     await distributeUserPercentage(userId, product.price);
@@ -73,38 +67,55 @@ const createProductOrder = async (req, res) => {
   res.json(userPurchaseHistory);
 };
 
-const getProduct = async (req, res) => {
-  const { id } = req.params;
-  const product = await Product.findById(id);
-  res.json(product);
-};
-
-const getProducts = async (_, res) => {
-  const [error, products] = await handlePromiseError(Product.find({}));
-  if (error) {
-    return res.status(400).json(error);
-  }
-  res.json({ products });
-};
-
 const createProduct = async (req, res) => {
-  const { name, price } = req.body;
-  const checkName = await Product.find({ name });
-  if (checkName) throw new Error("Product already exist");
-  const product = await new Product({ name, price }).save();
+  const { courseId, price } = req.body;
+  const checkName = await Product.findOne({ courseId });
+  if (checkName) throw new Error("courseId already exist");
+  const product = await new Product({ courseId, price }).save();
   res.json(product);
 };
 
-const updateProduct = (req, res) => {
-  res.send("updateProduct");
+const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+  await Product.findByIdAndDelete(id);
+  res.json({ message: "deleted successfully" });
+};
+
+const getUserCourses = async (req, res) => {
+  const userId = getUserId(req);
+  const purchaseHistory = await UserPurchase.findOne({ userId }).populate(
+    "products.product"
+  );
+  const products = purchaseHistory?.products;
+  if (products?.length) {
+    const data = await Promise.all(
+      products.map(async ({ product, timestamp, status }) => {
+        const courseId = product.courseId;
+        const course = await getAlbumById(courseId);
+        if (course.error) return { courseId, error };
+        return {
+          courseId,
+          timestamp,
+          status,
+          name: course.name,
+          description: course.description,
+          link: course.link,
+          duration: course.duration,
+          created_time: course.created_time,
+          modified_time: course.modified_time,
+          pictures: { ...course.pictures, sizes: {} },
+        };
+      })
+    );
+    return res.json(data);
+  }
+  res.json(products);
 };
 
 module.exports = {
-  getProductOrder,
   createProductOrder,
-  getProduct,
   createProduct,
-  updateProduct,
   createRazorpayOrder,
-  getProducts,
+  deleteProduct,
+  getUserCourses,
 };

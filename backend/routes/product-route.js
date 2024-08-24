@@ -1,24 +1,18 @@
 const { Router } = require("express");
 const {
-  getProductOrder,
   createProductOrder,
-  getProduct,
-  updateProduct,
   createProduct,
   createRazorpayOrder,
-  getProducts,
+  deleteProduct,
 } = require("../controllers/productController");
 const { adminAuth, auth } = require("../middleware/auth");
 const { tryCatch } = require("../utils/helper");
 
 const router = new Router();
 
-router.get("/order", tryCatch(getProductOrder));
 router.post("/order", tryCatch(createProductOrder));
-router.get("/items", tryCatch(getProducts));
 router.post("/create/order", tryCatch(createRazorpayOrder));
 router.post("/", adminAuth, tryCatch(createProduct));
-router.get("/:id", tryCatch(getProduct));
-router.put("/:id", adminAuth, tryCatch(updateProduct));
+router.delete("/:id", tryCatch(deleteProduct));
 
 module.exports = router;
