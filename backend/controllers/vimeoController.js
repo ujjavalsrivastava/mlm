@@ -1,6 +1,6 @@
 const vimeoClient = require("../vimeo/client");
 const { getAlbumById } = require("../vimeo/helper");
-const Course = require("../models/course-model");
+const Product = require("../models/product-model");
 
 const getVideo = async (req, res) => {
   const { courseId } = req.query;
@@ -57,21 +57,11 @@ const handleRedirection = async (req, res) => {
   res.json(result);
 };
 
-const createVimeoShowcase = async (req, res) => {
-  const { courseId, price } = req.body;
-  const courseAvailable = await Course.findOne({ courseId });
-
-  if (courseAvailable)
-    return res.status(400).json({ error: "This courseId is already saved" });
-  const response = await Course({ courseId, price }).save();
-  res.json(response);
-};
-
 const getAllCourses = async (req, res) => {
-  const couses = await Course.find();
-  if (couses.length) {
+  const courses = await Product.find();
+  if (courses.length) {
     const data = await Promise.all(
-      couses.map(async ({ price, courseId }) => {
+      courses.map(async ({ price, courseId }) => {
         const course = await getAlbumById(courseId);
         if (course.error) return { courseId, price, error };
         return {
@@ -89,20 +79,12 @@ const getAllCourses = async (req, res) => {
     );
     return res.json(data);
   }
-  res.json(couses);
-};
-
-const getCourseById = async (req, res) => {
-  const { courseId } = req.params;
-  const data = await getAlbumById(courseId);
-  res.json(data);
+  res.json(courses);
 };
 
 module.exports = {
   getVideo,
   handleAuthentication,
   handleRedirection,
-  createVimeoShowcase,
   getAllCourses,
-  getCourseById,
 };
