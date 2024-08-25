@@ -7,10 +7,13 @@ const UserPurchase = require("../models/purchase-history-model");
 const getVideo = async (req, res) => {
   const { courseId } = req.query;
   const userId = getUserId(req);
+  console.log(userId);
   const history = await UserPurchase.findOne({ userId }).populate(
     "products.product"
   );
-  const products = history.products;
+  console.log(history,userId);
+  const products = history?.products || [];
+ 
   const checkCourse = products.find(
     ({ product }) => product.courseId === courseId
   );
@@ -74,10 +77,12 @@ const getAllCourses = async (req, res) => {
   const courses = await Product.find();
   if (courses.length) {
     const data = await Promise.all(
-      courses.map(async ({ price, courseId }) => {
+      courses.map(async ({ price, courseId,_id }) => {
+        
         const course = await getAlbumById(courseId);
         if (course.error) return { courseId, price, error };
         return {
+          id:_id,
           courseId,
           price,
           name: course.name,

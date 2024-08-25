@@ -2,40 +2,51 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
+import { toast } from "react-toastify";
 const Purchage = () => {
   const[product,setProduct]=useState(null);
   const [orderId, setOrderId] = useState("");
   const [productId, setproductId] = useState("");
   const fetchProduct = async()=>{
     try{
-      const response =  await axios.get('product/items');
-      setProduct(response.data.products);
+      const response =  await axios.get('vimeo/courses');
+      setProduct(response.data);
     }catch(error){
       console.log(error)
     }
     
   }
 
+
+
   const orderCreate = async(id,price)=>{
     try{
+     
+      var token = localStorage.getItem("token");
+      
+      if(token == null){
+        toast.error('please Login First');
+        return false;
+      }
 
-     const response =  await axios.post('create/order',{
+     const response =  await axios.post('product/create/order',{
         amount: price * 100,
         currency: "INR",
         receipt: "xyz product purchased",
       });
       setOrderId(response.data.order_id);
       setproductId(id);
+      handlePayment(price,id);
     }catch(error){
       console.log(error)
     }
   }
-  const handlePaymentComplete = (response) => {
-    const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
-      response;
-    console.log({ response });
-  };
-  const handlePayment = (price) => {
+  // const handlePaymentComplete = async(response) => {
+  //   const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
+  //     response;
+  //   const response = await axios.post('product/order',{"productId":"66ca081771a6103598651071", "paymentId":razorpay_payment_id,"orderId":razorpay_order_id, "paymentMethod":"upi", "status":"created","signature":razorpay_signature}) 
+  // };
+  const handlePayment = (price,courseId) => {
     const options = {
       key: import.meta.env.VITE_PAYMENT_KEY, // Enter the Key ID generated from the Dashboard
       amount: price * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -43,7 +54,19 @@ const Purchage = () => {
       name: "Merchant Name",
       description: "Test Transaction",
       order_id: orderId, // This is a sample Order ID. Pass the `id` obtained in the previous step
-      handler: handlePaymentComplete,
+      handler: async function (response) {
+        
+          // Send this data to your server to verify the payment
+          const result = await axios.post('product/payment-verification', response);
+            if(result.status==200){
+              const productOrder= await axios.post('product/order',{"productId":courseId, "paymentId":response.razorpay_payment_id,"orderId":response.razorpay_order_id, "paymentMethod":"upi", "status":"success","signature":response.razorpay_signature});
+              toast.success(productOrder.data.message);
+            }else{
+              toast.error(result.data.msg);
+            }
+         
+         
+        },
       prefill: {
         name: "Test User",
         email: "test.user@example.com",
@@ -92,8 +115,8 @@ const Purchage = () => {
                     </div>
                   <span style={{textAligh:'center'}}>{row.name}</span> 
                   <div>Price : {row.price}</div>
-                  <button onClick={() => orderCreate(row._id,row.price)} type="button" class="btn btn-primary btn-sm">Order Now</button>
-                  {(row._id == productId) && <button class="btn btn-info btn-sm"  onClick={() => handlePayment(row.price)}>Pay Now</button>}
+                  <button onClick={() => orderCreate(row.id,row.price)} type="button" class="btn btn-primary btn-sm">Order Now</button>
+      
                   </div>
                  
                   </div>

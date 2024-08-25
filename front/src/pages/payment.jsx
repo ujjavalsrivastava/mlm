@@ -21,6 +21,7 @@ const Checkout = () => {
   };
 
   const handlePaymentComplete = (response) => {
+    console.log(JSON.stringify(response));
     const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
       response;
   };

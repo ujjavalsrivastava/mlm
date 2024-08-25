@@ -6,7 +6,7 @@ const MyCourse = () => {
   const[product,setProduct]=useState(null);
   const fetchProduct = async()=>{
     try{
-      const response =  await axios.get('vimeo/courses');
+      const response =  await axios.get('user/courses');
       setProduct(response.data);
     }catch(error){
       console.log(error)

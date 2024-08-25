@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user-model");
 
-const unAuthRoutes = { "/api/user/login": true, "/api/user/register": true };
+const unAuthRoutes = { "/api/user/login": true, "/api/user/register": true,'/api/vimeo/courses':true };
 
 const auth = async (req, res, next) => {
   const endpoint = req.originalUrl;

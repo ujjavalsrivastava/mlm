@@ -9,9 +9,9 @@ const userRoutes = new Router();
 userRoutes.use("/user", auth, userRouter);
 
 const productRoutes = new Router();
-productRoutes.use("/product", auth, productRouter);
+productRoutes.use("/product",auth,productRouter);
 
 const videoRoutes = new Router();
-videoRoutes.use("/vimeo", auth, videoRouter);
+videoRoutes.use("/vimeo",  auth,videoRouter);
 
 module.exports = { userRoutes, productRoutes, videoRoutes };
