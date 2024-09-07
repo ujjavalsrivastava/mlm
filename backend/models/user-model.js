@@ -20,7 +20,6 @@ const userSchema = new Schema(
     country: { type: String, default: null },
     pincode: { type: Number, default: null },
     city: { type: String, default: null },
-    picture: { type: String, default: null },
     occupation: { type: String, default: null },
     address: { type: String, default: null },
     vimeoAccessToken: { type: String, default: null },

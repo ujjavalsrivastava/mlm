@@ -41,6 +41,8 @@ const morgan = require("morgan");
 
   app.use(morgan(customFormat));
 
+  app.use("/uploads", express.static("uploads"));
+
   app.use(
     `/api`,
     userRoutes,

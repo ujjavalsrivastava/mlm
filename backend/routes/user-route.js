@@ -5,6 +5,9 @@ const {
   getUserProfile,
   updateProfile,
   changePassword,
+  updateProfilePicture,
+  getProfilePicture,
+  getInvoice,
 } = require("../controllers/userController");
 
 const {
@@ -21,6 +24,7 @@ const {
 } = require("../controllers/purchaseController");
 const { tryCatch } = require("../utils/helper");
 const { getUserCourses } = require("../controllers/productController");
+const { uploadProfilePicture } = require("../utils/storage");
 
 const router = express.Router();
 
@@ -31,6 +35,13 @@ router.post("/login", tryCatch(loginHandler));
 router.get("/profile", tryCatch(getUserProfile));
 router.get("/courses", tryCatch(getUserCourses));
 router.patch("/profile", tryCatch(updateProfile));
+router.put(
+  "/profile-picture",
+  uploadProfilePicture.single("profilePicture"),
+  tryCatch(updateProfilePicture)
+);
+router.get("/profile-picture", tryCatch(getProfilePicture));
+router.get("/invoice", tryCatch(getInvoice));
 router.put("/change-password", tryCatch(changePassword));
 router.get("/lower-users", tryCatch(getLowerLevelUsers));
 router.get("/upper-users", tryCatch(getUpperLevelUsers));
