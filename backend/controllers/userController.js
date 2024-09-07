@@ -1,9 +1,11 @@
 const User = require("../models/user-model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { generateReferralCode } = require("../utils/helper");
+const { generateReferralCode, getUserId } = require("../utils/helper");
 const UserPurchase = require("../models/purchase-history-model");
 const PercentDistribution = require("../models/percentage-distribution-model");
+const path = require("path");
+const fs = require("fs");
 
 const createUser = async (req, res) => {
   const { email, name, password, referalCode } = req.body;
@@ -104,10 +106,56 @@ const changePassword = async (req, res) => {
   res.json({ message: "Password update successfully" });
 };
 
+const updateProfilePicture = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).send("No file uploaded.");
+  }
+
+  const userId = getUserId(req);
+  const oldFilePath = path.join(
+    __dirname,
+    "uploads/profile_pictures",
+    `${userId}.jpg`
+  );
+
+  if (userId && fs.existsSync(oldFilePath)) {
+    fs.unlinkSync(oldFilePath); // Delete the old profile picture
+  }
+  res.json({ message: "profile picture updated successfully", ...req.file });
+};
+
+const getProfilePicture = async (req, res) => {
+  const userId = `${getUserId(req)}`;
+  const imagePath = path.join(
+    __dirname,
+    "../uploads/profile_pictures",
+    `${userId}.PNG`
+  );
+  if (fs.existsSync(imagePath)) return res.sendFile(imagePath);
+  res.status(404).json({ error: "Profile picture not found" });
+};
+
+const getInvoice = async (req, res) => {
+  const userId = getUserId(req);
+  const userPurchaseHistory = await UserPurchase.findOne({ userId }).populate(
+    "products.product"
+  );
+  if (
+    Array.isArray(userPurchaseHistory?.products) &&
+    userPurchaseHistory.products.length
+  ) {
+    return res.json(userPurchaseHistory.products);
+  }
+  res.status(404).json([]);
+};
+
 module.exports = {
   createUser,
   loginHandler,
   getUserProfile,
   updateProfile,
   changePassword,
+  updateProfilePicture,
+  getProfilePicture,
+  getInvoice,
 };
