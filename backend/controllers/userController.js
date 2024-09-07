@@ -1,9 +1,11 @@
 const User = require("../models/user-model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { generateReferralCode } = require("../utils/helper");
+const { generateReferralCode, getUserId } = require("../utils/helper");
 const UserPurchase = require("../models/purchase-history-model");
 const PercentDistribution = require("../models/percentage-distribution-model");
+const path = require("path");
+const fs = require("fs");
 
 const createUser = async (req, res) => {
   const { email, name, password, referalCode } = req.body;
@@ -65,9 +67,95 @@ const getUserProfile = (req, res) => {
 
 const updateProfile = async (req, res) => {
   const user = req.user;
-  const { name } = req.body;
-  user.name = name;
+  const {
+    name,
+    mobile,
+    gender,
+    dob,
+    state,
+    country,
+    city,
+    occupation,
+    address,
+  } = req.body;
+  user.name = name || user.name;
+  user.mobile = mobile || user.mobile;
+  if (gender) {
+    user.gender = gender;
+  }
+  user.dob = dob || user.dob;
+  user.state = state || user.state;
+  user.country = country || user.country;
+  user.city = city || user.city;
+  user.occupation = occupation || user.occupation;
+  user.address = address || user.address;
   await user.save();
   res.json({ message: "user data updated successfully" });
 };
-module.exports = { createUser, loginHandler, getUserProfile, updateProfile };
+
+const changePassword = async (req, res) => {
+  const user = req.user;
+  const { newPassword, oldPassword } = req.body;
+  if (!newPassword || !oldPassword)
+    return res.status(404).json({ error: "old and new password required" });
+  const passwordMatched = await bcrypt.compare(oldPassword, `${user.password}`);
+  if (!passwordMatched)
+    return res.json({ error: "old password is incorrect", code: 802 });
+  user.password = newPassword;
+  await user.save();
+  res.json({ message: "Password update successfully" });
+};
+
+const updateProfilePicture = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).send("No file uploaded.");
+  }
+
+  const userId = getUserId(req);
+  const oldFilePath = path.join(
+    __dirname,
+    "uploads/profile_pictures",
+    `${userId}.jpg`
+  );
+
+  if (userId && fs.existsSync(oldFilePath)) {
+    fs.unlinkSync(oldFilePath); // Delete the old profile picture
+  }
+  res.json({ message: "profile picture updated successfully", ...req.file });
+};
+
+const getProfilePicture = async (req, res) => {
+  const userId = `${getUserId(req)}`;
+  const imagePath = path.join(
+    __dirname,
+    "../uploads/profile_pictures",
+    `${userId}.PNG`
+  );
+  if (fs.existsSync(imagePath)) return res.sendFile(imagePath);
+  res.status(404).json({ error: "Profile picture not found" });
+};
+
+const getInvoice = async (req, res) => {
+  const userId = getUserId(req);
+  const userPurchaseHistory = await UserPurchase.findOne({ userId }).populate(
+    "products.product"
+  );
+  if (
+    Array.isArray(userPurchaseHistory?.products) &&
+    userPurchaseHistory.products.length
+  ) {
+    return res.json(userPurchaseHistory.products);
+  }
+  res.status(404).json([]);
+};
+
+module.exports = {
+  createUser,
+  loginHandler,
+  getUserProfile,
+  updateProfile,
+  changePassword,
+  updateProfilePicture,
+  getProfilePicture,
+  getInvoice,
+};
