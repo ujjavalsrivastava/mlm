@@ -33,6 +33,8 @@ async function populateLowerLevel(user) {
       })
     )
   );
+  if (lowerLevelUsersError)
+    console.log("lowerLevelUsersError", lowerLevelUsersError);
 
   user.lowerLevel = lowerLevelUsers;
   return user;
@@ -134,6 +136,39 @@ function tryCatch(fn) {
 
 const getUserId = (req) => req.query?.userId || req.user?._id;
 
+const flattenUsers = (user) => {
+  let flatUsers = [user];
+  user.lowerLevel.forEach((subUser) => {
+    flatUsers = flatUsers.concat(flattenUsers(subUser));
+  });
+  return flatUsers;
+};
+
+function usersJoinedToday(users) {
+  const currentDate = new Date().toISOString().split("T")[0];
+  return users.filter((user) => {
+    const dateOnly = user.createdAt.toISOString().split("T")[0]; // Extract the date part (YYYY-MM-DD)
+    return dateOnly === currentDate; // Keep only those that don't match the current date
+  });
+}
+
+const totalAmountPipeline = (userIds) => [
+  {
+    $match: {
+      userId: { $in: userIds }, // Match the list of users by userId
+    },
+  },
+  {
+    $unwind: "$purchaseHistory", // Decompose purchaseHistory array
+  },
+  {
+    $group: {
+      _id: "$userId", // Group by userId
+      totalAmount: { $sum: "$purchaseHistory.amount" }, // Sum the amount for each user
+    },
+  },
+];
+
 module.exports = {
   generateReferralCode,
   populateLowerLevel,
@@ -142,4 +177,7 @@ module.exports = {
   handlePromiseError,
   tryCatch,
   getUserId,
+  flattenUsers,
+  usersJoinedToday,
+  totalAmountPipeline,
 };

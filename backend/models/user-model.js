@@ -6,6 +6,23 @@ const userSchema = new Schema(
     name: { type: String, required: true, default: "user" },
     email: { type: String, required: true, unique: true },
     mobile: { type: Number },
+    gender: {
+      type: String,
+      default: null,
+      validate(value) {
+        if (!(value === "male" || value === "female")) {
+          throw new Error("value can be male or female only");
+        }
+      },
+    },
+    dob: { type: String, default: null },
+    state: { type: String, default: null },
+    country: { type: String, default: null },
+    pincode: { type: Number, default: null },
+    city: { type: String, default: null },
+    picture: { type: String, default: null },
+    occupation: { type: String, default: null },
+    address: { type: String, default: null },
     vimeoAccessToken: { type: String, default: null },
     referalCode: {
       type: String,

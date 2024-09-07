@@ -65,9 +65,49 @@ const getUserProfile = (req, res) => {
 
 const updateProfile = async (req, res) => {
   const user = req.user;
-  const { name } = req.body;
-  user.name = name;
+  const {
+    name,
+    mobile,
+    gender,
+    dob,
+    state,
+    country,
+    city,
+    occupation,
+    address,
+  } = req.body;
+  user.name = name || user.name;
+  user.mobile = mobile || user.mobile;
+  if (gender) {
+    user.gender = gender;
+  }
+  user.dob = dob || user.dob;
+  user.state = state || user.state;
+  user.country = country || user.country;
+  user.city = city || user.city;
+  user.occupation = occupation || user.occupation;
+  user.address = address || user.address;
   await user.save();
   res.json({ message: "user data updated successfully" });
 };
-module.exports = { createUser, loginHandler, getUserProfile, updateProfile };
+
+const changePassword = async (req, res) => {
+  const user = req.user;
+  const { newPassword, oldPassword } = req.body;
+  if (!newPassword || !oldPassword)
+    return res.status(404).json({ error: "old and new password required" });
+  const passwordMatched = await bcrypt.compare(oldPassword, `${user.password}`);
+  if (!passwordMatched)
+    return res.json({ error: "old password is incorrect", code: 802 });
+  user.password = newPassword;
+  await user.save();
+  res.json({ message: "Password update successfully" });
+};
+
+module.exports = {
+  createUser,
+  loginHandler,
+  getUserProfile,
+  updateProfile,
+  changePassword,
+};
