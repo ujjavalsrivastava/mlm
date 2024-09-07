@@ -4,11 +4,13 @@ const {
   loginHandler,
   getUserProfile,
   updateProfile,
+  changePassword,
 } = require("../controllers/userController");
-const { auth } = require("../middleware/auth");
+
 const {
   getLowerLevelUsers,
   getUpperLevelUsers,
+  getUserGroupStatus,
 } = require("../controllers/levelController");
 const {
   handleProductPurchase,
@@ -29,6 +31,7 @@ router.post("/login", tryCatch(loginHandler));
 router.get("/profile", tryCatch(getUserProfile));
 router.get("/courses", tryCatch(getUserCourses));
 router.patch("/profile", tryCatch(updateProfile));
+router.put("/change-password", tryCatch(changePassword));
 router.get("/lower-users", tryCatch(getLowerLevelUsers));
 router.get("/upper-users", tryCatch(getUpperLevelUsers));
 router.post("/purchase", tryCatch(handleProductPurchase));
@@ -36,5 +39,6 @@ router.get("/purchase", tryCatch(getUserProductsAndBalance));
 router.get("/account-purchase", tryCatch(getUserAccountAndPurcheseHistory));
 router.get("/percent-earning", tryCatch(getUserPercentDistribution));
 router.get("/total-earning", tryCatch(getUserTotalEarning));
+router.get("/group-status", tryCatch(getUserGroupStatus));
 
 module.exports = router;
