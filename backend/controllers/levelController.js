@@ -20,7 +20,7 @@ const getLowerLevelUsers = async (req, res) => {
 
   if (role === "user") {
     let user = await User.findById(userId).exec();
-    user = await populateLowerLevel(user, "lowerLevel");
+    user = await populateLowerLevel(user);
     return res.json([user]);
   } else if (role === "admin") {
     const allParentUserIds = await User.find({
@@ -76,10 +76,9 @@ const updateLevelPercentage = async (req, res) => {
 const getUserGroupStatus = async (req, res) => {
   const userId = getUserId(req);
   let user = await User.findById(userId).exec();
-  user = await populateLowerLevel(user, "lowerLevel");
+  user = await populateLowerLevel(user);
   const allUsers = flattenUsers(user);
   const todaysUsers = usersJoinedToday(allUsers);
-  const allUserIds = allUsers.map((u) => u._id);
 
   const totalEarning = await PercentDistribution.aggregate(
     totalAmountPipeline(allUsers.map((u) => u._id))

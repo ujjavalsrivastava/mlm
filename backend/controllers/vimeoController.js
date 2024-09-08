@@ -11,9 +11,9 @@ const getVideo = async (req, res) => {
   const history = await UserPurchase.findOne({ userId }).populate(
     "products.product"
   );
-  console.log(history,userId);
+  console.log(history, userId);
   const products = history?.products || [];
- 
+
   const checkCourse = products.find(
     ({ product }) => product.courseId === courseId
   );
@@ -77,12 +77,11 @@ const getAllCourses = async (req, res) => {
   const courses = await Product.find();
   if (courses.length) {
     const data = await Promise.all(
-      courses.map(async ({ price, courseId,_id }) => {
-        
+      courses.map(async ({ price, courseId, _id }) => {
         const course = await getAlbumById(courseId);
         if (course.error) return { courseId, price, error };
         return {
-          id:_id,
+          id: _id,
           courseId,
           price,
           name: course.name,
