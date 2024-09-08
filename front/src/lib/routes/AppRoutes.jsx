@@ -10,11 +10,13 @@ import Comingsoon from "../../app/Dashboard/ComingSoon";
 import RouteAuth from "../../middleware/RouteAuth";
 import Layout from "../../app/root/Layout";
 import { authRoutes } from "./routes";
+import Landing from "../../pages/landing";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Purchage />} />
+      <Route path="/home" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route element={<RouteAuth />}>
