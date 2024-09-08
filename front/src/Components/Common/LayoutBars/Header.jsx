@@ -274,17 +274,22 @@ const Header = () => {
                       <i class="icon-profile-male"></i> Affiliate Panel
                     </Link>
                   </li>
-                
+                  <li>
+                    <Link to={"/referal-link"}>
+                      <i class="icon-profile-male"></i> Referal
+                    </Link>
+                  </li>
                   <li>
                     <Link to={"/tree"}>
                       <i class="fa fa-tree" aria-hidden="true"></i> Hierarchy
                     </Link>
                   </li>
-                  <li role="separator" class="divider"></li>
+                  
+                 
                   <li>
-                    <a href="#">
-                      <i class="icon-gears"></i> Account Setting
-                    </a>
+                  <Link to={"/change-password"}>
+                      <i class="fa fa-tree" aria-hidden="true"></i> Change Password
+                    </Link>
                   </li>
                   <li role="separator" class="divider"></li>
                   <li>
