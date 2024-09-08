@@ -14,7 +14,7 @@ import { authRoutes } from "./routes";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-     <Route path="/" element={<Purchage />} />
+      <Route path="/" element={<Purchage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route element={<RouteAuth />}>

@@ -1,5 +1,5 @@
 const Product = require("../models/product-model");
-const crypto = require('crypto');
+const crypto = require("crypto");
 const UserPurchase = require("../models/purchase-history-model");
 const { razorpay } = require("../payment/getway");
 const { distributeUserPercentage, getUserId } = require("../utils/helper");
@@ -12,7 +12,6 @@ const createRazorpayOrder = async (req, res) => {
     amount,
     currency,
     receipt,
-    // receipt: "any unique id for every order",
     payment_capture: 1,
   };
   try {
@@ -31,23 +30,22 @@ const createRazorpayOrder = async (req, res) => {
 };
 
 const paymentVerification = async (req, res) => {
-//app.post('/payment-verification', (req, res) => {
-  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+    req.body;
 
-  const body = razorpay_order_id + '|' + razorpay_payment_id;
+  const body = razorpay_order_id + "|" + razorpay_payment_id;
 
   const expectedSignature = crypto
-    .createHmac('sha256', process.env.RAZORPAY_SECRET)
+    .createHmac("sha256", process.env.RAZORPAY_SECRET)
     .update(body.toString())
-    .digest('hex');
+    .digest("hex");
 
   if (expectedSignature === razorpay_signature) {
-    res.json({ msg: 'Payment successful' },200);
+    res.json({ msg: "Payment successful" }, 200);
   } else {
-    res.status(400).json({ msg: 'Payment verification failed' });
+    res.status(400).json({ msg: "Payment verification failed" });
   }
 };
-
 
 const createProductOrder = async (req, res) => {
   const { productId, paymentMethod, status, orderId, paymentId, signature } =
@@ -110,7 +108,7 @@ const getUserCourses = async (req, res) => {
   if (products?.length) {
     const data = await Promise.all(
       products.map(async ({ product, timestamp, status }) => {
-        console.log('product' , product);
+        console.log("product", product);
         const courseId = product.courseId;
         const course = await getAlbumById(courseId);
         if (course.error) return { courseId, error };
@@ -126,9 +124,7 @@ const getUserCourses = async (req, res) => {
           modified_time: course.modified_time,
           pictures: { ...course.pictures, sizes: {} },
         };
-
       })
-
     );
     return res.json(data);
   }
@@ -141,5 +137,5 @@ module.exports = {
   createRazorpayOrder,
   deleteProduct,
   getUserCourses,
-  paymentVerification
+  paymentVerification,
 };

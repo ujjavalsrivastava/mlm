@@ -98,6 +98,10 @@ const changePassword = async (req, res) => {
   const { newPassword, oldPassword } = req.body;
   if (!newPassword || !oldPassword)
     return res.status(404).json({ error: "old and new password required" });
+  if (newPassword.trim().length > 5)
+    return res
+      .status(404)
+      .json({ error: "Password should be greater than 5 character" });
   const passwordMatched = await bcrypt.compare(oldPassword, `${user.password}`);
   if (!passwordMatched)
     return res.json({ error: "old password is incorrect", code: 802 });

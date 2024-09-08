@@ -19,17 +19,18 @@ function generateReferralCode(len = 8) {
 }
 
 // Function to recursively populate lowerLevel
-async function populateLowerLevel(user) {
-  if (!user.lowerLevel || user.lowerLevel.length === 0) {
+async function populateLowerLevel(user, counter = 0) {
+  if (!user.lowerLevel || user.lowerLevel.length === 0 || counter > 7) {
     return user;
   }
+  console.log({ counter });
 
   await user.populate("lowerLevel");
 
   const [lowerLevelUsersError, lowerLevelUsers] = await handlePromiseError(
     Promise.all(
       user.lowerLevel.map(async (lowerUser) => {
-        return populateLowerLevel(lowerUser);
+        return populateLowerLevel(lowerUser, ++counter);
       })
     )
   );
