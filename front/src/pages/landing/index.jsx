@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import style from './home.module.css';
 
 function Landing() {
 
@@ -36,6 +37,7 @@ function Landing() {
       </button>
 
       <header>
+        {/* className="tg-header__top" */}
         <div className="tg-header__top">
           <div className="container custom-container">
             <div className="row">
@@ -655,7 +657,8 @@ function Landing() {
             </div>
             <div className="row">
               <div className="col-12">
-                <div className="categories__wrap">
+              
+                <div className={`${style.categories__wrap}`} >
                   <div className="swiper categories-active">
                     <div className="swiper-wrapper">
                       <div className="swiper-slide">
@@ -778,8 +781,8 @@ function Landing() {
             </div>
           </div>
         </section>
-
-        <div className="brand-area">
+        
+        <div className={`${style.brand_area}`} >
           <div className="container-fluid">
             <div className="marquee_mode">
               <div className="brand__item">
@@ -1035,7 +1038,8 @@ function Landing() {
                 <div className="swiper courses-swiper-active">
                   <div className="swiper-wrapper">
                     <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    
+                      <div className={`${style.courses__item} ${style.shine__animate_item}`} >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"

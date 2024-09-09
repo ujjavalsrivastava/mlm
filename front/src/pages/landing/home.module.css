@@ -9302,7 +9302,7 @@ textarea {
   -ms-transform: skewX(-25deg);
   transform: skewX(-25deg);
 }
-.shine__animate-item:hover .shine__animate-link::before {
+.shine__animate_item:hover .shine__animate-link::before {
   -webkit-animation: hoverShine 1.2s;
   animation: hoverShine 1.2s;
 }
