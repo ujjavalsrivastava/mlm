@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import style from './home.module.css';
 
 function Landing() {
+
+  const[product,setProduct]=useState(null);
+  const [orderId, setOrderId] = useState("");
+  const [productId, setproductId] = useState("");
+
+  const fetchProduct = async()=>{
+    try{
+      const response =  await axios.get('vimeo/courses');
+      setProduct(response.data);
+    }catch(error){
+      console.log(error)
+    }
+    
+  }
+  useEffect((row)=>{
+    fetchProduct();
+  },[]);
+  
   return (
     <React.Fragment>
       <div id="preloader">
@@ -18,6 +37,7 @@ function Landing() {
       </button>
 
       <header>
+        {/* className="tg-header__top" */}
         <div className="tg-header__top">
           <div className="container custom-container">
             <div className="row">
@@ -637,7 +657,8 @@ function Landing() {
             </div>
             <div className="row">
               <div className="col-12">
-                <div className="categories__wrap">
+              
+                <div className={`${style.categories__wrap}`} >
                   <div className="swiper categories-active">
                     <div className="swiper-wrapper">
                       <div className="swiper-slide">
@@ -760,8 +781,8 @@ function Landing() {
             </div>
           </div>
         </section>
-
-        <div className="brand-area">
+        
+        <div className={`${style.brand_area}`} >
           <div className="container-fluid">
             <div className="marquee_mode">
               <div className="brand__item">
@@ -1017,7 +1038,8 @@ function Landing() {
                 <div className="swiper courses-swiper-active">
                   <div className="swiper-wrapper">
                     <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    
+                      <div className={`${style.courses__item} ${style.shine__animate_item}`} >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
