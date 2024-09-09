@@ -15,8 +15,8 @@ import Landing from "../../pages/landing";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<Purchage />} />
-      <Route path="/home" element={<Landing />} />
+      {/* <Route path="/" element={<Purchage />} /> */}
+      <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route element={<RouteAuth />}>

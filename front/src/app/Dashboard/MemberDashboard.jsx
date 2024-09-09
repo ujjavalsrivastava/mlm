@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLowerProfiles } from "../../store/lowerLevel";
 
 const MemberDashboard = () => {
-  const [totalSum, settotalSum] = useState(0);
+  const [todayDirectTeam, setTodayDirectTeam] = useState(0);
   const [group, setgroup] = useState(0);
   const lowerProfiles = useSelector((state) => state.levels);
   const [usersTotalEarnings, setUsersTotalEarnings] = useState([]);
-
+  const [AllTimeDirectTeam, setAllTimeDirectTeam] = useState(0);
+  
   const dispatch = useDispatch();
 
   const lowerLevels = lowerProfiles?.data[0]?.lowerLevel || [];
@@ -38,7 +39,18 @@ const MemberDashboard = () => {
       const response = await axios.get("user/lower-users");
       //const total = response[0].lowerLevel.reduce((acc, item) => acc + item.value, 0);
        // setSum(total);
-      settotalSum(response.data);
+       setAllTimeDirectTeam(response.data[0]?.lowerLevel.length)
+        let todayTeamcout = 0;
+       const todayteam = await response.data[0]?.lowerLevel.map((row) => {
+        const d1 = new Date();
+        const d2 = new Date(row.createdAt);
+        if(d1 == d2){
+          todayTeamcout += 1;
+        }
+      
+    });
+       
+       setTodayDirectTeam(todayTeamcout);
     } catch (error) {
       console.log(error.message);
     }
@@ -59,7 +71,7 @@ const MemberDashboard = () => {
     const response = await axios.get("user/profile");
     setuser(response.data);
   };
-  console.log('totalSum'+ totalSum);
+ 
   // const cnt = purchageHistry.length;
 
   //  for (var i=0; i<cnt; i++) {
@@ -205,7 +217,7 @@ const MemberDashboard = () => {
                       <i class="ti-face-smile f-20 text-blue"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                         0
+                         {todayDirectTeam}
                         </h1>
                         <span class="progress-description">
                           Today Direct Team
@@ -230,7 +242,7 @@ const MemberDashboard = () => {
                       <i class="ti-bar-chart f-20 text-danger"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                         0
+                         {AllTimeDirectTeam}
                         </h1>
                         <span class="progress-description">
                           All Time Direct Team

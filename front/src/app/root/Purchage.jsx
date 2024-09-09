@@ -58,7 +58,8 @@ const Purchage = () => {
       handler: async function (response) {
         
           // Send this data to your server to verify the payment
-          const result = await axios.post('product/payment-verification', response);
+          try{
+            const result = await axios.post('product/payment-verification', response);
             if(result.status==200){
               const productOrder= await axios.post('product/order',{"productId":courseId, "paymentId":response.razorpay_payment_id,"orderId":response.razorpay_order_id, "paymentMethod":"upi", "status":"success","signature":response.razorpay_signature});
               navigate('/my-course');
@@ -66,6 +67,10 @@ const Purchage = () => {
             }else{
               toast.error(result.data.msg);
             }
+          }catch(error){
+          console.log(error)
+          }
+         
          
          
         },
@@ -113,7 +118,7 @@ const Purchage = () => {
                  
                   <div class="info-box">s
                   <div class="info-box-content">
-                    <img src="https://www.bizgurukul.com/Biz/img/marketing-mastery.png" alt="" class="responsive img-fluid img-thumbnail step1" />
+                    <img src={row.pictures.base_link} alt="" class="responsive img-fluid img-thumbnail step1" />
                     </div>
                   <span style={{textAligh:'center'}}>{row.name}</span> 
                   <div>Price : {row.price}</div>

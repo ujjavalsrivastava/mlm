@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function Landing() {
+
+  const[product,setProduct]=useState(null);
+  const [orderId, setOrderId] = useState("");
+  const [productId, setproductId] = useState("");
+
+  const fetchProduct = async()=>{
+    try{
+      const response =  await axios.get('vimeo/courses');
+      setProduct(response.data);
+    }catch(error){
+      console.log(error)
+    }
+    
+  }
+  useEffect((row)=>{
+    fetchProduct();
+  },[]);
+  
   return (
     <React.Fragment>
       <div id="preloader">
