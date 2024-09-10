@@ -77,6 +77,7 @@ const getUserGroupStatus = async (req, res) => {
   const userId = getUserId(req);
   let user = await User.findById(userId).exec();
   user = await populateLowerLevel(user);
+
   const allUsers = flattenUsers(user);
   const todaysUsers = usersJoinedToday(allUsers);
 

@@ -23,10 +23,7 @@ async function populateLowerLevel(user, counter = 0) {
   if (!user.lowerLevel || user.lowerLevel.length === 0 || counter > 7) {
     return user;
   }
-  console.log({ counter });
-
   await user.populate("lowerLevel");
-
   const [lowerLevelUsersError, lowerLevelUsers] = await handlePromiseError(
     Promise.all(
       user.lowerLevel.map(async (lowerUser) => {
@@ -36,7 +33,6 @@ async function populateLowerLevel(user, counter = 0) {
   );
   if (lowerLevelUsersError)
     console.log("lowerLevelUsersError", lowerLevelUsersError);
-
   user.lowerLevel = lowerLevelUsers;
   return user;
 }
@@ -139,19 +135,20 @@ const getUserId = (req) => req.query?.userId || req.user?._id;
 
 const flattenUsers = (user) => {
   let flatUsers = [user];
-  user.lowerLevel.forEach((subUser) => {
-    flatUsers = flatUsers.concat(flattenUsers(subUser));
-  });
+  Array.isArray(user.lowerLevel) &&
+    user.lowerLevel.forEach((subUser) => {
+      flatUsers = flatUsers.concat(flattenUsers(subUser));
+    });
   return flatUsers;
 };
 
-function usersJoinedToday(users) {
+const joinedToday = (user) => {
+  const userCreatedDate = user.createdAt?.toISOString()?.split("T")[0];
   const currentDate = new Date().toISOString().split("T")[0];
-  return users.filter((user) => {
-    const dateOnly = user.createdAt.toISOString().split("T")[0]; // Extract the date part (YYYY-MM-DD)
-    return dateOnly === currentDate; // Keep only those that don't match the current date
-  });
-}
+  return userCreatedDate === currentDate;
+};
+
+const usersJoinedToday = (users) => users.filter(joinedToday);
 
 const totalAmountPipeline = (userIds) => [
   {
@@ -170,6 +167,12 @@ const totalAmountPipeline = (userIds) => [
   },
 ];
 
+const asyncHandler = (requestHandler) => {
+  return (req, res, next) => {
+    Promise.resolve(requestHandler(req, res, next)).catch((err) => next(err));
+  };
+};
+
 module.exports = {
   generateReferralCode,
   populateLowerLevel,
@@ -181,4 +184,6 @@ module.exports = {
   flattenUsers,
   usersJoinedToday,
   totalAmountPipeline,
+  asyncHandler,
+  joinedToday,
 };

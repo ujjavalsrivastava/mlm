@@ -9,11 +9,6 @@ const userSchema = new Schema(
     gender: {
       type: String,
       default: null,
-      validate(value) {
-        if (!(value === "male" || value === "female")) {
-          throw new Error("value can be male or female only");
-        }
-      },
     },
     dob: { type: String, default: null },
     state: { type: String, default: null },

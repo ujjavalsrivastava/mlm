@@ -5,6 +5,7 @@ const {
   getUserProfile,
   updateProfile,
   changePassword,
+  getUserLevelStatus,
   updateProfilePicture,
   getProfilePicture,
   getInvoice,
@@ -22,34 +23,41 @@ const {
   getUserProductsAndBalance,
   getUserTotalEarning,
 } = require("../controllers/purchaseController");
-const { tryCatch } = require("../utils/helper");
+const { tryCatch, asyncHandler } = require("../utils/helper");
 const { getUserCourses } = require("../controllers/productController");
 const { uploadProfilePicture } = require("../utils/storage");
 
 const router = express.Router();
 
-router.post("/register", tryCatch(createUser));
-router.post("/login", tryCatch(loginHandler));
+router.post("/register", tryCatch(asyncHandler(createUser)));
+router.post("/login", tryCatch(asyncHandler(loginHandler)));
 
 // auth required
-router.get("/profile", tryCatch(getUserProfile));
-router.get("/courses", tryCatch(getUserCourses));
-router.patch("/profile", tryCatch(updateProfile));
+router.get("/profile", tryCatch(asyncHandler(getUserProfile)));
+router.get("/courses", tryCatch(asyncHandler(getUserCourses)));
+router.patch("/profile", tryCatch(asyncHandler(updateProfile)));
+router.put("/change-password", tryCatch(asyncHandler(changePassword)));
+router.get("/lower-users", tryCatch(asyncHandler(getLowerLevelUsers)));
+router.get("/upper-users", tryCatch(asyncHandler(getUpperLevelUsers)));
+router.post("/purchase", tryCatch(asyncHandler(handleProductPurchase)));
+router.get("/purchase", tryCatch(asyncHandler(getUserProductsAndBalance)));
+router.get(
+  "/account-purchase",
+  tryCatch(asyncHandler(getUserAccountAndPurcheseHistory))
+);
+router.get(
+  "/percent-earning",
+  tryCatch(asyncHandler(getUserPercentDistribution))
+);
+router.get("/total-earning", tryCatch(asyncHandler(getUserTotalEarning)));
+router.get("/group-status", tryCatch(asyncHandler(getUserGroupStatus)));
+router.get("/level-status", tryCatch(asyncHandler(getUserLevelStatus)));
 router.put(
   "/profile-picture",
   uploadProfilePicture.single("profilePicture"),
-  tryCatch(updateProfilePicture)
+  tryCatch(asyncHandler(updateProfilePicture))
 );
-router.get("/profile-picture", tryCatch(getProfilePicture));
-router.get("/invoice", tryCatch(getInvoice));
-router.put("/change-password", tryCatch(changePassword));
-router.get("/lower-users", tryCatch(getLowerLevelUsers));
-router.get("/upper-users", tryCatch(getUpperLevelUsers));
-router.post("/purchase", tryCatch(handleProductPurchase));
-router.get("/purchase", tryCatch(getUserProductsAndBalance));
-router.get("/account-purchase", tryCatch(getUserAccountAndPurcheseHistory));
-router.get("/percent-earning", tryCatch(getUserPercentDistribution));
-router.get("/total-earning", tryCatch(getUserTotalEarning));
-router.get("/group-status", tryCatch(getUserGroupStatus));
+router.get("/profile-picture", tryCatch(asyncHandler(getProfilePicture)));
+router.get("/invoice", tryCatch(asyncHandler(getInvoice)));
 
 module.exports = router;

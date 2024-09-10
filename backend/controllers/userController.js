@@ -1,7 +1,12 @@
 const User = require("../models/user-model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { generateReferralCode, getUserId } = require("../utils/helper");
+const {
+  generateReferralCode,
+  populateLowerLevel,
+  joinedToday,
+  getUserId,
+} = require("../utils/helper");
 const UserPurchase = require("../models/purchase-history-model");
 const PercentDistribution = require("../models/percentage-distribution-model");
 const path = require("path");
@@ -110,6 +115,74 @@ const changePassword = async (req, res) => {
   res.json({ message: "Password update successfully" });
 };
 
+// Sample data structure
+const user = {
+  name: "User1",
+  lowerLevelUsers: [
+    {
+      name: "User2",
+      lowerLevelUsers: [
+        {
+          name: "User3",
+          lowerLevelUsers: [],
+        },
+        {
+          name: "User4",
+          lowerLevelUsers: [],
+        },
+      ],
+    },
+    {
+      name: "User5",
+      lowerLevelUsers: [
+        {
+          name: "User6",
+          lowerLevelUsers: [],
+        },
+      ],
+    },
+  ],
+};
+
+// Function to count users at each level and track users created today by level
+function countUsersAtEachLevel(
+  user,
+  level = 0,
+  counts = { totalByLevel: {}, createdTodayByLevel: {} }
+) {
+  // Initialize the count for the current level if it doesn't exist
+  if (!counts.totalByLevel[level]) {
+    counts.totalByLevel[level] = 0;
+    counts.createdTodayByLevel[level] = 0; // Also initialize the 'created today' count for the level
+  }
+
+  // Increment the total count for the current level
+  counts.totalByLevel[level]++;
+
+  // Check if the user was created today and increment the 'created today' count for the level
+  if (joinedToday(user)) {
+    counts.createdTodayByLevel[level]++;
+  }
+
+  // Recursively count for each lower-level user
+  Array.isArray(user.lowerLevel) &&
+    user.lowerLevel.forEach((lowerUser) => {
+      countUsersAtEachLevel(lowerUser, level + 1, counts);
+    });
+
+  return counts;
+}
+
+const getUserLevelStatus = async (req, res) => {
+  const user = req.user;
+
+  const userLL = await populateLowerLevel(user);
+  // if(Array.isArray(userLL.lowerLevel)){
+  //   data.ul1=
+  // }
+  // if (userLL.lowerLevel)
+  res.json(countUsersAtEachLevel(userLL, 1));
+};
 const updateProfilePicture = async (req, res) => {
   if (!req.file) {
     return res.status(400).send("No file uploaded.");
@@ -159,6 +232,7 @@ module.exports = {
   getUserProfile,
   updateProfile,
   changePassword,
+  getUserLevelStatus,
   updateProfilePicture,
   getProfilePicture,
   getInvoice,
