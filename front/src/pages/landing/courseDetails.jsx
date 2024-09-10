@@ -4,19 +4,12 @@ const courseDetails = ()=>{
     return (
         <React.Fragment>
 
-<div id="preloader">
-        <div id="loader" class="loader">
-            <div class="loader-container">
-                <div class="loader-icon"><img src="assets/img/logo/preloader.svg" alt="Preloader" /></div>
-            </div>
-        </div>
-    </div>
-    
+
     <button class="scroll__top scroll-to-target" data-target="html">
         <i class="tg-flaticon-arrowhead-up"></i>
     </button>
     
-    <header>
+    {/* <header>
         <div class="tg-header__top">
             <div class="container custom-container">
                 <div class="row">
@@ -260,7 +253,7 @@ const courseDetails = ()=>{
             </div>
         </div>
     </header>
-    
+     */}
     <main class="main-area fix">
 
       
@@ -700,7 +693,7 @@ const courseDetails = ()=>{
        
 
     </main>
-  
+{/*   
     <footer class="footer__area">
         <div class="footer__top">
             <div class="container">
@@ -809,7 +802,7 @@ const courseDetails = ()=>{
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> */}
 
 
      </React.Fragment>

@@ -1,23 +1,108 @@
 import React, { useEffect, useState } from "react";
 import style from './home.module.css';
-const register = ()=>{
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { axios } from "../../helper/httpHelper";
+import { toast } from "react-toastify";
+const register = () => {
+  const[product,setProduct]=useState(null);
+  const [orderId, setOrderId] = useState("");
+  const [productId, setproductId] = useState("");
+  const navigate = useNavigate();
+  const fetchProduct = async()=>{
+    try{
+      const response =  await axios.get('vimeo/courses');
+      setProduct(response.data);
+    }catch(error){
+      console.log(error)
+    }
+    
+  }
+
+  const orderCreate = async(id,price)=>{
+    try{
+     
+      var token = localStorage.getItem("token");
+      
+      if(token == null){
+        toast.error('please Login First');
+        return false;
+      }
+
+     const response =  await axios.post('product/create/order',{
+        amount: price * 100,
+        currency: "INR",
+        receipt: "xyz product purchased",
+      });
+      setOrderId(response.data.order_id);
+      setproductId(id);
+      handlePayment(price,id);
+    }catch(error){
+      console.log(error)
+    }
+  }
+  // const handlePaymentComplete = async(response) => {
+  //   const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
+  //     response;
+  //   const response = await axios.post('product/order',{"productId":"66ca081771a6103598651071", "paymentId":razorpay_payment_id,"orderId":razorpay_order_id, "paymentMethod":"upi", "status":"created","signature":razorpay_signature}) 
+  // };
+  const handlePayment = (price,courseId) => {
+    const options = {
+      key: import.meta.env.VITE_PAYMENT_KEY, // Enter the Key ID generated from the Dashboard
+      amount: price * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency: "INR",
+      name: "Merchant Name",
+      description: "Test Transaction",
+      order_id: orderId, // This is a sample Order ID. Pass the `id` obtained in the previous step
+      handler: async function (response) {
+        
+          // Send this data to your server to verify the payment
+          try{
+            const result = await axios.post('product/payment-verification', response);
+            if(result.status==200){
+              const productOrder= await axios.post('product/order',{"productId":courseId, "paymentId":response.razorpay_payment_id,"orderId":response.razorpay_order_id, "paymentMethod":"upi", "status":"success","signature":response.razorpay_signature});
+              navigate('/my-course');
+              toast.success(productOrder.data.message);
+            }else{
+              toast.error(result.data.msg);
+            }
+          }catch(error){
+          console.log(error)
+          }
+         
+         
+         
+        },
+      prefill: {
+        name: "Test User",
+        email: "test.user@example.com",
+        contact: "9999999999",
+      },
+      notes: {
+        address: "Test Address",
+      },
+      theme: {
+        color: "#F37254",
+      },
+    };
+
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+
+  useEffect(()=>{
+    fetchProduct();
+  },[])
+
     return (
 
         <React.Fragment>
 
-<div id="preloader">
-        <div id="loader" class="loader">
-            <div class="loader-container">
-                <div class="loader-icon"><img src="assets/img/logo/preloader.svg" alt="Preloader" /></div>
-            </div>
-        </div>
-    </div>
+
  
-    <button class="scroll__top scroll-to-target" data-target="html">
-        <i class="tg-flaticon-arrowhead-up"></i>
-    </button>
+
    
-    <header>
+    {/* <header>
         <div class="tg-header__top">
             <div class="container custom-container">
                 <div class="row">
@@ -260,7 +345,7 @@ const register = ()=>{
                 </div>
             </div>
         </div>
-    </header>
+    </header> */}
     
     <main class="main-area fix">
 
@@ -291,7 +376,7 @@ const register = ()=>{
             </div>
         </section>
        
-        <section class="singUp-area section-py-120">
+        <section class="singUp-area section-py-0">
             <div class="container">
                 <div class="row justify-content-center">
                 <div class="col-xl-6 col-lg-8">
@@ -332,7 +417,8 @@ const register = ()=>{
                                 <button type="submit" class="btn btn-two arrow-btn">Sign Up<img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable" /></button>
                             </form>
                             <div class="account__switch">
-                                <p>Already have an account?<a href="login.html">Login</a></p>
+                               
+                                <p>Already have an account?<Link to={'/login'}>Login</Link></p>
                             </div>
                         </div>
                     </div>
@@ -730,12 +816,7 @@ const register = ()=>{
                                     </div>
                                 </div>
                                 <nav className="pagination__wrap mt-30">
-                                    <ul className="list-wrap">
-                                        <li className="active"><a href="#">1</a></li>
-                                        <li><a href="courses.html">2</a></li>
-                                        <li><a href="courses.html">3</a></li>
-                                        <li><a href="courses.html">4</a></li>
-                                    </ul>
+                                <button type="submit" class="btn btn-two arrow-btn">Make Payment for 2499<img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable" /></button>
                                 </nav>
                             </div>
                             <div className="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
@@ -958,14 +1039,14 @@ const register = ()=>{
                                         </div>
                                     </div>
                                 </div>
-                                <nav className="pagination__wrap mt-30">
+                                {/* <nav className="pagination__wrap mt-30">
                                     <ul className="list-wrap">
                                         <li className="active"><a href="#">1</a></li>
                                         <li><a href="courses.html">2</a></li>
                                         <li><a href="courses.html">3</a></li>
                                         <li><a href="courses.html">4</a></li>
                                     </ul>
-                                </nav>
+                                </nav> */}
                             </div>
                         </div>
                     </div>
@@ -975,7 +1056,7 @@ const register = ()=>{
       
     </main>
  
-    <footer class="footer__area">
+    {/* <footer class="footer__area">
         <div class="footer__top">
             <div class="container">
                 <div class="row">
@@ -1083,7 +1164,7 @@ const register = ()=>{
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> */}
 
         </React.Fragment>
 
