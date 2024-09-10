@@ -3,9 +3,9 @@ const {
   getLevelPercentage,
   updateLevelPercentage,
 } = require("../controllers/levelController");
-const { tryCatch } = require("../utils/helper");
+const { tryCatch, asyncHandler } = require("../utils/helper");
 const router = express.Router();
 
-router.get("/level-percentage", tryCatch(getLevelPercentage));
-router.put("/level-percentage", tryCatch(updateLevelPercentage));
+router.get("/level-percentage", tryCatch(asyncHandler(getLevelPercentage)));
+router.put("/level-percentage", tryCatch(asyncHandler(updateLevelPercentage)));
 module.exports = router;

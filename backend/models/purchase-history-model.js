@@ -7,7 +7,6 @@ const history = new Schema({
   },
   products: [
     {
-      product: { type: Types.ObjectId, ref: "Product", default: null },
       orderId: { type: String, default: null },
       paymentId: { type: String, default: null },
       paymentMethod: { type: String, default: null },

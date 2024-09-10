@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { tryCatch } = require("../utils/helper");
+const { tryCatch, asyncHandler } = require("../utils/helper");
 const {
   getVideo,
   handleAuthentication,
@@ -9,9 +9,9 @@ const {
 } = require("../controllers/vimeoController");
 const router = express.Router();
 
-router.get("/video", tryCatch(getVideo));
-router.get("/authorize", tryCatch(handleAuthentication));
-router.get("/redirect", tryCatch(handleRedirection));
-router.get("/courses", tryCatch(getAllCourses));
+router.get("/video", tryCatch(asyncHandler(getVideo)));
+router.get("/authorize", tryCatch(asyncHandler(handleAuthentication)));
+router.get("/redirect", tryCatch(asyncHandler(handleRedirection)));
+router.get("/courses", tryCatch(asyncHandler(getAllCourses)));
 
 module.exports = router;

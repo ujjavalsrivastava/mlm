@@ -4,6 +4,7 @@ require("dotenv").config({ path: ".env" });
 const levelPercent = require("./routes/level-percentage");
 const kycRoute = require("./routes/kyc-route");
 const { userRoutes, productRoutes, videoRoutes } = require("./routes");
+const connectDB = require("./config/connection");
 
 const morgan = require("morgan");
 (async () => {
@@ -59,7 +60,15 @@ const morgan = require("morgan");
     res.status(200).json({ status: "success", message: "Route not defined" });
   });
 
-  app.listen(PORT, () => {
-    console.log(`Server is running in development on http://localhost:${PORT}`);
-  });
+  connectDB()
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(
+          `⚙️  Server is running in development on http://localhost:${PORT}`
+        );
+      });
+    })
+    .catch((err) => {
+      console.log("MONGO db connection failed !!! ", err);
+    });
 })();

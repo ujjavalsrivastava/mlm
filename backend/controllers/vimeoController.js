@@ -1,25 +1,9 @@
 const vimeoClient = require("../vimeo/client");
 const { getAlbumById } = require("../vimeo/helper");
 const Product = require("../models/product-model");
-const { getUserId } = require("../utils/helper");
-const UserPurchase = require("../models/purchase-history-model");
 
 const getVideo = async (req, res) => {
   const { courseId } = req.query;
-  const userId = getUserId(req);
-  console.log(userId);
-  const history = await UserPurchase.findOne({ userId }).populate(
-    "products.product"
-  );
-  console.log(history, userId);
-  const products = history?.products || [];
-
-  const checkCourse = products.find(
-    ({ product }) => product.courseId === courseId
-  );
-  if (!products.length || !checkCourse)
-    return res.status(400).json({ error: "You haven't purchased this course" });
-
   vimeoClient(process.env.VIMEO_ACCESS_TOKEN).request(
     `/albums/${courseId}/videos`,
     (error, body, statusCode, headers) => {

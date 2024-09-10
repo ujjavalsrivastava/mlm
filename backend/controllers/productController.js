@@ -48,18 +48,14 @@ const paymentVerification = async (req, res) => {
 };
 
 const createProductOrder = async (req, res) => {
-  const { productId, paymentMethod, status, orderId, paymentId, signature } =
+  const { paymentMethod, status, orderId, paymentId, signature, amount } =
     req.body;
   const userId = getUserId(req);
-  if (!productId)
-    res.status(400).json({ error: "productId is required to make a purchase" });
-  const [userPurchaseHistory, product] = await Promise.all([
+  const [userPurchaseHistory] = await Promise.all([
     UserPurchase.findOne({ userId }),
-    Product.findById(productId),
   ]);
 
   const createProduct = {
-    product: product._id,
     orderId,
     paymentId,
     signature,
@@ -78,10 +74,9 @@ const createProductOrder = async (req, res) => {
   } else {
     userPurchaseHistory.products.unshift(createProduct);
     const savedData = await userPurchaseHistory.save();
-    await distributeUserPercentage(userId, product.price);
+    await distributeUserPercentage(userId, amount);
     return res.json({ message: "Order created successfull", savedData });
   }
-
   res.json(userPurchaseHistory);
 };
 
@@ -100,22 +95,15 @@ const deleteProduct = async (req, res) => {
 };
 
 const getUserCourses = async (req, res) => {
-  const userId = getUserId(req);
-  const purchaseHistory = await UserPurchase.findOne({ userId }).populate(
-    "products.product"
-  );
-  const products = purchaseHistory?.products;
+  const products = await Product.find();
   if (products?.length) {
     const data = await Promise.all(
-      products.map(async ({ product, timestamp, status }) => {
-        console.log("product", product);
-        const courseId = product.courseId;
+      products.map(async ({ courseId }) => {
         const course = await getAlbumById(courseId);
         if (course.error) return { courseId, error };
         return {
           courseId,
-          timestamp,
-          status,
+
           name: course.name,
           description: course.description,
           link: course.link,
@@ -128,7 +116,7 @@ const getUserCourses = async (req, res) => {
     );
     return res.json(data);
   }
-  res.json(products);
+  res.json({ products });
 };
 
 module.exports = {

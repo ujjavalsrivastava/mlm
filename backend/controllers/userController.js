@@ -1,7 +1,11 @@
 const User = require("../models/user-model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { generateReferralCode } = require("../utils/helper");
+const {
+  generateReferralCode,
+  populateLowerLevel,
+  joinedToday,
+} = require("../utils/helper");
 const UserPurchase = require("../models/purchase-history-model");
 const PercentDistribution = require("../models/percentage-distribution-model");
 
@@ -108,10 +112,89 @@ const changePassword = async (req, res) => {
   res.json({ message: "Password update successfully" });
 };
 
+// Sample data structure
+const user = {
+  name: "User1",
+  lowerLevelUsers: [
+    {
+      name: "User2",
+      lowerLevelUsers: [
+        {
+          name: "User3",
+          lowerLevelUsers: [],
+        },
+        {
+          name: "User4",
+          lowerLevelUsers: [],
+        },
+      ],
+    },
+    {
+      name: "User5",
+      lowerLevelUsers: [
+        {
+          name: "User6",
+          lowerLevelUsers: [],
+        },
+      ],
+    },
+  ],
+};
+
+// Function to count users at each level and track users created today by level
+function countUsersAtEachLevel(
+  user,
+  level = 0,
+  counts = { totalByLevel: {}, createdTodayByLevel: {} }
+) {
+  // Initialize the count for the current level if it doesn't exist
+  if (!counts.totalByLevel[level]) {
+    counts.totalByLevel[level] = 0;
+    counts.createdTodayByLevel[level] = 0; // Also initialize the 'created today' count for the level
+  }
+
+  // Increment the total count for the current level
+  counts.totalByLevel[level]++;
+
+  // Check if the user was created today and increment the 'created today' count for the level
+  if (joinedToday(user)) {
+    counts.createdTodayByLevel[level]++;
+  }
+
+  // Recursively count for each lower-level user
+  Array.isArray(user.lowerLevel) &&
+    user.lowerLevel.forEach((lowerUser) => {
+      countUsersAtEachLevel(lowerUser, level + 1, counts);
+    });
+
+  return counts;
+}
+
+const getUserLevelStatus = async (req, res) => {
+  const user = req.user;
+  const data = {
+    ul1: [],
+    ul2: [],
+    ul3: [],
+    ul4: [],
+    ul5: [],
+    ul6: [],
+    ul7: [],
+    ul8: [],
+  };
+  const userLL = await populateLowerLevel(user);
+  // if(Array.isArray(userLL.lowerLevel)){
+  //   data.ul1=
+  // }
+  // if (userLL.lowerLevel)
+  res.json(countUsersAtEachLevel(user, 1));
+};
+
 module.exports = {
   createUser,
   loginHandler,
   getUserProfile,
   updateProfile,
   changePassword,
+  getUserLevelStatus,
 };
