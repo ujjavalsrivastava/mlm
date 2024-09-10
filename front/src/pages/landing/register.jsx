@@ -9,7 +9,39 @@ const register = () => {
   const [orderId, setOrderId] = useState("");
   const [productId, setproductId] = useState("");
   const [referral, setReferral] = useState(null);
+  const [level, setlevel] = useState(1);
   const navigate = useNavigate();
+
+  const [data, setData] = useState(null);
+
+  
+
+  const handle = (e) => {
+    setData((pre) => ({
+      ...pre,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const submitLogin = async (e) => {
+    e.preventDefault();
+
+    setlevel( level + 1);
+
+    // try {
+    //   const response = await axios.post("user/register", data);
+    //    console.log(response)
+    //   if (response.status == "200") {
+        
+    //     navigate("/login");
+    //     toast.success(response.data.message);
+    //   } else {
+    //     toast.error(response.data.error);
+    //   }
+    // } catch (error) {
+    //   toast.error(error.message);
+    // }
+  };
 
   const fetchProduct = async()=>{
     try{
@@ -25,7 +57,7 @@ const register = () => {
   const queryParams = new URLSearchParams(location.search);
   const value = queryParams.get('referral');
 
-  const orderCreate = async(id,price)=>{
+  const orderCreate = async(price)=>{
     try{
      
       var token = localStorage.getItem("token");
@@ -41,8 +73,8 @@ const register = () => {
         receipt: "xyz product purchased",
       });
       setOrderId(response.data.order_id);
-      setproductId(id);
-      handlePayment(price,id);
+    
+      handlePayment(price);
     }catch(error){
       console.log(error)
     }
@@ -52,7 +84,7 @@ const register = () => {
   //     response;
   //   const response = await axios.post('product/order',{"productId":"66ca081771a6103598651071", "paymentId":razorpay_payment_id,"orderId":razorpay_order_id, "paymentMethod":"upi", "status":"created","signature":razorpay_signature}) 
   // };
-  const handlePayment = (price,courseId) => {
+  const handlePayment = (price) => {
     const options = {
       key: import.meta.env.VITE_PAYMENT_KEY, // Enter the Key ID generated from the Dashboard
       amount: price * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -66,9 +98,9 @@ const register = () => {
           try{
             const result = await axios.post('product/payment-verification', response);
             if(result.status==200){
-              const productOrder= await axios.post('product/order',{"productId":courseId, "paymentId":response.razorpay_payment_id,"orderId":response.razorpay_order_id, "paymentMethod":"upi", "status":"success","signature":response.razorpay_signature});
-              navigate('/my-course');
-              toast.success(productOrder.data.message);
+            //   const productOrder= await axios.post('product/order',{"productId":courseId, "paymentId":response.razorpay_payment_id,"orderId":response.razorpay_order_id, "paymentMethod":"upi", "status":"success","signature":response.razorpay_signature});
+            //   navigate('/my-course');
+              toast.success(result.data.msg);
             }else{
               toast.error(result.data.msg);
             }
@@ -115,7 +147,7 @@ const register = () => {
     
     <main class="main-area fix">
 
-      
+       
         <section class="breadcrumb__area breadcrumb__bg" data-background="assets/img/bg/breadcrumb_bg.jpg" >
             <div class="container">
                 <div class="row">
@@ -142,6 +174,8 @@ const register = () => {
             </div>
         </section>
        
+        {(level == 1) ? (
+        <>
         <section class="singUp-area section-py-0">
             <div class="container">
                 <div class="row justify-content-center">
@@ -150,49 +184,50 @@ const register = () => {
                             <h2 class="title">Create Your Account</h2>
                             <p>Hey there! Ready to join the party? We just need a few details from you to get <br /> started. Let's do this!</p>
                             
-                            
-                            <form action="#" class="account__form">
+                          
+                            <form  onSubmit={submitLogin} class="account__form">
                                 <div class="row gutter-20">
                                 <div class="col-md-12">
                                         <div class="form-grp">
                                             <label for="fast-name">Referral Code</label>
-                                            <input type="text" value={referral} id="fast-name" placeholder="Referral Code" />
+                                            <input type="text" onChange={handle} value={referral} required placeholder="Referral Code" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-grp">
                                             <label for="fast-name"> Name</label>
-                                            <input type="text" id="fast-name" name="name" placeholder="First Name" />
+                                            <input type="text" onChange={handle} id="fast-name" required name="name" placeholder="First Name" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-grp">
                                             <label for="last-name">Mobile </label>
-                                            <input type="text" id="last-name" name="mobile" placeholder="Last name" />
+                                            <input type="text" onChange={handle} id="last-name" required name="mobile" placeholder="Last name" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-grp">
                                     <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" placeholder="email" />
+                                    <input type="email" onChange={handle} id="email" required name="email" placeholder="email" />
                                 </div>
                                 <div class="form-grp">
                                     <label for="email">Confirm Email</label>
-                                    <input type="email" id="email" name="cemail" placeholder="email" />
+                                    <input type="email" onChange={handle} id="email" required name="cemail" placeholder="email" />
                                 </div>
                                 <div class="form-grp">
                                     <label for="email">State</label>
-                                    <select class="form-control">
-                                        <option> select State</option>
+                                    <select class="form-control" name="state" required onChange={handle}>
+                                        <option value=""> select State</option>
+                                        <option> Allahabad</option>
                                     </select>
                                 </div>
                                 <div class="form-grp">
                                     <label for="password">Password</label>
-                                    <input type="password" id="password" placeholder="password" />
+                                    <input type="password" id="password" name="password" required placeholder="password" />
                                 </div>
                                 <div class="form-grp">
                                     <label for="confirm-password">Confirm Password</label>
-                                    <input type="password" id="confirm-password" placeholder="Confirm Password" />
+                                    <input type="password" id="confirm-password" name="cpassword" required placeholder="Confirm Password" />
                                 </div>
 
                                 
@@ -204,7 +239,10 @@ const register = () => {
                 </div>
             </div>
         </section>
-
+        </>):null}
+         
+        {(level == 2) ? (
+        <>
         <section className="all-courses-area section-py-120">
             <div className="container">
                 <div className="row">
@@ -595,7 +633,7 @@ const register = () => {
                                     </div>
                                 </div>
                                 <nav className="pagination__wrap mt-30">
-                                <button type="submit" class="btn btn-two arrow-btn">Make Payment for 2499<img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable" /></button>
+                                <button type="button" onClick={() => orderCreate('2499')} class="btn btn-two arrow-btn">Make Payment for 2499<img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable" /></button>
                                 </nav>
                             </div>
                             <div className="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
@@ -832,119 +870,10 @@ const register = () => {
                 </div>
             </div>
         </section>
-      
+        </>):null}
     </main>
  
-    {/* <footer class="footer__area">
-        <div class="footer__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="footer__widget">
-                            <div class="logo mb-35">
-                                <a href="index-2.html"><img src="assets/img/logo/secondary_logo.svg" alt="img" /></a>
-                            </div>
-                            <div class="footer__content">
-                                <p>when an unknown printer took galley of type and scrambled it to make pspecimen bookt has.</p>
-                                <ul class="list-wrap">
-                                    <li>463 7th Ave, NY 10018, USA</li>
-                                    <li>+123 88 9900 456</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                        <div class="footer__widget">
-                            <h4 class="footer__widget-title">Useful Links</h4>
-                            <div class="footer__link">
-                                <ul class="list-wrap">
-                                    <li><a href="events-details.html">Our values</a></li>
-                                    <li><a href="events-details.html">Our advisory board</a></li>
-                                    <li><a href="events-details.html">Our partners</a></li>
-                                    <li><a href="events-details.html">Become a partner</a></li>
-                                    <li><a href="events-details.html">Work at Future Learn</a></li>
-                                    <li><a href="events-details.html">Quizlet Plus</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                        <div class="footer__widget">
-                            <h4 class="footer__widget-title">Our Company</h4>
-                            <div class="footer__link">
-                                <ul class="list-wrap">
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="instructor-details.html">Become Teacher</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="instructor-details.html">Instructor</a></li>
-                                    <li><a href="events-details.html">Events</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="footer__widget">
-                            <h4 class="footer__widget-title">Get In Touch</h4>
-                            <div class="footer__contact-content">
-                                <p>when an unknown printer took <br /> galley type and scrambled</p>
-                                <ul class="list-wrap footer__social">
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/facebook.svg" alt="img" class="injectable" /> 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/twitter.svg" alt="img" class="injectable" /> 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/whatsapp.svg" alt="img" class="injectable" /> 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/instagram.svg" alt="img" class="injectable" /> 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/youtube.svg" alt="img" class="injectable" /> 
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="app-download">
-                                <a href="#"><img src="assets/img/others/google-play.svg" alt="img" /></a>
-                                <a href="#"><img src="assets/img/others/apple-store.svg" alt="img" /></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer__bottom">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-7">
-                        <div class="copy-right-text">
-                            <p>© 2010-2024 skillgro.com. All rights reserved.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="footer__bottom-menu">
-                            <ul class="list-wrap">
-                                <li><a href="contact.html">Term of Use</a></li>
-                                <li><a href="contact.html">Privacy Policy</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer> */}
-
+   
         </React.Fragment>
 
     )
