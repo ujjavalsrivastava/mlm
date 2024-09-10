@@ -17,6 +17,8 @@ import Courses from "../../pages/landing/courses";
 import CoursesDetails from "../../pages/landing/courseDetails";
 import Login from "../../pages/landing/login";
 import Register from "../../pages/landing/register";
+import Aboutus from "../../pages/landing/aboutUs";
+import Blog from "../../pages/landing/Blog";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -26,7 +28,8 @@ const router = createBrowserRouter(
       <Route path="/" element={<Landing />} />
       <Route path="/courses" element={<Courses />} />
       <Route path="/courses-details" element={<CoursesDetails />} />
-      
+      <Route path="/about-us" element={<Aboutus />} />
+      <Route path="/blogs" element={<Blog />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       </Route>
