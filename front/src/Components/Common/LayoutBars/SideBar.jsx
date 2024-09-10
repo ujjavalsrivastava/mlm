@@ -1,5 +1,7 @@
 // import { IoMdHome } from "react-icons/io";
 
+import { Link } from "react-router-dom";
+
 const SideBar = () => {
  
   return (
@@ -18,15 +20,40 @@ const SideBar = () => {
  
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">PERSONAL</li>
-      <li class="treeview"> <a href="#"> <i class="fa fa-dashboard"></i> <span>Dashboard</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
-        <ul class="treeview-menu">
-          <li><a href="index.html">Dashboard 1</a></li>
-          <li><a href="index2.html">Dashboard 2</a></li>
-          <li><a href="index3.html">Dashboard 3</a></li>
-          <li><a href="index4.html">Dashboard 4</a></li>
-        </ul>
-      </li>
-      <li class="treeview"> <a href="#"> <i class="fa fa-bullseye"></i> <span>Apps</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+      <li>
+                    <Link to={"/my-course"}>
+                      <i class="icon-profile-male"></i> My Course
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/kyc"}>
+                      <i class="icon-profile-male"></i> KYC
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/member-dashboard"}>
+                      <i class="icon-profile-male"></i> Affiliate Panel
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/referal-link"}>
+                      <i class="icon-profile-male"></i> Referal
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/tree"}>
+                      <i class="fa fa-tree" aria-hidden="true"></i> Hierarchy
+                    </Link>
+                  </li>
+                  
+                 
+                  <li>
+                  <Link to={"/change-password"}>
+                      <i class="fa fa-tree" aria-hidden="true"></i> Change Password
+                    </Link>
+                  </li>
+
+      {/* <li class="treeview"> <a href="#"> <i class="fa fa-bullseye"></i> <span>Apps</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
         <ul class="treeview-menu">
           <li><a href="apps-calendar.html">Calendar</a></li>
           <li><a href="apps-support-ticket.html">Support Ticket</a></li>
@@ -153,7 +180,7 @@ const SideBar = () => {
           </li>
           <li><a href="#">Level One</a></li>
         </ul>
-      </li>
+      </li> */}
     </ul>
   </div>
 

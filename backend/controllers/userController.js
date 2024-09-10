@@ -5,9 +5,12 @@ const {
   generateReferralCode,
   populateLowerLevel,
   joinedToday,
+  getUserId,
 } = require("../utils/helper");
 const UserPurchase = require("../models/purchase-history-model");
 const PercentDistribution = require("../models/percentage-distribution-model");
+const path = require("path");
+const fs = require("fs");
 
 const createUser = async (req, res) => {
   const { email, name, password, referalCode } = req.body;
@@ -172,22 +175,55 @@ function countUsersAtEachLevel(
 
 const getUserLevelStatus = async (req, res) => {
   const user = req.user;
-  const data = {
-    ul1: [],
-    ul2: [],
-    ul3: [],
-    ul4: [],
-    ul5: [],
-    ul6: [],
-    ul7: [],
-    ul8: [],
-  };
+
   const userLL = await populateLowerLevel(user);
   // if(Array.isArray(userLL.lowerLevel)){
   //   data.ul1=
   // }
   // if (userLL.lowerLevel)
-  res.json(countUsersAtEachLevel(user, 1));
+  res.json(countUsersAtEachLevel(userLL, 1));
+};
+const updateProfilePicture = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).send("No file uploaded.");
+  }
+
+  const userId = getUserId(req);
+  const oldFilePath = path.join(
+    __dirname,
+    "uploads/profile_pictures",
+    `${userId}.jpg`
+  );
+
+  if (userId && fs.existsSync(oldFilePath)) {
+    fs.unlinkSync(oldFilePath); // Delete the old profile picture
+  }
+  res.json({ message: "profile picture updated successfully", ...req.file });
+};
+
+const getProfilePicture = async (req, res) => {
+  const userId = `${getUserId(req)}`;
+  const imagePath = path.join(
+    __dirname,
+    "../uploads/profile_pictures",
+    `${userId}.PNG`
+  );
+  if (fs.existsSync(imagePath)) return res.sendFile(imagePath);
+  res.status(404).json({ error: "Profile picture not found" });
+};
+
+const getInvoice = async (req, res) => {
+  const userId = getUserId(req);
+  const userPurchaseHistory = await UserPurchase.findOne({ userId }).populate(
+    "products.product"
+  );
+  if (
+    Array.isArray(userPurchaseHistory?.products) &&
+    userPurchaseHistory.products.length
+  ) {
+    return res.json(userPurchaseHistory.products);
+  }
+  res.status(404).json([]);
 };
 
 module.exports = {
@@ -197,4 +233,7 @@ module.exports = {
   updateProfile,
   changePassword,
   getUserLevelStatus,
+  updateProfilePicture,
+  getProfilePicture,
+  getInvoice,
 };

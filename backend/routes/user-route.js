@@ -6,6 +6,9 @@ const {
   updateProfile,
   changePassword,
   getUserLevelStatus,
+  updateProfilePicture,
+  getProfilePicture,
+  getInvoice,
 } = require("../controllers/userController");
 
 const {
@@ -22,6 +25,7 @@ const {
 } = require("../controllers/purchaseController");
 const { tryCatch, asyncHandler } = require("../utils/helper");
 const { getUserCourses } = require("../controllers/productController");
+const { uploadProfilePicture } = require("../utils/storage");
 
 const router = express.Router();
 
@@ -48,5 +52,12 @@ router.get(
 router.get("/total-earning", tryCatch(asyncHandler(getUserTotalEarning)));
 router.get("/group-status", tryCatch(asyncHandler(getUserGroupStatus)));
 router.get("/level-status", tryCatch(asyncHandler(getUserLevelStatus)));
+router.put(
+  "/profile-picture",
+  uploadProfilePicture.single("profilePicture"),
+  tryCatch(asyncHandler(updateProfilePicture))
+);
+router.get("/profile-picture", tryCatch(asyncHandler(getProfilePicture)));
+router.get("/invoice", tryCatch(asyncHandler(getInvoice)));
 
 module.exports = router;
