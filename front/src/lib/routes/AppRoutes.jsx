@@ -9,6 +9,8 @@ import Purchage from "../../app/root/Purchage";
 import Comingsoon from "../../app/Dashboard/ComingSoon";
 import RouteAuth from "../../middleware/RouteAuth";
 import Layout from "../../app/root/Layout";
+import FrontLayout from "../../pages/FrontLayout";
+
 import { authRoutes } from "./routes";
 import Landing from "../../pages/landing";
 import Courses from "../../pages/landing/courses";
@@ -19,12 +21,16 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       {/* <Route path="/" element={<Purchage />} /> */}
+      
+      <Route element={<FrontLayout />}>
       <Route path="/" element={<Landing />} />
       <Route path="/courses" element={<Courses />} />
       <Route path="/courses-details" element={<CoursesDetails />} />
       
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      </Route>
+
       <Route element={<RouteAuth />}>
         <Route element={<Layout />}>
           {authRoutes.map((route, idx) => (
