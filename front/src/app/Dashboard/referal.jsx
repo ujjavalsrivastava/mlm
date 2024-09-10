@@ -5,10 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 const referal = () => {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile);
-  console.log('profile '+profile);
+  console.log('profile '+ JSON.stringify(profile) );
   const [data, setdata] = useState(null);
-  const [text, setText] = useState("77jsadj8");
-  const [text1, setText1] = useState("this is testing");
+  const [text, setText] = useState(profile.data.referalCode);
+  const [text1, setText1] = useState(`${window.location.origin}/register?referralCode=${profile.data.referalCode}`);
   const handleCopy = () => {
     // Copy the input text to the clipboard
     navigator.clipboard.writeText(text).then(() => {
@@ -57,7 +57,7 @@ const referal = () => {
               <div class="card ">
                 <div class="card-header bg-blue">
                   <span class="text-white m-b-0">My Referral Code</span>
-                  <button onClick={handleCopy} class="btn btn-default btn-sm m-b-0 float-right">Copy</button>
+                  <button onClick={handleCopy} class="btn btn-default btn-sm float-right">Copy</button>
                 </div>
                 <div class="card-body">
                  
