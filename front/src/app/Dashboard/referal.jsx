@@ -7,8 +7,8 @@ const referal = () => {
   const profile = useSelector((state) => state.profile);
   console.log('profile '+ JSON.stringify(profile) );
   const [data, setdata] = useState(null);
-  const [text, setText] = useState(profile.data.referalCode);
-  const [text1, setText1] = useState(`${window.location.origin}/register?referralCode=${profile.data.referalCode}`);
+  const [text, setText] = useState(null);
+  const [text1, setText1] = useState(null);
   const handleCopy = () => {
     // Copy the input text to the clipboard
     navigator.clipboard.writeText(text).then(() => {
@@ -27,8 +27,15 @@ const referal = () => {
     });
   };
   useEffect(() => {
+    
+    if(profile?.status === "succeeded"){
+      setText(profile.data?.referalCode);
+      setText1(`${window.location.origin}/register?referralCode=${profile.data && profile.data?.referalCode}`);
+    }
     if (profile?.status !== "succeeded") {
       dispatch(fetchProfile());
+    }else{
+      
     }
   }, []);
 
