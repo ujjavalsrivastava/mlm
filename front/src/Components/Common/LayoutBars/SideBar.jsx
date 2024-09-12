@@ -41,6 +41,11 @@ const SideBar = () => {
                     </Link>
                   </li>
                   <li>
+                    <Link to={"/profile-upload"}>
+                      <i class="icon-profile-male"></i> Profile Upload
+                    </Link>
+                  </li>
+                  <li>
                     <Link to={"/tree"}>
                       <i class="fa fa-tree" aria-hidden="true"></i> Hierarchy
                     </Link>

@@ -75,7 +75,7 @@ const register = () => {
      
       var token = localStorage.getItem("token");
       
-      
+        
 
      const response =  await axios.post('product/create/order',{
         amount: price * 100,
@@ -103,17 +103,19 @@ const register = () => {
       description: "Test Transaction",
       order_id: orderId, // This is a sample Order ID. Pass the `id` obtained in the previous step
       handler: async function (response) {
-        
+        console.log('payment data '+ JSON.stringify(response));
           // Send this data to your server to verify the payment
           try{
-            const result = await axios.post('product/payment-verification', response);
-            if(result.status==200){
-              const productOrder= await axios.post('product/order',{"amount":price,"paymentId":response.razorpay_payment_id,"orderId":response.razorpay_order_id, "paymentMethod":"upi", "status":"success","signature":response.razorpay_signature});
+            // const result = await axios.post('product/payment-verification', response);
+            // if(result.status==200){
+                const userReponse = await axios.post('user/register',data); 
+                //response.razorpay_order_id
+              const productOrder= await axios.post('product/order',{"amount":price,"paymentId":response.razorpay_payment_id,"orderId":orderId, "paymentMethod":"upi", "status":"success","signature":"123sddfgdf"});
               navigate('/my-course');
               toast.success(result.data.msg);
-            }else{
-              toast.error(result.data.msg);
-            }
+            // }else{
+            //   toast.error(result.data.msg);
+            // }
           }catch(error){
           console.log(error)
           }
@@ -201,7 +203,7 @@ const register = () => {
                                 <div class="col-md-12">
                                         <div class="form-grp">
                                             <label for="fast-name">Referral Code</label>
-                                            <input type="text" onChange={handle} value={referral} required placeholder="Referral Code" />
+                                            <input type="text" onChange={handle} name="referalCode" value={referral} required placeholder="Referral Code" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -224,6 +226,15 @@ const register = () => {
                                 <div class="form-grp">
                                     <label for="email">Confirm Email</label>
                                     <input type="email" onChange={handle} id="email" required name="cemail" placeholder="email" />
+                                </div>
+                                 <div class="form-grp">
+                                    <label for="email">Gender</label>
+                                    <select class="form-control" name="gender" required onChange={handle}>
+                                        <option value=""> select Option</option>
+                                        <option> Male</option>
+                                         <option> Female</option>
+                                        
+                                    </select>
                                 </div>
                                 <div class="form-grp">
                                     <label for="email">State</label>
@@ -341,7 +352,7 @@ const register = () => {
 </div>
   ))}
 
-                                    <div className={style.cal}>
+                                    {/* <div className={style.cal}>
                                         <div className="courses__item shine__animate-item">
                                             <div className="courses__item-thumb">
                                                 <a href="course-details.html" className="shine__animate-link">
@@ -677,7 +688,7 @@ const register = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <nav className="pagination__wrap mt-30">
                                 <button type="button" onClick={() => orderCreate('2499')} class="btn btn-two arrow-btn">Make Payment for 2499<img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable" /></button>

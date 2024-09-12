@@ -44,7 +44,7 @@ const MyCourse = () => {
               <Link to={`/course-details/${row.courseId}`}>   
                   <div class="info-box">
                     <div class="info-box-content">
-                    <img src="https://www.bizgurukul.com/Biz/img/marketing-mastery.png" alt="" class="responsive img-fluid img-thumbnail step1" />
+                    <img src={row.pictures?.base_link} alt="" class="responsive img-fluid img-thumbnail step1" />
                     </div>
                      <span style={{textAligh:'center'}}>{row.name}</span> 
                  

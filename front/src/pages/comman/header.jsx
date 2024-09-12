@@ -61,7 +61,7 @@ const header = () => {
                         <div className="tgmenu__wrap">
                             <nav className="tgmenu__nav">
                                 <div className="logo">
-                                    <a href="index-2.html"><img src="assets/img/logo/logo.svg" alt="Logo" /></a>
+                                    <a href="index-2.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a>
                                 </div>
                                 <div className="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                     <ul className="navigation">

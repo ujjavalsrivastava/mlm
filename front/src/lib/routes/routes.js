@@ -7,6 +7,7 @@ import Tree from "../../app/tree/Tree";
 import KYC from "../../app/Dashboard/KYC";
 import payment from "../../pages/payment";
 import MyCourse from "../../app/Dashboard/MyCourse";
+import ProfileUplaod from '../../app/Dashboard/ProfileUpload';
 import MyCourseDeatils from "../../app/Dashboard/MyCouseDetails";
 
 
@@ -21,6 +22,7 @@ export const authRoutes = [
   { path: "/payment", Component: payment },
   { path: "/member-dashboard", Component: MemberDashboard },
   { path: "/my-course", Component: MyCourse },
+  { path: "/profile-upload", Component: ProfileUplaod },
   { path: "/referal-link", Component: referal },
   { path: "/course-details/:id", Component: MyCourseDeatils },
 ];

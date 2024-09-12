@@ -35,4 +35,19 @@ const httpFileAxios = createAxios.create({
   timeout: 10000,
 });
 
+httpFileAxios.interceptors.request.use(
+  (config) => {
+    // Get the token from local storage or state
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 export { axios, httpFileAxios };

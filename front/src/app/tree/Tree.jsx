@@ -91,7 +91,7 @@ const Tree = () => {
                     </span>
                     <div class="info-box-content">
                       <span class="info-box-number">
-                        {showBal && showBal.oneDayEarning}
+                        {showBal && parseInt(showBal.oneDayEarning) }
                       </span>
                       <span class="info-box-text">Today's</span>
                     </div>
@@ -105,7 +105,7 @@ const Tree = () => {
                     </span>
                     <div class="info-box-content">
                       <span class="info-box-number">
-                        {showBal && showBal.oneWeekEarning}
+                        {showBal && parseInt(showBal.oneWeekEarning)}
                       </span>
                       <span class="info-box-text">Last 7 Days</span>
                     </div>
@@ -119,7 +119,7 @@ const Tree = () => {
                     </span>
                     <div class="info-box-content">
                       <span class="info-box-number">
-                        {showBal && showBal.oneMonthEarning}
+                        {showBal && parseInt(showBal.oneMonthEarning)}
                       </span>
                       <span class="info-box-text">Last 30 Days</span>
                     </div>
@@ -133,7 +133,7 @@ const Tree = () => {
                     </span>
                     <div class="info-box-content">
                       <span class="info-box-number">
-                        {showBal && showBal.overallEarning}
+                        {showBal && parseInt(showBal.overallEarning)}
                       </span>
                       <span class="info-box-text">All Time</span>
                     </div>
