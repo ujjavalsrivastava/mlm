@@ -100,10 +100,23 @@ const header = () => {
                                             </a>
                                         </li>
                                         <li className="header-btn login-btn">
+                                            
                                         
-                                            {profile ? profile.name : (<Link to={'login'}>Log in</Link>)}
+                                            {profile ? (<>
+                                                <div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  {profile.name}
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="#">Log Out</a>
+  
+  </div>
+</div>
+                                            </>)  : (<Link to={'login'}>Log in</Link>)}
                                             
                                         </li>
+
                                     </ul>
                                 </div>
                             

@@ -14,7 +14,20 @@ const register = () => {
 
   const [data, setData] = useState(null);
 
-  
+  const[course,setcourse]=useState(null);
+    const fetchCourse = async()=>{
+        try{
+            const response = await axios.get('vimeo/courses');
+            setcourse(response.data);
+        }catch(error){
+            console.log(error)
+        }
+        
+    }
+
+    
+
+ 
 
   const handle = (e) => {
     setData((pre) => ({
@@ -62,10 +75,7 @@ const register = () => {
      
       var token = localStorage.getItem("token");
       
-      if(token == null){
-        toast.error('please Login First');
-        return false;
-      }
+      
 
      const response =  await axios.post('product/create/order',{
         amount: price * 100,
@@ -98,8 +108,8 @@ const register = () => {
           try{
             const result = await axios.post('product/payment-verification', response);
             if(result.status==200){
-            //   const productOrder= await axios.post('product/order',{"productId":courseId, "paymentId":response.razorpay_payment_id,"orderId":response.razorpay_order_id, "paymentMethod":"upi", "status":"success","signature":response.razorpay_signature});
-            //   navigate('/my-course');
+              const productOrder= await axios.post('product/order',{"amount":price,"paymentId":response.razorpay_payment_id,"orderId":response.razorpay_order_id, "paymentMethod":"upi", "status":"success","signature":response.razorpay_signature});
+              navigate('/my-course');
               toast.success(result.data.msg);
             }else{
               toast.error(result.data.msg);
@@ -133,6 +143,7 @@ const register = () => {
     const value = queryParams.get('referralCode'); // 'myParam' is the name of the query parameter
     setReferral(value);
     fetchProduct();
+    fetchCourse();
   },[])
 
     return (
@@ -248,7 +259,7 @@ const register = () => {
                 <div className="row">
                   
                     <div className="col-xl-12 col-lg-12">
-                        <div className="courses-top-wrap courses-top-wrap">
+                        {/* <div className="courses-top-wrap courses-top-wrap">
                             <div className="row align-items-center">
                                 <div className="col-md-5">
                                     <div className="courses-top-left">
@@ -291,10 +302,45 @@ const register = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="tab-content" id="myTabContent">
                             <div className="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
                                 <div className="row courses__grid-wrap row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-sm-1">
+                                    
+                                {course && course.map(row =>(
+
+                                  
+<div className={style.cal}>
+    <div className="courses__item shine__animate-item">
+        <div className="courses__item-thumb">
+            <a href="course-details.html" className="shine__animate-link">
+                <img src={row.pictures.base_link} alt="img" />
+            </a>
+        </div>
+        <div className="courses__item-content">
+            <ul className="courses__item-meta list-wrap">
+                <li className="courses__item-tag">
+                    <a href="course.html">Development</a>
+                </li>
+                <li className="avg-rating"><i className="fas fa-star"></i> (4.8 Reviews)</li>
+            </ul>
+         
+            <h5 className="title"><Link to={`/courses-details-all/${row.courseId}`}>{row.name}</Link></h5>
+            <p className="author">By <a href="#">David Millar</a></p>
+            <div className="courses__item-bottom">
+                <div className="button">
+                    <a href="course-details.html">
+                        <span className="text">Enroll Now</span>
+                        <i className="flaticon-arrow-right"></i>
+                    </a>
+                </div>
+                <h5 className="price">{row.price.toFixed(2)}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+  ))}
+
                                     <div className={style.cal}>
                                         <div className="courses__item shine__animate-item">
                                             <div className="courses__item-thumb">
@@ -323,6 +369,7 @@ const register = () => {
                                             </div>
                                         </div>
                                     </div>
+
                                     <div className={style.cal}>
                                         <div className="courses__item shine__animate-item">
                                             <div className="courses__item-thumb">
