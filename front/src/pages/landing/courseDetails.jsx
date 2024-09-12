@@ -1,6 +1,31 @@
 
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { axios } from "../../helper/httpHelper";
 const courseDetails = ()=>{
+    const {courseId} = useParams();
+
+    const[course,setcourse]=useState(null);
+    const fetchCourse = async()=>{
+        try{
+            
+            const response = await axios.get('vimeo/courses');
+             // Filtered names based on the search term
+             console.log(response.data)
+             const filteredNames = response.data.filter(name => 
+            (name.courseId === courseId) // Ensure both values are numbers
+            );
+            setcourse(filteredNames); 
+        }catch(error){
+            console.log(error)
+        }
+        
+    }
+
+console.log('course '+ JSON.stringify(course));
+useEffect(()=>{
+    fetchCourse();
+},[])
     return (
         <React.Fragment>
 
@@ -15,14 +40,14 @@ const courseDetails = ()=>{
                 <div class="row">
                     <div class="col-lg-6">
                         <ul class="tg-header__top-info list-wrap">
-                            <li><img src="assets/img/icons/map_marker.svg" alt="icon" /> <span>589 5th Ave, NY 10024, USA</span></li>
-                            <li><img src="assets/img/icons/envelope.svg" alt="icon" /> <a href="mailto:info@skillgrodemo.com">info@skillgrodemo.com</a></li>
+                            <li><img src="../assets/img/icons/map_marker.svg" alt="icon" /> <span>589 5th Ave, NY 10024, USA</span></li>
+                            <li><img src="../assets/img/icons/envelope.svg" alt="icon" /> <a href="mailto:info@skillgrodemo.com">info@skillgrodemo.com</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-6">
                         <div class="tg-header__top-right">
                             <div class="tg-header__phone">
-                                <img src="assets/img/icons/phone.svg" alt="icon" />Call us: <a href="tel:0123456789">+123 599 8989</a>
+                                <img src="../assets/img/icons/phone.svg" alt="icon" />Call us: <a href="tel:0123456789">+123 599 8989</a>
                             </div>
                             <ul class="tg-header__top-social list-wrap">
                                 <li>Follow Us On :</li>
@@ -45,7 +70,7 @@ const courseDetails = ()=>{
                         <div class="tgmenu__wrap">
                             <nav class="tgmenu__nav">
                                 <div class="logo">
-                                    <a href="index-2.html"><img src="assets/img/logo/logo.svg" alt="Logo" /></a>
+                                    <a href="index-2.html"><img src="../assets/img/logo/logo.svg" alt="Logo" /></a>
                                 </div>
                                 <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                     <ul class="navigation">
@@ -85,7 +110,7 @@ const courseDetails = ()=>{
                                                 </li>
                                                 <li>
                                                     <div class="mega-menu-img">
-                                                        <a href="courses.html"><img src="assets/img/others/mega_menu_img.jpg" alt="img" /></a>
+                                                        <a href="courses.html"><img src="../assets/img/others/mega_menu_img.jpg" alt="img" /></a>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -198,13 +223,13 @@ const courseDetails = ()=>{
                                     <ul class="list-wrap">
                                         <li class="wishlist-icon">
                                             <a href="cart.html" class="cart-count">
-                                                <img src="assets/img/icons/heart.svg" class="injectable" alt="img" />
+                                                <img src="../assets/img/icons/heart.svg" class="injectable" alt="img" />
                                                 <span class="wishlist-count">0</span>
                                             </a>
                                         </li>
                                         <li class="mini-cart-icon">
                                             <a href="cart.html" class="cart-count">
-                                                <img src="assets/img/icons/cart.svg" class="injectable" alt="img" />
+                                                <img src="../assets/img/icons/cart.svg" class="injectable" alt="img" />
                                                 <span class="mini-cart-count">0</span>
                                             </a>
                                         </li>
@@ -214,7 +239,7 @@ const courseDetails = ()=>{
                                     </ul>
                                 </div>
                                 <div class="mobile-login-btn">
-                                    <a href="login.html"><img src="assets/img/icons/user.svg" alt="" class="injectable" /></a>
+                                    <a href="login.html"><img src="../assets/img/icons/user.svg" alt="" class="injectable" /></a>
                                 </div>
                                 <div class="mobile-nav-toggler"><i class="tg-flaticon-menu-1"></i></div>
                             </nav>
@@ -224,7 +249,7 @@ const courseDetails = ()=>{
                             <nav class="tgmobile__menu-box">
                                 <div class="close-btn"><i class="tg-flaticon-close-1"></i></div>
                                 <div class="nav-logo">
-                                    <a href="index-2.html"><img src="assets/img/logo/logo.svg" alt="Logo" /></a>
+                                    <a href="index-2.html"><img src="../assets/img/logo/logo.svg" alt="Logo" /></a>
                                 </div>
                                 <div class="tgmobile__search">
                                     <form action="#">
@@ -257,7 +282,7 @@ const courseDetails = ()=>{
     <main class="main-area fix">
 
       
-        <div class="breadcrumb__area breadcrumb__bg breadcrumb__bg-two" data-background="assets/img/bg/breadcrumb_bg.jpg">
+        <div class="breadcrumb__area breadcrumb__bg breadcrumb__bg-two" data-background="../assets/img/bg/breadcrumb_bg.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -271,18 +296,18 @@ const courseDetails = ()=>{
                                     <a href="index-2.html">Courses</a>
                                 </span>
                                 <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
-                                <span property="itemListElement" typeof="ListItem">Resolving Conflicts Between Designers And Engineers</span>
+                                <span property="itemListElement" typeof="ListItem">{course && course[0].name}</span>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="breadcrumb__shape-wrap">
-                <img src="assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown" />
-                <img src="assets/img/others/breadcrumb_shape02.svg" alt="img" data-aos="fade-right" data-aos-delay="300" />
-                <img src="assets/img/others/breadcrumb_shape03.svg" alt="img" data-aos="fade-up" data-aos-delay="400" />
-                <img src="assets/img/others/breadcrumb_shape04.svg" alt="img" data-aos="fade-down-left" data-aos-delay="400" />
-                <img src="assets/img/others/breadcrumb_shape05.svg" alt="img" data-aos="fade-left" data-aos-delay="400" />
+                <img src="../assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown" />
+                <img src="../assets/img/others/breadcrumb_shape02.svg" alt="img" data-aos="fade-right" data-aos-delay="300" />
+                <img src="../assets/img/others/breadcrumb_shape03.svg" alt="img" data-aos="fade-up" data-aos-delay="400" />
+                <img src="../assets/img/others/breadcrumb_shape04.svg" alt="img" data-aos="fade-down-left" data-aos-delay="400" />
+                <img src="../assets/img/others/breadcrumb_shape05.svg" alt="img" data-aos="fade-left" data-aos-delay="400" />
             </div>
         </div>
         
@@ -291,7 +316,7 @@ const courseDetails = ()=>{
                 <div class="row">
                     <div class="col-xl-9 col-lg-8">
                         <div class="courses__details-thumb">
-                            <img src="assets/img/courses/courses_details.jpg" alt="img" />
+                            <img src={course && course[0].pictures.base_link} alt="img" />
                         </div>
                         <div class="courses__details-content">
                             <ul class="courses__item-meta list-wrap">
@@ -300,11 +325,11 @@ const courseDetails = ()=>{
                                 </li>
                                 <li class="avg-rating"><i class="fas fa-star"></i> (4.5 Reviews)</li>
                             </ul>
-                            <h2 class="title">Resolving Conflicts Between Designers And Engineers</h2>
+                            <h2 class="title">{course && course[0].name}</h2>
                             <div class="courses__details-meta">
                                 <ul class="list-wrap">
                                     <li class="author-two">
-                                        <img src="assets/img/courses/course_author001.png" alt="img" />
+                                        <img src="../assets/img/courses/course_author001.png" alt="img" />
                                         By
                                         <a href="#">David Millar</a>
                                     </li>
@@ -382,7 +407,7 @@ const courseDetails = ()=>{
                                                                     <div class="course-item-meta">
                                                                         <span class="item-meta duration">07:48</span>
                                                                         <span class="item-meta course-item-status">
-                                                                            <img src="assets/img/icons/lock.svg" alt="icon" />
+                                                                            <img src="../assets/img/icons/lock.svg" alt="icon" />
                                                                         </span>
                                                                     </div>
                                                                 </a>
@@ -393,7 +418,7 @@ const courseDetails = ()=>{
                                                                     <div class="course-item-meta">
                                                                         <span class="item-meta duration">10:48</span>
                                                                         <span class="item-meta course-item-status">
-                                                                            <img src="assets/img/icons/lock.svg" alt="icon" />
+                                                                            <img src="../assets/img/icons/lock.svg" alt="icon" />
                                                                         </span>
                                                                     </div>
                                                                 </a>
@@ -417,7 +442,7 @@ const courseDetails = ()=>{
                                                                     <div class="course-item-meta">
                                                                         <span class="item-meta duration">07:48</span>
                                                                         <span class="item-meta course-item-status">
-                                                                            <img src="assets/img/icons/lock.svg" alt="icon" />
+                                                                            <img src="../assets/img/icons/lock.svg" alt="icon" />
                                                                         </span>
                                                                     </div>
                                                                 </a>
@@ -428,7 +453,7 @@ const courseDetails = ()=>{
                                                                     <div class="course-item-meta">
                                                                         <span class="item-meta duration">07:48</span>
                                                                         <span class="item-meta course-item-status">
-                                                                            <img src="assets/img/icons/lock.svg" alt="icon" />
+                                                                            <img src="../assets/img/icons/lock.svg" alt="icon" />
                                                                         </span>
                                                                     </div>
                                                                 </a>
@@ -439,7 +464,7 @@ const courseDetails = ()=>{
                                                                     <div class="course-item-meta">
                                                                         <span class="item-meta duration">10:48</span>
                                                                         <span class="item-meta course-item-status">
-                                                                            <img src="assets/img/icons/lock.svg" alt="icon" />
+                                                                            <img src="../assets/img/icons/lock.svg" alt="icon" />
                                                                         </span>
                                                                     </div>
                                                                 </a>
@@ -464,7 +489,7 @@ const courseDetails = ()=>{
                                                                     <div class="course-item-meta">
                                                                         <span class="item-meta duration">07:48</span>
                                                                         <span class="item-meta course-item-status">
-                                                                            <img src="assets/img/icons/lock.svg" alt="icon" />
+                                                                            <img src="../assets/img/icons/lock.svg" alt="icon" />
                                                                         </span>
                                                                     </div>
                                                                 </a>
@@ -475,7 +500,7 @@ const courseDetails = ()=>{
                                                                     <div class="course-item-meta">
                                                                         <span class="item-meta duration">07:48</span>
                                                                         <span class="item-meta course-item-status">
-                                                                            <img src="assets/img/icons/lock.svg" alt="icon" />
+                                                                            <img src="../assets/img/icons/lock.svg" alt="icon" />
                                                                         </span>
                                                                     </div>
                                                                 </a>
@@ -486,7 +511,7 @@ const courseDetails = ()=>{
                                                                     <div class="course-item-meta">
                                                                         <span class="item-meta duration">10:48</span>
                                                                         <span class="item-meta course-item-status">
-                                                                            <img src="assets/img/icons/lock.svg" alt="icon" />
+                                                                            <img src="../assets/img/icons/lock.svg" alt="icon" />
                                                                         </span>
                                                                     </div>
                                                                 </a>
@@ -501,7 +526,7 @@ const courseDetails = ()=>{
                                 <div class="tab-pane fade" id="instructors-tab-pane" role="tabpanel" aria-labelledby="instructors-tab" tabindex="0">
                                     <div class="courses__instructors-wrap">
                                         <div class="courses__instructors-thumb">
-                                            <img src="assets/img/courses/course_instructors.png" alt="img" />
+                                            <img src="../assets/img/courses/course_instructors.png" alt="img" />
                                         </div>
                                         <div class="courses__instructors-content">
                                             <h2 class="title">Mark Jukarberg</h2>
@@ -596,7 +621,7 @@ const courseDetails = ()=>{
                                         </div>
                                         <div class="course-review-head">
                                             <div class="review-author-thumb">
-                                                <img src="assets/img/courses/review-author.png" alt="img" />
+                                                <img src="../assets/img/courses/review-author.png" alt="img" />
                                             </div>
                                             <div class="review-author-content">
                                                 <div class="author-name">
@@ -621,43 +646,43 @@ const courseDetails = ()=>{
                     <div class="col-xl-3 col-lg-4">
                         <div class="courses__details-sidebar">
                             <div class="courses__details-video">
-                                <img src="assets/img/courses/course_thumb02.jpg" alt="img" />
+                                <img src="../assets/img/courses/course_thumb02.jpg" alt="img" />
                                 <a href="https://www.youtube.com/watch?v=YwrHGratByU" class="popup-video"><i class="fas fa-play"></i></a>
                             </div>
                             <div class="courses__cost-wrap">
                                 <span>This Course Fee:</span>
-                                <h2 class="title">$18.00 <del>$32.00</del></h2>
+                                <h2 class="title">{course && course[0].price.toFixed(2)}</h2>
                             </div>
                             <div class="courses__information-wrap">
                                 <h5 class="title">Course includes:</h5>
                                 <ul class="list-wrap">
                                     <li>
-                                        <img src="assets/img/icons/course_icon01.svg" alt="img" class="injectable" />
+                                        <img src="../assets/img/icons/course_icon01.svg" alt="img" class="injectable" />
                                         Level
                                         <span>Expert</span>
                                     </li>
                                     <li>
-                                        <img src="assets/img/icons/course_icon02.svg" alt="img" class="injectable" />
+                                        <img src="../assets/img/icons/course_icon02.svg" alt="img" class="injectable" />
                                         Duration
                                         <span>11h 20m</span>
                                     </li>
                                     <li>
-                                        <img src="assets/img/icons/course_icon03.svg" alt="img" class="injectable" />
+                                        <img src="../assets/img/icons/course_icon03.svg" alt="img" class="injectable" />
                                         Lessons
                                         <span>12</span>
                                     </li>
                                     <li>
-                                        <img src="assets/img/icons/course_icon04.svg" alt="img" class="injectable" />
+                                        <img src="../assets/img/icons/course_icon04.svg" alt="img" class="injectable" />
                                         Quizzes
                                         <span>145</span>
                                     </li>
                                     <li>
-                                        <img src="assets/img/icons/course_icon05.svg" alt="img" class="injectable" />
+                                        <img src="../assets/img/icons/course_icon05.svg" alt="img" class="injectable" />
                                         Certifications
                                         <span>Yes</span>
                                     </li>
                                     <li>
-                                        <img src="assets/img/icons/course_icon06.svg" alt="img" class="injectable" />
+                                        <img src="../assets/img/icons/course_icon06.svg" alt="img" class="injectable" />
                                         Graduation
                                         <span>25K</span>
                                     </li>
@@ -665,7 +690,7 @@ const courseDetails = ()=>{
                             </div>
                             <div class="courses__payment">
                                 <h5 class="title">Secure Payment:</h5>
-                                <img src="assets/img/others/payment.png" alt="img" />
+                                <img src="../assets/img/others/payment.png" alt="img" />
                             </div>
                             <div class="courses__details-social">
                                 <h5 class="title">Share this course:</h5>
@@ -681,7 +706,7 @@ const courseDetails = ()=>{
                                 <div class="tg-button-wrap">
                                     <a href="courses.html" class="btn btn-two arrow-btn">
                                         See All Instructors
-                                        <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable" />
+                                        <img src="../assets/img/icons/right_arrow.svg" alt="img" class="injectable" />
                                     </a>
                                 </div>
                             </div>
@@ -701,7 +726,7 @@ const courseDetails = ()=>{
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="footer__widget">
                             <div class="logo mb-35">
-                                <a href="index-2.html"><img src="assets/img/logo/secondary_logo.svg" alt="img" /></a>
+                                <a href="index-2.html"><img src="../assets/img/logo/secondary_logo.svg" alt="img" /></a>
                             </div>
                             <div class="footer__content">
                                 <p>when an unknown printer took galley of type and scrambled it to make pspecimen bookt has.</p>
@@ -749,34 +774,34 @@ const courseDetails = ()=>{
                                 <ul class="list-wrap footer__social">
                                     <li>
                                         <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/facebook.svg" alt="img" class="injectable" />
+                                            <img src="../assets/img/icons/facebook.svg" alt="img" class="injectable" />
                                         </a>
                                     </li>
                                     <li>
                                         <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/twitter.svg" alt="img" class="injectable" />
+                                            <img src="../assets/img/icons/twitter.svg" alt="img" class="injectable" />
                                         </a>
                                     </li>
                                     <li>
                                         <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/whatsapp.svg" alt="img" class="injectable" />
+                                            <img src="../assets/img/icons/whatsapp.svg" alt="img" class="injectable" />
                                         </a>
                                     </li>
                                     <li>
                                         <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/instagram.svg" alt="img" class="injectable" />
+                                            <img src="../assets/img/icons/instagram.svg" alt="img" class="injectable" />
                                         </a>
                                     </li>
                                     <li>
                                         <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/youtube.svg" alt="img" class="injectable" />
+                                            <img src="../assets/img/icons/youtube.svg" alt="img" class="injectable" />
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="app-download">
-                                <a href="#"><img src="assets/img/others/google-play.svg" alt="img" /></a>
-                                <a href="#"><img src="assets/img/others/apple-store.svg" alt="img" /></a>
+                                <a href="#"><img src="../assets/img/others/google-play.svg" alt="img" /></a>
+                                <a href="#"><img src="../assets/img/others/apple-store.svg" alt="img" /></a>
                             </div>
                         </div>
                     </div>
