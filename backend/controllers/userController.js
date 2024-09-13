@@ -214,16 +214,8 @@ const getProfilePicture = async (req, res) => {
 
 const getInvoice = async (req, res) => {
   const userId = getUserId(req);
-  const userPurchaseHistory = await UserPurchase.findOne({ userId }).populate(
-    "products.product"
-  );
-  if (
-    Array.isArray(userPurchaseHistory?.products) &&
-    userPurchaseHistory.products.length
-  ) {
-    return res.json(userPurchaseHistory.products);
-  }
-  res.status(404).json([]);
+  const userPurchaseHistory = await UserPurchase.findOne({ userId });
+  res.json(userPurchaseHistory);
 };
 
 module.exports = {
