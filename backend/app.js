@@ -18,6 +18,7 @@ const morgan = require("morgan");
         "http://localhost:6006",
         "http://192.168.1.69:6006",
         "http://localhost:5173",
+        "http://35.154.235.131:5173"
       ],
 
       credentials: true,

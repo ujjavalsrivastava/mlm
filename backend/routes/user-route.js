@@ -52,7 +52,7 @@ router.get(
 router.get("/total-earning", tryCatch(asyncHandler(getUserTotalEarning)));
 router.get("/group-status", tryCatch(asyncHandler(getUserGroupStatus)));
 router.get("/level-status", tryCatch(asyncHandler(getUserLevelStatus)));
-router.put(
+router.post(
   "/profile-picture",
   uploadProfilePicture.single("profilePicture"),
   tryCatch(asyncHandler(updateProfilePicture))
