@@ -839,7 +839,7 @@ function Landing() {
                 tabindex="0"
               >
                 <div className="swiper courses-swiper-active">
-                  <div className="swiper-wrapper">
+                  <div className={style.categorySection}>
                     <div className={style.swiper_slide}>
                       <div
                         className={`${style.courses__item} ${style.shine__animate_item}`}
@@ -1123,7 +1123,7 @@ function Landing() {
                 tabindex="0"
               >
                 <div className="swiper courses-swiper-active">
-                  <div className="swiper-wrapper">
+                  <div className={style.categorySection}>
                     <div className={style.swiper_slide}>
                       <div
                         className={`${style.courses__item} ${style.shine__animate_item}`}
@@ -1407,7 +1407,7 @@ function Landing() {
                 tabindex="0"
               >
                 <div className="swiper courses-swiper-active">
-                  <div className="swiper-wrapper">
+                  <div className={style.categorySection}>
                     <div className={style.swiper_slide}>
                       <div
                         className={`${style.courses__item} ${style.shine__animate_item}`}
