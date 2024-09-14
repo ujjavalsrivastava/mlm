@@ -1,8 +1,14 @@
 // import { IoMdHome } from "react-icons/io";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SideBar = () => {
+  const navigator =  useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigator("/login");
+  };
  
   return (
     <>
@@ -14,7 +20,7 @@ const SideBar = () => {
       <div class="image text-center"><img src="dist/img/img1.jpg" class="img-circle" alt="User Image"/> </div>
       <div class="info">
         <p>Alexander Pierce</p>
-        <a href="#"><i class="fa fa-cog"></i></a> <a href="#"><i class="fa fa-envelope-o"></i></a> <a href="#"><i class="fa fa-power-off"></i></a> </div>
+        <a href="#"><i class="fa fa-cog"></i></a> <a href="#"><i class="fa fa-envelope-o"></i></a> <a href="javascript:void(0)" onClick={logout}><i class="fa fa-power-off"></i></a> </div>
     </div>
     
  
@@ -55,6 +61,11 @@ const SideBar = () => {
                   <li>
                   <Link to={"/change-password"}>
                       <i class="fa fa-tree" aria-hidden="true"></i> Change Password
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/profile"}>
+                      <i class="icon-profile-male"></i> My Profile
                     </Link>
                   </li>
 

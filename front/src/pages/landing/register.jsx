@@ -110,7 +110,17 @@ const register = () => {
             // if(result.status==200){
                 const userReponse = await axios.post('user/register',data); 
                 //response.razorpay_order_id
+                const response = await axios.post("user/login", {email:data.email,password:data.password});
+                localStorage.setItem("token", response.data.token);
+                // if (response.data.code == "801") {
+                  
+                //   navigate("/my-course");
+                //   toast.success(response.data.message);
+                // } else {
+                //   toast.error(response.data.error);
+                // }
               const productOrder= await axios.post('product/order',{"amount":price,"paymentId":response.razorpay_payment_id,"orderId":orderId, "paymentMethod":"upi", "status":"success","signature":"123sddfgdf"});
+              
               navigate('/my-course');
               toast.success(result.data.msg);
             // }else{
@@ -225,7 +235,7 @@ const register = () => {
                                 </div>
                                 <div class="form-grp">
                                     <label for="email">Confirm Email</label>
-                                    <input type="email" onChange={handle} id="email" required name="cemail" placeholder="email" />
+                                    <input type="email"  id="email" required name="cemail" placeholder="email" />
                                 </div>
                                  <div class="form-grp">
                                     <label for="email">Gender</label>
@@ -245,7 +255,7 @@ const register = () => {
                                 </div>
                                 <div class="form-grp">
                                     <label for="password">Password</label>
-                                    <input type="password" id="password" name="password" required placeholder="password" />
+                                    <input type="password" id="password" name="password" onChange={handle} required placeholder="password" />
                                 </div>
                                 <div class="form-grp">
                                     <label for="confirm-password">Confirm Password</label>

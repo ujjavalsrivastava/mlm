@@ -23,7 +23,7 @@ const login = () => {
 
       if (response.data.code == "801") {
         localStorage.setItem("token", response.data.token);
-        navigate("/dashboard");
+        navigate("/my-course");
         toast.success(response.data.message);
       } else {
         toast.error(response.data.error);

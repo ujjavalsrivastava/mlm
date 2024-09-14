@@ -149,7 +149,7 @@ const Profile = () => {
                               class="custom-file-input"
                               type="file"
                             />
-                            <span class="custom-file-control"></span>{" "}
+                          
                           </label>
                         </div>
                       </div>
