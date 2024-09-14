@@ -5,7 +5,7 @@ import { axios } from "../../helper/httpHelper";
 import VimeoVideo from "./VimeoVideo";
 const MyCouseDetails = () => {
 
-  const [course, setcourse] = useState([]);
+  const [course, setcourse] = useState(null);
   const [video, setvideo] = useState(null);
   const [videoName, setvideoName] = useState(null);
   const {id} =  useParams();
@@ -24,9 +24,17 @@ const MyCouseDetails = () => {
   setvideoName(name);
   setvideo(videoId);
  }
-console.log()
+ 
+
  useEffect(()=>{
+ 
   courseVideo();
+  if(course){
+    setvideoName(course[0]?.name);
+    setvideo(course[0]?.player_embed_url);
+  }
+ 
+  
  },[])
 
   return (
