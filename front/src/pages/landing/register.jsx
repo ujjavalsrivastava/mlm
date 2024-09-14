@@ -154,6 +154,7 @@ const register = () => {
     const queryParams = new URLSearchParams(window.location.search);
     const value = queryParams.get('referralCode'); // 'myParam' is the name of the query parameter
     setReferral(value);
+    setData(value);
     fetchProduct();
     fetchCourse();
   },[])
