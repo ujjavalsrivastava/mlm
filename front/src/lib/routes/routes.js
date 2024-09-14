@@ -9,7 +9,7 @@ import payment from "../../pages/payment";
 import MyCourse from "../../app/Dashboard/MyCourse";
 import ProfileUplaod from '../../app/Dashboard/ProfileUpload';
 import MyCourseDeatils from "../../app/Dashboard/MyCouseDetails";
-
+import Level from "../../app/Dashboard/Level";
 
 
 export const authRoutes = [
@@ -25,4 +25,6 @@ export const authRoutes = [
   { path: "/profile-upload", Component: ProfileUplaod },
   { path: "/referal-link", Component: referal },
   { path: "/course-details/:id", Component: MyCourseDeatils },
+  { path: "/level", Component: Level },
+  
 ];

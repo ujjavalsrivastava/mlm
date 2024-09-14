@@ -61,7 +61,7 @@ const header = () => {
                         <div className="tgmenu__wrap">
                             <nav className="tgmenu__nav">
                                 <div className="logo">
-                                    <a href="index-2.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a>
+                                    <Link to={'/'}><img src="assets/img/logo/logo.png" alt="Logo" /></Link>
                                 </div>
                                 <div className="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                     <ul className="navigation">
@@ -131,7 +131,7 @@ const header = () => {
                             <nav className="tgmobile__menu-box">
                                 <div className="close-btn"><i className="tg-flaticon-close-1"></i></div>
                                 <div className="nav-logo">
-                                    <a href="index-2.html"><img src="assets/img/logo/logo.svg" alt="Logo" /></a>
+                                    <a href="#"><img src="assets/img/logo/logo.png" alt="Logo" /></a>
                                 </div>
                                 <div className="tgmobile__search">
                                     <form action="#">

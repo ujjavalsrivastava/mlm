@@ -8,7 +8,7 @@ const footer =()=>{
                     <div className="col-xl-3 col-lg-4 col-md-6">
                         <div className="footer__widget">
                             <div className="logo mb-35">
-                                <a href="index-2.html"><img src="assets/img/logo/secondary_logo.svg" alt="img" /></a>
+                                <a href="index-2.html"><img src="assets/img/logo/logo.png" alt="img" /></a>
                             </div>
                             <div className="footer__content">
                                 <p>when an unknown printer took galley of type and scrambled it to make pspecimen bookt has.</p>
