@@ -5,6 +5,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+  const handleToggle = () => {
+    setShow((p) => !p);
+  };
   const logout = () => {
     localStorage.removeItem("token");
     window.location.assign("/login");
@@ -31,14 +35,14 @@ const Header = () => {
             </span>
             <span class="logo-lg">
               <img src="dist/img/logo.png" alt="" />
-            </span>{" "}
+            </span>
           </a>
         </Link>
 
         <nav class="navbar blue-bg navbar-static-top">
           <ul class="nav navbar-nav pull-left">
             <li>
-              <a class="sidebar-toggle" data-toggle="push-menu" href="#"></a>{" "}
+              <a class="sidebar-toggle" data-toggle="push-menu" href="#"></a>
             </li>
           </ul>
           <div class="pull-left search-box">
@@ -57,7 +61,7 @@ const Header = () => {
                     id="search-btn"
                     class="btn btn-flat"
                   >
-                    <i class="fa fa-search"></i>{" "}
+                    <i class="fa fa-search"></i>
                   </button>
                 </span>
               </div>
@@ -66,13 +70,10 @@ const Header = () => {
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <li class="dropdown messages-menu">
-                {" "}
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  {" "}
                   <i class="fa fa-envelope-o"></i>
                   <div class="notify">
-                    {" "}
-                    <span class="heartbit"></span> <span class="point"></span>{" "}
+                    <span class="heartbit"></span> <span class="point"></span>
                   </div>
                 </a>
                 <ul class="dropdown-menu">
@@ -86,7 +87,7 @@ const Header = () => {
                               src="dist/img/img1.jpg"
                               class="img-circle"
                               alt="User Image"
-                            />{" "}
+                            />
                             <span class="profile-status online pull-right"></span>
                           </div>
                           <h4>Alex C. Patton</h4>
@@ -103,7 +104,7 @@ const Header = () => {
                               src="dist/img/img3.jpg"
                               class="img-circle"
                               alt="User Image"
-                            />{" "}
+                            />
                             <span class="profile-status offline pull-right"></span>
                           </div>
                           <h4>Nikolaj S. Henriksen</h4>
@@ -120,7 +121,7 @@ const Header = () => {
                               src="dist/img/img2.jpg"
                               class="img-circle"
                               alt="User Image"
-                            />{" "}
+                            />
                             <span class="profile-status away pull-right"></span>
                           </div>
                           <h4>Kasper S. Jessen</h4>
@@ -137,7 +138,7 @@ const Header = () => {
                               src="dist/img/img4.jpg"
                               class="img-circle"
                               alt="User Image"
-                            />{" "}
+                            />
                             <span class="profile-status busy pull-right"></span>
                           </div>
                           <h4>Florence S. Kasper</h4>
@@ -156,13 +157,10 @@ const Header = () => {
               </li>
 
               <li class="dropdown messages-menu">
-                {" "}
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  {" "}
                   <i class="fa fa-bell-o"></i>
                   <div class="notify">
-                    {" "}
-                    <span class="heartbit"></span> <span class="point"></span>{" "}
+                    <span class="heartbit"></span> <span class="point"></span>
                   </div>
                 </a>
                 <ul class="dropdown-menu">
@@ -226,78 +224,90 @@ const Header = () => {
               </li>
 
               <li class="dropdown user user-menu p-ph-res">
-                {" "}
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  {" "}
+                <a
+                  href="#"
+                  class="dropdown-toggle"
+                  onClick={handleToggle}
+                  data-toggle="dropdown"
+                >
                   <img
                     src="dist/img/img1.jpg"
                     class="user-image"
                     alt="User Image"
-                  />{" "}
-                  <span class="hidden-xs">{profile && profile.name}</span>{" "}
+                  />
+                  <span class="hidden-xs">{profile && profile.name}</span>
                 </a>
-                <ul class="dropdown-menu">
-                  <li class="user-header">
-                    <div class="pull-left user-img">
-                      <img
-                        src="dist/img/img1.jpg"
-                        class="img-responsive"
-                        alt="User"
-                      />
-                    </div>
-                    <p class="text-left">
-                      {profile && profile.name}{" "}
-                      <small> {profile && profile.email}</small>{" "}
-                    </p>
-                    <div class="view-link text-left">
-                      <a href="#">View Profile</a>{" "}
-                    </div>
-                  </li>
+                {show && (
+                  <ul
+                    style={{
+                      background: "white",
+                      width: "200px",
+                      position: "absolute",
+                      right: "0px",
+                    }}
+                  >
+                    <li class="user-header">
+                      <div class="pull-left user-img">
+                        <img
+                          src="dist/img/img1.jpg"
+                          class="img-responsive"
+                          alt="User"
+                        />
+                      </div>
+                      <p class="text-left">
+                        {profile && profile.name}
+                        <small> {profile && profile.email}</small>
+                      </p>
+                      <div class="view-link text-left">
+                        <a href="#">View Profile</a>
+                      </div>
+                    </li>
 
-                  <li>
-                    <Link to={"/profile"}>
-                      <i class="icon-profile-male"></i> My Profile
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/my-course"}>
-                      <i class="icon-profile-male"></i> My Course
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/kyc"}>
-                      <i class="icon-profile-male"></i> KYC
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/member-dashboard"}>
-                      <i class="icon-profile-male"></i> Affiliate Panel
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/referal-link"}>
-                      <i class="icon-profile-male"></i> Referal
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/tree"}>
-                      <i class="fa fa-tree" aria-hidden="true"></i> Hierarchy
-                    </Link>
-                  </li>
-                  
-                 
-                  <li>
-                  <Link to={"/change-password"}>
-                      <i class="fa fa-tree" aria-hidden="true"></i> Change Password
-                    </Link>
-                  </li>
-                  <li role="separator" class="divider"></li>
-                  <li>
-                    <a href="javascript:void(0)" onClick={logout}>
-                      <i class="fa fa-power-off"></i> Logout
-                    </a>
-                  </li>
-                </ul>
+                    <li>
+                      <Link to={"/profile"}>
+                        <i class="icon-profile-male"></i> My Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={"/my-course"}>
+                        <i class="icon-profile-male"></i> My Course
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={"/kyc"}>
+                        <i class="icon-profile-male"></i> KYC
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={"/member-dashboard"}>
+                        <i class="icon-profile-male"></i> Affiliate Panel
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={"/referal-link"}>
+                        <i class="icon-profile-male"></i> Referal
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={"/tree"}>
+                        <i class="fa fa-tree" aria-hidden="true"></i> Hierarchy
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link to={"/change-password"}>
+                        <i class="fa fa-tree" aria-hidden="true"></i> Change
+                        Password
+                      </Link>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                      <a href="javascript:void(0)" onClick={logout}>
+                        <i class="fa fa-power-off"></i> Logout
+                      </a>
+                    </li>
+                  </ul>
+                )}
               </li>
             </ul>
           </div>

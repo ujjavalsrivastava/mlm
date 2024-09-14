@@ -3952,7 +3952,19 @@ ul.plan-list li {
   margin-left: 60px;
 }
 .products-list .product-title {
-  font-weight: 600;
+  /* font-weight: 600; */
+  font-size: 14px;
+}
+.videoContainer {
+  display: flex;
+  align-items: center;
+}
+.videoContainer p {
+  margin: unset;
+}
+.videoContainer img {
+  margin: 0px 5px;
+  width: 20px;
 }
 .products-list .product-description {
   display: block;
