@@ -72,7 +72,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">First Name</label>
                           <input
                             class="form-control"
-                            placeholder="First Name"
+                           
                             type="text"
                             name="fullname"
                            onChange={handleChange}
@@ -89,7 +89,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">E-mail</label>
                           <input
                             class="form-control"
-                            placeholder="E-mail"
+                            
                             type="text"
                             name="eamil"
                              onChange={handleChange}
@@ -106,7 +106,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">Mobile Number</label>
                           <input
                             class="form-control"
-                            placeholder="Contact Number"
+                            
                             type="text"
                             name="fullname"
                            onChange={handleChange}
@@ -122,7 +122,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">Document Type</label>
                           <input
                             class="form-control"
-                            placeholder="Document"
+                            
                             type="text"
                             name="fullname"
                            onChange={handleChange}
@@ -138,7 +138,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">Addhar Card</label>
                           <input
                             class="form-control"
-                            placeholder="Addhar Card"
+                           
                             type="text"
                             name="fullname"
                            onChange={handleChange}
@@ -154,7 +154,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">Addhar Name</label>
                           <input
                             class="form-control"
-                            placeholder="Addhar Card"
+                            
                             type="text"
                             name="fullname"
                            onChange={handleChange}
@@ -170,7 +170,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">Pan Name</label>
                           <input
                             class="form-control"
-                            placeholder="Pan Card"
+                            
                             type="text"
                             name="fullname"
                            onChange={handleChange}
@@ -186,7 +186,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">Pan Number</label>
                           <input
                             class="form-control"
-                            placeholder="Pan Card"
+                            
                             type="text"
                             name="fullname"
                            onChange={handleChange}
@@ -203,7 +203,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">Bank Name</label>
                           <input
                             class="form-control"
-                            placeholder="Bank Name"
+                            
                             type="text"
                             name="fullname"
                             onChange={handleChange}
@@ -220,7 +220,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">Account Holder Name</label>
                           <input
                             class="form-control"
-                            placeholder="Account Holder Name"
+                           
                             type="text"
                             name="fullname"
                            onChange={handleChange}
@@ -236,7 +236,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">Account Number</label>
                           <input
                             class="form-control"
-                            placeholder="Account Card"
+                            
                             type="text"
                             name="fullname"
                            onChange={handleChange}
@@ -252,7 +252,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">IFSC code</label>
                           <input
                             class="form-control"
-                            placeholder="ifsc Code"
+                            
                             type="text"
                             name="fullname"
                            onChange={handleChange}
@@ -265,17 +265,19 @@ const saveKycData = async(e)=>{
                       </div>
                     
                       <div class="col-md-12">
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Bank Detatils</label>
+                        
+                       
+                         <hr/>
+                          <h6>Bank Detatils</h6>
                           
-                        </div>
+                       
                       </div>
                       <div class="col-md-4">
                         <div class="form-group has-feedback">
                           <label class="control-label">Bank Name</label>
                           <input
                             class="form-control"
-                            placeholder="Bank Name"
+                           
                             type="text"
                             name="fullname"
                            onChange={handleChange}
@@ -291,7 +293,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">Account Holder Name</label>
                           <input
                             class="form-control"
-                            placeholder="Account Holder Name"
+                            
                             type="text"
                             name="fullname"
                            onChange={handleChange}
@@ -307,7 +309,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">Account Number</label>
                           <input
                             class="form-control"
-                            placeholder="Account Number"
+                            
                             type="text"
                             name="fullname"
                            onChange={handleChange}
@@ -323,7 +325,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">IFSC Code</label>
                           <input
                             class="form-control"
-                            placeholder="IFSC Code"
+                            
                             type="text"
                             name="fullname"
                            onChange={handleChange}
@@ -355,7 +357,7 @@ const saveKycData = async(e)=>{
                           <label class="control-label">OTP Code</label>
                           <input
                             class="form-control"
-                            placeholder="OTP Code"
+                          
                             type="text"
                             name="otp"
                            
@@ -367,7 +369,7 @@ const saveKycData = async(e)=>{
                           ></span>{" "}
                         </div>
                       </div>
-                      <div class="col-md-12">
+                      <div class="col-md-12 p-3 ">
                         <button type="submit" class="btn btn-success">
                           Update Details
                         </button>

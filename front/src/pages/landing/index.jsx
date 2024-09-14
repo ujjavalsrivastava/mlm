@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./home.module.css";
+import { Link } from "react-router-dom";
+import { axios } from "../../helper/httpHelper";
 
 function Landing() {
   const [product, setProduct] = useState(null);
@@ -14,6 +16,7 @@ function Landing() {
       console.log(error);
     }
   };
+  console.log(product);
   useEffect((row) => {
     fetchProduct();
   }, []);
@@ -556,6 +559,8 @@ function Landing() {
               >
                 <div className="swiper courses-swiper-active">
                   <div className={style.categorySection}>
+                    {product && product.map(row =>(
+
                     <div className={style.swiper_slide}>
                       <div
                         className={`${style.courses__item} ${style.shine__animate_item}`}
@@ -566,7 +571,7 @@ function Landing() {
                             className="shine__animate-link"
                           >
                             <img
-                              src="assets/img/courses/course_thumb01.jpg"
+                              src={row.pictures.base_link}
                               alt="img"
                             />
                           </a>
@@ -581,9 +586,8 @@ function Landing() {
                             </li>
                           </ul>
                           <h5 className="title">
-                            <a href="course-details.html">
-                              Learning JavaScript With Imagination
-                            </a>
+                          <Link to={`/courses-details-all/${row.courseId}`}>{row.name}</Link>
+                          
                           </h5>
                           <p className="author">
                             By <a href="#">David Millar</a>
@@ -595,11 +599,12 @@ function Landing() {
                                 <i className="flaticon-arrow-right"></i>
                               </a>
                             </div>
-                            <h5 className="price">$15.00</h5>
+                            <h5 className="price">{row.price.toFixed(2)}</h5>
                           </div>
                         </div>
                       </div>
                     </div>
+                    ))}
                     <div className={style.swiper_slide}>
                       <div
                         className={`${style.courses__item} ${style.shine__animate_item}`}

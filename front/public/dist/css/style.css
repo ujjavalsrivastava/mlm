@@ -3841,6 +3841,7 @@ ul.plan-list li {
 .nav-tabs-custom > .nav-tabs.pull-right > li {
   float: right;
 }
+
 .nav-tabs-custom > .nav-tabs.pull-right > li:first-of-type {
   margin-right: 0;
 }

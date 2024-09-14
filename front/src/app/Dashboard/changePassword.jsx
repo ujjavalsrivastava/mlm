@@ -72,10 +72,10 @@ const changePassword = () => {
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group has-feedback">
-                          <label class="control-label">old Password</label>
+                          <label class="control-label">Old Password</label>
                           <input
                             class="form-control"
-                            placeholder="Old password"
+                          
                             type="password"
                             name="oldPassword"
                             onChange={handleChange}
@@ -93,7 +93,7 @@ const changePassword = () => {
                           <label class="control-label">New Password</label>
                           <input
                             class="form-control"
-                            placeholder="New Password"
+                         
                             type="password"
                             name="newPassword"
                             onChange={handleChange}
@@ -110,21 +110,18 @@ const changePassword = () => {
                           <label class="control-label">Confirm password</label>
                           <input
                             class="form-control"
-                            placeholder="Confirm password"
+                          
                             type="password"
                             name="cpassword"
                             onChange={handleChange}
                             required
                             
                           />
-                          <span
-                            class="fa fa-envelope-o form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "}
+                          
                         </div>
                       </div>
                
-                      <div class="col-md-12">
+                      <div class="col-md-12 p-3">
                         <button type="submit" class="btn btn-success">
                           Submit
                         </button>

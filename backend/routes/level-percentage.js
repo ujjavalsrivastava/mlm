@@ -7,5 +7,5 @@ const { tryCatch, asyncHandler } = require("../utils/helper");
 const router = express.Router();
 
 router.get("/level-percentage", tryCatch(asyncHandler(getLevelPercentage)));
-router.put("/level-percentage", tryCatch(asyncHandler(updateLevelPercentage)));
+router.post("/level-percentage", tryCatch(asyncHandler(updateLevelPercentage)));
 module.exports = router;
