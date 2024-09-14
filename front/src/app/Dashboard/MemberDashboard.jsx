@@ -111,7 +111,7 @@ const MemberDashboard = () => {
                       <i class="ti-face-smile f-20 text-blue"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                          {group && group.todayTeamEarning}
+                          {group && group.todayTeamEarning.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           Today's Earning
@@ -186,7 +186,7 @@ const MemberDashboard = () => {
                       <i class="ti-wallet f-20 text-green"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                          {group && group.totalTeamEarning}
+                          {group && group.totalTeamEarning.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           All Time Earning
@@ -217,7 +217,7 @@ const MemberDashboard = () => {
                       <i class="ti-face-smile f-20 text-blue"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                         {todayDirectTeam}
+                         {todayDirectTeam.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           Today Direct Team
@@ -242,7 +242,7 @@ const MemberDashboard = () => {
                       <i class="ti-bar-chart f-20 text-danger"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                         {AllTimeDirectTeam}
+                         {AllTimeDirectTeam.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           All Time Direct Team
@@ -267,7 +267,7 @@ const MemberDashboard = () => {
                       <i class="ti-panel f-20 text-info"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                          {group && group.todayGroupUser}
+                          {group && group.todayGroupUser.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           Today Team
@@ -292,7 +292,7 @@ const MemberDashboard = () => {
                       <i class="ti-wallet f-20 text-green"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                          {group && group.totalGroupUser}
+                          {group && group.totalGroupUser.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           All Team Sise
@@ -349,7 +349,7 @@ const MemberDashboard = () => {
               <div>
                 <div class="box box-widget widget-user-2">
                   <div class="widget-user-header bg-yellow">
-                    <h3>Your Recent Sales</h3>
+                    <h5>Your Recent Sales</h5>
                     {/* <h5>Checkout my contacts here</h5> */}
                   </div>
                   <ul class="products-list product-list-in-box">

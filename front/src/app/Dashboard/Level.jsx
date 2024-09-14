@@ -73,7 +73,7 @@ console.log('data' + JSON.stringify(data));
                 <div class="card-body">
                   <form onSubmit={save}>
                     <div class="row">
-                      <div class="col-md-2">
+                      <div class="col-md-3">
                         <div class="form-group has-feedback">
                           <label class="control-label">Level 1</label>
                           <input
@@ -87,7 +87,7 @@ console.log('data' + JSON.stringify(data));
                           
                         </div>
                       </div>
-                      <div class="col-md-2">
+                      <div class="col-md-3">
                         <div class="form-group has-feedback">
                           <label class="control-label">Level 2</label>
                           <input
@@ -102,7 +102,7 @@ console.log('data' + JSON.stringify(data));
                         </div>
                       </div>
 
-                      <div class="col-md-2">
+                      <div class="col-md-3">
                         <div class="form-group has-feedback">
                           <label class="control-label">Level 3</label>
                           <input
@@ -117,7 +117,7 @@ console.log('data' + JSON.stringify(data));
                         </div>
                       </div>
 
-                      <div class="col-md-2">
+                      <div class="col-md-3">
                         <div class="form-group has-feedback">
                           <label class="control-label">Level 4</label>
                           <input
@@ -132,7 +132,7 @@ console.log('data' + JSON.stringify(data));
                         </div>
                       </div>
 
-                      <div class="col-md-2">
+                      <div class="col-md-3">
                         <div class="form-group has-feedback">
                           <label class="control-label">Level 5</label>
                           <input
@@ -148,7 +148,7 @@ console.log('data' + JSON.stringify(data));
                         </div>
                       </div>
 
-                      <div class="col-md-2">
+                      <div class="col-md-3">
                         <div class="form-group has-feedback">
                           <label class="control-label">Level 6</label>
                           <input
@@ -163,7 +163,7 @@ console.log('data' + JSON.stringify(data));
                         </div>
                       </div>
 
-                      <div class="col-md-2">
+                      <div class="col-md-3">
                         <div class="form-group has-feedback">
                           <label class="control-label">Level 7</label>
                           <input
@@ -177,7 +177,7 @@ console.log('data' + JSON.stringify(data));
                           
                         </div>
                       </div>
-                      <div class="col-md-2">
+                      <div class="col-md-3">
                         <div class="form-group has-feedback">
                           <label class="control-label">Level 8</label>
                           <input
@@ -193,7 +193,7 @@ console.log('data' + JSON.stringify(data));
                       </div>
 
                      <br/><br/>
-                      <div class="col-md-12">
+                      <div class="col-md-12 p-3">
                         <button type="submit" class="btn btn-success">
                           Submit
                         </button>
