@@ -1,34 +1,28 @@
 import React, { useEffect, useState } from "react";
-import style from './home.module.css';
+import style from "./home.module.css";
 
 function Landing() {
-
-  const[product,setProduct]=useState(null);
+  const [product, setProduct] = useState(null);
   const [orderId, setOrderId] = useState("");
   const [productId, setproductId] = useState("");
 
-  const fetchProduct = async()=>{
-    try{
-      const response =  await axios.get('vimeo/courses');
+  const fetchProduct = async () => {
+    try {
+      const response = await axios.get("vimeo/courses");
       setProduct(response.data);
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-    
-  }
-  useEffect((row)=>{
+  };
+  useEffect((row) => {
     fetchProduct();
-  },[]);
-  
+  }, []);
+
   return (
     <React.Fragment>
-     
-
       <button className="scroll__top scroll-to-target" data-target="html">
         <i className="tg-flaticon-arrowhead-up"></i>
       </button>
-
-
 
       <main className="main-area fix">
         <section
@@ -170,11 +164,10 @@ function Landing() {
             </div>
             <div className="row">
               <div className="col-12">
-              
-                <div className={`${style.categories__wrap}`} >
+                <div className={style.categories__wrap}>
                   <div className="swiper categories-active">
-                    <div className="swiper-wrapper">
-                      <div className="swiper-slide">
+                    <div className={style.categorySection}>
+                      <div className={style.swiper_slide}>
                         <div className="categories__item">
                           <a href="courses.html">
                             <div className="icon">
@@ -185,7 +178,7 @@ function Landing() {
                           </a>
                         </div>
                       </div>
-                      <div className="swiper-slide">
+                      <div className={style.swiper_slide}>
                         <div className="categories__item">
                           <a href="courses.html">
                             <div className="icon">
@@ -196,7 +189,7 @@ function Landing() {
                           </a>
                         </div>
                       </div>
-                      <div className="swiper-slide">
+                      <div className={style.swiper_slide}>
                         <div className="categories__item">
                           <a href="courses.html">
                             <div className="icon">
@@ -207,7 +200,7 @@ function Landing() {
                           </a>
                         </div>
                       </div>
-                      <div className="swiper-slide">
+                      <div className={style.swiper_slide}>
                         <div className="categories__item">
                           <a href="courses.html">
                             <div className="icon">
@@ -218,7 +211,7 @@ function Landing() {
                           </a>
                         </div>
                       </div>
-                      <div className="swiper-slide">
+                      <div className={style.swiper_slide}>
                         <div className="categories__item">
                           <a href="courses.html">
                             <div className="icon">
@@ -229,7 +222,7 @@ function Landing() {
                           </a>
                         </div>
                       </div>
-                      <div className="swiper-slide">
+                      <div className={style.swiper_slide}>
                         <div className="categories__item">
                           <a href="courses.html">
                             <div className="icon">
@@ -240,7 +233,7 @@ function Landing() {
                           </a>
                         </div>
                       </div>
-                      <div className="swiper-slide">
+                      <div className={style.swiper_slide}>
                         <div className="categories__item">
                           <a href="courses.html">
                             <div className="icon">
@@ -294,63 +287,78 @@ function Landing() {
             </div>
           </div>
         </section>
-        
-        <div className={`${style.brand_area}`} >
+
+        <div className={`${style.brand_area}`}>
           <div className="container-fluid">
             <div className="marquee_mode">
-              <div className="brand__item">
-                <a href="#">
-                  <img src="assets/img/brand/brand01.png" alt="brand" />
-                </a>
-                <img src="assets/img/icons/brand_star.svg" alt="star" />
-              </div>
-              <div className="brand__item">
-                <a href="#">
-                  <img src="assets/img/brand/brand02.png" alt="brand" />
-                </a>
-                <img src="assets/img/icons/brand_star.svg" alt="star" />
-              </div>
-              <div className="brand__item">
-                <a href="#">
-                  <img src="assets/img/brand/brand03.png" alt="brand" />
-                </a>
-                <img src="assets/img/icons/brand_star.svg" alt="star" />
-              </div>
-              <div className="brand__item">
-                <a href="#">
-                  <img src="assets/img/brand/brand04.png" alt="brand" />
-                </a>
-                <img src="assets/img/icons/brand_star.svg" alt="star" />
-              </div>
-              <div className="brand__item">
-                <a href="#">
-                  <img src="assets/img/brand/brand05.png" alt="brand" />
-                </a>
-                <img src="assets/img/icons/brand_star.svg" alt="star" />
-              </div>
-              <div className="brand__item">
-                <a href="#">
-                  <img src="assets/img/brand/brand06.png" alt="brand" />
-                </a>
-                <img src="assets/img/icons/brand_star.svg" alt="star" />
-              </div>
-              <div className="brand__item">
-                <a href="#">
-                  <img src="assets/img/brand/brand07.png" alt="brand" />
-                </a>
-                <img src="assets/img/icons/brand_star.svg" alt="star" />
-              </div>
-              <div className="brand__item">
-                <a href="#">
-                  <img src="assets/img/brand/brand04.png" alt="brand" />
-                </a>
-                <img src="assets/img/icons/brand_star.svg" alt="star" />
-              </div>
-              <div className="brand__item">
-                <a href="#">
-                  <img src="assets/img/brand/brand03.png" alt="brand" />
-                </a>
-                <img src="assets/img/icons/brand_star.svg" alt="star" />
+              <div
+                style={{
+                  width: "100000px",
+                  transform: "translateX(0px)",
+                  animation:
+                    "85.725s linear 0s infinite normal none running marqueeAnimation-5396873",
+                }}
+                className="js-marquee-wrapper"
+              >
+                <div
+                  style={{ marginRight: "35px", float: "left" }}
+                  className={style.js_marquee}
+                >
+                  <div className={style.brand__item}>
+                    <a href="#">
+                      <img src="assets/img/brand/brand01.png" alt="brand" />
+                    </a>
+                    <img src="assets/img/icons/brand_star.svg" alt="star" />
+                  </div>
+                  <div className={style.brand__item}>
+                    <a href="#">
+                      <img src="assets/img/brand/brand02.png" alt="brand" />
+                    </a>
+                    <img src="assets/img/icons/brand_star.svg" alt="star" />
+                  </div>
+                  <div className={style.brand__item}>
+                    <a href="#">
+                      <img src="assets/img/brand/brand03.png" alt="brand" />
+                    </a>
+                    <img src="assets/img/icons/brand_star.svg" alt="star" />
+                  </div>
+                  <div className={style.brand__item}>
+                    <a href="#">
+                      <img src="assets/img/brand/brand04.png" alt="brand" />
+                    </a>
+                    <img src="assets/img/icons/brand_star.svg" alt="star" />
+                  </div>
+                  <div className={style.brand__item}>
+                    <a href="#">
+                      <img src="assets/img/brand/brand05.png" alt="brand" />
+                    </a>
+                    <img src="assets/img/icons/brand_star.svg" alt="star" />
+                  </div>
+                  <div className={style.brand__item}>
+                    <a href="#">
+                      <img src="assets/img/brand/brand06.png" alt="brand" />
+                    </a>
+                    <img src="assets/img/icons/brand_star.svg" alt="star" />
+                  </div>
+                  <div className={style.brand__item}>
+                    <a href="#">
+                      <img src="assets/img/brand/brand07.png" alt="brand" />
+                    </a>
+                    <img src="assets/img/icons/brand_star.svg" alt="star" />
+                  </div>
+                  <div className={style.brand__item}>
+                    <a href="#">
+                      <img src="assets/img/brand/brand04.png" alt="brand" />
+                    </a>
+                    <img src="assets/img/icons/brand_star.svg" alt="star" />
+                  </div>
+                  <div className={style.brand__item}>
+                    <a href="#">
+                      <img src="assets/img/brand/brand03.png" alt="brand" />
+                    </a>
+                    <img src="assets/img/icons/brand_star.svg" alt="star" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -433,17 +441,15 @@ function Landing() {
                   <ul className="about__info-list list-wrap">
                     <li className="about__info-list-item">
                       <i className="flaticon-angle-right"></i>
-                      <p className="content">
-                        The Most World Class Instructors
-                      </p>
+                      <p>The Most World Class Instructors</p>
                     </li>
                     <li className="about__info-list-item">
                       <i className="flaticon-angle-right"></i>
-                      <p className="content">Access Your Class anywhere</p>
+                      <p>Access Your Class anywhere</p>
                     </li>
                     <li className="about__info-list-item">
                       <i className="flaticon-angle-right"></i>
-                      <p className="content">Flexible Course Plan</p>
+                      <p>Flexible Course Plan</p>
                     </li>
                   </ul>
                   <div className="tg-button-wrap">
@@ -549,10 +555,11 @@ function Landing() {
                 tabindex="0"
               >
                 <div className="swiper courses-swiper-active">
-                  <div className="swiper-wrapper">
-                    <div className="swiper-slide">
-                    
-                      <div className={`${style.courses__item} ${style.shine__animate_item}`} >
+                  <div className={style.categorySection}>
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -593,8 +600,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -635,8 +644,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -677,8 +688,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -719,8 +732,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -761,8 +776,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -823,8 +840,10 @@ function Landing() {
               >
                 <div className="swiper courses-swiper-active">
                   <div className="swiper-wrapper">
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -865,8 +884,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -907,8 +928,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -949,8 +972,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -991,8 +1016,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -1033,8 +1060,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -1095,8 +1124,10 @@ function Landing() {
               >
                 <div className="swiper courses-swiper-active">
                   <div className="swiper-wrapper">
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -1137,8 +1168,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -1179,8 +1212,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -1221,8 +1256,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -1263,8 +1300,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -1305,8 +1344,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -1367,8 +1408,10 @@ function Landing() {
               >
                 <div className="swiper courses-swiper-active">
                   <div className="swiper-wrapper">
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -1409,8 +1452,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -1451,8 +1496,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -1493,8 +1540,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -1535,8 +1584,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -1577,8 +1628,10 @@ function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="swiper-slide">
-                      <div className="courses__item shine__animate-item">
+                    <div className={style.swiper_slide}>
+                      <div
+                        className={`${style.courses__item} ${style.shine__animate_item}`}
+                      >
                         <div className="courses__item-thumb">
                           <a
                             href="course-details.html"
@@ -2424,7 +2477,6 @@ function Landing() {
           </div>
         </section>
       </main>
-
     </React.Fragment>
   );
 }
