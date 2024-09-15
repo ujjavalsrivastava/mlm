@@ -145,15 +145,44 @@ const user = {
 };
 
 // Function to count users at each level and track users created today by level
-function countUsersAtEachLevel(
+async function countUsersAtEachLevel(
   user,
   level = 0,
-  counts = { totalByLevel: {}, createdTodayByLevel: {} }
+  counts = {
+    totalByLevel: {},
+    createdTodayByLevel: {},
+    totalEarning: {},
+    todayEarning: {},
+  }
 ) {
   // Initialize the count for the current level if it doesn't exist
   if (!counts.totalByLevel[level]) {
     counts.totalByLevel[level] = 0;
+  }
+  if (!counts.createdTodayByLevel[level]) {
     counts.createdTodayByLevel[level] = 0; // Also initialize the 'created today' count for the level
+  }
+  if (!counts.totalEarning[level]) {
+    counts.totalEarning[level] = 0; // Also initialize the 'created today' count for the level
+  }
+  if (!counts.todayEarning[level]) {
+    counts.todayEarning[level] = 0; // Also initialize the 'created today' count for the level
+  }
+  const userId = user._id;
+  console.log({ userId });
+
+  if (userId) {
+    const data = await PercentDistribution.findOne({ userId });
+    console.log({ data });
+    data.purchaseHistory.map((curr) => {
+      counts.totalEarning[level] += curr.amount;
+      const today = new Date();
+      const oneDay = new Date();
+      oneDay.setDate(today.getDate() - 1);
+      if (curr.createdAt >= oneDay) {
+        counts.todayEarning[level] += curr.amount;
+      }
+    });
   }
 
   // Increment the total count for the current level
@@ -166,9 +195,10 @@ function countUsersAtEachLevel(
 
   // Recursively count for each lower-level user
   Array.isArray(user.lowerLevel) &&
-    user.lowerLevel.forEach((lowerUser) => {
-      countUsersAtEachLevel(lowerUser, level + 1, counts);
-    });
+    level !== 8 &&
+    (await user.lowerLevel.map(async (lowerUser) => {
+      await countUsersAtEachLevel(lowerUser, level + 1, counts);
+    }));
 
   return counts;
 }
@@ -177,11 +207,8 @@ const getUserLevelStatus = async (req, res) => {
   const user = req.user;
 
   const userLL = await populateLowerLevel(user);
-  // if(Array.isArray(userLL.lowerLevel)){
-  //   data.ul1=
-  // }
-  // if (userLL.lowerLevel)
-  res.json(countUsersAtEachLevel(userLL, 1));
+
+  res.json(await countUsersAtEachLevel(userLL, 1));
 };
 const updateProfilePicture = async (req, res) => {
   if (!req.file) {

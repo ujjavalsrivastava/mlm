@@ -2,8 +2,13 @@ const Product = require("../models/product-model");
 const crypto = require("crypto");
 const UserPurchase = require("../models/purchase-history-model");
 const { razorpay } = require("../payment/getway");
-const { distributeUserPercentage, getUserId } = require("../utils/helper");
+const {
+  distributeUserPercentage,
+  getUserId,
+  handlePromiseError,
+} = require("../utils/helper");
 const { getAlbumById } = require("../vimeo/helper");
+const LevelPercentage = require("../models/level-percentage-model");
 
 const createRazorpayOrder = async (req, res) => {
   const { amount, currency, receipt } = req.body;
@@ -62,10 +67,16 @@ const createProductOrder = async (req, res) => {
     paymentMethod,
     status,
   };
+  const [shareError, userLevelShare] = await handlePromiseError(
+    LevelPercentage.findOne()
+  );
+
+  const associatePercent = (amount * userLevelShare.level0) / 100;
 
   if (!userPurchaseHistory) {
     const addPurchase = await new UserPurchase({
       userId,
+      currentAmount: associatePercent,
       products: [createProduct],
     }).save();
     if (addPurchase._id) {
@@ -74,7 +85,7 @@ const createProductOrder = async (req, res) => {
   } else {
     userPurchaseHistory.products.unshift(createProduct);
     const savedData = await userPurchaseHistory.save();
-    await distributeUserPercentage(userId, amount);
+    await distributeUserPercentage(userId, amount, userLevelShare);
     return res.json({ message: "Order created successfull", savedData });
   }
   res.json(userPurchaseHistory);

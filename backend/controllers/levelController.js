@@ -80,30 +80,60 @@ const getUserGroupStatus = async (req, res) => {
 
   const allUsers = flattenUsers(user);
   const todaysUsers = usersJoinedToday(allUsers);
+  const totalGroupUser = allUsers.length || 0;
+  const todayGroupUser = [...todaysUsers].length || 0;
 
-  const totalEarning = await PercentDistribution.aggregate(
-    totalAmountPipeline(allUsers.map((u) => u._id))
-  );
+  const users = allUsers.map((u) => u._id);
+
+  console.log({ users });
+
+  const teamPercent = await PercentDistribution.find({
+    userId: { $in: users },
+  });
+  let totalTeamEarning = 0;
+  let total7DaysEarning = 0;
+  let total30DaysEarning = 0;
+  teamPercent.map((t) => {
+    t.purchaseHistory.map((curr) => {
+      totalTeamEarning += curr.amount;
+      const today = new Date();
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(today.getDate() - 7);
+      const thirtyDays = new Date();
+      thirtyDays.setDate(today.getDate() - 30);
+      if (curr.createdAt >= sevenDaysAgo) {
+        total7DaysEarning += curr.amount;
+      }
+      if (curr.createdAt >= thirtyDays) {
+        total30DaysEarning += curr.amount;
+      }
+    });
+
+    console.log({ t });
+  });
+
   const currentDayEarning = await PercentDistribution.aggregate(
     totalAmountPipeline(todaysUsers.map((u) => u._id))
   );
 
-  let totalGroupUser = allUsers.length || 0;
-  let todayGroupUser = [...todaysUsers].length || 0;
-  let totalTeamEarning = totalEarning.reduce(
-    (pre, curr) => pre + curr.totalAmount,
-    0
-  );
+  // let totalTeamEarning = totalEarning.reduce(
+  //   (pre, curr) => pre + curr.totalAmount,
+  //   0
+  // );
   let todayTeamEarning = currentDayEarning.reduce(
     (pre, curr) => pre + curr.totalAmount,
     0
   );
+
+  //  7 day and 30 day team earning
 
   return res.json({
     totalGroupUser,
     todayGroupUser,
     totalTeamEarning,
     todayTeamEarning,
+    total7DaysEarning,
+    total30DaysEarning,
   });
 };
 

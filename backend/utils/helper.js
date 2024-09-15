@@ -67,10 +67,11 @@ const parentPipelineUpToLevel = (userId, level) => {
   return pipeline;
 };
 
-const distributeUserPercentage = async (associateId, amount) => {
-  const [shareError, userLevelShare] = await handlePromiseError(
-    LevelPercentage.findOne()
-  );
+const distributeUserPercentage = async (
+  associateId,
+  amount,
+  userLevelShare
+) => {
   const [userError, user] = await handlePromiseError(
     User.aggregate(parentPipelineUpToLevel(associateId, 8)).exec()
   );
@@ -106,11 +107,15 @@ const distributeUserPercentage = async (associateId, amount) => {
         senderId: associateId,
         receiverId: currentUser._id,
       };
+
       if (!userPercentage) {
         await new PercentDistribution({
           userId: currentUser._id,
           purchaseHistory: [dataForPerventageDistribution],
         }).save();
+        userCurrentPurchase.currentAmount +=
+          dataForPerventageDistribution.amount;
+        await userCurrentPurchase.save();
       } else {
         userPercentage.purchaseHistory.unshift(dataForPerventageDistribution);
         await userPercentage.save();
