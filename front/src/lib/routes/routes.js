@@ -10,7 +10,8 @@ import MyCourse from "../../app/Dashboard/MyCourse";
 import ProfileUplaod from '../../app/Dashboard/ProfileUpload';
 import MyCourseDeatils from "../../app/Dashboard/MyCouseDetails";
 import Level from "../../app/Dashboard/Level";
-
+import LevelWiseReport from "../../app/Dashboard/LevelWiseReport";
+import TeamSize from "../../app/Dashboard/TeamSize";
 
 export const authRoutes = [
 
@@ -26,5 +27,7 @@ export const authRoutes = [
   { path: "/referal-link", Component: referal },
   { path: "/course-details/:id", Component: MyCourseDeatils },
   { path: "/level", Component: Level },
+  { path: "/level-wise-report", Component: LevelWiseReport },
+  { path: "/team-size", Component: TeamSize },
   
 ];
