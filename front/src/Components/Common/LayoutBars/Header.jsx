@@ -235,23 +235,31 @@ const Header = () => {
                     class="user-image"
                     alt="User Image"
                   />
-                  <span class="hidden-xs">{profile && profile.name}</span>
+                  <span class="hidden-xs" style={{textTransform: 'capitalize'}}>{profile && profile.name}</span>
                 </a>
                 {show && (
                   <ul
                     style={{
+                      marginRight: "5px",
                       background: "white",
                       width: "200px",
+                      padding: "15px",
                       position: "absolute",
                       right: "0px",
+                     listStyleType: "none",
                     }}
                   >
-                    <li class="user-header">
+                    {/* <li class="user-header">
                       <div class="pull-left user-img">
                         <img
                           src="dist/img/img1.jpg"
                           class="img-responsive"
                           alt="User"
+                          style={{ 
+                          borderRadius: "50%",
+                          width: "43px",
+                          padding: "5px",
+                          }}
                         />
                       </div>
                       <p class="text-left">
@@ -261,49 +269,54 @@ const Header = () => {
                       <div class="view-link text-left">
                         <a href="#">View Profile</a>
                       </div>
-                    </li>
+                    </li> */}
 
                     <li>
-                      <Link to={"/profile"}>
-                        <i class="icon-profile-male"></i> My Profile
+                      <Link to={"/profile"} style={{color:"#635d5d"}}>
+                        <i class="fa fa-user" style={{marginRight: "7px"}}></i> My Profile
                       </Link>
                     </li>
-                    <li>
-                      <Link to={"/my-course"}>
-                        <i class="icon-profile-male"></i> My Course
+                    <li style={{marginTop:"10px"}}>
+                      <Link to={"/my-course"} style={{color:"#635d5d"}}>
+                        <i class="fa fa-graduation-cap" style={{marginRight: "7px"}}></i> My Course
                       </Link>
                     </li>
-                    <li>
-                      <Link to={"/kyc"}>
-                        <i class="icon-profile-male"></i> KYC
+                    <li style={{marginTop:"10px"}}>
+                      <Link to={"/my-course"} style={{color:"#635d5d"}}>
+                        <i class="fa fa-suitcase" style={{marginRight: "7px"}}></i> Wallet
                       </Link>
                     </li>
-                    <li>
-                      <Link to={"/member-dashboard"}>
-                        <i class="icon-profile-male"></i> Affiliate Panel
+                    <li style={{marginTop:"10px"}}> 
+                      <Link to={"/kyc"} style={{color:"#635d5d"}}>
+                        <i class="fa fa-users" style={{marginRight: "7px"}}></i> KYC
                       </Link>
                     </li>
-                    <li>
-                      <Link to={"/referal-link"}>
-                        <i class="icon-profile-male"></i> Referal
+                    <li style={{marginTop:"10px"}}>
+                      <Link to={"/member-dashboard"} style={{color:"#635d5d"}}>
+                        <i class="fa fa-building" style={{marginRight: "7px"}}></i> Affiliate Panel
                       </Link>
                     </li>
-                    <li>
-                      <Link to={"/tree"}>
-                        <i class="fa fa-tree" aria-hidden="true"></i> Hierarchy
+                    <li style={{marginTop:"10px"}}>
+                      <Link to={"/referal-link"} style={{color:"#635d5d"}}>
+                        <i class="fa fa-refresh" style={{marginRight: "7px"}}></i> Referal
+                      </Link>
+                    </li>
+                    <li style={{marginTop:"10px"}}>
+                      <Link to={"/tree"} style={{color:"#635d5d"}}>
+                        <i class="fa fa-sitemap" aria-hidden="true" style={{marginRight: "7px"}}></i> Hierarchy
                       </Link>
                     </li>
 
-                    <li>
-                      <Link to={"/change-password"}>
-                        <i class="fa fa-tree" aria-hidden="true"></i> Change
+                    <li style={{marginTop:"10px"}}>
+                      <Link to={"/change-password"} style={{color:"#635d5d"}}>
+                        <i class="fa fa-key" aria-hidden="true" style={{marginRight: "7px"}}></i> Change
                         Password
                       </Link>
                     </li>
                     <li role="separator" class="divider"></li>
-                    <li>
-                      <a href="javascript:void(0)" onClick={logout}>
-                        <i class="fa fa-power-off"></i> Logout
+                    <li style={{marginTop:"10px"}}>
+                      <a href="javascript:void(0)" onClick={logout} style={{color:"#635d5d"}}>
+                        <i class="fa fa-power-off" style={{marginRight: "7px"}}></i> Logout
                       </a>
                     </li>
                   </ul>

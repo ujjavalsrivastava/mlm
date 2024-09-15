@@ -1,6 +1,8 @@
 // import { IoMdHome } from "react-icons/io";
 
 import { Link, useNavigate } from "react-router-dom";
+import { axios } from "../../../helper/httpHelper";
+import { useEffect, useState } from "react";
 
 const SideBar = () => {
   const navigator =  useNavigate();
@@ -9,6 +11,15 @@ const SideBar = () => {
     localStorage.removeItem("token");
     navigator("/login");
   };
+  const [profile, setprofile] = useState({});
+  const fetchProfile = async () => {
+    const response = await axios.get("user/profile");
+    setprofile(response.data);
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
  
   return (
     <>
@@ -19,7 +30,7 @@ const SideBar = () => {
     <div class="user-panel">
       <div class="image text-center"><img src="dist/img/img1.jpg" class="img-circle" alt="User Image"/> </div>
       <div class="info">
-        <p>Alexander Pierce</p>
+        <p style={{textTransform: 'capitalize'}}>{profile && profile.name}</p>
         <a href="#"><i class="fa fa-cog"></i></a> <a href="#"><i class="fa fa-envelope-o"></i></a> <a href="javascript:void(0)" onClick={logout}><i class="fa fa-power-off"></i></a> </div>
     </div>
     
@@ -27,47 +38,48 @@ const SideBar = () => {
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">PERSONAL</li>
       <li>
+                    <Link to={"/profile"}>
+                      <i class="fa fa-user" style={{marginRight: "7px"}}></i> My Profile
+                    </Link>
+                  </li>
+      <li>
                     <Link to={"/my-course"}>
-                      <i class="icon-profile-male"></i> My Course
+                      <i class="fa fa-graduation-cap" style={{marginRight: "7px"}}></i> My Course
                     </Link>
                   </li>
                   <li>
                     <Link to={"/kyc"}>
-                      <i class="icon-profile-male"></i> KYC
+                      <i class="fa fa-users" style={{marginRight: "7px"}}></i> KYC
                     </Link>
                   </li>
                   <li>
                     <Link to={"/member-dashboard"}>
-                      <i class="icon-profile-male"></i> Affiliate Panel
+                      <i class="fa fa-building" style={{marginRight: "7px"}}></i> Affiliate Panel
                     </Link>
                   </li>
                   <li>
                     <Link to={"/referal-link"}>
-                      <i class="icon-profile-male"></i> Referal
+                      <i class="fa fa-refresh" style={{marginRight: "7px"}}></i> Referal
                     </Link>
                   </li>
                   <li>
                     <Link to={"/profile-upload"}>
-                      <i class="icon-profile-male"></i> Profile Upload
+                      <i class="fa fa-upload" style={{marginRight: "7px"}}></i> Profile Upload
                     </Link>
                   </li>
                   <li>
                     <Link to={"/tree"}>
-                      <i class="fa fa-tree" aria-hidden="true"></i> Hierarchy
+                      <i class="fa fa-sitemap" aria-hidden="true" style={{marginRight: "7px"}}></i> Hierarchy
                     </Link>
                   </li>
                   
                  
                   <li>
                   <Link to={"/change-password"}>
-                      <i class="fa fa-tree" aria-hidden="true"></i> Change Password
+                      <i class="fa fa-key" aria-hidden="true" style={{marginRight: "7px"}}></i> Change Password
                     </Link>
                   </li>
-                  <li>
-                    <Link to={"/profile"}>
-                      <i class="icon-profile-male"></i> My Profile
-                    </Link>
-                  </li>
+                  
 
                   <li>
                     <Link to={"/level-wise-report"}>

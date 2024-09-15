@@ -32,14 +32,14 @@ console.log(error);
           <h1 class="text-black">Profile</h1>
           <ol class="breadcrumb">
             <li>
-              <a href="#">Home</a>
+            <a href="#" style={{color:'black'}}>Home /  Profile Upload </a>
             </li>
-            <li class="sub-bread">
+            {/* <li class="sub-bread">
               <i class="fa fa-angle-right"></i> Profile
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <i class="fa fa-angle-right"></i> Profile
-            </li>
+            </li> */}
           </ol>
         </div>
 

@@ -37,6 +37,7 @@ const Tree = () => {
           data-toggle="modal"
           data-target="#balanceModal"
           onClick={() => showBalance(node._id)}
+          style={{color:'black',fontWeight: 'normal', textTransform: 'capitalize'}}
         >
           {node.name}
         </a>
@@ -49,7 +50,22 @@ const Tree = () => {
 
   return (
     <>
-      <div className="App">
+    <div className="App">
+     <div class="content-header sty-one">
+          <h1 class="text-black" style={{marginLeft:'225px'}}> Hierarchy</h1>
+          <ol class="breadcrumb">
+            <li>
+            <a href="#" style={{color:'black'}}>Home / Hierarchy </a>
+            </li>
+            {/* <li class="sub-bread">
+              <i class="fa fa-angle-right"></i> Change Password
+            </li>
+            <li>
+              <i class="fa fa-angle-right"></i> Password
+            </li> */}
+          </ol>
+        </div>
+      
         <div className="custom-tree">
           <div class="org-chart">
             {lowerProfile?.data?.map((rootNode) => (
@@ -75,11 +91,11 @@ const Tree = () => {
               </h5>
               <button
                 type="button"
-                class="close"
+                class="close closebtn"
                 data-dismiss="modal"
                 aria-label="Close"
               >
-                <span aria-hidden="true">&times;</span>
+               <span aria-hidden="true" style={{fontWeight: 'bold'}}>&times;</span>
               </button>
             </div>
             <div class="modal-body">

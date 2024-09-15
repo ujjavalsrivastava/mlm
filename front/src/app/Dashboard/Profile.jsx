@@ -60,14 +60,14 @@ const Profile = () => {
           <h1 class="text-black">Profile</h1>
           <ol class="breadcrumb">
             <li>
-              <a href="#">Home</a>
+            <a href="#" style={{color:'black'}}>Home /  Profile </a>
             </li>
-            <li class="sub-bread">
+            {/* <li class="sub-bread">
               <i class="fa fa-angle-right"></i> Profile
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <i class="fa fa-angle-right"></i> Profile
-            </li>
+            </li> */}
           </ol>
         </div>
 
@@ -121,9 +121,9 @@ const Profile = () => {
               <hr/>
               <div class="col-lg-12">
               <div class="card ">
-                <div class="card-header bg-info">
+                <div class="card-header" style={{background:'rgb(88 103 221 / 72%)'}}>
                   <h5 class="text-white m-b-0">Personal Information</h5>
-                  <p>Kindly complete your KYC, to change the name. </p>
+                  <p style={{color:'white'}}>Kindly complete your KYC, to change the name. </p>
                 </div>
                 <div class="card-body">
                   <form onSubmit={saveProfile}>
@@ -161,7 +161,7 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6">
+                      <div class="col-md-6" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Email Id</label>
                           <input
@@ -178,7 +178,7 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6">
+                      <div class="col-md-6" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Mobile No</label>
                           <input
@@ -193,7 +193,7 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6">
+                      <div class="col-md-6" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Gender</label>
                           <select class="form-control"  name="gender"
@@ -209,7 +209,7 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6">
+                      <div class="col-md-6" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Date of Birth</label>
                           <input
@@ -226,7 +226,7 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6">
+                      <div class="col-md-6" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Country</label>
                           <select class="form-control" name="country"
@@ -240,7 +240,7 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6">
+                      <div class="col-md-6" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">State</label>
                           <select class="form-control" name="state"
@@ -258,7 +258,7 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6">
+                      <div class="col-md-6" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">City</label>
                           <input
@@ -274,8 +274,12 @@ const Profile = () => {
                           ></span>{" "}
                         </div>
                       </div>
+
+
+                      <div class="col-md-6" style={{marginTop:'20px'}}>
                      
-                      <div class="col-md-6">
+                      
+
                         <div class="form-group has-feedback">
                           <label class="control-label">Pin Code</label>
                           <input
@@ -292,7 +296,7 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6">
+                      <div class="col-md-6" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Occupation</label>
                           <select class="form-control" name="occupation"
@@ -329,7 +333,7 @@ const Profile = () => {
 
 
 
-                      <div class="col-md-6">
+                      <div class="col-md-6" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Language</label>
                           <select class="form-control" name="occupation"
@@ -343,7 +347,7 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-12">
+                      <div class="col-md-12" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Addresh</label>
                           <textarea class="form-control" name="address"
