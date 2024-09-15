@@ -82,10 +82,10 @@ const changePassword = () => {
                             required
                            
                           />
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-6">
@@ -99,10 +99,10 @@ const changePassword = () => {
                             onChange={handleChange}
                             required
                           />
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-6" style={{marginTop:'20px'}}>
@@ -110,7 +110,6 @@ const changePassword = () => {
                           <label class="control-label">Confirm password</label>
                           <input
                             class="form-control"
-                          
                             type="password"
                             name="cpassword"
                             onChange={handleChange}

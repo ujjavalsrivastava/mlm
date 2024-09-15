@@ -14,6 +14,7 @@ const MyCouseDetails = () => {
     try {
       const response = await axios.get(`vimeo/video?courseId=${id}`);
       setcourse(response.data.data);
+      getVideo(response.data.data[0]?.player_embed_url,response.data.data[0]?.name);
     } catch (error) {
       console.log(error);
     }
@@ -23,13 +24,14 @@ const MyCouseDetails = () => {
     setvideo(videoId);
   };
 
+ 
+
   useEffect(() => {
     courseVideo();
-    if (course) {
-      setvideoName(course[0]?.name);
-      setvideo(course[0]?.player_embed_url);
-    }
-  }, [course]);
+    
+    
+    
+  }, []);
 
   return (
     <>
@@ -51,25 +53,23 @@ const MyCouseDetails = () => {
             <div class="col-lg-8 m-b-3">
                {/* <div class="col-12"> */}
                   {/* <div style={{textAlign:'center'}}>  */}
-                    <div class="ml-auto modal-iframe-wrapper" style={{marginTop:'-62px'}}>
+                    <div class="ml-auto modal-iframe-wrapper video-container" >
                       {video && (
                         <iframe
                           src={video}
-                          width="800"
-                          height="600"
-                          frameBorder="0"
-                          allow="autoplay; fullscreen"
-                          allowFullScreen
+                          frameborder="0" 
+                          allowfullscreen
                           title="Vimeo Video"
                         ></iframe>
                       )}
                     {/* </div> */}
                   {/* </div> */}
                 {/* <div id="area"></div> */}
-                <div style={{marginLeft:'18px',marginTop:'-55px'}}>
+                
+              </div>
+              <div style={{padding:'15px'}}>
                   <h6>{videoName && videoName}</h6>
                 </div>
-              </div>
             </div>
             <div class="col-lg-4 m-b-3">
               <div>

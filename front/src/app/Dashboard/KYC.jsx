@@ -77,10 +77,10 @@ const saveKycData = async(e)=>{
                             name="fullname"
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
                      
@@ -95,10 +95,10 @@ const saveKycData = async(e)=>{
                              onChange={handleChange}
                             value={data && data.email}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-envelope-o form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-4">
@@ -111,13 +111,13 @@ const saveKycData = async(e)=>{
                             name="fullname"
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-phone form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Document Type</label>
                           <input
@@ -127,13 +127,13 @@ const saveKycData = async(e)=>{
                             name="fullname"
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-briefcase form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Addhar Card</label>
                           <input
@@ -143,13 +143,13 @@ const saveKycData = async(e)=>{
                             name="fullname"
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Addhar Name</label>
                           <input
@@ -159,13 +159,13 @@ const saveKycData = async(e)=>{
                             name="fullname"
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Pan Name</label>
                           <input
@@ -175,13 +175,13 @@ const saveKycData = async(e)=>{
                             name="fullname"
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Pan Number</label>
                           <input
@@ -191,14 +191,14 @@ const saveKycData = async(e)=>{
                             name="fullname"
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
 
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Bank Name</label>
                           <input
@@ -208,14 +208,14 @@ const saveKycData = async(e)=>{
                             name="fullname"
                             onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
 
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Account Holder Name</label>
                           <input
@@ -225,13 +225,13 @@ const saveKycData = async(e)=>{
                             name="fullname"
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Account Number</label>
                           <input
@@ -241,13 +241,13 @@ const saveKycData = async(e)=>{
                             name="fullname"
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">IFSC code</label>
                           <input
@@ -257,22 +257,23 @@ const saveKycData = async(e)=>{
                             name="fullname"
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
                     
                       <div class="col-md-12">
-                        
-                       
                          <hr/>
-                          <h6>Bank Detatils</h6>
-                          
+                         
+                          {/* <h6>Bank Detatils</h6> */}
+                          <div class="card-header bg-blue">
+                            <h6 class="text-white m-b-0">Bank Detatils</h6>
+                          </div>
                        
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Bank Name</label>
                           <input
@@ -282,13 +283,13 @@ const saveKycData = async(e)=>{
                             name="fullname"
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Account Holder Name</label>
                           <input
@@ -298,13 +299,13 @@ const saveKycData = async(e)=>{
                             name="fullname"
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Account Number</label>
                           <input
@@ -314,13 +315,13 @@ const saveKycData = async(e)=>{
                             name="fullname"
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'22px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">IFSC Code</label>
                           <input
@@ -330,13 +331,13 @@ const saveKycData = async(e)=>{
                             name="fullname"
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'22px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Upload Cancel Cheque / Passbook / Bank</label>
                           <input
@@ -345,14 +346,14 @@ const saveKycData = async(e)=>{
                             type="file"
                             name="file"
                           />
-                          <span
+                          {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
                      
-                      <div class="col-md-4">
+                      <div class="col-md-4" style={{marginTop:'22px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">OTP Code</label>
                           <input
@@ -363,13 +364,13 @@ const saveKycData = async(e)=>{
                            
                            onChange={handleChange}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-12 p-3 ">
+                      <div class="col-md-12 p-3 " style={{marginTop:'20px'}}>
                         <button type="submit" class="btn btn-success">
                           Update Details
                         </button>

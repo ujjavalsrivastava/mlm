@@ -3451,13 +3451,13 @@ caption button.btn-default:hover {
   background-color: #6a79ee;
 }
 .btn-success {
-  background-color: #5867dd;
-  border-color: #5867dd;
+  background-color: #6a79ee;
+  border-color: #6a79ee;
 }
 .btn-success:hover,
 .btn-success:active,
 .btn-success.hover {
-  background-color: #008d4c;
+  background-color: #6a79ee;
 }
 .btn-info {
   background-color: #008cd3;
@@ -3466,7 +3466,7 @@ caption button.btn-default:hover {
 .btn-info:hover,
 .btn-info:active,
 .btn-info.hover {
-  background-color: #00acd6;
+  /* background-color: #00acd6; */
 }
 .btn-danger {
   background-color: #dd4b39;
@@ -6671,4 +6671,22 @@ canvas {
   width: 40px;
   height: 32px;
 }
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio (height/width = 9/16 = 0.5625 or 56.25%) */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%; /* Ensures the video scales down */
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 

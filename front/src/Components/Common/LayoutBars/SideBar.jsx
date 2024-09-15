@@ -3,7 +3,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { axios } from "../../../helper/httpHelper";
 import { useEffect, useState } from "react";
-
+import logo from "../../../../public/dist/img/img1.jpg"
 const SideBar = () => {
   const navigator =  useNavigate();
 
@@ -28,7 +28,7 @@ const SideBar = () => {
   <div class="sidebar"> 
 
     <div class="user-panel">
-      <div class="image text-center"><img src="dist/img/img1.jpg" class="img-circle" alt="User Image"/> </div>
+      <div class="image text-center"><img src={logo} class="img-circle" alt="User Image"/> </div>
       <div class="info">
         <p style={{textTransform: 'capitalize'}}>{profile && profile.name}</p>
         <a href="#"><i class="fa fa-cog"></i></a> <a href="#"><i class="fa fa-envelope-o"></i></a> <a href="javascript:void(0)" onClick={logout}><i class="fa fa-power-off"></i></a> </div>
@@ -72,26 +72,23 @@ const SideBar = () => {
                       <i class="fa fa-sitemap" aria-hidden="true" style={{marginRight: "7px"}}></i> Hierarchy
                     </Link>
                   </li>
-                  
-                 
+                  <li>
+                    <Link to={"/level-wise-report"}>
+                      <i class="fa fa-sort-amount-asc" style={{marginRight: "7px"}}></i>Level Wise Income
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link to={"/team-size"}>
+                      <i class="fa fa-steam" style={{marginRight: "7px"}}></i> Level Wie Team Size
+                    </Link>
+                  </li>
                   <li>
                   <Link to={"/change-password"}>
                       <i class="fa fa-key" aria-hidden="true" style={{marginRight: "7px"}}></i> Change Password
                     </Link>
                   </li>
                   
-
-                  <li>
-                    <Link to={"/level-wise-report"}>
-                      <i class="icon-profile-male"></i>Level Wise Income
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link to={"/team-size"}>
-                      <i class="icon-profile-male"></i> Level Wie Team Size
-                    </Link>
-                  </li>
 
       {/* <li class="treeview"> <a href="#"> <i class="fa fa-bullseye"></i> <span>Apps</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
         <ul class="treeview-menu">

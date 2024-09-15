@@ -364,7 +364,7 @@ const MemberDashboard = () => {
                             {lUser.name}
                           </a>
                           <span class="product-description">
-                            <a href="#">
+                            <a href="#" style={{color:'black'}}>
                               {usersTotalEarnings.length
                                 ? `₹${
                                     usersTotalEarnings.find(
