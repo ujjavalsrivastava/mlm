@@ -69,6 +69,18 @@ const SideBar = () => {
                     </Link>
                   </li>
 
+                  <li>
+                    <Link to={"/level-wise-report"}>
+                      <i class="icon-profile-male"></i>Level Wise Income
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link to={"/team-size"}>
+                      <i class="icon-profile-male"></i> Level Wie Team Size
+                    </Link>
+                  </li>
+
       {/* <li class="treeview"> <a href="#"> <i class="fa fa-bullseye"></i> <span>Apps</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
         <ul class="treeview-menu">
           <li><a href="apps-calendar.html">Calendar</a></li>

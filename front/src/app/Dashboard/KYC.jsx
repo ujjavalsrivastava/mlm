@@ -374,6 +374,7 @@ const saveKycData = async(e)=>{
                           Update Details
                         </button>
                       </div>
+                      <div class="col-md-12 p-3">&nbsp;</div>
                     </div>
                   </form>
                 </div>
