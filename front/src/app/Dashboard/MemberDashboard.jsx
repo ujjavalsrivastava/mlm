@@ -93,11 +93,11 @@ const MemberDashboard = () => {
           <h1>Welcome {user && user.name}! </h1>
           <ol class="breadcrumb">
             <li>
-              <a href="#">Home</a>
+            <a href="#" style={{color:'black'}}>Home /  Affiliate Panel </a>
             </li>
-            <li>
+            {/* <li>
               <i class="fa fa-angle-right"></i> Dashboard
-            </li>
+            </li> */}
           </ol>
         </div>
 
@@ -321,7 +321,7 @@ const MemberDashboard = () => {
           <div class="row">
             <div class="col-lg-8">
               <div class="info-box">
-                <div class="col-12">
+                {/* <div class="col-12">
                   <div class="d-flex flex-wrap">
                     <div>
                       <h5>Area Chart</h5>
@@ -340,7 +340,7 @@ const MemberDashboard = () => {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div id="area"></div>
               </div>
            
@@ -349,17 +349,18 @@ const MemberDashboard = () => {
               <div>
                 <div class="box box-widget widget-user-2">
                   <div class="widget-user-header bg-yellow">
-                    <h5>Your Recent Sales</h5>
+                    <h5 style={{color:'white'}}>Your Recent Sales</h5>
                     {/* <h5>Checkout my contacts here</h5> */}
                   </div>
-                  <ul class="products-list product-list-in-box">
+                  <ul class="products-list product-list-in-box scroll" style={{height:"311px"}}>
                     {lowerLevels.map((lUser) => (
                       <li class="item">
                         <div class="product-img">
-                          <img src="./dist/img/img1.jpg" alt="Product Image" />
+                          <img src="./dist/img/img1.jpg" alt="Product Image" style={{borderRadius:'50%'}}
+                            />
                         </div>
                         <div class="product-info">
-                          <a href="#" class="product-title">
+                          <a href="#" class="product-title" style={{color:'black',fontWeight: 'bold', textTransform: 'capitalize'}}>
                             {lUser.name}
                           </a>
                           <span class="product-description">

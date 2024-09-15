@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
+import { RiCheckboxBlankCircleLine } from "@remixicon/react";
 const MyCourse = () => {
   const[product,setProduct]=useState(null);
   const fetchProduct = async()=>{
@@ -28,11 +29,11 @@ const MyCourse = () => {
           <h1>My Course</h1>
           <ol class="breadcrumb">
             <li>
-              <a href="#">Home </a>
+              <a href="#" style={{color:'black'}}>Home /  My Courses </a>
             </li>
-            <li>
-              <i class="fa fa-angle-right"></i> My Courses
-            </li>
+            {/* <li>
+                My Courses
+            </li> */}
           </ol>
         </div>
        
@@ -46,7 +47,7 @@ const MyCourse = () => {
                     <div class="info-box-content">
                     <img src={row.pictures?.base_link} alt="" class="responsive img-fluid img-thumbnail step1" />
                     </div>
-                     <span style={{textAligh:'center'}}>{row.name}</span> 
+                     <span style={{textAligh:'center',color:'black',marginLeft:'40px',textTransform: 'capitalize', fontWeight: 'bold'}}>{row.name}</span> 
                  
                   </div>
                   </Link>

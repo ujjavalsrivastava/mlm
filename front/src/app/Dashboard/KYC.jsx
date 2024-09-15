@@ -44,14 +44,14 @@ const saveKycData = async(e)=>{
           <h1 class="text-black">KYC</h1>
           <ol class="breadcrumb">
             <li>
-              <a href="#">Home</a>
+            <a href="#" style={{color:'black'}}>Home /  KYC Details </a>
             </li>
-            <li class="sub-bread">
+            {/* <li class="sub-bread">
               <i class="fa fa-angle-right"></i> KYC
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <i class="fa fa-angle-right"></i> KYC Details
-            </li>
+            </li> */}
           </ol>
         </div>
 

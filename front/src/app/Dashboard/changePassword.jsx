@@ -47,14 +47,14 @@ const changePassword = () => {
           <h1 class="text-black">Change Password</h1>
           <ol class="breadcrumb">
             <li>
-              <a href="#">Home</a>
+            <a href="#" style={{color:'black'}}>Home /  Change Password </a>
             </li>
-            <li class="sub-bread">
+            {/* <li class="sub-bread">
               <i class="fa fa-angle-right"></i> Change Password
             </li>
             <li>
               <i class="fa fa-angle-right"></i> Password
-            </li>
+            </li> */}
           </ol>
         </div>
 
@@ -105,7 +105,7 @@ const changePassword = () => {
                           ></span>{" "}
                         </div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-6" style={{marginTop:'20px'}}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Confirm password</label>
                           <input

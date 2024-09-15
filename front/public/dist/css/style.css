@@ -131,6 +131,7 @@ a:focus {
   font-size: 13px;
   border-top: 1px solid #d2d6de;
   position: fixed;
+  width: 100%;
   bottom: 0;
 }
 .fixed .main-header,
@@ -820,11 +821,12 @@ ul.fa-ul {
   }
 }
 .main-sidebar {
+  height: 200%;
   position: absolute;
   top: 0;
   left: 0;
   padding-top: 60px;
-  min-height: 100%;
+  /* min-height: 100%; */
   width: 230px;
   background: #2f3742;
   z-index: 810;
@@ -5819,7 +5821,7 @@ iframe {
 .alert-warning,
 .label-warning,
 .modal-warning .modal-body {
-  background-color: #f39c12 !important;
+  background-color: rgba(88, 103, 221, 0.72) !important;
 }
 .bg-aqua,
 .callout.callout-info,
@@ -5829,7 +5831,7 @@ iframe {
   background-color: #04c1c4 !important;
 }
 .bg-blue {
-  background-color: #0073b7 !important;
+  background-color: rgb(88 103 221 / 72%) !important;
 }
 .bg-light-blue,
 .label-primary,
@@ -6636,3 +6638,37 @@ canvas {
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
+.modal-iframe-wrapper {
+  overflow: hidden;
+  border-radius: 8px;
+  width: 600;
+  height: 800;
+ }
+
+ .scroll {
+  overflow: auto;
+}
+
+.scroll:active::-webkit-scrollbar-thumb,
+.scroll:focus::-webkit-scrollbar-thumb,
+.scroll:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+}
+.scroll::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    visibility: hidden;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.closebtn{
+  border: hidden;
+  background: white;
+  color: black;
+  width: 40px;
+  height: 32px;
+}
+

@@ -47,11 +47,11 @@ const referal = () => {
           <h1 class="text-black">Referral Link Generation</h1>
           <ol class="breadcrumb">
             <li>
-              <a href="#">Home</a>
+            <a href="#" style={{color:'black'}}>Home /  Referral Link Generation </a>
             </li>
-            <li class="sub-bread">
+            {/* <li class="sub-bread">
               <i class="fa fa-angle-right"></i> Referral Link Generation
-            </li>
+            </li> */}
            
           </ol>
         </div>
@@ -64,7 +64,7 @@ const referal = () => {
               <div class="card ">
                 <div class="card-header bg-blue">
                   <span class="text-white m-b-0">My Referral Code</span>
-                  <button onClick={handleCopy} class="btn btn-default btn-sm float-right">Copy</button>
+                  <button onClick={handleCopy} class="btn btn-default btn-sm" style={{marginLeft:'382px'}}>Copy</button>
                 </div>
                 <div class="card-body">
                  
@@ -77,8 +77,6 @@ const referal = () => {
                             placeholder="Generated Link"
                             type="text"
                             value={text} 
-                           
-                           
                           />
                          
                         </div>
@@ -93,7 +91,7 @@ const referal = () => {
               <div class="card ">
                 <div class="card-header bg-blue">
                   <span class="text-white m-b-0">My Referral Code</span>
-                  <button  onClick={handleCopy1} class="btn btn-default btn-sm m-b-0 float-right">Copy</button>
+                  <button  onClick={handleCopy1} class="btn btn-default btn-sm m-b-0" style={{marginLeft:'382px'}}>Copy</button>
                 </div>
                 <div class="card-body">
                  
