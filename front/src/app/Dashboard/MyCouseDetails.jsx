@@ -29,7 +29,7 @@ const MyCouseDetails = () => {
       setvideoName(course[0]?.name);
       setvideo(course[0]?.player_embed_url);
     }
-  }, []);
+  }, [course]);
 
   return (
     <>
