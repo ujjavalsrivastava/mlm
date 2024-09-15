@@ -56,10 +56,10 @@ const login = () => {
                             <h3 class="title">Student Login</h3>
                             <nav class="breadcrumb">
                                 <span property="itemListElement" typeof="ListItem">
-                                    <a href="index-2.html">Home</a>
+                                    <a href="#">Home / Login</a>
                                 </span>
-                                <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
-                                <span property="itemListElement" typeof="ListItem">Login</span>
+                                {/* <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
+                                <span property="itemListElement" typeof="ListItem">Login</span> */}
                             </nav>
                         </div>
                     </div>
@@ -76,7 +76,7 @@ const login = () => {
        
         <section class="singUp-area section-py-120">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center" style={{marginTop:'-178px'}}> 
                     <div class="col-xl-6 col-lg-8">
                         <div class="singUp-wrap">
                             <h2 class="title">Welcome back!</h2>

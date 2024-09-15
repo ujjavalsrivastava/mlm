@@ -10,14 +10,14 @@ const TeamSize = () => {
     <>
       <div class="content-wrapper">
         <div class="content-header sty-one">
-          <h1>Welcome </h1>
+          <h1> Level Wie Team Size </h1>
           <ol class="breadcrumb">
             <li>
-              <a href="#">Home</a>
+            <a href="#" style={{color:'black'}}>Home /  Level Wie Team Size </a>
             </li>
-            <li>
+            {/* <li>
               <i class="fa fa-angle-right"></i> Dashboard
-            </li>
+            </li> */}
           </ol>
         </div>
 
@@ -29,7 +29,7 @@ const TeamSize = () => {
                 <div class="col-lg-4 col-sm-6 col-xs-12">
                     <div>
                       <i class="ti-face-smile f-20 text-blue"></i>
-                      <div class="info-box-content">
+                      <div class="info-box-content" style={{padding:'16px'}}>
                       <h2 class="f-25 text-black">
                           Level 1
                         </h2>
@@ -45,7 +45,7 @@ const TeamSize = () => {
                         <h4 class="f-25 text-black">
                           0
                         </h4>
-                        <span class="progress-description">
+                        <span class="progress-description" style={{color:'black'}}>
                           Today's Team Size
                         </span>
                       </div>
@@ -59,7 +59,7 @@ const TeamSize = () => {
                         <h4 class="f-25 text-black">
                                 0
                         </h4>
-                        <span class="progress-description">
+                        <span class="progress-description" style={{color:'black'}}>
                         All Time Team Size
                         </span>
                       </div>

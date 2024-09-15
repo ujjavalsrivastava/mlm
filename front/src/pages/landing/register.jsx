@@ -177,13 +177,13 @@ const register = () => {
                 <div class="row">
                     <div class="col-12">
                         <div class="breadcrumb__content">
-                            <h3 class="title">Student Login</h3>
+                            <h3 class="title">Student Signup</h3>
                             <nav class="breadcrumb">
                                 <span property="itemListElement" typeof="ListItem">
-                                    <a href="index-2.html">Home</a>
+                                    <a href="index-2.html">Home / Signup</a>
                                 </span>
-                                <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
-                                <span property="itemListElement" typeof="ListItem">Login</span>
+                                {/* <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
+                                <span property="itemListElement" typeof="ListItem">Login</span> */}
                             </nav>
                         </div>
                     </div>
@@ -202,7 +202,7 @@ const register = () => {
         <>
         <section class="singUp-area section-py-0">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center" style={{marginTop:'-45px'}}>
                 <div class="col-xl-6 col-lg-8">
                         <div class="singUp-wrap">
                             <h2 class="title">Create Your Account</h2>

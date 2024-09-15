@@ -92,10 +92,10 @@ const Profile = () => {
                             type="text"
                             
                           />
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-6">
@@ -106,10 +106,10 @@ const Profile = () => {
                            
                             type="text"
                           />
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
                       
@@ -139,10 +139,10 @@ const Profile = () => {
                             onChange={handle}
                             
                           />
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-6">
@@ -154,10 +154,10 @@ const Profile = () => {
                             type="text"
                             readOnly
                           />
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -171,10 +171,10 @@ const Profile = () => {
                             name="email"
                             onChange={handle}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -186,10 +186,10 @@ const Profile = () => {
                            
                             type="text"
                           />
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -202,10 +202,10 @@ const Profile = () => {
                            <option selected={(profile.data.gender == 'Female') ?true:false}>Female</option>
                             </select>
                           
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -219,10 +219,10 @@ const Profile = () => {
                             name="dob"
                             onChange={handle}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -233,10 +233,10 @@ const Profile = () => {
                             onChange={handle}>
                            <option>{profile && profile.data.country?profile.data.country:'India' }</option>
                             </select>
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -251,10 +251,10 @@ const Profile = () => {
                             ))}
                            
                             </select>
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -268,10 +268,10 @@ const Profile = () => {
                             name="city"
                             onChange={handle}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -289,10 +289,10 @@ const Profile = () => {
                             name="pincode"
                             onChange={handle}
                           />
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -324,10 +324,10 @@ const Profile = () => {
 		<option value="20">Musicians and performers</option>
 
 	</select>
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -340,10 +340,10 @@ const Profile = () => {
                             onChange={handle} >
                            <option>English</option>
                             </select>
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -352,10 +352,10 @@ const Profile = () => {
                           <label class="control-label">Addresh</label>
                           <textarea class="form-control" name="address"
                             onChange={handle} value={profile && profile.data.address}></textarea>
-                          <span
+                          {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
-                          ></span>{" "}
+                          ></span>{" "} */}
                         </div>
                       </div>
 

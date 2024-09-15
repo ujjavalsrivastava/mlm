@@ -1,6 +1,7 @@
 import { initDropdowns } from "flowbite";
 import { useEffect, useState } from "react";
 import { axios } from "../../../helper/httpHelper";
+import logo from "../../../../public/dist/img/img1.jpg"
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -84,7 +85,7 @@ const Header = () => {
                         <a href="#">
                           <div class="pull-left">
                             <img
-                              src="dist/img/img1.jpg"
+                              src={logo}
                               class="img-circle"
                               alt="User Image"
                             />
