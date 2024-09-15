@@ -3,6 +3,7 @@ import style from './home.module.css';
 import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
+import axios1 from "axios";
 import { toast } from "react-toastify";
 const register = () => {
   const[product,setProduct]=useState(null);
@@ -13,8 +14,21 @@ const register = () => {
   const navigate = useNavigate();
 
   const [data, setData] = useState(null);
-
+  const [state, setState] = useState(null);
   const[course,setcourse]=useState(null);
+
+  const stateFun  = async()=>{
+    try{
+      const response = await axios1.post('https://countriesnow.space/api/v0.1/countries/states',{
+        "country": "India"
+      });
+      setState(response.data.data.states);
+    }catch(error){
+      console.log(error)
+    }
+}
+console.log('state '+state);
+
     const fetchCourse = async()=>{
         try{
             const response = await axios.get('vimeo/courses');
@@ -157,6 +171,7 @@ const register = () => {
     setData(value);
     fetchProduct();
     fetchCourse();
+    stateFun();
   },[])
 
     return (
@@ -250,8 +265,11 @@ const register = () => {
                                 <div class="form-grp">
                                     <label for="email">State</label>
                                     <select class="form-control" name="state" required onChange={handle}>
-                                        <option value=""> select State</option>
-                                        <option> Allahabad</option>
+                                        <option value=""> Select State</option>
+                                       
+                            {state && state.map(row =>(
+                              <option>{row && row.name}</option>
+                            ))}
                                     </select>
                                 </div>
                                 <div class="form-grp">

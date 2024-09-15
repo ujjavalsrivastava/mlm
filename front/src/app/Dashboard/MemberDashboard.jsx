@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { axios } from "../../helper/httpHelper";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLowerProfiles } from "../../store/lowerLevel";
+import moment from 'moment'
 
 const MemberDashboard = () => {
   const [todayDirectTeam, setTodayDirectTeam] = useState(0);
@@ -42,8 +43,10 @@ const MemberDashboard = () => {
        setAllTimeDirectTeam(response.data[0]?.lowerLevel.length)
         let todayTeamcout = 0;
        const todayteam = await response.data[0]?.lowerLevel.map((row) => {
-        const d1 = new Date();
-        const d2 = new Date(row.createdAt);
+        const d1 =moment(new Date()).format('DD/MM/YYYY') ;
+        const d2 = moment(new Date(row.createdAt)).format('DD/MM/YYYY');
+        console.log('d1 '+d1);
+        console.log('d2 '+d2);
         if(d1 == d2){
           todayTeamcout += 1;
         }
