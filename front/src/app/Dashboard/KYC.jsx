@@ -1,40 +1,44 @@
 import { useEffect, useState } from "react";
-import { fetchProfile } from "../../store/profileReducer";
-import { useSelector, useDispatch } from "react-redux";
 import { axios } from "../../helper/httpHelper";
 import { toast } from "react-toastify";
 
 const KYC = () => {
-  const dispatch = useDispatch();
-  const profile = useSelector((state) => state.profile);
   const [kycSave, SetkycSave] = useState(null);
+  const [kyc, setKyc] = useState({});
   const [data, setdata] = useState(null);
+  const [error, setError] = useState(false);
 
-  const handleChange = (e)=>{
-    SetkycSave((pre)=>(
-      {
-        ...pre,
-        [e.target.name]:e.target.value
+  const fetchUserKyc = async () => {
+    const userKyc = await axios.get("/kyc");
+    if (userKyc.data?.bank) {
+      setKyc(userKyc.data.bank);
+    }
+  };
+
+  const handleChange = (e) => {
+    SetkycSave((pre) => ({
+      ...pre,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const saveKycData = async (e) => {
+    try {
+      e.preventDefault();
+      const response = await axios.put("kyc-update", kycSave);
+      if (response.status == 200 && response.data.bank) {
+        toast.success(response.data.message);
+        setKyc(response.data.bank);
+      } else {
+        toast.error(response.data.message);
       }
-    ))
-  }
-const saveKycData = async(e)=>{
-  try{
-    e.preventDefault();
-  const response = await axios.post('kyc-update',kycSave);
-  if(response.data.code == '801'){
-    toast.success(response.data.message)
-  }else{
-    toast.error(response.data.message)
-  }
-    }catch(error){
+    } catch (error) {
       toast.error(error.message);
     }
-}
+  };
+
   useEffect(() => {
-    if (profile?.status !== "succeeded") {
-      dispatch(fetchProfile());
-    }
+    fetchUserKyc();
   }, []);
 
   return (
@@ -44,7 +48,9 @@ const saveKycData = async(e)=>{
           <h1 class="text-black">KYC</h1>
           <ol class="breadcrumb">
             <li>
-            <a href="#" style={{color:'black'}}>Home /  KYC Details </a>
+              <a href="#" style={{ color: "black" }}>
+                Home / KYC Details{" "}
+              </a>
             </li>
             {/* <li class="sub-bread">
               <i class="fa fa-angle-right"></i> KYC
@@ -55,9 +61,7 @@ const saveKycData = async(e)=>{
           </ol>
         </div>
 
-       
         <div class="content">
-         
           <div class="row m-t-3">
             <div class="col-lg-12">
               <div class="card ">
@@ -69,36 +73,30 @@ const saveKycData = async(e)=>{
                     <div class="row">
                       <div class="col-md-4">
                         <div class="form-group has-feedback">
-                          <label class="control-label">First Name</label>
+                          <label class="control-label">Full Name</label>
                           <input
                             class="form-control"
-                           
                             type="text"
                             name="fullname"
-                           onChange={handleChange}
+                            placeholder="Full name..."
+                            value={kyc.fullname}
+                            onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
-                     
+
                       <div class="col-md-4">
                         <div class="form-group has-feedback">
                           <label class="control-label">E-mail</label>
                           <input
                             class="form-control"
-                            
                             type="text"
-                            name="eamil"
-                             onChange={handleChange}
-                            value={data && data.email}
+                            name="email"
+                            disabled
+                            placeholder="Email..."
+                            onChange={handleChange}
+                            value={kyc.email}
                           />
-                          {/* <span
-                            class="fa fa-envelope-o form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-4">
@@ -106,26 +104,23 @@ const saveKycData = async(e)=>{
                           <label class="control-label">Mobile Number</label>
                           <input
                             class="form-control"
-                            
-                            type="text"
-                            name="fullname"
-                           onChange={handleChange}
+                            type="number"
+                            name="mobile"
+                            placeholder="Mobile..."
+                            value={kyc.mobile}
+                            onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-phone form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4" style={{marginTop:'20px'}}>
+                      <div class="col-md-4" style={{ marginTop: "20px" }}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Document Type</label>
                           <input
                             class="form-control"
-                            
                             type="text"
-                            name="fullname"
-                           onChange={handleChange}
+                            name="document"
+                            value={kyc.document}
+                            onChange={handleChange}
                           />
                           {/* <span
                             class="fa fa-briefcase form-control-feedback"
@@ -133,15 +128,16 @@ const saveKycData = async(e)=>{
                           ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4" style={{marginTop:'20px'}}>
+                      <div class="col-md-4" style={{ marginTop: "20px" }}>
                         <div class="form-group has-feedback">
-                          <label class="control-label">Addhar Card</label>
+                          <label class="control-label">Addhar Number</label>
                           <input
                             class="form-control"
-                           
-                            type="text"
-                            name="fullname"
-                           onChange={handleChange}
+                            type="number"
+                            name="addharNo"
+                            value={kyc.addharNo}
+                            placeholder="Addhar number..."
+                            onChange={handleChange}
                           />
                           {/* <span
                             class="fa fa-globe form-control-feedback"
@@ -149,15 +145,16 @@ const saveKycData = async(e)=>{
                           ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4" style={{marginTop:'20px'}}>
+                      <div class="col-md-4" style={{ marginTop: "20px" }}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Addhar Name</label>
                           <input
                             class="form-control"
-                            
                             type="text"
-                            name="fullname"
-                           onChange={handleChange}
+                            name="addharName"
+                            value={kyc.addharName}
+                            placeholder="Addhar Name..."
+                            onChange={handleChange}
                           />
                           {/* <span
                             class="fa fa-globe form-control-feedback"
@@ -165,31 +162,33 @@ const saveKycData = async(e)=>{
                           ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4" style={{marginTop:'20px'}}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Pan Name</label>
-                          <input
-                            class="form-control"
-                            
-                            type="text"
-                            name="fullname"
-                           onChange={handleChange}
-                          />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
-                        </div>
-                      </div>
-                      <div class="col-md-4" style={{marginTop:'20px'}}>
+                      <div class="col-md-4" style={{ marginTop: "20px" }}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Pan Number</label>
                           <input
                             class="form-control"
-                            
                             type="text"
-                            name="fullname"
-                           onChange={handleChange}
+                            name="panNo"
+                            value={kyc.panNo}
+                            placeholder="Pan Number..."
+                            onChange={handleChange}
+                          />
+                          {/* <span
+                            class="fa fa-globe form-control-feedback"
+                            aria-hidden="true"
+                          ></span>{" "} */}
+                        </div>
+                      </div>
+                      <div class="col-md-4" style={{ marginTop: "20px" }}>
+                        <div class="form-group has-feedback">
+                          <label class="control-label">Pan Name</label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            name="panName"
+                            value={kyc.panName}
+                            placeholder="Pan Name..."
+                            onChange={handleChange}
                           />
                           {/* <span
                             class="fa fa-globe form-control-feedback"
@@ -198,12 +197,91 @@ const saveKycData = async(e)=>{
                         </div>
                       </div>
 
-                      <div class="col-md-4" style={{marginTop:'20px'}}>
+                      <div class="col-md-4" style={{ marginTop: "20px" }}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Bank Name</label>
                           <input
                             class="form-control"
-                            
+                            type="text"
+                            name="BankName"
+                            value={kyc.BankName}
+                            placeholder="Bank Name..."
+                            onChange={handleChange}
+                          />
+                          {/* <span
+                            class="fa fa-globe form-control-feedback"
+                            aria-hidden="true"
+                          ></span>{" "} */}
+                        </div>
+                      </div>
+
+                      <div class="col-md-4" style={{ marginTop: "20px" }}>
+                        <div class="form-group has-feedback">
+                          <label class="control-label">
+                            Account Holder Name
+                          </label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            name="accHolderName"
+                            value={kyc.accHolderName}
+                            placeholder="Account Holder Name..."
+                            onChange={handleChange}
+                          />
+                          {/* <span
+                            class="fa fa-globe form-control-feedback"
+                            aria-hidden="true"
+                          ></span>{" "} */}
+                        </div>
+                      </div>
+                      <div class="col-md-4" style={{ marginTop: "20px" }}>
+                        <div class="form-group has-feedback">
+                          <label class="control-label">Account Number</label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            name="accNo"
+                            value={kyc.accNo}
+                            placeholder="Account Number..."
+                            onChange={handleChange}
+                          />
+                          {/* <span
+                            class="fa fa-globe form-control-feedback"
+                            aria-hidden="true"
+                          ></span>{" "} */}
+                        </div>
+                      </div>
+                      <div class="col-md-4" style={{ marginTop: "20px" }}>
+                        <div class="form-group has-feedback">
+                          <label class="control-label">IFSC code</label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            name="ifscCode"
+                            value={kyc.ifscCode}
+                            placeholder="IFSC Code..."
+                            onChange={handleChange}
+                          />
+                          {/* <span
+                            class="fa fa-globe form-control-feedback"
+                            aria-hidden="true"
+                          ></span>{" "} */}
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <hr />
+
+                        {/* <h6>Bank Detatils</h6> */}
+                        <div class="card-header bg-blue">
+                          <h6 class="text-white m-b-0">Bank Detatils</h6>
+                        </div>
+                      </div>
+                      <div class="col-md-4" style={{ marginTop: "20px" }}>
+                        <div class="form-group has-feedback">
+                          <label class="control-label">Bank Name</label>
+                          <input
+                            class="form-control"
                             type="text"
                             name="fullname"
                             onChange={handleChange}
@@ -214,16 +292,16 @@ const saveKycData = async(e)=>{
                           ></span>{" "} */}
                         </div>
                       </div>
-
-                      <div class="col-md-4" style={{marginTop:'20px'}}>
+                      <div class="col-md-4" style={{ marginTop: "20px" }}>
                         <div class="form-group has-feedback">
-                          <label class="control-label">Account Holder Name</label>
+                          <label class="control-label">
+                            Account Holder Name
+                          </label>
                           <input
                             class="form-control"
-                           
                             type="text"
                             name="fullname"
-                           onChange={handleChange}
+                            onChange={handleChange}
                           />
                           {/* <span
                             class="fa fa-globe form-control-feedback"
@@ -231,89 +309,14 @@ const saveKycData = async(e)=>{
                           ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4" style={{marginTop:'20px'}}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Account Number</label>
-                          <input
-                            class="form-control"
-                            
-                            type="text"
-                            name="fullname"
-                           onChange={handleChange}
-                          />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
-                        </div>
-                      </div>
-                      <div class="col-md-4" style={{marginTop:'20px'}}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">IFSC code</label>
-                          <input
-                            class="form-control"
-                            
-                            type="text"
-                            name="fullname"
-                           onChange={handleChange}
-                          />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
-                        </div>
-                      </div>
-                    
-                      <div class="col-md-12">
-                         <hr/>
-                         
-                          {/* <h6>Bank Detatils</h6> */}
-                          <div class="card-header bg-blue">
-                            <h6 class="text-white m-b-0">Bank Detatils</h6>
-                          </div>
-                       
-                      </div>
-                      <div class="col-md-4" style={{marginTop:'20px'}}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Bank Name</label>
-                          <input
-                            class="form-control"
-                           
-                            type="text"
-                            name="fullname"
-                           onChange={handleChange}
-                          />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
-                        </div>
-                      </div>
-                      <div class="col-md-4" style={{marginTop:'20px'}}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Account Holder Name</label>
-                          <input
-                            class="form-control"
-                            
-                            type="text"
-                            name="fullname"
-                           onChange={handleChange}
-                          />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
-                        </div>
-                      </div>
-                      <div class="col-md-4" style={{marginTop:'20px'}}>
+                      <div class="col-md-4" style={{ marginTop: "20px" }}>
                         <div class="form-group has-feedback">
                           <label class="control-label">Account Number</label>
                           <input
                             class="form-control"
-                            
                             type="text"
                             name="fullname"
-                           onChange={handleChange}
+                            onChange={handleChange}
                           />
                           {/* <span
                             class="fa fa-globe form-control-feedback"
@@ -321,15 +324,14 @@ const saveKycData = async(e)=>{
                           ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4" style={{marginTop:'22px'}}>
+                      <div class="col-md-4" style={{ marginTop: "22px" }}>
                         <div class="form-group has-feedback">
                           <label class="control-label">IFSC Code</label>
                           <input
                             class="form-control"
-                            
                             type="text"
                             name="fullname"
-                           onChange={handleChange}
+                            onChange={handleChange}
                           />
                           {/* <span
                             class="fa fa-globe form-control-feedback"
@@ -337,32 +339,27 @@ const saveKycData = async(e)=>{
                           ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-4" style={{marginTop:'22px'}}>
+                      <div class="col-md-4" style={{ marginTop: "22px" }}>
                         <div class="form-group has-feedback">
-                          <label class="control-label">Upload Cancel Cheque / Passbook / Bank</label>
-                          <input
-                            class="form-control"
-                           
-                            type="file"
-                            name="file"
-                          />
+                          <label class="control-label">
+                            Upload Cancel Cheque / Passbook / Bank
+                          </label>
+                          <input class="form-control" type="file" name="file" />
                           {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
                           ></span>{" "} */}
                         </div>
                       </div>
-                     
-                      <div class="col-md-4" style={{marginTop:'22px'}}>
+
+                      <div class="col-md-4" style={{ marginTop: "22px" }}>
                         <div class="form-group has-feedback">
                           <label class="control-label">OTP Code</label>
                           <input
                             class="form-control"
-                          
                             type="text"
                             name="otp"
-                           
-                           onChange={handleChange}
+                            onChange={handleChange}
                           />
                           {/* <span
                             class="fa fa-globe form-control-feedback"
@@ -370,8 +367,12 @@ const saveKycData = async(e)=>{
                           ></span>{" "} */}
                         </div>
                       </div>
-                      <div class="col-md-12 p-3 " style={{marginTop:'20px'}}>
-                        <button type="submit" class="btn btn-success">
+                      <div class="col-md-12 p-3 " style={{ marginTop: "20px" }}>
+                        <button
+                          type="submit"
+                          class="btn btn-success"
+                          disabled={error}
+                        >
                           Update Details
                         </button>
                       </div>
@@ -382,7 +383,6 @@ const saveKycData = async(e)=>{
               </div>
             </div>
           </div>
-         
         </div>
       </div>
     </>

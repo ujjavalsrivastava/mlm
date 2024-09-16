@@ -9,6 +9,7 @@ const {
   updateProfilePicture,
   getProfilePicture,
   getInvoice,
+  checkUserExist,
 } = require("../controllers/userController");
 
 const {
@@ -59,5 +60,6 @@ router.post(
 );
 router.get("/profile-picture", tryCatch(asyncHandler(getProfilePicture)));
 router.get("/invoice", tryCatch(asyncHandler(getInvoice)));
+router.get("/valid", tryCatch(asyncHandler(checkUserExist)));
 
 module.exports = router;

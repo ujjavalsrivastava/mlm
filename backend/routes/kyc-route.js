@@ -1,6 +1,6 @@
 const express = require("express");
 const multer = require("multer");
-const { kycUpdate } = require("../controllers/kycController");
+const { kycUpdate, fetchkyc } = require("../controllers/kycController");
 const { auth } = require("../middleware/auth");
 const { tryCatch, asyncHandler } = require("../utils/helper");
 
@@ -18,11 +18,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post(
+router.put(
   "/kyc-update",
   auth,
   upload.single("file"),
   tryCatch(asyncHandler(kycUpdate))
 );
+
+router.get("/kyc", auth, tryCatch(asyncHandler(fetchkyc)));
 
 module.exports = router;

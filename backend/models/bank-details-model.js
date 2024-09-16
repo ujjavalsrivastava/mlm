@@ -1,9 +1,9 @@
 const { Schema, model, Types } = require("mongoose");
-const typeString = { type: String };
-const typeNumber = { type: Number };
+const typeString = { type: String, default: null };
+const typeNumber = { type: Number, default: null };
 
 const bank = new Schema({
-  user: { type: Types.ObjectId, ref: "User", required: true },
+  user: { type: Types.ObjectId, ref: "User", required: true, unique: true },
   fullname: typeString,
   email: typeString,
   mobile: typeNumber,
@@ -16,7 +16,6 @@ const bank = new Schema({
   accHolderName: typeString,
   accNo: typeString,
   ifscCode: typeString,
-
   bank: [
     {
       Inbank: typeString,

@@ -11,6 +11,7 @@ const UserPurchase = require("../models/purchase-history-model");
 const PercentDistribution = require("../models/percentage-distribution-model");
 const path = require("path");
 const fs = require("fs");
+const bankDetails = require("../models/bank-details-model");
 
 const createUser = async (req, res) => {
   const { email, name, password, referalCode } = req.body;
@@ -42,6 +43,7 @@ const createUser = async (req, res) => {
     }
     await UserPurchase({ userId: savedUser._id, currentAmount: 0 }).save();
     await PercentDistribution({ userId: savedUser._id }).save();
+    await bankDetails({ email }).save();
     return res.status(200).json({ message: "user created successfully" });
   } catch (error) {
     console.log({ error });
@@ -169,17 +171,13 @@ async function countUsersAtEachLevel(
     counts.todayEarning[level] = 0; // Also initialize the 'created today' count for the level
   }
   const userId = user._id;
-  console.log({ userId });
 
   if (userId) {
     const data = await PercentDistribution.findOne({ userId });
-    console.log({ data });
     data.purchaseHistory.map((curr) => {
       counts.totalEarning[level] += curr.amount;
       const today = new Date();
-      const oneDay = new Date();
-      oneDay.setDate(today.getDate() - 1);
-      if (curr.createdAt >= oneDay) {
+      if (`${curr.createdAt}`.split("T")[0] === `${today}`.split("T")[0]) {
         counts.todayEarning[level] += curr.amount;
       }
     });
@@ -245,6 +243,12 @@ const getInvoice = async (req, res) => {
   res.json(userPurchaseHistory);
 };
 
+const checkUserExist = async (req, res) => {
+  const { email } = req.query;
+  const user = await User.findOne({ email }).save();
+  res.json({ inValid: user });
+};
+
 module.exports = {
   createUser,
   loginHandler,
@@ -255,4 +259,5 @@ module.exports = {
   updateProfilePicture,
   getProfilePicture,
   getInvoice,
+  checkUserExist,
 };
