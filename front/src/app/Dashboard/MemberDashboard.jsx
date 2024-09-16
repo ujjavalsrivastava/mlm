@@ -139,7 +139,7 @@ const MemberDashboard = () => {
                       <i class="ti-bar-chart f-20 text-danger"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                                0
+                        {group && group.total7DaysEarning.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           Last 7 Days Earning
@@ -164,7 +164,7 @@ const MemberDashboard = () => {
                       <i class="ti-panel f-20 text-info"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                          0
+                        {group && group.total30DaysEarning.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           Last 30 Days Earning
