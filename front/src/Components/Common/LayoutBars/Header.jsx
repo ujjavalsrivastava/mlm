@@ -5,14 +5,15 @@ import logo from "../../../../public/dist/img/img1.jpg"
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const navigate = useNavigate();
+  const navigator = useNavigate();
   const [show, setShow] = useState(false);
+
   const handleToggle = () => {
     setShow((p) => !p);
   };
   const logout = () => {
     localStorage.removeItem("token");
-    window.location.assign("/login");
+    navigator("/login");
   };
   const [profile, setprofile] = useState({});
   const fetchProfile = async () => {
