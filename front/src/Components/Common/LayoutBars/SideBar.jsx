@@ -80,7 +80,7 @@ const SideBar = () => {
 
                   <li>
                     <Link to={"/team-size"}>
-                      <i class="fa fa-steam" style={{marginRight: "7px"}}></i> Level Wie Team Size
+                      <i class="fa fa-steam" style={{marginRight: "7px"}}></i> Level Wise Team Size
                     </Link>
                   </li>
                   <li>
@@ -88,6 +88,16 @@ const SideBar = () => {
                       <i class="fa fa-key" aria-hidden="true" style={{marginRight: "7px"}}></i> Change Password
                     </Link>
                   </li>
+           {profile && profile.role == 'admin' ? (
+            <>
+              <li>
+                  <Link to={"/level"}>
+                  <i class="fa fa-level-up" aria-hidden="true" style={{marginRight: "7px"}}></i> Update Level
+                    </Link>
+                  </li>
+            </>
+           ) :null}
+                 
                   
 
       {/* <li class="treeview"> <a href="#"> <i class="fa fa-bullseye"></i> <span>Apps</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
