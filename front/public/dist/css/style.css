@@ -6688,5 +6688,27 @@ canvas {
   height: 100%;
   border: 0;
 }
+.signup_head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+
+.signup_head .sign_head_card.fade_head {
+  cursor: inherit;
+}
+
+.signup_head .sign_head_card {
+  text-align: center;
+  cursor: pointer;
+}
+
+.testimgblur{
+    color: #787777;
+    filter: blur(1px);
+}
 
 
