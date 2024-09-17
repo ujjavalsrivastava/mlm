@@ -376,7 +376,10 @@ const register = () => {
                             onChange={handle}
                           >
                             <option value=""> select State</option>
-                            <option> Allahabad</option>
+                            {state && state.map(row =>(
+                              <option>{row && row.name}</option>
+                            ))}
+                            
                           </select>
                         </div>
                         <div class="form-grp">
