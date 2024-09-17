@@ -25,7 +25,7 @@ const KYC = () => {
   const saveKycData = async (e) => {
     try {
       e.preventDefault();
-      const response = await axios.put("kyc-update", kycSave);
+      const response = await axios.post("kyc-update", kycSave);
       if (response.status == 200 && response.data.bank) {
         toast.success(response.data.message);
         setKyc(response.data.bank);
@@ -283,7 +283,7 @@ const KYC = () => {
                           <input
                             class="form-control"
                             type="text"
-                            name="fullname"
+                            name="Inbank"
                             onChange={handleChange}
                           />
                           {/* <span
@@ -300,7 +300,7 @@ const KYC = () => {
                           <input
                             class="form-control"
                             type="text"
-                            name="fullname"
+                            name="InbankName"
                             onChange={handleChange}
                           />
                           {/* <span
@@ -315,7 +315,7 @@ const KYC = () => {
                           <input
                             class="form-control"
                             type="text"
-                            name="fullname"
+                            name="InaccountNumber"
                             onChange={handleChange}
                           />
                           {/* <span
@@ -330,7 +330,7 @@ const KYC = () => {
                           <input
                             class="form-control"
                             type="text"
-                            name="fullname"
+                            name="InifscCode"
                             onChange={handleChange}
                           />
                           {/* <span
