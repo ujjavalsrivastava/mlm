@@ -36,7 +36,7 @@ router.post("/login", tryCatch(asyncHandler(loginHandler)));
 // auth required
 router.get("/profile", tryCatch(asyncHandler(getUserProfile)));
 router.get("/courses", tryCatch(asyncHandler(getUserCourses)));
-router.patch("/profile", tryCatch(asyncHandler(updateProfile)));
+router.post("/profile", tryCatch(asyncHandler(updateProfile)));
 router.put("/change-password", tryCatch(asyncHandler(changePassword)));
 router.get("/lower-users", tryCatch(asyncHandler(getLowerLevelUsers)));
 router.get("/upper-users", tryCatch(asyncHandler(getUpperLevelUsers)));

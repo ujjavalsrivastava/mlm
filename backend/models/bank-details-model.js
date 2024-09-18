@@ -16,15 +16,12 @@ const bank = new Schema({
   accHolderName: typeString,
   accNo: typeString,
   ifscCode: typeString,
-  bank: [
-    {
-      Inbank: typeString,
-      InbankName: typeString,
-      InaccountNumber: typeNumber,
-      InifscCode: typeString,
-      file: { type: Buffer },
-    },
-  ],
+  Inbank: typeString,
+  InbankName: typeString,
+  InaccountNumber: typeNumber,
+  InifscCode: typeString,
+  file:typeString,
+
 });
 
 const bankDetails = new model("bankDetails", bank);
