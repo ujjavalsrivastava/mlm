@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.put(
+router.post(
   "/kyc-update",
   auth,
   upload.single("file"),
