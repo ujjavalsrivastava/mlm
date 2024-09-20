@@ -13,7 +13,7 @@ const Header = () => {
   };
   const logout = () => {
     localStorage.removeItem("token");
-    navigator("/login");
+    window.location.assign("/login");
   };
   const [profile, setprofile] = useState({});
   const fetchProfile = async () => {
