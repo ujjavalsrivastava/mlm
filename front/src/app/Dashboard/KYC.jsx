@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { axios } from "../../helper/httpHelper";
+import { axios,httpFileAxios } from "../../helper/httpHelper";
 import { toast } from "react-toastify";
 
 const KYC = () => {
@@ -51,7 +51,7 @@ const KYC = () => {
       formData.append('file',file);
       
 
-      const response = await axios.post("kyc-update", formData);
+      const response = await httpFileAxios.post("kyc-update", formData);
       if (response.status == 200 && response.data.bank) {
         toast.success(response.data.message);
         setKyc(response.data.bank);
@@ -103,6 +103,7 @@ const KYC = () => {
                           <input
                             class="form-control"
                             type="text"
+                            required
                             name="fullname"
                             placeholder="Full name..."
                             value={kyc.fullname}
@@ -132,6 +133,7 @@ const KYC = () => {
                             class="form-control"
                             type="number"
                             name="mobile"
+                            required
                             placeholder="Mobile..."
                             value={kyc.mobile}
                             onChange={handleChange}
@@ -144,6 +146,7 @@ const KYC = () => {
                           <input
                             class="form-control"
                             type="text"
+                            required
                             name="document"
                             value={kyc.document}
                             onChange={handleChange}
@@ -160,6 +163,7 @@ const KYC = () => {
                           <input
                             class="form-control"
                             type="number"
+                            required
                             name="addharNo"
                             value={kyc.addharNo}
                             placeholder="Addhar number..."
@@ -177,6 +181,7 @@ const KYC = () => {
                           <input
                             class="form-control"
                             type="text"
+                            required
                             name="addharName"
                             value={kyc.addharName}
                             placeholder="Addhar Name..."
@@ -194,6 +199,7 @@ const KYC = () => {
                           <input
                             class="form-control"
                             type="text"
+                            required
                             name="panNo"
                             value={kyc.panNo}
                             placeholder="Pan Number..."
@@ -212,6 +218,7 @@ const KYC = () => {
                             class="form-control"
                             type="text"
                             name="panName"
+                            required
                             value={kyc.panName}
                             placeholder="Pan Name..."
                             onChange={handleChange}
@@ -229,6 +236,7 @@ const KYC = () => {
                           <input
                             class="form-control"
                             type="text"
+                            required
                             name="BankName"
                             value={kyc.BankName}
                             placeholder="Bank Name..."
@@ -250,6 +258,7 @@ const KYC = () => {
                             class="form-control"
                             type="text"
                             name="accHolderName"
+                            required
                             value={kyc.accHolderName}
                             placeholder="Account Holder Name..."
                             onChange={handleChange}
@@ -267,6 +276,7 @@ const KYC = () => {
                             class="form-control"
                             type="number"
                             name="accNo"
+                            required
                             value={kyc.accNo}
                             placeholder="Account Number..."
                             onChange={handleChange}
@@ -284,6 +294,7 @@ const KYC = () => {
                             class="form-control"
                             type="text"
                             name="ifscCode"
+                            required
                             value={kyc.ifscCode}
                             placeholder="IFSC Code..."
                             onChange={handleChange}
@@ -310,6 +321,7 @@ const KYC = () => {
                             class="form-control"
                             type="text"
                             name="Inbank"
+                            required
                             value={kyc.Inbank}
                             onChange={handleChange}
                           />
@@ -328,6 +340,7 @@ const KYC = () => {
                             class="form-control"
                             type="text"
                             name="InbankName"
+                            required
                             value={kyc.InbankName}
                             onChange={handleChange}
                           />
@@ -343,6 +356,7 @@ const KYC = () => {
                           <input
                             class="form-control"
                             type="number"
+                            required
                             name="InaccountNumber"
                             value={kyc.InaccountNumber}
                             onChange={handleChange}
@@ -360,6 +374,7 @@ const KYC = () => {
                             class="form-control"
                             type="text"
                             name="InifscCode"
+                            required
                             value={kyc.InifscCode}
                             onChange={handleChange}
                           />

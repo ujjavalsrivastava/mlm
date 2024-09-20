@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
 import axios1 from "axios";
 import { toast } from "react-toastify";
+import process from '../../../public/dist/img/process.png';
 const register = () => {
   const [product, setProduct] = useState(null);
   const [orderId, setOrderId] = useState("");
@@ -268,21 +269,21 @@ console.log('data...........'+data);
                       </p>
                       <div class="signup_head">
                                 <div class={(level == 1) ? 'sign_head_card personal_head present_head':'sign_head_card personal_head present_head testimgblur'}>
-                                    <img src="https://www.bizgurukul.com/Biz/img/biz_image/blue_circle.png" class="personal_image"/>
+                                    <img src={process} style={{width:'40px'}} class="personal_image"/>
                                     <h6 class="">Personal info</h6>
                                 </div>
                                 <div class="sign_head_card">
                                     <img src="https://www.bizgurukul.com/Biz/img/biz_image/head_line.png" class="head_line"/>
                                 </div>
                                 <div class={(level == 2) ? 'sign_head_card course_head fade_head' : 'sign_head_card course_head fade_head testimgblur'}>
-                                    <img src="https://www.bizgurukul.com/Biz/img/biz_image/blue_circle.png" class="course_image"/>
+                                    <img src={process} style={{width:'40px'}} class="course_image"/>
                                     <h6>Course Selection</h6>
                                 </div>
                                 <div class="sign_head_card">
                                     <img src="https://www.bizgurukul.com/Biz/img/biz_image/head_line.png" class="head_line"/>
                                 </div>
                                 <div class={(level == 3)? 'sign_head_card payment_head fade_head':'sign_head_card payment_head fade_head testimgblur'}>
-                                    <img src="https://www.bizgurukul.com/Biz/img/biz_image/blue_circle.png" class="payment_image"/>
+                                    <img src={process} style={{width:'40px'}} class="payment_image"/>
                                     <h6>Payment info</h6>
                                 </div>
                             </div>

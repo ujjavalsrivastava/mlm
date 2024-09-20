@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
 import VimeoVideo from "./VimeoVideo";
+import play from '../../../public/dist/img/play.png';
 const MyCouseDetails = () => {
   const [course, setcourse] = useState(null);
   const [video, setvideo] = useState(null);
@@ -78,14 +79,14 @@ const MyCouseDetails = () => {
                     <h6 style={{color:'white', marginTop:'14px'}}>Digital Marketing</h6>
                     {/* <h5>Checkout my contacts here</h5> */}
                   </div>
-                  <ul class="products-list product-list-in-box scroll" style={{height:'430px'}}>
+                  <ul class="products-list product-list-in-box scroll" style={{height:'350px'}}>
                     {course &&
                       course.map((row, index) => (
                         <li class="item">
                           <div class="videoContainer">
                             <p>{index + 1}.</p>
                             <img
-                              src="https://www.bizgurukul.com/Biz/members/BizPro/imgs/play-button.png"
+                              src={play}
                               alt="Product Image"
                             />
                             <a

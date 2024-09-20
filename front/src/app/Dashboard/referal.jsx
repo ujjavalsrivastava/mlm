@@ -28,10 +28,10 @@ const referal = () => {
   };
   useEffect(() => {
     
-    if(profile?.status === "succeeded"){
+   // if(profile?.status === "succeeded"){
       setText(profile.data?.referalCode);
       setText1(`${window.location.origin}/register?referralCode=${profile.data && profile.data?.referalCode}`);
-    }
+    //}
     if (profile?.status !== "succeeded") {
       dispatch(fetchProfile());
     }else{
