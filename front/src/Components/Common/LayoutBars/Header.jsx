@@ -13,8 +13,7 @@ const Header = () => {
   };
   const logout = () => {
     localStorage.clear();
-
-    navigator("/login");
+    window.location.assign("/login");
   };
   const [profile, setprofile] = useState({});
   const fetchProfile = async () => {

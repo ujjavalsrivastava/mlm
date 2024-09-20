@@ -185,7 +185,7 @@ const register = () => {
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
   };
-
+console.log('data...........'+data);
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const value = queryParams.get("referralCode"); // 'myParam' is the name of the query parameter

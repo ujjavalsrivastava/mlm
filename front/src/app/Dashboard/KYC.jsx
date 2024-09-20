@@ -7,7 +7,8 @@ const KYC = () => {
   const [kyc, setKyc] = useState({});
   const [data, setdata] = useState(null);
   const [error, setError] = useState(false);
-
+  const [file, setFile] = useState(false);
+  
   const fetchUserKyc = async () => {
     const userKyc = await axios.get("/kyc");
     if (userKyc.data?.bank) {
@@ -16,16 +17,41 @@ const KYC = () => {
   };
 
   const handleChange = (e) => {
-    SetkycSave((pre) => ({
+    setKyc((pre) => ({
       ...pre,
       [e.target.name]: e.target.value,
     }));
   };
 
+  const handleFile = (e)=>{
+    setFile(e.target.files[0]);
+  }
+
+
+  console.log('kyc '+ JSON.stringify(kyc));
   const saveKycData = async (e) => {
     try {
       e.preventDefault();
-      const response = await axios.post("kyc-update", kycSave);
+      const formData =  new FormData();
+      formData.append('fullname',kyc.fullname);
+      formData.append('mobile',kyc.mobile);
+      formData.append('document',kyc.document);
+      formData.append('addharNo',kyc.addharNo);
+      formData.append('addharName',kyc.addharName);
+      formData.append('panNo',kyc.panNo);
+      formData.append('panName',kyc.panName);
+      formData.append('BankName',kyc.BankName);
+      formData.append('accHolderName',kyc.accHolderName);
+      formData.append('accNo',kyc.accNo);
+      formData.append('ifscCode',kyc.ifscCode);
+      formData.append('Inbank',kyc.Inbank);
+      formData.append('InbankName',kyc.InbankName);
+      formData.append('InaccountNumber',kyc.InaccountNumber);
+      formData.append('InifscCode',kyc.InifscCode);
+      formData.append('file',file);
+      
+
+      const response = await axios.post("kyc-update", formData);
       if (response.status == 200 && response.data.bank) {
         toast.success(response.data.message);
         setKyc(response.data.bank);
@@ -239,7 +265,7 @@ const KYC = () => {
                           <label class="control-label">Account Number</label>
                           <input
                             class="form-control"
-                            type="text"
+                            type="number"
                             name="accNo"
                             value={kyc.accNo}
                             placeholder="Account Number..."
@@ -284,6 +310,7 @@ const KYC = () => {
                             class="form-control"
                             type="text"
                             name="Inbank"
+                            value={kyc.Inbank}
                             onChange={handleChange}
                           />
                           {/* <span
@@ -301,6 +328,7 @@ const KYC = () => {
                             class="form-control"
                             type="text"
                             name="InbankName"
+                            value={kyc.InbankName}
                             onChange={handleChange}
                           />
                           {/* <span
@@ -314,8 +342,9 @@ const KYC = () => {
                           <label class="control-label">Account Number</label>
                           <input
                             class="form-control"
-                            type="text"
+                            type="number"
                             name="InaccountNumber"
+                            value={kyc.InaccountNumber}
                             onChange={handleChange}
                           />
                           {/* <span
@@ -331,6 +360,7 @@ const KYC = () => {
                             class="form-control"
                             type="text"
                             name="InifscCode"
+                            value={kyc.InifscCode}
                             onChange={handleChange}
                           />
                           {/* <span
@@ -344,7 +374,7 @@ const KYC = () => {
                           <label class="control-label">
                             Upload Cancel Cheque / Passbook / Bank
                           </label>
-                          <input class="form-control" type="file" name="file" />
+                          <input class="form-control" type="file" name="file" onChange={handleFile} />
                           {/* <span
                             class="fa fa-globe form-control-feedback"
                             aria-hidden="true"
