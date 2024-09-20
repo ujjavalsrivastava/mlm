@@ -252,42 +252,74 @@ const register = () => {
           </div>
         </section>
 
-       
-            <section class="singUp-area section-py-0">
-              <div class="container">
-                <div
-                  class="row justify-content-center"
-                  style={{ marginTop: "-45px" }}
-                >
-                  <div class="col-xl-6 col-lg-8">
-                    <div class="singUp-wrap">
-                      <h2 class="title">Create Your Account</h2>
-                      <p>
-                        Hey there! Ready to join the party? We just need a few
-                        details from you to get <br /> started. Let's do this!
-                      </p>
-                      <div class="signup_head">
-                                <div class={(level == 1) ? 'sign_head_card personal_head present_head':'sign_head_card personal_head present_head testimgblur'}>
-                                    <img src="https://www.bizgurukul.com/Biz/img/biz_image/blue_circle.png" class="personal_image"/>
-                                    <h6 class="">Personal info</h6>
-                                </div>
-                                <div class="sign_head_card">
-                                    <img src="https://www.bizgurukul.com/Biz/img/biz_image/head_line.png" class="head_line"/>
-                                </div>
-                                <div class={(level == 2) ? 'sign_head_card course_head fade_head' : 'sign_head_card course_head fade_head testimgblur'}>
-                                    <img src="https://www.bizgurukul.com/Biz/img/biz_image/blue_circle.png" class="course_image"/>
-                                    <h6>Course Selection</h6>
-                                </div>
-                                <div class="sign_head_card">
-                                    <img src="https://www.bizgurukul.com/Biz/img/biz_image/head_line.png" class="head_line"/>
-                                </div>
-                                <div class={(level == 3)? 'sign_head_card payment_head fade_head':'sign_head_card payment_head fade_head testimgblur'}>
-                                    <img src="https://www.bizgurukul.com/Biz/img/biz_image/blue_circle.png" class="payment_image"/>
-                                    <h6>Payment info</h6>
-                                </div>
-                            </div>
-                    {level == 1 ? (
-                       <>
+        <section class="singUp-area section-py-0">
+          <div class="container">
+            <div
+              class="row justify-content-center"
+              style={{ marginTop: "-45px" }}
+            >
+              <div class="col-xl-6 col-lg-8">
+                <div class="singUp-wrap">
+                  <h2 class="title">Create Your Account</h2>
+                  <p>
+                    Hey there! Ready to join the party? We just need a few
+                    details from you to get <br /> started. Let's do this!
+                  </p>
+                  <div class="signup_head">
+                    <div
+                      class={
+                        level == 1
+                          ? "sign_head_card personal_head present_head"
+                          : "sign_head_card personal_head present_head testimgblur"
+                      }
+                    >
+                      <img
+                        src="https://www.bizgurukul.com/Biz/img/biz_image/blue_circle.png"
+                        class="personal_image"
+                      />
+                      <h6 class="">Personal info</h6>
+                    </div>
+                    <div class="sign_head_card">
+                      <img
+                        src="https://www.bizgurukul.com/Biz/img/biz_image/head_line.png"
+                        class="head_line"
+                      />
+                    </div>
+                    <div
+                      class={
+                        level == 2
+                          ? "sign_head_card course_head fade_head"
+                          : "sign_head_card course_head fade_head testimgblur"
+                      }
+                    >
+                      <img
+                        src="https://www.bizgurukul.com/Biz/img/biz_image/blue_circle.png"
+                        class="course_image"
+                      />
+                      <h6>Course Selection</h6>
+                    </div>
+                    <div class="sign_head_card">
+                      <img
+                        src="https://www.bizgurukul.com/Biz/img/biz_image/head_line.png"
+                        class="head_line"
+                      />
+                    </div>
+                    <div
+                      class={
+                        level == 3
+                          ? "sign_head_card payment_head fade_head"
+                          : "sign_head_card payment_head fade_head testimgblur"
+                      }
+                    >
+                      <img
+                        src="https://www.bizgurukul.com/Biz/img/biz_image/blue_circle.png"
+                        class="payment_image"
+                      />
+                      <h6>Payment info</h6>
+                    </div>
+                  </div>
+                  {level == 1 ? (
+                    <>
                       <form onSubmit={submitLogin} class="account__form">
                         <div class="row gutter-20">
                           <div class="col-md-12">
@@ -298,7 +330,6 @@ const register = () => {
                                 onChange={handle}
                                 name="referalCode"
                                 value={referral}
-                                
                                 placeholder="Referral Code"
                               />
                             </div>
@@ -351,7 +382,7 @@ const register = () => {
                             id="email"
                             required
                             name="cemail"
-                            placeholder="confirm email..."
+                            placeholder="Confirm email..."
                           />
                         </div>
                         <div class="form-grp">
@@ -376,10 +407,10 @@ const register = () => {
                             onChange={handle}
                           >
                             <option value=""> select State</option>
-                            {state && state.map(row =>(
-                              <option>{row && row.name}</option>
-                            ))}
-                            
+                            {state &&
+                              state.map((row) => (
+                                <option>{row && row.name}</option>
+                              ))}
                           </select>
                         </div>
                         <div class="form-grp">
@@ -407,7 +438,7 @@ const register = () => {
                           type="submit"
                           class="btn btn-two arrow-btn"
                           disabled={error}
-                          style={{marginBottom:'20px'}}
+                          style={{ marginBottom: "20px" }}
                         >
                           Proceed to Course Selection
                           <img
@@ -416,480 +447,479 @@ const register = () => {
                             class="injectable"
                           />
                         </button>
-                        </form>
-                      </>
-                      ) : null}
-                      
-                    <div className="tab-content" id="myTabContent">
-                    {level == 2 ? (
-                       <>
-                      <div
-                        className="tab-pane fade show active"
-                        id="grid"
-                        role="tabpanel"
-                        aria-labelledby="grid-tab"
-                         >
-                        <div className="">
-                          {course &&
-                            course.map((row) => (
-                              <div className={style.cal}>
-                                <div className="courses__item shine__animate-item">
-                                  <div className="courses__item-thumb">
-                                    <a
-                                      href="course-details.html"
-                                      className="shine__animate-link"
-                                    >
-                                      <img
-                                        src={row.pictures.base_link}
-                                        alt="img"
-                                      />
-                                    </a>
-                                  </div>
-                                  <div className="courses__item-content">
-                                    <ul className="courses__item-meta list-wrap">
-                                      <li className="courses__item-tag">
-                                        <a href="course.html">Development</a>
-                                      </li>
-                                      <li className="avg-rating">
-                                        <i className="fas fa-star"></i> (4.8
-                                        Reviews)
-                                      </li>
-                                    </ul>
+                      </form>
+                    </>
+                  ) : null}
 
-                                    <h5 className="title">
-                                      <Link
-                                        to={`/courses-details-all/${row.courseId}`}
+                  <div className="tab-content" id="myTabContent">
+                    {level == 2 ? (
+                      <>
+                        <div
+                          className="tab-pane fade show active"
+                          id="grid"
+                          role="tabpanel"
+                          aria-labelledby="grid-tab"
+                        >
+                          <div className="">
+                            {course &&
+                              course.map((row) => (
+                                <div className={style.cal}>
+                                  <div className="courses__item shine__animate-item">
+                                    <div className="courses__item-thumb">
+                                      <a
+                                        href="course-details.html"
+                                        className="shine__animate-link"
                                       >
-                                        {row.name}
-                                      </Link>
-                                    </h5>
-                                    <p className="author">
-                                      By <a href="#">David Millar</a>
-                                    </p>
-                                    <div className="courses__item-bottom">
-                                      <div className="button">
-                                        {/* <a href="course-details.html">
+                                        <img
+                                          src={row.pictures.base_link}
+                                          alt="img"
+                                        />
+                                      </a>
+                                    </div>
+                                    <div className="courses__item-content">
+                                      <ul className="courses__item-meta list-wrap">
+                                        <li className="courses__item-tag">
+                                          <a href="course.html">Development</a>
+                                        </li>
+                                        <li className="avg-rating">
+                                          <i className="fas fa-star"></i> (4.8
+                                          Reviews)
+                                        </li>
+                                      </ul>
+
+                                      <h5 className="title">
+                                        <Link
+                                          to={`/courses-details-all/${row.courseId}`}
+                                        >
+                                          {row.name}
+                                        </Link>
+                                      </h5>
+                                      <p className="author">
+                                        By <a href="#">David Millar</a>
+                                      </p>
+                                      <div className="courses__item-bottom">
+                                        <div className="button">
+                                          {/* <a href="course-details.html">
                                           <span className="text">
                                             Enroll Now
                                           </span>
                                           <i className="flaticon-arrow-right"></i>
                                         </a> */}
+                                        </div>
+                                        <h5 className="price">
+                                          {row.price.toFixed(2)}
+                                        </h5>
                                       </div>
-                                      <h5 className="price">
-                                        {row.price.toFixed(2)}
-                                      </h5>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            ))}
-
+                              ))}
+                          </div>
+                          <nav className="pagination__wrap mt-30">
+                            <button
+                              type="button"
+                              onClick={() => setlevel(level + 1)}
+                              class="btn btn-two arrow-btn"
+                              style={{ marginBottom: "20px" }}
+                            >
+                              Make Payment for 2499
+                              <img
+                                src="assets/img/icons/right_arrow.svg"
+                                alt="img"
+                                class="injectable"
+                              />
+                            </button>
+                          </nav>
                         </div>
-                        <nav className="pagination__wrap mt-30">
-                          <button
-                            type="button"
-                            onClick={() => setlevel(level + 1)}
-                            class="btn btn-two arrow-btn"
-                            style={{marginBottom:'20px'}}
-                          >
-                            Make Payment for 2499
-                            <img
-                              src="assets/img/icons/right_arrow.svg"
-                              alt="img"
-                              class="injectable"
-                            />
-                          </button>
-                        </nav>
-                      </div>
                       </>
-                      ) : null}
+                    ) : null}
 
                     {level == 3 ? (
-                       <>
-                      <div>
-                         <img
-                              src="assets/img/raza.png"
-                              alt="img"
-                              class="injectable center"
-                            />
-                            <nav className="pagination__wrap mt-30">
-                          <button
-                            type="button"
-                            onClick={() => orderCreate("2499")}
-                            class="btn btn-two arrow-btn"
-                          >
-                            Make Payment 
-                            <img
-                              src="assets/img/icons/right_arrow.svg"
-                              alt="img"
-                              class="injectable"
-                            />
-                          </button>
-                        </nav>
-                      </div>
+                      <>
+                        <div>
+                          <img
+                            src="assets/img/raza.png"
+                            alt="img"
+                            class="injectable center"
+                          />
+                          <nav className="pagination__wrap mt-30">
+                            <button
+                              type="button"
+                              onClick={() => orderCreate("2499")}
+                              class="btn btn-two arrow-btn"
+                            >
+                              Make Payment
+                              <img
+                                src="assets/img/icons/right_arrow.svg"
+                                alt="img"
+                                class="injectable"
+                              />
+                            </button>
+                          </nav>
+                        </div>
                       </>
-                      ) : null}
-                      <div
-                        className="tab-pane fade"
-                        id="list"
-                        role="tabpanel"
-                        aria-labelledby="list-tab"
-                      >
-                        <div className="row courses__list-wrap row-cols-1">
-                          <div className={style.cal}>
-                            <div className="courses__item courses__item-three shine__animate-item">
-                              <div className="courses__item-thumb">
-                                <a
-                                  href="course-details.html"
-                                  className="shine__animate-link"
-                                >
-                                  <img
-                                    src="assets/img/courses/course_thumb01.jpg"
-                                    alt="img"
-                                  />
-                                </a>
-                              </div>
-                              <div className="courses__item-content">
-                                <ul className="courses__item-meta list-wrap">
-                                  <li className="courses__item-tag">
-                                    <a href="course.html">Development</a>
-                                    <div className="avg-rating">
-                                      <i className="fas fa-star"></i> (4.8
-                                      Reviews)
-                                    </div>
-                                  </li>
-                                  <li className="price">
-                                    <del>$29.00</del>$15.00
-                                  </li>
-                                </ul>
-                                <h5 className="title">
-                                  <a href="course-details.html">
-                                    Resolving Conflicts Between Designers And
-                                    Engineers
-                                  </a>
-                                </h5>
-                                <p className="author">
-                                  By <a href="#">David Millar</a>
-                                </p>
-                                <p className="info">
-                                  when an unknown printer took a galley of type
-                                  and scrambled type specimen book It has
-                                  survived not only.
-                                </p>
-                                <div className="courses__item-bottom">
-                                  <div className="button">
-                                    <a href="course-details.html">
-                                      <span className="text">Enroll Now</span>
-                                      <i className="flaticon-arrow-right"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
+                    ) : null}
+                    <div
+                      className="tab-pane fade"
+                      id="list"
+                      role="tabpanel"
+                      aria-labelledby="list-tab"
+                    >
+                      <div className="row courses__list-wrap row-cols-1">
+                        <div className={style.cal}>
+                          <div className="courses__item courses__item-three shine__animate-item">
+                            <div className="courses__item-thumb">
+                              <a
+                                href="course-details.html"
+                                className="shine__animate-link"
+                              >
+                                <img
+                                  src="assets/img/courses/course_thumb01.jpg"
+                                  alt="img"
+                                />
+                              </a>
                             </div>
-                          </div>
-                          <div className={style.cal}>
-                            <div className="courses__item courses__item-three shine__animate-item">
-                              <div className="courses__item-thumb">
-                                <a
-                                  href="course-details.html"
-                                  className="shine__animate-link"
-                                >
-                                  <img
-                                    src="assets/img/courses/course_thumb02.jpg"
-                                    alt="img"
-                                  />
-                                </a>
-                              </div>
-                              <div className="courses__item-content">
-                                <ul className="courses__item-meta list-wrap">
-                                  <li className="courses__item-tag">
-                                    <a href="course.html">Design</a>
-                                    <div className="avg-rating">
-                                      <i className="fas fa-star"></i> (4.5
-                                      Reviews)
-                                    </div>
-                                  </li>
-                                  <li className="price">$41.00</li>
-                                </ul>
-                                <h5 className="title">
-                                  <a href="course-details.html">
-                                    Powerful Image Optimization Tools for this
-                                    year
-                                  </a>
-                                </h5>
-                                <p className="author">
-                                  By <a href="#">Jenny Wilson</a>
-                                </p>
-                                <p className="info">
-                                  when an unknown printer took a galley of type
-                                  and scrambled type specimen book It has
-                                  survived not only.
-                                </p>
-                                <div className="courses__item-bottom">
-                                  <div className="button">
-                                    <a href="course-details.html">
-                                      <span className="text">Enroll Now</span>
-                                      <i className="flaticon-arrow-right"></i>
-                                    </a>
+                            <div className="courses__item-content">
+                              <ul className="courses__item-meta list-wrap">
+                                <li className="courses__item-tag">
+                                  <a href="course.html">Development</a>
+                                  <div className="avg-rating">
+                                    <i className="fas fa-star"></i> (4.8
+                                    Reviews)
                                   </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className={style.cal}>
-                            <div className="courses__item courses__item-three shine__animate-item">
-                              <div className="courses__item-thumb">
-                                <a
-                                  href="course-details.html"
-                                  className="shine__animate-link"
-                                >
-                                  <img
-                                    src="assets/img/courses/course_thumb03.jpg"
-                                    alt="img"
-                                  />
+                                </li>
+                                <li className="price">
+                                  <del>$29.00</del>$15.00
+                                </li>
+                              </ul>
+                              <h5 className="title">
+                                <a href="course-details.html">
+                                  Resolving Conflicts Between Designers And
+                                  Engineers
                                 </a>
-                              </div>
-                              <div className="courses__item-content">
-                                <ul className="courses__item-meta list-wrap">
-                                  <li className="courses__item-tag">
-                                    <a href="course.html">Marketing</a>
-                                    <div className="avg-rating">
-                                      <i className="fas fa-star"></i> (4.6
-                                      Reviews)
-                                    </div>
-                                  </li>
-                                  <li className="price">
-                                    <del>$24.00</del>$12.00
-                                  </li>
-                                </ul>
-                                <h5 className="title">
+                              </h5>
+                              <p className="author">
+                                By <a href="#">David Millar</a>
+                              </p>
+                              <p className="info">
+                                when an unknown printer took a galley of type
+                                and scrambled type specimen book It has survived
+                                not only.
+                              </p>
+                              <div className="courses__item-bottom">
+                                <div className="button">
                                   <a href="course-details.html">
-                                    Learning JavaScript With Imagination
+                                    <span className="text">Enroll Now</span>
+                                    <i className="flaticon-arrow-right"></i>
                                   </a>
-                                </h5>
-                                <p className="author">
-                                  By <a href="#">Wade Warren</a>
-                                </p>
-                                <p className="info">
-                                  when an unknown printer took a galley of type
-                                  and scrambled type specimen book It has
-                                  survived not only.
-                                </p>
-                                <div className="courses__item-bottom">
-                                  <div className="button">
-                                    <a href="course-details.html">
-                                      <span className="text">Enroll Now</span>
-                                      <i className="flaticon-arrow-right"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className={style.cal}>
-                            <div className="courses__item courses__item-three shine__animate-item">
-                              <div className="courses__item-thumb">
-                                <a
-                                  href="course-details.html"
-                                  className="shine__animate-link"
-                                >
-                                  <img
-                                    src="assets/img/courses/course_thumb04.jpg"
-                                    alt="img"
-                                  />
-                                </a>
-                              </div>
-                              <div className="courses__item-content">
-                                <ul className="courses__item-meta list-wrap">
-                                  <li className="courses__item-tag">
-                                    <a href="course.html">Finance</a>
-                                    <div className="avg-rating">
-                                      <i className="fas fa-star"></i> (4.9
-                                      Reviews)
-                                    </div>
-                                  </li>
-                                  <li className="price">
-                                    <del>$32.00</del>$19.00
-                                  </li>
-                                </ul>
-                                <h5 className="title">
-                                  <a href="course-details.html">
-                                    Resolving Conflicts Between Designers And
-                                    Engineers
-                                  </a>
-                                </h5>
-                                <p className="author">
-                                  By <a href="#">Robert Fox</a>
-                                </p>
-                                <p className="info">
-                                  when an unknown printer took a galley of type
-                                  and scrambled type specimen book It has
-                                  survived not only.
-                                </p>
-                                <div className="courses__item-bottom">
-                                  <div className="button">
-                                    <a href="course-details.html">
-                                      <span className="text">Enroll Now</span>
-                                      <i className="flaticon-arrow-right"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className={style.cal}>
-                            <div className="courses__item courses__item-three shine__animate-item">
-                              <div className="courses__item-thumb">
-                                <a
-                                  href="course-details.html"
-                                  className="shine__animate-link"
-                                >
-                                  <img
-                                    src="assets/img/courses/course_thumb05.jpg"
-                                    alt="img"
-                                  />
-                                </a>
-                              </div>
-                              <div className="courses__item-content">
-                                <ul className="courses__item-meta list-wrap">
-                                  <li className="courses__item-tag">
-                                    <a href="course.html">Data Science</a>
-                                    <div className="avg-rating">
-                                      <i className="fas fa-star"></i> (4.7
-                                      Reviews)
-                                    </div>
-                                  </li>
-                                  <li className="price">
-                                    <del>$50.00</del>$40.00
-                                  </li>
-                                </ul>
-                                <h5 className="title">
-                                  <a href="course-details.html">
-                                    A Look At Remix And The Differences With
-                                    Next.js
-                                  </a>
-                                </h5>
-                                <p className="author">
-                                  By <a href="#">Guy Hawkins</a>
-                                </p>
-                                <p className="info">
-                                  when an unknown printer took a galley of type
-                                  and scrambled type specimen book It has
-                                  survived not only.
-                                </p>
-                                <div className="courses__item-bottom">
-                                  <div className="button">
-                                    <a href="course-details.html">
-                                      <span className="text">Enroll Now</span>
-                                      <i className="flaticon-arrow-right"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className={style.cal}>
-                            <div className="courses__item courses__item-three shine__animate-item">
-                              <div className="courses__item-thumb">
-                                <a
-                                  href="course-details.html"
-                                  className="shine__animate-link"
-                                >
-                                  <img
-                                    src="assets/img/courses/course_thumb06.jpg"
-                                    alt="img"
-                                  />
-                                </a>
-                              </div>
-                              <div className="courses__item-content">
-                                <ul className="courses__item-meta list-wrap">
-                                  <li className="courses__item-tag">
-                                    <a href="course.html">Mathematic</a>
-                                    <div className="avg-rating">
-                                      <i className="fas fa-star"></i> (4.8
-                                      Reviews)
-                                    </div>
-                                  </li>
-                                  <li className="price">
-                                    <del>$30.00</del>$19.00
-                                  </li>
-                                </ul>
-                                <h5 className="title">
-                                  <a href="course-details.html">
-                                    An Accessibility-First Approach To Chart
-                                    Visual
-                                  </a>
-                                </h5>
-                                <p className="author">
-                                  By <a href="#">Sawpawlo Mark</a>
-                                </p>
-                                <p className="info">
-                                  when an unknown printer took a galley of type
-                                  and scrambled type specimen book It has
-                                  survived not only.
-                                </p>
-                                <div className="courses__item-bottom">
-                                  <div className="button">
-                                    <a href="course-details.html">
-                                      <span className="text">Enroll Now</span>
-                                      <i className="flaticon-arrow-right"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className={style.cal}>
-                            <div className="courses__item courses__item-three shine__animate-item">
-                              <div className="courses__item-thumb">
-                                <a
-                                  href="course-details.html"
-                                  className="shine__animate-link"
-                                >
-                                  <img
-                                    src="assets/img/courses/course_thumb07.jpg"
-                                    alt="img"
-                                  />
-                                </a>
-                              </div>
-                              <div className="courses__item-content">
-                                <ul className="courses__item-meta list-wrap">
-                                  <li className="courses__item-tag">
-                                    <a href="course.html">Development</a>
-                                    <div className="avg-rating">
-                                      <i className="fas fa-star"></i> (4.6
-                                      Reviews)
-                                    </div>
-                                  </li>
-                                  <li className="price">$11.00</li>
-                                </ul>
-                                <h5 className="title">
-                                  <a href="course-details.html">
-                                    How To Build A Localized Website With Hugo
-                                    And Strapi
-                                  </a>
-                                </h5>
-                                <p className="author">
-                                  By <a href="#">Robert Fox</a>
-                                </p>
-                                <p className="info">
-                                  when an unknown printer took a galley of type
-                                  and scrambled type specimen book It has
-                                  survived not only.
-                                </p>
-                                <div className="courses__item-bottom">
-                                  <div className="button">
-                                    <a href="course-details.html">
-                                      <span className="text">Enroll Now</span>
-                                      <i className="flaticon-arrow-right"></i>
-                                    </a>
-                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                        {/* <nav className="pagination__wrap mt-30">
+                        <div className={style.cal}>
+                          <div className="courses__item courses__item-three shine__animate-item">
+                            <div className="courses__item-thumb">
+                              <a
+                                href="course-details.html"
+                                className="shine__animate-link"
+                              >
+                                <img
+                                  src="assets/img/courses/course_thumb02.jpg"
+                                  alt="img"
+                                />
+                              </a>
+                            </div>
+                            <div className="courses__item-content">
+                              <ul className="courses__item-meta list-wrap">
+                                <li className="courses__item-tag">
+                                  <a href="course.html">Design</a>
+                                  <div className="avg-rating">
+                                    <i className="fas fa-star"></i> (4.5
+                                    Reviews)
+                                  </div>
+                                </li>
+                                <li className="price">$41.00</li>
+                              </ul>
+                              <h5 className="title">
+                                <a href="course-details.html">
+                                  Powerful Image Optimization Tools for this
+                                  year
+                                </a>
+                              </h5>
+                              <p className="author">
+                                By <a href="#">Jenny Wilson</a>
+                              </p>
+                              <p className="info">
+                                when an unknown printer took a galley of type
+                                and scrambled type specimen book It has survived
+                                not only.
+                              </p>
+                              <div className="courses__item-bottom">
+                                <div className="button">
+                                  <a href="course-details.html">
+                                    <span className="text">Enroll Now</span>
+                                    <i className="flaticon-arrow-right"></i>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className={style.cal}>
+                          <div className="courses__item courses__item-three shine__animate-item">
+                            <div className="courses__item-thumb">
+                              <a
+                                href="course-details.html"
+                                className="shine__animate-link"
+                              >
+                                <img
+                                  src="assets/img/courses/course_thumb03.jpg"
+                                  alt="img"
+                                />
+                              </a>
+                            </div>
+                            <div className="courses__item-content">
+                              <ul className="courses__item-meta list-wrap">
+                                <li className="courses__item-tag">
+                                  <a href="course.html">Marketing</a>
+                                  <div className="avg-rating">
+                                    <i className="fas fa-star"></i> (4.6
+                                    Reviews)
+                                  </div>
+                                </li>
+                                <li className="price">
+                                  <del>$24.00</del>$12.00
+                                </li>
+                              </ul>
+                              <h5 className="title">
+                                <a href="course-details.html">
+                                  Learning JavaScript With Imagination
+                                </a>
+                              </h5>
+                              <p className="author">
+                                By <a href="#">Wade Warren</a>
+                              </p>
+                              <p className="info">
+                                when an unknown printer took a galley of type
+                                and scrambled type specimen book It has survived
+                                not only.
+                              </p>
+                              <div className="courses__item-bottom">
+                                <div className="button">
+                                  <a href="course-details.html">
+                                    <span className="text">Enroll Now</span>
+                                    <i className="flaticon-arrow-right"></i>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className={style.cal}>
+                          <div className="courses__item courses__item-three shine__animate-item">
+                            <div className="courses__item-thumb">
+                              <a
+                                href="course-details.html"
+                                className="shine__animate-link"
+                              >
+                                <img
+                                  src="assets/img/courses/course_thumb04.jpg"
+                                  alt="img"
+                                />
+                              </a>
+                            </div>
+                            <div className="courses__item-content">
+                              <ul className="courses__item-meta list-wrap">
+                                <li className="courses__item-tag">
+                                  <a href="course.html">Finance</a>
+                                  <div className="avg-rating">
+                                    <i className="fas fa-star"></i> (4.9
+                                    Reviews)
+                                  </div>
+                                </li>
+                                <li className="price">
+                                  <del>$32.00</del>$19.00
+                                </li>
+                              </ul>
+                              <h5 className="title">
+                                <a href="course-details.html">
+                                  Resolving Conflicts Between Designers And
+                                  Engineers
+                                </a>
+                              </h5>
+                              <p className="author">
+                                By <a href="#">Robert Fox</a>
+                              </p>
+                              <p className="info">
+                                when an unknown printer took a galley of type
+                                and scrambled type specimen book It has survived
+                                not only.
+                              </p>
+                              <div className="courses__item-bottom">
+                                <div className="button">
+                                  <a href="course-details.html">
+                                    <span className="text">Enroll Now</span>
+                                    <i className="flaticon-arrow-right"></i>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className={style.cal}>
+                          <div className="courses__item courses__item-three shine__animate-item">
+                            <div className="courses__item-thumb">
+                              <a
+                                href="course-details.html"
+                                className="shine__animate-link"
+                              >
+                                <img
+                                  src="assets/img/courses/course_thumb05.jpg"
+                                  alt="img"
+                                />
+                              </a>
+                            </div>
+                            <div className="courses__item-content">
+                              <ul className="courses__item-meta list-wrap">
+                                <li className="courses__item-tag">
+                                  <a href="course.html">Data Science</a>
+                                  <div className="avg-rating">
+                                    <i className="fas fa-star"></i> (4.7
+                                    Reviews)
+                                  </div>
+                                </li>
+                                <li className="price">
+                                  <del>$50.00</del>$40.00
+                                </li>
+                              </ul>
+                              <h5 className="title">
+                                <a href="course-details.html">
+                                  A Look At Remix And The Differences With
+                                  Next.js
+                                </a>
+                              </h5>
+                              <p className="author">
+                                By <a href="#">Guy Hawkins</a>
+                              </p>
+                              <p className="info">
+                                when an unknown printer took a galley of type
+                                and scrambled type specimen book It has survived
+                                not only.
+                              </p>
+                              <div className="courses__item-bottom">
+                                <div className="button">
+                                  <a href="course-details.html">
+                                    <span className="text">Enroll Now</span>
+                                    <i className="flaticon-arrow-right"></i>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className={style.cal}>
+                          <div className="courses__item courses__item-three shine__animate-item">
+                            <div className="courses__item-thumb">
+                              <a
+                                href="course-details.html"
+                                className="shine__animate-link"
+                              >
+                                <img
+                                  src="assets/img/courses/course_thumb06.jpg"
+                                  alt="img"
+                                />
+                              </a>
+                            </div>
+                            <div className="courses__item-content">
+                              <ul className="courses__item-meta list-wrap">
+                                <li className="courses__item-tag">
+                                  <a href="course.html">Mathematic</a>
+                                  <div className="avg-rating">
+                                    <i className="fas fa-star"></i> (4.8
+                                    Reviews)
+                                  </div>
+                                </li>
+                                <li className="price">
+                                  <del>$30.00</del>$19.00
+                                </li>
+                              </ul>
+                              <h5 className="title">
+                                <a href="course-details.html">
+                                  An Accessibility-First Approach To Chart
+                                  Visual
+                                </a>
+                              </h5>
+                              <p className="author">
+                                By <a href="#">Sawpawlo Mark</a>
+                              </p>
+                              <p className="info">
+                                when an unknown printer took a galley of type
+                                and scrambled type specimen book It has survived
+                                not only.
+                              </p>
+                              <div className="courses__item-bottom">
+                                <div className="button">
+                                  <a href="course-details.html">
+                                    <span className="text">Enroll Now</span>
+                                    <i className="flaticon-arrow-right"></i>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className={style.cal}>
+                          <div className="courses__item courses__item-three shine__animate-item">
+                            <div className="courses__item-thumb">
+                              <a
+                                href="course-details.html"
+                                className="shine__animate-link"
+                              >
+                                <img
+                                  src="assets/img/courses/course_thumb07.jpg"
+                                  alt="img"
+                                />
+                              </a>
+                            </div>
+                            <div className="courses__item-content">
+                              <ul className="courses__item-meta list-wrap">
+                                <li className="courses__item-tag">
+                                  <a href="course.html">Development</a>
+                                  <div className="avg-rating">
+                                    <i className="fas fa-star"></i> (4.6
+                                    Reviews)
+                                  </div>
+                                </li>
+                                <li className="price">$11.00</li>
+                              </ul>
+                              <h5 className="title">
+                                <a href="course-details.html">
+                                  How To Build A Localized Website With Hugo And
+                                  Strapi
+                                </a>
+                              </h5>
+                              <p className="author">
+                                By <a href="#">Robert Fox</a>
+                              </p>
+                              <p className="info">
+                                when an unknown printer took a galley of type
+                                and scrambled type specimen book It has survived
+                                not only.
+                              </p>
+                              <div className="courses__item-bottom">
+                                <div className="button">
+                                  <a href="course-details.html">
+                                    <span className="text">Enroll Now</span>
+                                    <i className="flaticon-arrow-right"></i>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {/* <nav className="pagination__wrap mt-30">
                                     <ul className="list-wrap">
                                         <li className="active"><a href="#">1</a></li>
                                         <li><a href="courses.html">2</a></li>
@@ -897,20 +927,13 @@ const register = () => {
                                         <li><a href="courses.html">4</a></li>
                                     </ul>
                                 </nav> */}
-                      </div>
-                    </div>
-                       
-                      
                     </div>
                   </div>
                 </div>
               </div>
-            </section>
-          
-       
-
-       
-         
+            </div>
+          </div>
+        </section>
       </main>
     </React.Fragment>
   );

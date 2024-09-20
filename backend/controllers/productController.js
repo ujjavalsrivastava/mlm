@@ -71,12 +71,10 @@ const createProductOrder = async (req, res) => {
     LevelPercentage.findOne()
   );
 
-  const associatePercent = (amount * userLevelShare.level0) / 100;
-
   if (!userPurchaseHistory) {
     const addPurchase = await new UserPurchase({
       userId,
-      currentAmount: associatePercent,
+      currentAmount: 0,
       products: [createProduct],
     }).save();
     if (addPurchase._id) {

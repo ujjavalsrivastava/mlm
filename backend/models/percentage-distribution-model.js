@@ -4,6 +4,7 @@ const percent = new Schema({
   userId: {
     type: Types.ObjectId,
     ref: "User",
+    unique: true,
   },
   purchaseHistory: [
     {

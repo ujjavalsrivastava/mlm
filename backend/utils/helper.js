@@ -1,5 +1,5 @@
 const crypto = require("crypto");
-const { Types } = require("mongoose");
+const { Types, ObjectId } = require("mongoose");
 const LevelPercentage = require("../models/level-percentage-model");
 const User = require("../models/user-model");
 const PercentDistribution = require("../models/percentage-distribution-model");
@@ -73,50 +73,40 @@ const distributeUserPercentage = async (
   userLevelShare
 ) => {
   const [userError, user] = await handlePromiseError(
-    User.aggregate(parentPipelineUpToLevel(associateId, 8)).exec()
+    User.aggregate(parentPipelineUpToLevel(associateId, 9)).exec()
   );
-  const parentUsers = user[0]?.parentUsers;
-  const associateUser = { ...user[0] };
-  delete associateUser.parentUsers;
-  const allUser = [associateUser, ...parentUsers];
+  const allUser = user[0]?.parentUsers;
+
   const eachLevelShareList = levels.map((l) => userLevelShare[l] || 0);
 
   for (let a = 0; a <= allUser.length; a++) {
-    const currentUser = allUser[a];
-    let [userCurrentPurchase, userPercentage] = currentUser
-      ? await Promise.all([
-          UserPurchase.findOne({
-            userId: currentUser._id,
-          }),
-          PercentDistribution.findOne({ userId: currentUser._id }),
-        ])
-      : [];
-    const calculateAmountForUser = (amount / 100) * eachLevelShareList[a];
-    if (!userCurrentPurchase && currentUser) {
-      [_, userCurrentPurchase] = await handlePromiseError(
-        UserPurchase({ userId: currentUser._id })
-      );
-    }
+    const calculateAmountForUser =
+      (amount / 100) * eachLevelShareList[a].toFixed(2);
 
-    if (calculateAmountForUser && userCurrentPurchase && currentUser) {
-      userCurrentPurchase.currentAmount += calculateAmountForUser;
-      userCurrentPurchase.save();
+    const everyUserId = allUser[a]?._id;
+
+    if (calculateAmountForUser && everyUserId) {
       const dataForPerventageDistribution = {
         percent: eachLevelShareList[a],
         amount: calculateAmountForUser,
         senderId: associateId,
-        receiverId: currentUser._id,
+        receiverId: everyUserId,
       };
+      const [otherUserPurchase, userPercentage] = await Promise.all([
+        UserPurchase.findOne({
+          userId: everyUserId,
+        }),
+        PercentDistribution.findOne({
+          userId: everyUserId,
+        }),
+      ]);
 
-      if (!userPercentage) {
-        await new PercentDistribution({
-          userId: currentUser._id,
-          purchaseHistory: [dataForPerventageDistribution],
-        }).save();
-        userCurrentPurchase.currentAmount +=
-          dataForPerventageDistribution.amount;
-        await userCurrentPurchase.save();
-      } else {
+      if (otherUserPurchase) {
+        otherUserPurchase.currentAmount += calculateAmountForUser;
+        await otherUserPurchase.save();
+      }
+
+      if (userPercentage) {
         userPercentage.purchaseHistory.unshift(dataForPerventageDistribution);
         await userPercentage.save();
       }
@@ -138,14 +128,16 @@ function tryCatch(fn) {
 
 const getUserId = (req) => req.query?.userId || req.user?._id;
 
-const flattenUsers = (user) => {
-  let flatUsers = [user];
-  Array.isArray(user.lowerLevel) &&
-    user.lowerLevel.forEach((subUser) => {
-      flatUsers = flatUsers.concat(flattenUsers(subUser));
-    });
-  return flatUsers;
-};
+function flattenUsers(userArray) {
+  let flatList = [];
+  userArray.forEach((user) => {
+    if (user.email) flatList.push(user); // Add the current user to the flat list
+    if (user.lowerLevel && user.lowerLevel.length > 0) {
+      flatList = flatList.concat(flattenUsers(user.lowerLevel)); // Recursively flatten lowerLevel users
+    }
+  });
+  return flatList;
+}
 
 const joinedToday = (user) => {
   const userCreatedDate = user.createdAt?.toISOString()?.split("T")[0];

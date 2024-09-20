@@ -1,7 +1,7 @@
 import { initDropdowns } from "flowbite";
 import { useEffect, useState } from "react";
 import { axios } from "../../../helper/httpHelper";
-import logo from "../../../../public/dist/img/img1.jpg"
+import logo from "../../../../public/dist/img/img1.jpg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -12,7 +12,8 @@ const Header = () => {
     setShow((p) => !p);
   };
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
+
     navigator("/login");
   };
   const [profile, setprofile] = useState({});
@@ -237,7 +238,12 @@ const Header = () => {
                     class="user-image"
                     alt="User Image"
                   />
-                  <span class="hidden-xs" style={{textTransform: 'capitalize'}}>{profile && profile.name}</span>
+                  <span
+                    class="hidden-xs"
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    {profile && profile.name}
+                  </span>
                 </a>
                 {show && (
                   <ul
@@ -248,7 +254,7 @@ const Header = () => {
                       padding: "15px",
                       position: "absolute",
                       right: "0px",
-                     listStyleType: "none",
+                      listStyleType: "none",
                     }}
                   >
                     {/* <li class="user-header">
@@ -274,51 +280,98 @@ const Header = () => {
                     </li> */}
 
                     <li>
-                      <Link to={"/profile"} style={{color:"#635d5d"}}>
-                        <i class="fa fa-user" style={{marginRight: "7px"}}></i> My Profile
+                      <Link to={"/profile"} style={{ color: "#635d5d" }}>
+                        <i
+                          class="fa fa-user"
+                          style={{ marginRight: "7px" }}
+                        ></i>{" "}
+                        My Profile
                       </Link>
                     </li>
-                    <li style={{marginTop:"10px"}}>
-                      <Link to={"/my-course"} style={{color:"#635d5d"}}>
-                        <i class="fa fa-graduation-cap" style={{marginRight: "7px"}}></i> My Course
+                    <li style={{ marginTop: "10px" }}>
+                      <Link to={"/my-course"} style={{ color: "#635d5d" }}>
+                        <i
+                          class="fa fa-graduation-cap"
+                          style={{ marginRight: "7px" }}
+                        ></i>{" "}
+                        My Course
                       </Link>
                     </li>
-                    <li style={{marginTop:"10px"}}>
-                      <Link to={"/my-course"} style={{color:"#635d5d"}}>
-                        <i class="fa fa-suitcase" style={{marginRight: "7px"}}></i> Wallet
+                    <li style={{ marginTop: "10px" }}>
+                      <Link to={"/my-course"} style={{ color: "#635d5d" }}>
+                        <i
+                          class="fa fa-suitcase"
+                          style={{ marginRight: "7px" }}
+                        ></i>{" "}
+                        Wallet
                       </Link>
                     </li>
-                    <li style={{marginTop:"10px"}}> 
-                      <Link to={"/kyc"} style={{color:"#635d5d"}}>
-                        <i class="fa fa-users" style={{marginRight: "7px"}}></i> KYC
+                    <li style={{ marginTop: "10px" }}>
+                      <Link to={"/kyc"} style={{ color: "#635d5d" }}>
+                        <i
+                          class="fa fa-users"
+                          style={{ marginRight: "7px" }}
+                        ></i>{" "}
+                        KYC
                       </Link>
                     </li>
-                    <li style={{marginTop:"10px"}}>
-                      <Link to={"/member-dashboard"} style={{color:"#635d5d"}}>
-                        <i class="fa fa-building" style={{marginRight: "7px"}}></i> Affiliate Panel
+                    <li style={{ marginTop: "10px" }}>
+                      <Link
+                        to={"/member-dashboard"}
+                        style={{ color: "#635d5d" }}
+                      >
+                        <i
+                          class="fa fa-building"
+                          style={{ marginRight: "7px" }}
+                        ></i>{" "}
+                        Affiliate Panel
                       </Link>
                     </li>
-                    <li style={{marginTop:"10px"}}>
-                      <Link to={"/referal-link"} style={{color:"#635d5d"}}>
-                        <i class="fa fa-refresh" style={{marginRight: "7px"}}></i> Referal
+                    <li style={{ marginTop: "10px" }}>
+                      <Link to={"/referal-link"} style={{ color: "#635d5d" }}>
+                        <i
+                          class="fa fa-refresh"
+                          style={{ marginRight: "7px" }}
+                        ></i>{" "}
+                        Referal
                       </Link>
                     </li>
-                    <li style={{marginTop:"10px"}}>
-                      <Link to={"/tree"} style={{color:"#635d5d"}}>
-                        <i class="fa fa-sitemap" aria-hidden="true" style={{marginRight: "7px"}}></i> Hierarchy
+                    <li style={{ marginTop: "10px" }}>
+                      <Link to={"/tree"} style={{ color: "#635d5d" }}>
+                        <i
+                          class="fa fa-sitemap"
+                          aria-hidden="true"
+                          style={{ marginRight: "7px" }}
+                        ></i>{" "}
+                        Hierarchy
                       </Link>
                     </li>
 
-                    <li style={{marginTop:"10px"}}>
-                      <Link to={"/change-password"} style={{color:"#635d5d"}}>
-                        <i class="fa fa-key" aria-hidden="true" style={{marginRight: "7px"}}></i> Change
-                        Password
+                    <li style={{ marginTop: "10px" }}>
+                      <Link
+                        to={"/change-password"}
+                        style={{ color: "#635d5d" }}
+                      >
+                        <i
+                          class="fa fa-key"
+                          aria-hidden="true"
+                          style={{ marginRight: "7px" }}
+                        ></i>{" "}
+                        Change Password
                       </Link>
                     </li>
                     <li role="separator" class="divider"></li>
-                    <li style={{marginTop:"10px"}}>
-                      <a href="javascript:void(0)" onClick={logout} style={{color:"#635d5d"}}>
-                        <i class="fa fa-power-off" style={{marginRight: "7px"}}></i> Logout
+                    <li style={{ marginTop: "10px" }}>
+                      <a
+                        href="javascript:void(0)"
+                        onClick={logout}
+                        style={{ color: "#635d5d" }}
+                      >
+                        <i
+                          class="fa fa-power-off"
+                          style={{ marginRight: "7px" }}
+                        ></i>{" "}
+                        Logout
                       </a>
                     </li>
                   </ul>

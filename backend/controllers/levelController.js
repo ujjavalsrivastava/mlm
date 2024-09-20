@@ -77,16 +77,11 @@ const getUserGroupStatus = async (req, res) => {
   const userId = getUserId(req);
   let user = await User.findById(userId).exec();
   user = await populateLowerLevel(user);
-
-  const allUsers = flattenUsers(user);
+  const allUsers = flattenUsers(user?.lowerLevel || []);
   const todaysUsers = usersJoinedToday(allUsers);
   const totalGroupUser = allUsers.length || 0;
   const todayGroupUser = [...todaysUsers].length || 0;
-
   const users = allUsers.map((u) => u._id);
-
-  console.log({ users });
-
   const teamPercent = await PercentDistribution.find({
     userId: { $in: users },
   });
@@ -108,8 +103,6 @@ const getUserGroupStatus = async (req, res) => {
         total30DaysEarning += curr.amount;
       }
     });
-
-    console.log({ t });
   });
 
   const currentDayEarning = await PercentDistribution.aggregate(

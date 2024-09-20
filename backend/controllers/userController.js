@@ -43,7 +43,7 @@ const createUser = async (req, res) => {
     }
     await UserPurchase({ userId: savedUser._id, currentAmount: 0 }).save();
     await PercentDistribution({ userId: savedUser._id }).save();
-    await bankDetails({ email }).save();
+    await bankDetails({ email, user: savedUser._id }).save();
     return res.status(200).json({ message: "user created successfully" });
   } catch (error) {
     console.log({ error });
@@ -146,80 +146,47 @@ const user = {
   ],
 };
 
-// Function to count users at each level and track users created today by level
-async function countUsersAtEachLevel(
+function countUsersAtEachLevel(
   user,
   level = 0,
-  counts = {
-    totalByLevel: {},
-    createdTodayByLevel: {},
-    totalEarning: {},
-    todayEarning: {},
-  }
+  counts = { totalByLevel: {}, createdTodayByLevel: {} }
 ) {
-  // Initialize the count for the current level if it doesn't exist
   if (!counts.totalByLevel[level]) {
     counts.totalByLevel[level] = 0;
+    counts.createdTodayByLevel[level] = 0;
   }
-  if (!counts.createdTodayByLevel[level]) {
-    counts.createdTodayByLevel[level] = 0; // Also initialize the 'created today' count for the level
-  }
-  if (!counts.totalEarning[level]) {
-    counts.totalEarning[level] = 0; // Also initialize the 'created today' count for the level
-  }
-  if (!counts.todayEarning[level]) {
-    counts.todayEarning[level] = 0; // Also initialize the 'created today' count for the level
-  }
-  const userId = user._id;
+  console.log(user.createdAt);
 
-  if (userId) {
-    const data = await PercentDistribution.findOne({ userId });
-    data.purchaseHistory.map((curr) => {
-      counts.totalEarning[level] += curr.amount;
-      const today = new Date();
-      if (`${curr.createdAt}`.split("T")[0] === `${today}`.split("T")[0]) {
-        counts.todayEarning[level] += curr.amount;
-      }
-    });
-  }
-
-  // Increment the total count for the current level
   counts.totalByLevel[level]++;
 
-  // Check if the user was created today and increment the 'created today' count for the level
   if (joinedToday(user)) {
     counts.createdTodayByLevel[level]++;
   }
 
-  // Recursively count for each lower-level user
-  Array.isArray(user.lowerLevel) &&
-    level !== 8 &&
-    (await user.lowerLevel.map(async (lowerUser) => {
-      await countUsersAtEachLevel(lowerUser, level + 1, counts);
-    }));
+  user.lowerLevel.forEach((lowerUser) => {
+    countUsersAtEachLevel(lowerUser, level + 1, counts);
+  });
 
   return counts;
 }
 
 const getUserLevelStatus = async (req, res) => {
   const user = req.user;
-
-  const userLL = await populateLowerLevel(user);
-
-  res.json(await countUsersAtEachLevel(userLL, 1));
+  const allLowerLevelUsers = await populateLowerLevel(user);
+  const data = countUsersAtEachLevel(allLowerLevelUsers, 1);
+  res.json({ ...data });
 };
+
 const updateProfilePicture = async (req, res) => {
   if (!req.file) {
     return res.status(400).send("No file uploaded.");
   }
-
   const userId = getUserId(req);
   const oldFilePath = path.join(
     __dirname,
     "uploads/profile_pictures",
     `${userId}.jpg`
   );
-
   if (userId && fs.existsSync(oldFilePath)) {
     fs.unlinkSync(oldFilePath); // Delete the old profile picture
   }
@@ -245,8 +212,8 @@ const getInvoice = async (req, res) => {
 
 const checkUserExist = async (req, res) => {
   const { email } = req.query;
-  const user = await User.findOne({ email }).save();
-  res.json({ inValid: user });
+  const user = await User.findOne({ email });
+  res.json({ inValid: !!user });
 };
 
 module.exports = {

@@ -4,6 +4,7 @@ const history = new Schema({
   userId: {
     type: Types.ObjectId,
     ref: "User",
+    uniquer: true,
   },
   currentAmount: { type: Number, default: 0 },
   products: [
