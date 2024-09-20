@@ -145,6 +145,12 @@ const joinedToday = (user) => {
   return userCreatedDate === currentDate;
 };
 
+const checkDaysCount = (date) => {
+  const now = new Date();
+  const cTime = new Date(date);
+  return Math.abs(now - cTime) / (1000 * 60 * 60 * 24);
+};
+
 const usersJoinedToday = (users) => users.filter(joinedToday);
 
 const totalAmountPipeline = (userIds) => [
@@ -183,4 +189,5 @@ module.exports = {
   totalAmountPipeline,
   asyncHandler,
   joinedToday,
+  checkDaysCount,
 };

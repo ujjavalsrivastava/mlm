@@ -279,69 +279,94 @@ const Header = () => {
                     </li> */}
 
                     <li>
-                      <Link to={"/profile"} style={{ color: "#635d5d" }}>
+                      <Link
+                        to={"/profile"}
+                        onClick={handleToggle}
+                        style={{ color: "#635d5d" }}
+                      >
                         <i
                           class="fa fa-user"
                           style={{ marginRight: "7px" }}
-                        ></i>{" "}
+                        ></i>
                         My Profile
                       </Link>
                     </li>
                     <li style={{ marginTop: "10px" }}>
-                      <Link to={"/my-course"} style={{ color: "#635d5d" }}>
+                      <Link
+                        to={"/my-course"}
+                        onClick={handleToggle}
+                        style={{ color: "#635d5d" }}
+                      >
                         <i
                           class="fa fa-graduation-cap"
                           style={{ marginRight: "7px" }}
-                        ></i>{" "}
+                        ></i>
                         My Course
                       </Link>
                     </li>
                     <li style={{ marginTop: "10px" }}>
-                      <Link to={"/my-course"} style={{ color: "#635d5d" }}>
+                      <Link
+                        to={"/my-course"}
+                        onClick={handleToggle}
+                        style={{ color: "#635d5d" }}
+                      >
                         <i
                           class="fa fa-suitcase"
                           style={{ marginRight: "7px" }}
-                        ></i>{" "}
+                        ></i>
                         Wallet
                       </Link>
                     </li>
                     <li style={{ marginTop: "10px" }}>
-                      <Link to={"/kyc"} style={{ color: "#635d5d" }}>
+                      <Link
+                        to={"/kyc"}
+                        onClick={handleToggle}
+                        style={{ color: "#635d5d" }}
+                      >
                         <i
                           class="fa fa-users"
                           style={{ marginRight: "7px" }}
-                        ></i>{" "}
+                        ></i>
                         KYC
                       </Link>
                     </li>
                     <li style={{ marginTop: "10px" }}>
                       <Link
                         to={"/member-dashboard"}
+                        onClick={handleToggle}
                         style={{ color: "#635d5d" }}
                       >
                         <i
                           class="fa fa-building"
                           style={{ marginRight: "7px" }}
-                        ></i>{" "}
+                        ></i>
                         Affiliate Panel
                       </Link>
                     </li>
                     <li style={{ marginTop: "10px" }}>
-                      <Link to={"/referal-link"} style={{ color: "#635d5d" }}>
+                      <Link
+                        to={"/referal-link"}
+                        onClick={handleToggle}
+                        style={{ color: "#635d5d" }}
+                      >
                         <i
                           class="fa fa-refresh"
                           style={{ marginRight: "7px" }}
-                        ></i>{" "}
+                        ></i>
                         Referal
                       </Link>
                     </li>
                     <li style={{ marginTop: "10px" }}>
-                      <Link to={"/tree"} style={{ color: "#635d5d" }}>
+                      <Link
+                        to={"/tree"}
+                        onClick={handleToggle}
+                        style={{ color: "#635d5d" }}
+                      >
                         <i
                           class="fa fa-sitemap"
                           aria-hidden="true"
                           style={{ marginRight: "7px" }}
-                        ></i>{" "}
+                        ></i>
                         Hierarchy
                       </Link>
                     </li>
@@ -349,13 +374,14 @@ const Header = () => {
                     <li style={{ marginTop: "10px" }}>
                       <Link
                         to={"/change-password"}
+                        onClick={handleToggle}
                         style={{ color: "#635d5d" }}
                       >
                         <i
                           class="fa fa-key"
                           aria-hidden="true"
                           style={{ marginRight: "7px" }}
-                        ></i>{" "}
+                        ></i>
                         Change Password
                       </Link>
                     </li>
@@ -369,7 +395,7 @@ const Header = () => {
                         <i
                           class="fa fa-power-off"
                           style={{ marginRight: "7px" }}
-                        ></i>{" "}
+                        ></i>
                         Logout
                       </a>
                     </li>

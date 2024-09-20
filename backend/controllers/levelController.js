@@ -7,6 +7,8 @@ const {
   flattenUsers,
   usersJoinedToday,
   totalAmountPipeline,
+  joinedToday,
+  checkDaysCount,
 } = require("../utils/helper");
 const PercentDistribution = require("../models/percentage-distribution-model");
 const { Types } = require("mongoose");
@@ -81,10 +83,12 @@ const getUserGroupStatus = async (req, res) => {
   const todaysUsers = usersJoinedToday(allUsers);
   const totalGroupUser = allUsers.length || 0;
   const todayGroupUser = [...todaysUsers].length || 0;
-  const users = allUsers.map((u) => u._id);
+  const users = [user, ...allUsers].map((u) => u._id);
   const teamPercent = await PercentDistribution.find({
     userId: { $in: users },
   });
+
+  let todayTeamEarning = 0;
   let totalTeamEarning = 0;
   let total7DaysEarning = 0;
   let total30DaysEarning = 0;
@@ -92,31 +96,37 @@ const getUserGroupStatus = async (req, res) => {
     t.purchaseHistory.map((curr) => {
       totalTeamEarning += curr.amount;
       const today = new Date();
-      const sevenDaysAgo = new Date();
+      const sevenDaysAgo = new Date(curr.createdAt);
+
       sevenDaysAgo.setDate(today.getDate() - 7);
       const thirtyDays = new Date();
       thirtyDays.setDate(today.getDate() - 30);
-      if (curr.createdAt >= sevenDaysAgo) {
+      console.log(checkDaysCount(curr.createdAt));
+
+      if (checkDaysCount(curr.createdAt) < 7) {
         total7DaysEarning += curr.amount;
       }
-      if (curr.createdAt >= thirtyDays) {
+      if (checkDaysCount(curr.createdAt) < 30) {
         total30DaysEarning += curr.amount;
+      }
+      if (joinedToday(curr)) {
+        todayTeamEarning += curr.amount;
       }
     });
   });
 
-  const currentDayEarning = await PercentDistribution.aggregate(
-    totalAmountPipeline(todaysUsers.map((u) => u._id))
-  );
+  // const currentDayEarning = await PercentDistribution.aggregate(
+  //   totalAmountPipeline(todaysUsers.map((u) => u._id))
+  // );
 
   // let totalTeamEarning = totalEarning.reduce(
   //   (pre, curr) => pre + curr.totalAmount,
   //   0
   // );
-  let todayTeamEarning = currentDayEarning.reduce(
-    (pre, curr) => pre + curr.totalAmount,
-    0
-  );
+  // todayTeamEarning = currentDayEarning.reduce(
+  //   (pre, curr) => pre + curr.totalAmount,
+  //   0
+  // );
 
   //  7 day and 30 day team earning
 
