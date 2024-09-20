@@ -155,7 +155,9 @@ function countUsersAtEachLevel(
     counts.totalByLevel[level] = 0;
     counts.createdTodayByLevel[level] = 0;
   }
-  console.log(user.createdAt);
+  if (!user.email) {
+    return counts;
+  }
 
   counts.totalByLevel[level]++;
 
@@ -163,7 +165,7 @@ function countUsersAtEachLevel(
     counts.createdTodayByLevel[level]++;
   }
 
-  user.lowerLevel.forEach((lowerUser) => {
+  user?.lowerLevel?.forEach((lowerUser) => {
     countUsersAtEachLevel(lowerUser, level + 1, counts);
   });
 
