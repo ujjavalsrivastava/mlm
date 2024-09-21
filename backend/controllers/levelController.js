@@ -151,6 +151,7 @@ const getEachLevelEarning = async (req, res) => {
     const earnings = await PercentDistribution.find({
       userId: { $in: userIdLevelWise[prop] },
     });
+    console.log({ prop }, userIdLevelWise[prop], earnings);
     if (earnings && earnings.length) {
       todayEarning[prop] = 0;
       totalEarning[prop] = 0;
@@ -162,6 +163,10 @@ const getEachLevelEarning = async (req, res) => {
           totalEarning[prop] += e.amount;
         });
       });
+      if (totalEarning[prop] === 0) {
+        delete totalEarning[prop];
+        delete todayEarning[prop];
+      }
     }
   }
 

@@ -174,7 +174,7 @@ const asyncHandler = (requestHandler) => {
   };
 };
 
-const collectUserIdsByLevel = (user, level = 0, result = {}) => {
+const collectUserIdsByLevel = (user, level = 1, result = {}) => {
   if (!result[level]) {
     result[level] = [];
   }
