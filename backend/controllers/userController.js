@@ -174,7 +174,7 @@ function countUsersAtEachLevel(
 
 const getUserLevelStatus = async (req, res) => {
   const user = req.user;
-  const allLowerLevelUsers = await populateLowerLevel(user);
+  const allLowerLevelUsers = await populateLowerLevel(user, 0, 8);
   const data = countUsersAtEachLevel(allLowerLevelUsers, 1);
   res.json({ ...data });
 };

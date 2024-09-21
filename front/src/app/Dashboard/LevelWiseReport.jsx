@@ -1,23 +1,16 @@
 import { useEffect, useState } from "react";
 import { axios } from "../../helper/httpHelper";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchLowerProfiles } from "../../store/lowerLevel";
-import { RiH4 } from "@remixicon/react";
 
 const LevelWiseReport = () => {
   const [data, setData] = useState(null);
   const levelFun = async () => {
     try {
-      const response = await axios.get("user/level-status");
+      const response = await axios.get("user/level-earning");
       setData(response.data);
     } catch (error) {
       console.log(error);
     }
   };
-
-  var len = $.map(data?.totalByLevel, function (n, i) {
-    return i;
-  }).length;
 
   useEffect(() => {
     levelFun();
@@ -31,12 +24,9 @@ const LevelWiseReport = () => {
           <ol class="breadcrumb">
             <li>
               <a href="#" style={{ color: "black" }}>
-                Home / Level Wise Report{" "}
+                Home / Level Wise Report
               </a>
             </li>
-            {/* <li>
-              <i class="fa fa-angle-right"></i> Dashboard
-            </li> */}
           </ol>
         </div>
 
@@ -44,6 +34,10 @@ const LevelWiseReport = () => {
           <div class="row">
             <div class="col-12">
               {(() => {
+                const len = data?.totalEarning
+                  ? Object.keys(data.todayEarning).length
+                  : 0;
+
                 const arr = [];
                 for (let i = 1; i <= len; i++) {
                   arr.push(
@@ -65,7 +59,7 @@ const LevelWiseReport = () => {
                             <i class="ti-face-smile f-20 text-blue"></i>
                             <div class="info-box-content">
                               <h4 class="f-25 text-black">
-                                {data?.todayEarning?.[i]?.toFixed(2)}
+                                {data?.todayEarning?.[i]?.toFixed(2) || 0}
                               </h4>
                               <span
                                 class="progress-description"
@@ -81,7 +75,7 @@ const LevelWiseReport = () => {
                             <i class="ti-bar-chart f-20 text-danger"></i>
                             <div class="info-box-content">
                               <h4 class="f-25 text-black">
-                                {data?.totalEarning?.[i].toFixed(2)}
+                                {data?.totalEarning?.[i].toFixed(2) || 0}
                               </h4>
                               <span
                                 class="progress-description"

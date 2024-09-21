@@ -31,9 +31,7 @@ async function populateLowerLevel(user, counter = 0) {
       })
     )
   );
-  if (lowerLevelUsersError)
-    console.log("lowerLevelUsersError", lowerLevelUsersError);
-  user.lowerLevel = lowerLevelUsers;
+  if (lowerLevelUsersError) user.lowerLevel = lowerLevelUsers;
   return user;
 }
 
@@ -176,6 +174,19 @@ const asyncHandler = (requestHandler) => {
   };
 };
 
+const collectUserIdsByLevel = (user, level = 0, result = {}) => {
+  if (!result[level]) {
+    result[level] = [];
+  }
+  if (!user.email) return result;
+  result[level].push(user._id);
+
+  user.lowerLevel.forEach((lowerUser) => {
+    collectUserIdsByLevel(lowerUser, level + 1, result);
+  });
+  return result;
+};
+
 module.exports = {
   generateReferralCode,
   populateLowerLevel,
@@ -190,4 +201,5 @@ module.exports = {
   asyncHandler,
   joinedToday,
   checkDaysCount,
+  collectUserIdsByLevel,
 };

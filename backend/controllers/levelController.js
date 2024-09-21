@@ -9,6 +9,7 @@ const {
   totalAmountPipeline,
   joinedToday,
   checkDaysCount,
+  collectUserIdsByLevel,
 } = require("../utils/helper");
 const PercentDistribution = require("../models/percentage-distribution-model");
 const { Types } = require("mongoose");
@@ -101,7 +102,6 @@ const getUserGroupStatus = async (req, res) => {
       sevenDaysAgo.setDate(today.getDate() - 7);
       const thirtyDays = new Date();
       thirtyDays.setDate(today.getDate() - 30);
-      console.log(checkDaysCount(curr.createdAt));
 
       if (checkDaysCount(curr.createdAt) < 7) {
         total7DaysEarning += curr.amount;
@@ -140,10 +140,39 @@ const getUserGroupStatus = async (req, res) => {
   });
 };
 
+const getEachLevelEarning = async (req, res) => {
+  const user = req.user;
+  const todayEarning = {};
+  const totalEarning = {};
+  const userHierarchy = await populateLowerLevel(user);
+  const userIdLevelWise = collectUserIdsByLevel(userHierarchy);
+
+  for (const prop in userIdLevelWise) {
+    const earnings = await PercentDistribution.find({
+      userId: { $in: userIdLevelWise[prop] },
+    });
+    if (earnings && earnings.length) {
+      todayEarning[prop] = 0;
+      totalEarning[prop] = 0;
+      earnings.forEach((e) => {
+        e.purchaseHistory.forEach((e) => {
+          if (joinedToday(e)) {
+            todayEarning[prop] += e.amount;
+          }
+          totalEarning[prop] += e.amount;
+        });
+      });
+    }
+  }
+
+  res.json({ totalEarning, todayEarning });
+};
+
 module.exports = {
   getLowerLevelUsers,
   getUpperLevelUsers,
   getLevelPercentage,
   updateLevelPercentage,
   getUserGroupStatus,
+  getEachLevelEarning,
 };

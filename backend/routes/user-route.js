@@ -16,6 +16,7 @@ const {
   getLowerLevelUsers,
   getUpperLevelUsers,
   getUserGroupStatus,
+  getEachLevelEarning,
 } = require("../controllers/levelController");
 const {
   handleProductPurchase,
@@ -61,5 +62,6 @@ router.post(
 router.get("/profile-picture", tryCatch(asyncHandler(getProfilePicture)));
 router.get("/invoice", tryCatch(asyncHandler(getInvoice)));
 router.get("/valid", tryCatch(asyncHandler(checkUserExist)));
+router.get("/level-earning", tryCatch(asyncHandler(getEachLevelEarning)));
 
 module.exports = router;
