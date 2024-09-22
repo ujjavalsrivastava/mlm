@@ -3,6 +3,8 @@ import style from "./home.module.css";
 import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
+import process from './../../../public/dist/img/process.png';
+import line from './../../../public/dist/img/line.png';
 import axios1 from "axios";
 import { toast } from "react-toastify";
 const register = () => {
@@ -274,14 +276,15 @@ console.log('data...........'+data);
                       }
                     >
                       <img
-                        src="https://www.bizgurukul.com/Biz/img/biz_image/blue_circle.png"
+                        src={process}
                         class="personal_image"
+                        style={{width:'40px'}}
                       />
                       <h6 class="">Personal info</h6>
                     </div>
                     <div class="sign_head_card">
                       <img
-                        src="https://www.bizgurukul.com/Biz/img/biz_image/head_line.png"
+                        src={line}
                         class="head_line"
                       />
                     </div>
@@ -293,14 +296,15 @@ console.log('data...........'+data);
                       }
                     >
                       <img
-                        src="https://www.bizgurukul.com/Biz/img/biz_image/blue_circle.png"
+                        src={process}
                         class="course_image"
+                        style={{width:'40px'}}
                       />
                       <h6>Course Selection</h6>
                     </div>
                     <div class="sign_head_card">
                       <img
-                        src="https://www.bizgurukul.com/Biz/img/biz_image/head_line.png"
+                        src={line}
                         class="head_line"
                       />
                     </div>
@@ -312,8 +316,9 @@ console.log('data...........'+data);
                       }
                     >
                       <img
-                        src="https://www.bizgurukul.com/Biz/img/biz_image/blue_circle.png"
+                        src={process}
                         class="payment_image"
+                        style={{width:'40px'}}
                       />
                       <h6>Payment info</h6>
                     </div>
