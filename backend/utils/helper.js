@@ -20,7 +20,7 @@ function generateReferralCode(len = 8) {
 
 // Function to recursively populate lowerLevel
 async function populateLowerLevel(user, counter = 0) {
-  if (!user.lowerLevel || user.lowerLevel.length === 0 || counter >= 9) {
+  if (!user.lowerLevel || user.lowerLevel.length === 0 || counter >= 12) {
     return user;
   }
   await user.populate("lowerLevel");
