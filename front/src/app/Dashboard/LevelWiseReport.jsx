@@ -76,7 +76,7 @@ const LevelWiseReport = () => {
                             <i class="ti-face-smile f-20 text-blue"></i>
                             <div class="info-box-content">
                               <h4 class="f-25 text-black">
-                              {(price * level && level?.[`level${i - 2}`])/100 * data?.createdTodayByLevel?.[i] || 0}
+                              {(price *  level?.[`level${i - 2}`])/100 * data?.createdTodayByLevel?.[i] || 0}
                             
                               </h4>
                               <span
@@ -93,7 +93,7 @@ const LevelWiseReport = () => {
                             <i class="ti-bar-chart f-20 text-danger"></i>
                             <div class="info-box-content">
                               <h4 class="f-25 text-black">
-                              {(price * level && level?.[`level${i - 2}`])/100 * data?.totalByLevel?.[i] || 0}
+                              {(price *  level?.[`level${i - 2}`])/100 * data?.totalByLevel?.[i] || 0}
                               </h4>
                               <span
                                 class="progress-description"
