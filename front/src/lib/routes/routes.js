@@ -12,6 +12,7 @@ import MyCourseDeatils from "../../app/Dashboard/MyCouseDetails";
 import Level from "../../app/Dashboard/Level";
 import LevelWiseReport from "../../app/Dashboard/LevelWiseReport";
 import TeamSize from "../../app/Dashboard/TeamSize";
+import PassiveIncome from "../../app/Dashboard/PassiveIncome";
 
 export const authRoutes = [
 
@@ -29,5 +30,6 @@ export const authRoutes = [
   { path: "/level", Component: Level },
   { path: "/level-wise-report", Component: LevelWiseReport },
   { path: "/team-size", Component: TeamSize },
+  { path: "/passive-income", Component: PassiveIncome },
   
 ];
