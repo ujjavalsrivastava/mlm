@@ -250,8 +250,6 @@ const rewardsHandler = async (user) => {
   }
 };
 
-rewardsHandler();
-
 module.exports = {
   generateReferralCode,
   populateLowerLevel,
