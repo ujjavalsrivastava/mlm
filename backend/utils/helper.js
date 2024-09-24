@@ -189,6 +189,7 @@ const collectUserIdsByLevel = (user, level = 1, result = {}) => {
 
 const rewardsHandler = async (user) => {
   const parentUser = await populateLowerLevel(user);
+  const directChildCount = parentUser?.lowerLevel?.length || 0;
   const result = collectUserIdsByLevel(parentUser);
   let directChildMonthly = 0;
   let totalCount = 0;
@@ -207,22 +208,45 @@ const rewardsHandler = async (user) => {
       totalCount += result[i].lenght;
     }
   }
-  if (directChildMonthly > 2700 || totalCount > 12000) {
+  if (directChildMonthly > 2700 || directChildCount > 12000) {
     rewardsAmount += 300000;
-    isMonthlyReward = directChildMonthly > 2700;
-  } else if (directChildMonthly > 700 || totalCount > 3200) {
+  } else if (directChildMonthly > 700 || directChildCount > 3200) {
     rewardsAmount += 60000;
-    isMonthlyReward = directChildMonthly > 700;
-  } else if (directChildMonthly > 300 || totalCount > 1200) {
+  } else if (directChildMonthly > 300 || directChildCount > 1200) {
     rewardsAmount += 10000;
-    isMonthlyReward = directChildMonthly > 300;
+  }
+  if (directChildMonthly > 200) {
+    rewardsAmount += 19999;
+    isMonthlyReward = true;
+  } else if (directChildMonthly > 150) {
+    rewardsAmount += 14555;
+    isMonthlyReward = true;
+  } else if (directChildMonthly > 100) {
+    rewardsAmount += 9555;
+    isMonthlyReward = true;
+  } else if (directChildMonthly > 50) {
+    rewardsAmount += 4599;
+    isMonthlyReward = true;
   }
   if (rewardsAmount) {
+    const userId = parentUser._id;
     await Rewards({
       user: parentUser._id,
       amount: rewardsAmount,
       isMonthlyReward,
     });
+    const userPurchase = await UserPurchase.findOne({ userId });
+    userPurchase.currentAmount += rewardsAmount;
+    userPurchase.save();
+    const data = {
+      senderId: userId,
+      receiverId: userId,
+      amount: rewardsAmount,
+      percent: 100,
+    };
+    const distribution = await PercentDistribution({ userId });
+    distribution.purchaseHistory.push(data);
+    distribution.save();
   }
 };
 
