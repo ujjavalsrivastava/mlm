@@ -3,30 +3,45 @@ import { axios } from "../../helper/httpHelper";
 
 const LevelWiseReport = () => {
   const [data, setData] = useState(null);
+  const [level, setLevel] = useState(null);
   const levelFun = async () => {
     try {
-      const response = await axios.get("user/level-earning");
+      const response = await axios.get("user/level-status");
       setData(response.data);
     } catch (error) {
       console.log(error);
     }
   };
+  const LevelFatch = async()=>{
+    try{
+        const response =  await axios.get('level-percentage');
+        setLevel(response.data[0]);
+    }catch(error){
+        console.log(error);
+    }
+
+ }
+ const price ='2499';
 
   useEffect(() => {
     levelFun();
+    LevelFatch();
   }, []);
 
   return (
     <>
       <div class="content-wrapper">
         <div class="content-header sty-one">
-          <h1>Level Wise Report </h1>
+          <h1>Level Wise Income </h1>
           <ol class="breadcrumb">
             <li>
               <a href="#" style={{ color: "black" }}>
-                Home / Level Wise Report
+                Home / Level Wise Income
               </a>
             </li>
+            {/* <li>
+              <i class="fa fa-angle-right"></i> Dashboard
+            </li> */}
           </ol>
         </div>
 
@@ -34,12 +49,13 @@ const LevelWiseReport = () => {
           <div class="row">
             <div class="col-12">
               {(() => {
-                const len = data?.totalEarning
-                  ? Object.keys(data.todayEarning).length
+                const arr = [];
+                const len = data?.totalByLevel
+                  ? Object.keys(data?.totalByLevel).length
                   : 0;
 
-                const arr = [];
-                for (let i = 1; i <= len; i++) {
+                for (let i = 2; i <= len; i++) {
+               
                   arr.push(
                     <div class="info-box">
                       <div class="row">
@@ -50,7 +66,8 @@ const LevelWiseReport = () => {
                               class="info-box-content"
                               style={{ padding: "16px" }}
                             >
-                              <h2 class="f-25 text-black">Level {i}</h2>
+                              <h2 class="f-25 text-black">Level {i - 1}</h2>
+                         
                             </div>
                           </div>
                         </div>
@@ -59,7 +76,8 @@ const LevelWiseReport = () => {
                             <i class="ti-face-smile f-20 text-blue"></i>
                             <div class="info-box-content">
                               <h4 class="f-25 text-black">
-                                {data?.todayEarning?.[i]?.toFixed(2) || 0}
+                              {(price *  level?.[`level${i - 2}`])/100 * data?.createdTodayByLevel?.[i] || 0}
+                            
                               </h4>
                               <span
                                 class="progress-description"
@@ -75,7 +93,7 @@ const LevelWiseReport = () => {
                             <i class="ti-bar-chart f-20 text-danger"></i>
                             <div class="info-box-content">
                               <h4 class="f-25 text-black">
-                                {data?.totalEarning?.[i].toFixed(2) || 0}
+                              {(price *  level?.[`level${i - 2}`])/100 * data?.totalByLevel?.[i] || 0}
                               </h4>
                               <span
                                 class="progress-description"
