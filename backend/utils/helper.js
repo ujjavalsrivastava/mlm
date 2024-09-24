@@ -1,10 +1,10 @@
 const crypto = require("crypto");
-const { Types, ObjectId } = require("mongoose");
-const LevelPercentage = require("../models/level-percentage-model");
+const { Types } = require("mongoose");
 const User = require("../models/user-model");
 const PercentDistribution = require("../models/percentage-distribution-model");
 const UserPurchase = require("../models/purchase-history-model");
 const levels = Array.from({ length: 8 }, (_, i) => `level${i}`);
+const Rewards = require("../models/rewards-modal");
 
 const handlePromiseError = async (promise) =>
   await promise.then((data) => [null, data]).catch((error) => [error, null]);
@@ -187,6 +187,47 @@ const collectUserIdsByLevel = (user, level = 1, result = {}) => {
   return result;
 };
 
+const rewardsHandler = async (user) => {
+  const parentUser = await populateLowerLevel(user);
+  const result = collectUserIdsByLevel(parentUser);
+  let directChildMonthly = 0;
+  let totalCount = 0;
+  let rewardsAmount = 0;
+  let isMonthlyReward = false;
+  if (parentUser?.lowerLevel?.length) {
+    parentUser.lowerLevel.map((u) => {
+      if (checkDaysCount(u.createdAt) <= 30) {
+        directChildMonthly += 1;
+      }
+    });
+  }
+
+  for (let i = 1; i <= 4; i++) {
+    if (result[i] && result[i].length) {
+      totalCount += result[i].lenght;
+    }
+  }
+  if (directChildMonthly > 2700 || totalCount > 12000) {
+    rewardsAmount += 300000;
+    isMonthlyReward = directChildMonthly > 2700;
+  } else if (directChildMonthly > 700 || totalCount > 3200) {
+    rewardsAmount += 60000;
+    isMonthlyReward = directChildMonthly > 700;
+  } else if (directChildMonthly > 300 || totalCount > 1200) {
+    rewardsAmount += 10000;
+    isMonthlyReward = directChildMonthly > 300;
+  }
+  if (rewardsAmount) {
+    await Rewards({
+      user: parentUser._id,
+      amount: rewardsAmount,
+      isMonthlyReward,
+    });
+  }
+};
+
+rewardsHandler();
+
 module.exports = {
   generateReferralCode,
   populateLowerLevel,
@@ -202,4 +243,5 @@ module.exports = {
   joinedToday,
   checkDaysCount,
   collectUserIdsByLevel,
+  rewardsHandler,
 };
