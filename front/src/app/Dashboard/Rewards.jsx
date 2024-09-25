@@ -38,25 +38,32 @@ const Rewards = () => {
             <div class="col-12">
             <table class="table">
   <thead class="thead-dark">
+  <tr>
+  <th scope="col">S.R</th>
+    <th scope="col">Name</th>
+    <th scope="col">Amount</th>
+    <th scope="col">Remarks</th>
+    {/* <th scope="col">Date</th> */}
+  </tr>
+</thead>
+
+{data && data.map((row,i) =>(
+  !row.isMonthlyReward ? (
+
     <tr>
-      <th scope="col">S.R</th>
-      <th scope="col">Name</th>
-      <th scope="col">Amount</th>
-      <th scope="col">Date</th>
-    </tr>
-  </thead>
-  
-  {data && data.map((row,i) =>(
-        
-        <tr>
-        <th scope="row">{i + 1}</th>
-        <td>{row.name}</td>
-        <td>{row.amount}</td>
-        <td>{row.createdAt}</td>
-        </tr>
-        
-   
-   ))}
+      <th scope="row">{i + 1}</th>
+      <td>{row.name}</td>
+      <td>{row.amount}</td>
+      <td>{row.remark}</td>
+      
+      {/* <td>{row.createdAt}</td> */}
+      </tr>
+  ):null     
+      
+      
+ 
+ ))}
+
   
       
  
