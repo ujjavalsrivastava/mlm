@@ -149,6 +149,15 @@ const checkDaysCount = (date) => {
   return Math.abs(now - cTime) / (1000 * 60 * 60 * 24);
 };
 
+const sameMonth = (date) => {
+  const now = new Date();
+  const stored = new Date(date);
+  return (
+    now.getUTCMonth() === stored.getUTCMonth() &&
+    now.getUTCFullYear() === stored.getUTCFullYear()
+  );
+};
+
 const usersJoinedToday = (users) => users.filter(joinedToday);
 
 const totalAmountPipeline = (userIds) => [
@@ -187,6 +196,27 @@ const collectUserIdsByLevel = (user, level = 1, result = {}) => {
   return result;
 };
 
+const saveRewards = async (userId, amount, isMonthlyReward, remark) => {
+  await Rewards({
+    user: userId,
+    amount,
+    isMonthlyReward,
+    remark,
+  });
+  const userPurchase = await UserPurchase.findOne({ userId });
+  userPurchase.currentAmount += amount;
+  userPurchase.save();
+  const data = {
+    senderId: userId,
+    receiverId: userId,
+    amount,
+    percent: 100,
+  };
+  const distribution = await PercentDistribution({ userId });
+  distribution.purchaseHistory.push(data);
+  distribution.save();
+};
+
 const rewardsHandler = async (user) => {
   const parentUser = await populateLowerLevel(user);
   const directChildCount = parentUser?.lowerLevel?.length || 0;
@@ -194,10 +224,10 @@ const rewardsHandler = async (user) => {
   let directChildMonthly = 0;
   let totalCount = 0;
   let rewardsAmount = 0;
-  let isMonthlyReward = false;
+  let remark = "";
   if (parentUser?.lowerLevel?.length) {
     parentUser.lowerLevel.map((u) => {
-      if (checkDaysCount(u.createdAt) <= 30) {
+      if (sameMonth(u.createdAt)) {
         directChildMonthly += 1;
       }
     });
@@ -210,43 +240,29 @@ const rewardsHandler = async (user) => {
   }
   if (directChildMonthly > 2700 || directChildCount > 12000) {
     rewardsAmount += 300000;
+    remark = "300k BMW Car fund";
   } else if (directChildMonthly > 700 || directChildCount > 3200) {
     rewardsAmount += 60000;
+    remark = "60k Bike fund";
   } else if (directChildMonthly > 300 || directChildCount > 1200) {
     rewardsAmount += 10000;
+    remark = "10k SmartPhone fund";
+  }
+  if (rewardsAmount) {
+    await saveRewards(parentUser._id, rewardsAmount, false, remark);
+    rewardsAmount = 0;
   }
   if (directChildMonthly > 200) {
     rewardsAmount += 19999;
-    isMonthlyReward = true;
   } else if (directChildMonthly > 150) {
     rewardsAmount += 14555;
-    isMonthlyReward = true;
   } else if (directChildMonthly > 100) {
     rewardsAmount += 9555;
-    isMonthlyReward = true;
   } else if (directChildMonthly > 50) {
     rewardsAmount += 4599;
-    isMonthlyReward = true;
   }
   if (rewardsAmount) {
-    const userId = parentUser._id;
-    await Rewards({
-      user: parentUser._id,
-      amount: rewardsAmount,
-      isMonthlyReward,
-    });
-    const userPurchase = await UserPurchase.findOne({ userId });
-    userPurchase.currentAmount += rewardsAmount;
-    userPurchase.save();
-    const data = {
-      senderId: userId,
-      receiverId: userId,
-      amount: rewardsAmount,
-      percent: 100,
-    };
-    const distribution = await PercentDistribution({ userId });
-    distribution.purchaseHistory.push(data);
-    distribution.save();
+    await saveRewards(parentUser._id, rewardsAmount, true, remark);
   }
 };
 
