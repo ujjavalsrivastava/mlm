@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { axios } from "../../helper/httpHelper";
 
-const PassiveIncome = () => {
+const Rewards = () => {
   const [data, setData] = useState([]);
   const rewardsFun = async () => {
     try {
@@ -20,11 +20,11 @@ const PassiveIncome = () => {
     <>
       <div class="content-wrapper">
         <div class="content-header sty-one">
-          <h1>Passive Income </h1>
+          <h1>Rewards </h1>
           <ol class="breadcrumb">
             <li>
               <a href="#" style={{ color: "black" }}>
-                Home / Passive Income 
+                Home / Rewards 
               </a>
             </li>
             {/* <li>
@@ -70,4 +70,4 @@ const PassiveIncome = () => {
     </>
   );
 };
-export default PassiveIncome;
+export default Rewards;

@@ -111,6 +111,23 @@ const SideBar = () => {
                 Wise Team Size
               </Link>
             </li>
+      
+            <li>
+              <Link to={"/passive-income"}>
+             
+              <i class="fa fa-trophy" aria-hidden="true" style={{ marginRight: "7px" }}></i>
+                Passive income
+              </Link>
+            </li>
+
+            <li>
+              <Link to={"/rewards"}>
+                 
+              <i class="fa fa-trophy" aria-hidden="true" style={{ marginRight: "7px" }}></i>
+               Rewards
+              </Link>
+            </li>
+
             <li>
               <Link to={"/change-password"}>
                 <i
@@ -121,6 +138,8 @@ const SideBar = () => {
                 Change Password
               </Link>
             </li>
+
+
             {profile && profile.role == "admin" ? (
               <>
                 <li>
