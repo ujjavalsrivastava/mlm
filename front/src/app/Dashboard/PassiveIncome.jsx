@@ -52,7 +52,7 @@ const PassiveIncome = () => {
 
       <tr>
         <th scope="row">{i + 1}</th>
-        <td>{row.name}</td>
+        <td>{row?.user?.name}</td>
         <td>{row.amount}</td>
         <td>{row.remark}</td>
         

@@ -43,7 +43,7 @@ const Rewards = () => {
     <th scope="col">Name</th>
     <th scope="col">Amount</th>
     <th scope="col">Remarks</th>
-    {/* <th scope="col">Date</th> */}
+    <th scope="col">Date</th>
   </tr>
 </thead>
 
@@ -52,11 +52,11 @@ const Rewards = () => {
 
     <tr>
       <th scope="row">{i + 1}</th>
-      <td>{row.name}</td>
+      <td>{row?.user?.name}</td>
       <td>{row.amount}</td>
       <td>{row.remark}</td>
       
-      {/* <td>{row.createdAt}</td> */}
+     <td>{row.createdAt}</td> 
       </tr>
   ):null     
       
