@@ -196,7 +196,7 @@ const Profile = () => {
                             name="mobile"
                             value={profile && profile.mobile}
                             onChange={handle}
-                            type="text"
+                            type="number"
                           />
                           {/* <span
                             class="fa fa-user form-control-feedback"
