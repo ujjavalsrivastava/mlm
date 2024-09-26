@@ -197,19 +197,28 @@ const collectUserIdsByLevel = (user, level = 1, result = {}) => {
 };
 
 const saveRewards = async (userId, amount, isMonthlyReward, remark) => {
-  await Rewards({
-    user: userId,
-    amount,
-    isMonthlyReward,
-    remark,
-  });
+  const getUserRewards = await Rewards.findOne({ userId, isMonthlyReward });
+  let amountDiff = amount;
+  if (getUserRewards) {
+    amountDiff = amount - getUserRewards.amount;
+    getUserRewards.amount = amount;
+    getUserRewards.remark = remark;
+    await getUserRewards.save();
+  } else {
+    await Rewards({
+      user: userId,
+      amount,
+      isMonthlyReward,
+      remark,
+    });
+  }
   const userPurchase = await UserPurchase.findOne({ userId });
-  userPurchase.currentAmount += amount;
+  userPurchase.currentAmount += amountDiff;
   userPurchase.save();
   const data = {
     senderId: userId,
     receiverId: userId,
-    amount,
+    amount: amountDiff,
     percent: 100,
   };
   const distribution = await PercentDistribution({ userId });
