@@ -162,7 +162,7 @@ const Profile = () => {
                             class="form-control"
                             value={profile && profile.email}
                             type="text"
-                            readOnly
+                            disabled
                           />
                           {/* <span
                             class="fa fa-user form-control-feedback"
@@ -179,7 +179,7 @@ const Profile = () => {
                             value={profile && profile.email}
                             type="text"
                             name="email"
-                            onChange={handle}
+                            disabled
                           />
                           {/* <span
                             class="fa fa-user form-control-feedback"
@@ -193,7 +193,9 @@ const Profile = () => {
                           <label class="control-label">Mobile No</label>
                           <input
                             class="form-control"
-                           
+                            name="mobile"
+                            value={profile && profile.mobile}
+                            onChange={handle}
                             type="text"
                           />
                           {/* <span
