@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { axios } from "../../helper/httpHelper";
 
-const PassiveIncome = () => {
+const Rewards = () => {
   const [data, setData] = useState([]);
   const rewardsFun = async () => {
     try {
@@ -20,11 +20,11 @@ const PassiveIncome = () => {
     <>
       <div class="content-wrapper">
         <div class="content-header sty-one">
-          <h1>Passive Income </h1>
+          <h1>Rewards </h1>
           <ol class="breadcrumb">
             <li>
               <a href="#" style={{ color: "black" }}>
-                Home / Passive Income 
+                Home / Rewards 
               </a>
             </li>
             {/* <li>
@@ -38,31 +38,32 @@ const PassiveIncome = () => {
             <div class="col-12">
             <table class="table">
   <thead class="thead-dark">
-    <tr>
-    <th scope="col">S.R</th>
-      <th scope="col">Name</th>
-      <th scope="col">Amount</th>
-      <th scope="col">Remarks</th>
-      <th scope="col">Date</th>
-    </tr>
-  </thead>
-  
-  {data && data.map((row,i) =>(
-    row.isMonthlyReward ? (
+  <tr>
+  <th scope="col">S.R</th>
+    <th scope="col">Name</th>
+    <th scope="col">Amount</th>
+    <th scope="col">Remarks</th>
+    <th scope="col">Date</th>
+  </tr>
+</thead>
 
-      <tr>
-        <th scope="row">{i + 1}</th>
-        <td>{row?.user?.name}</td>
-        <td>{row.amount}</td>
-        <td>{row.remark}</td>
-        
-        <td>{row.createdAt}</td>
-        </tr>
-    ):null     
-        
-        
-   
-   ))}
+{data && data.map((row,i) =>(
+  !row.isMonthlyReward ? (
+
+    <tr>
+      <th scope="row">{i + 1}</th>
+      <td>{row?.user?.name}</td>
+      <td>{row.amount}</td>
+      <td>{row.remark}</td>
+      
+     <td>{row.createdAt}</td> 
+      </tr>
+  ):null     
+      
+      
+ 
+ ))}
+
   
       
  
@@ -76,4 +77,4 @@ const PassiveIncome = () => {
     </>
   );
 };
-export default PassiveIncome;
+export default Rewards;

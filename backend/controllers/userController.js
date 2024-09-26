@@ -224,11 +224,11 @@ const checkUserExist = async (req, res) => {
 const getRewards = async (req, res) => {
   const isAdmin = req.user.role;
   if (isAdmin) {
-    const rewards = await Rewards.find();
+    const rewards = await Rewards.find().populate('user');
     return res.json({ rewards });
   }
   const userId = getUserId(req);
-  const rewards = await Rewards.findOne({ user: userId });
+  const rewards = await Rewards.find({ user: userId }).populate('user');;
   res.json({ rewards });
 };
 

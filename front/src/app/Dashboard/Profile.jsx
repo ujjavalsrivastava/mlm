@@ -37,7 +37,7 @@ const Profile = () => {
   }
  }
 
- console.log('Updateprofile ' + JSON.stringify(Updateprofile) )
+ console.log('profile ' + JSON.stringify(profile) )
 
   const handle =(e)=>{
     setUpdateprofile((pre)=>({
