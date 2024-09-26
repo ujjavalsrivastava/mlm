@@ -5,8 +5,15 @@ import axios1 from "axios";
 import { axios } from "../../helper/httpHelper";
 import { toast } from "react-toastify";
 const Profile = () => {
-  const dispatch = useDispatch();
-  const profile = useSelector((state) => state.profile);
+  // const dispatch = useDispatch();
+  // const profile = useSelector((state) => state.profile);
+  const [profile,setProfile] =useState(null);
+  const profileFun = async()=>{
+     const response = await axios.get("user/profile");
+  
+     setProfile(response.data);
+  }
+  console.log('profile '+profile);
   const[state,setState]= useState(null);
   const[Updateprofile,setUpdateprofile]= useState({});
  const stateFun  = async()=>{
@@ -15,7 +22,7 @@ const Profile = () => {
       "country": "India"
     });
     setState(response.data.data.states);
-    setUpdateprofile(profile.data);
+   
   }catch(error){
     console.log(error)
   }
@@ -25,7 +32,7 @@ const Profile = () => {
  const saveProfile = async(e)=>{
   e.preventDefault();
   try{
-   const response =  await axios.post('user/profile',Updateprofile);
+   const response =  await axios.post('user/profile',profile);
    console.log(response)
    if(response){
      toast.success(response.data.message)
@@ -37,21 +44,22 @@ const Profile = () => {
   }
  }
 
- console.log('profile ' + JSON.stringify(profile) )
+ 
 
   const handle =(e)=>{
-    setUpdateprofile((pre)=>({
+    setProfile((pre)=>({
       ...pre,
       [e.target.name]:e.target.value
     }))
   }
 
-
+  console.log('profile ' + JSON.stringify(profile) )
   useEffect(() => {
     stateFun();
-    if (profile?.status !== "succeeded") {
-      dispatch(fetchProfile());
-    }
+    profileFun();
+    // if (profile?.status !== "succeeded") {
+    //   dispatch(fetchProfile());
+    // }
    
   }, []);
 
@@ -137,7 +145,7 @@ const Profile = () => {
                             class="form-control"
                             name="name"
                             type="text"
-                            value={profile && profile.data.name}
+                            value={profile && profile.name}
                             onChange={handle}
                             
                           />
@@ -152,7 +160,7 @@ const Profile = () => {
                           <label class="control-label">Login Id</label>
                           <input
                             class="form-control"
-                            value={profile && profile.data.email}
+                            value={profile && profile.email}
                             type="text"
                             readOnly
                           />
@@ -168,7 +176,7 @@ const Profile = () => {
                           <label class="control-label">Email Id</label>
                           <input
                             class="form-control"
-                            value={profile && profile.data.email}
+                            value={profile && profile.email}
                             type="text"
                             name="email"
                             onChange={handle}
@@ -200,8 +208,8 @@ const Profile = () => {
                           <label class="control-label">Gender</label>
                           <select class="form-control"  name="gender"
                             onChange={handle}>
-                           <option selected={(profile.data.gender == 'Male') ?true:false}>Male</option>
-                           <option selected={(profile.data.gender == 'Female') ?true:false}>Female</option>
+                           <option selected={(profile && profile.gender == 'Male') ?true:false}>Male</option>
+                           <option selected={(profile && profile.gender == 'Female') ?true:false}>Female</option>
                             </select>
                           
                           {/* <span
@@ -216,7 +224,7 @@ const Profile = () => {
                           <label class="control-label">Date of Birth</label>
                           <input
                             class="form-control"
-                            value={profile && profile.data.dob}
+                            value={profile && profile.dob}
                             type="text"
                             name="dob"
                             onChange={handle}
@@ -233,7 +241,7 @@ const Profile = () => {
                           <label class="control-label">Country</label>
                           <select class="form-control" name="country"
                             onChange={handle}>
-                           <option>{profile && profile.data.country?profile.data.country:'India' }</option>
+                           <option>{profile && profile.country?profile.country:'India' }</option>
                             </select>
                           {/* <span
                             class="fa fa-user form-control-feedback"
@@ -249,7 +257,7 @@ const Profile = () => {
                             onChange={handle}>
                           <option>Select Option</option>
                             {state && state.map(row =>(
-                              <option selected={(row.name == profile.data.state)?true:false}>{row && row.name}</option>
+                              <option selected={(row.name == profile.state)?true:false}>{row && row.name}</option>
                             ))}
                            
                             </select>
@@ -265,7 +273,7 @@ const Profile = () => {
                           <label class="control-label">City</label>
                           <input
                             class="form-control"
-                            value= {profile && profile.data.city}
+                            value= {profile && profile.city}
                             type="text"
                             name="city"
                             onChange={handle}
@@ -286,7 +294,7 @@ const Profile = () => {
                           <label class="control-label">Pin Code</label>
                           <input
                             class="form-control"
-                           value= {profile && profile.data.pincode}
+                           value= {profile && profile.pincode}
                             type="text"
                             name="pincode"
                             onChange={handle}
@@ -304,26 +312,26 @@ const Profile = () => {
                           <select class="form-control" name="occupation"
                             onChange={handle} >
 		<option value="" >Select Occupation</option>
-		<option value="1" selected={(profile.data.occupation == '1')?true:false}>Students</option>
-		<option value="2" selected={(profile.data.occupation == '2')?true:false}>Working professionals</option>
-		<option value="3" selected={(profile.data.occupation == '3')?true:false}>Entrepreneurs</option>
-		<option value="4" selected={(profile.data.occupation == '4')?true:false}>Artists</option>
-		<option value="5" selected={(profile.data.occupation == '5')?true:false}>Healthcare workers</option>
-		<option value="6" selected={(profile.data.occupation == '6')?true:false}>Educators</option>
-		<option value="7" selected={(profile.data.occupation == '7')?true:false}>Service industry workers</option>
-		<option value="8" selected={(profile.data.occupation == '8')?true:false}>Engineers</option>
-		<option value="9" selected={(profile.data.occupation == '9')?true:false}>Lawyers</option>
-		<option value="10" selected={(profile.data.occupation == '10')?true:false}>Accountants</option>
-		<option value="11" selected={(profile.data.occupation == '11')?true:false}>Sales professionals</option>
-		<option value="12" selected={(profile.data.occupation == '12')?true:false}>Scientists</option>
-		<option value="13" selected={(profile.data.occupation == '13')?true:false}>Social workers</option>
-		<option value="14" selected={(profile.data.occupation == '14')?true:false}>Tradespeople (e.g. plumbers, electricians)</option>
-		<option value="15" selected={(profile.data.occupation == '15')?true:false}>Military personnel</option>
-		<option value="16" selected={(profile.data.occupation == '16')?true:false}>Public servants (e.g. government employees)</option>
-		<option value="17" selected={(profile.data.occupation == '17')?true:false}>Freelancers</option>
-		<option value="18" selected={(profile.data.occupation == '18')?true:false}>Information technology professionals</option>
-		<option value="19" selected={(profile.data.occupation == '19')?true:false}>Writers and journalists</option>
-		<option value="20" selected={(profile.data.occupation == '20')?true:false}>Musicians and performers</option>
+		<option value="1" selected={(profile && profile.occupation == '1')?true:false}>Students</option>
+		<option value="2" selected={(profile && profile.occupation == '2')?true:false}>Working professionals</option>
+		<option value="3" selected={(profile && profile.occupation == '3')?true:false}>Entrepreneurs</option>
+		<option value="4" selected={(profile && profile.occupation == '4')?true:false}>Artists</option>
+		<option value="5" selected={(profile && profile.occupation == '5')?true:false}>Healthcare workers</option>
+		<option value="6" selected={(profile && profile.occupation == '6')?true:false}>Educators</option>
+		<option value="7" selected={(profile && profile.occupation == '7')?true:false}>Service industry workers</option>
+		<option value="8" selected={(profile && profile.occupation == '8')?true:false}>Engineers</option>
+		<option value="9" selected={(profile && profile.occupation == '9')?true:false}>Lawyers</option>
+		<option value="10" selected={(profile && profile.occupation == '10')?true:false}>Accountants</option>
+		<option value="11" selected={(profile && profile.occupation == '11')?true:false}>Sales professionals</option>
+		<option value="12" selected={(profile && profile.occupation == '12')?true:false}>Scientists</option>
+		<option value="13" selected={(profile && profile.occupation == '13')?true:false}>Social workers</option>
+		<option value="14" selected={(profile && profile.occupation == '14')?true:false}>Tradespeople (e.g. plumbers, electricians)</option>
+		<option value="15" selected={(profile && profile.occupation == '15')?true:false}>Military personnel</option>
+		<option value="16" selected={(profile && profile.occupation == '16')?true:false}>Public servants (e.g. government employees)</option>
+		<option value="17" selected={(profile && profile.occupation == '17')?true:false}>Freelancers</option>
+		<option value="18" selected={(profile && profile.occupation == '18')?true:false}>Information technology professionals</option>
+		<option value="19" selected={(profile && profile.occupation == '19')?true:false}>Writers and journalists</option>
+		<option value="20" selected={(profile && profile.occupation == '20')?true:false}>Musicians and performers</option>
 
 	</select>
                           {/* <span
@@ -353,7 +361,7 @@ const Profile = () => {
                         <div class="form-group has-feedback">
                           <label class="control-label">Addresh</label>
                           <textarea class="form-control" name="address"
-                            onChange={handle} value={profile && profile.data.address}></textarea>
+                            onChange={handle} value={profile && profile.address}></textarea>
                           {/* <span
                             class="fa fa-user form-control-feedback"
                             aria-hidden="true"
