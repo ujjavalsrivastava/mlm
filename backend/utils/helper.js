@@ -265,9 +265,9 @@ const rewardsHandler = async (user) => {
     rewardsAmount += 19999;
   } else if (directChildMonthly > 150) {
     rewardsAmount += 14555;
-  } else if (directChildMonthly > 100) {
+  } else if (directChildMonthly > 10) {
     rewardsAmount += 9555;
-  } else if (directChildMonthly > 50) {
+  } else if (directChildMonthly > 5) {
     rewardsAmount += 4599;
   }
   if (rewardsAmount) {
