@@ -1,10 +1,10 @@
 const crypto = require("crypto");
-const { Types, ObjectId } = require("mongoose");
-const LevelPercentage = require("../models/level-percentage-model");
+const { Types } = require("mongoose");
 const User = require("../models/user-model");
 const PercentDistribution = require("../models/percentage-distribution-model");
 const UserPurchase = require("../models/purchase-history-model");
 const levels = Array.from({ length: 8 }, (_, i) => `level${i}`);
+const Rewards = require("../models/rewards-modal");
 
 const handlePromiseError = async (promise) =>
   await promise.then((data) => [null, data]).catch((error) => [error, null]);
@@ -149,6 +149,15 @@ const checkDaysCount = (date) => {
   return Math.abs(now - cTime) / (1000 * 60 * 60 * 24);
 };
 
+const sameMonth = (date) => {
+  const now = new Date();
+  const stored = new Date(date);
+  return (
+    now.getUTCMonth() === stored.getUTCMonth() &&
+    now.getUTCFullYear() === stored.getUTCFullYear()
+  );
+};
+
 const usersJoinedToday = (users) => users.filter(joinedToday);
 
 const totalAmountPipeline = (userIds) => [
@@ -187,6 +196,93 @@ const collectUserIdsByLevel = (user, level = 1, result = {}) => {
   return result;
 };
 
+const saveRewards = async (userId, amount, isMonthlyReward, remark) => {
+  const getUserRewards = await Rewards.findOne({
+    user: userId,
+    isMonthlyReward,
+  });
+
+  if (amount === getUserRewards?.amount) {
+    return;
+  }
+  let amountDiff = amount;
+  if (getUserRewards) {
+    amountDiff = amount - getUserRewards.amount;
+    getUserRewards.amount = amount;
+    getUserRewards.remark = remark;
+    await getUserRewards.save();
+  } else {
+    await Rewards({
+      user: userId,
+      amount,
+      isMonthlyReward,
+      remark,
+    }).save();
+  }
+
+  const userPurchase = await UserPurchase.findOne({ userId });
+  userPurchase.currentAmount += amountDiff;
+  userPurchase.save();
+  const data = {
+    senderId: userId,
+    receiverId: userId,
+    amount: amountDiff,
+    percent: 100,
+  };
+  const distribution = await PercentDistribution({ userId });
+  distribution.purchaseHistory.push(data);
+  distribution.save();
+};
+
+const rewardsHandler = async (user) => {
+  const parentUser = await populateLowerLevel(user);
+  const directChildCount = parentUser?.lowerLevel?.length || 0;
+  const result = collectUserIdsByLevel(parentUser);
+  let directChildMonthly = 0;
+  let totalCount = 0;
+  let rewardsAmount = 0;
+  let remark = "";
+  if (parentUser?.lowerLevel?.length) {
+    parentUser.lowerLevel.map((u) => {
+      if (sameMonth(u.createdAt)) {
+        directChildMonthly += 1;
+      }
+    });
+  }
+
+  for (let i = 1; i <= 4; i++) {
+    if (result[i] && result[i].length) {
+      totalCount += result[i].lenght;
+    }
+  }
+  if (directChildMonthly > 2700 || directChildCount > 12000) {
+    rewardsAmount += 300000;
+    remark = "300k BMW Car fund";
+  } else if (directChildMonthly > 700 || directChildCount > 3200) {
+    rewardsAmount += 60000;
+    remark = "60k Bike fund";
+  } else if (directChildMonthly > 300 || directChildCount > 1200) {
+    rewardsAmount += 10000;
+    remark = "10k SmartPhone fund";
+  }
+  if (rewardsAmount) {
+    await saveRewards(parentUser._id, rewardsAmount, false, remark);
+    rewardsAmount = 0;
+  }
+  if (directChildMonthly > 8) {
+    rewardsAmount += 19999;
+  } else if (directChildMonthly > 6) {
+    rewardsAmount += 14555;
+  } else if (directChildMonthly >= 4) {
+    rewardsAmount += 9555;
+  } else if (directChildMonthly >= 2) {
+    rewardsAmount += 4599;
+  }
+  if (rewardsAmount) {
+    await saveRewards(parentUser._id, rewardsAmount, true, remark);
+  }
+};
+
 module.exports = {
   generateReferralCode,
   populateLowerLevel,
@@ -202,4 +298,5 @@ module.exports = {
   joinedToday,
   checkDaysCount,
   collectUserIdsByLevel,
+  rewardsHandler,
 };

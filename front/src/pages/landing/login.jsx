@@ -39,79 +39,87 @@ const login = () => {
         <React.Fragment>
 
 
-    <button class="scroll__top scroll-to-target" data-target="html">
-        <i class="tg-flaticon-arrowhead-up"></i>
-    </button>
-   
+<div class="main-content page-login ">
+            <section class="section-page-login login-wrap tf-spacing-4">
+                <div class="tf-container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="img-left">
+                                <img class=" ls-is-cached" data-src=""
+                                    src="assets/images/page-title-home2-1.jpg" alt="" />
 
-    
-    <main class="main-area fix">
+                            </div>
 
-      
-        <section class="breadcrumb__area breadcrumb__bg" data-background="assets/img/bg/breadcrumb_bg.jpg" >
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="breadcrumb__content">
-                            <h3 class="title">Student Login</h3>
-                            <nav class="breadcrumb">
-                                <span property="itemListElement" typeof="ListItem">
-                                    <a href="#">Home / Login</a>
-                                </span>
-                                {/* <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
-                                <span property="itemListElement" typeof="ListItem">Login</span> */}
-                            </nav>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="breadcrumb__shape-wrap">
-                <img src="assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown" />
-                <img src="assets/img/others/breadcrumb_shape02.svg" alt="img" data-aos="fade-right" data-aos-delay="300" />
-                <img src="assets/img/others/breadcrumb_shape03.svg" alt="img" data-aos="fade-up" data-aos-delay="400" />
-                <img src="assets/img/others/breadcrumb_shape04.svg" alt="img" data-aos="fade-down-left" data-aos-delay="400" />
-                <img src="assets/img/others/breadcrumb_shape05.svg" alt="img" data-aos="fade-left" data-aos-delay="400" />
-            </div>
-        </section>
-       
-        <section class="singUp-area section-py-120">
-            <div class="container">
-                <div class="row justify-content-center" style={{marginTop:'-178px'}}> 
-                    <div class="col-xl-6 col-lg-8">
-                        <div class="singUp-wrap">
-                            <h2 class="title">Welcome back!</h2>
-                            <p>Hey there! Ready to log in? Just enter your username and password below and you'll be back in action in no time. Let's go!</p>
+                        <div class="col-lg-6">
+                            <div class="content-right ">
+                                
+                                <h2 class="login-title fw-7 ">
+                                    Sign In To Your Account
+                                </h2>
+                                <div class="register">
+                                    <p class="fw-5 fs-15 " >Don’t have an account?</p>
+                                    <a href="#" class="fw-5 fs-15 " >Join here</a>
+                                </div>
+                                <form onSubmit={submitLogin} class="form-login">
+                                    <div class="cols">
+                                        <fieldset class="tf-field field-username " >
+                                        <input
+                            type="email"
+                            onChange={handle}
+                            
+                            id="email"
+                            required
+                            name="email"
+                            placeholder="email..."
+                            class="tf-input style-1"
+                          />
+                                           
+                                            <label class="tf-field-label fs-15" for="field1">Username Or Email</label>
+                                        </fieldset>
+                                    </div>
+                                    <div class="cols">
+                                        <fieldset class="tf-field field-pass " >
+                                        <input
+                            type="password"
+                            onChange={handle}
                            
-                            <form onSubmit={submitLogin} class="account__form">
-                                <div class="form-grp">
-                                    <label for="email">Email</label>
-                                    <input id="email" type="text" placeholder="email" name="email" onChange={handle}/>
-                                </div>
-                                <div class="form-grp">
-                                    <label for="password">Password</label>
-                                    <input id="password" type="password" placeholder="password" name="password"  onChange={handle}/>
-                                </div>
-                                <div class="account__check">
-                                    <div class="account__check-remember">
-                                        <input type="checkbox" class="form-check-input" value="" id="terms-check" />
-                                        <label for="terms-check" class="form-check-label">Remember me</label>
+                            id="email"
+                            required
+                            name="password"
+                            placeholder="password..."
+                            class="tf-input style-1"
+                          />
+                                            
+                                            <label class="tf-field-label fs-15" for="field2">Password</label>
+                                        </fieldset>
                                     </div>
-                                    <div class="account__check-forgot">
-                                        <a href="registration.html">Forgot Password?</a>
+                                    <div class="checkbox-item">
+                                        <label class="" >
+                                            <p class="fs-15">Remember me</p>
+                                            <input type="checkbox"/>
+                                            <span class="btn-checkbox"></span>
+                                        </label>
+                                        <a href="#" class="fs-15 " data-wow-delay="0.1s">Forgot your
+                                            password?</a>
                                     </div>
-                                </div>
-                                <button type="submit" class="btn btn-two arrow-btn">Sign In<img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable" /> </button>
-                            </form>
-                            <div class="account__switch">
-                                <p>Don't have an account?<Link to={'/register'}>Sign Up</Link></p>
+
+                                    <button class=" button-submit tf-btn w-100 " 
+                                        type="submit">
+                                        Log In<i class="icon-arrow-top-right"></i>
+                                    </button>
+                                </form>
+
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-      
-    </main>
+                
+            </section>
+
+
+        </div>
 
 
         </React.Fragment>

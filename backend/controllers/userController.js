@@ -6,12 +6,14 @@ const {
   populateLowerLevel,
   joinedToday,
   getUserId,
+  rewardsHandler,
 } = require("../utils/helper");
 const UserPurchase = require("../models/purchase-history-model");
 const PercentDistribution = require("../models/percentage-distribution-model");
 const path = require("path");
 const fs = require("fs");
 const bankDetails = require("../models/bank-details-model");
+const Rewards = require("../models/rewards-modal");
 
 const createUser = async (req, res) => {
   const { email, name, password, referalCode } = req.body;
@@ -42,6 +44,7 @@ const createUser = async (req, res) => {
       await referedUser.save();
     }
     await UserPurchase({ userId: savedUser._id, currentAmount: 0 }).save();
+    await rewardsHandler(referedUser);
     await PercentDistribution({ userId: savedUser._id }).save();
     await bankDetails({ email, user: savedUser._id }).save();
     return res.status(200).json({ message: "user created successfully" });
@@ -218,6 +221,18 @@ const checkUserExist = async (req, res) => {
   res.json({ inValid: !!user });
 };
 
+const getRewards = async (req, res) => {
+  const isAdmin = req.user.role==='admin';
+ 
+  if (isAdmin) {
+    const rewards = await Rewards.find().populate('user');
+    return res.json({ rewards });
+  }
+  const userId = getUserId(req);
+  const rewards = await Rewards.find({ user: userId }).populate('user');;
+  res.json({ rewards });
+};
+
 module.exports = {
   createUser,
   loginHandler,
@@ -229,4 +244,5 @@ module.exports = {
   getProfilePicture,
   getInvoice,
   checkUserExist,
+  getRewards,
 };

@@ -10,6 +10,7 @@ const {
   getProfilePicture,
   getInvoice,
   checkUserExist,
+  getRewards,
 } = require("../controllers/userController");
 
 const {
@@ -63,5 +64,6 @@ router.get("/profile-picture", tryCatch(asyncHandler(getProfilePicture)));
 router.get("/invoice", tryCatch(asyncHandler(getInvoice)));
 router.get("/valid", tryCatch(asyncHandler(checkUserExist)));
 router.get("/level-earning", tryCatch(asyncHandler(getEachLevelEarning)));
+router.get("/rewards", tryCatch(asyncHandler(getRewards)));
 
 module.exports = router;

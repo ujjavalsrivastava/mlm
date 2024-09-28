@@ -200,74 +200,23 @@ console.log('data...........'+data);
 
   return (
     <React.Fragment>
-      <main class="main-area fix">
-        <section
-          class="breadcrumb__area breadcrumb__bg"
-          data-background="assets/img/bg/breadcrumb_bg.jpg"
-        >
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <div class="breadcrumb__content">
-                  <h3 class="title">Student Signup</h3>
-                  <nav class="breadcrumb">
-                    <span property="itemListElement" typeof="ListItem">
-                      <a href="index-2.html">Home / Signup</a>
-                    </span>
-                    {/* <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
-                                <span property="itemListElement" typeof="ListItem">Login</span> */}
-                  </nav>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="breadcrumb__shape-wrap">
-            <img
-              src="assets/img/others/breadcrumb_shape01.svg"
-              alt="img"
-              class="alltuchtopdown"
-            />
-            <img
-              src="assets/img/others/breadcrumb_shape02.svg"
-              alt="img"
-              data-aos="fade-right"
-              data-aos-delay="300"
-            />
-            <img
-              src="assets/img/others/breadcrumb_shape03.svg"
-              alt="img"
-              data-aos="fade-up"
-              data-aos-delay="400"
-            />
-            <img
-              src="assets/img/others/breadcrumb_shape04.svg"
-              alt="img"
-              data-aos="fade-down-left"
-              data-aos-delay="400"
-            />
-            <img
-              src="assets/img/others/breadcrumb_shape05.svg"
-              alt="img"
-              data-aos="fade-left"
-              data-aos-delay="400"
-            />
-          </div>
-        </section>
+      <div class="main-content page-register">
+            <section class="section-page-register login-wrap tf-spacing-4">
+                <div class="tf-container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="img-left " >
+                                <img class=" ls-is-cached lazyloaded"
+                                   
+                                     src="assets/images/page-title-home2-1.jpg" alt="" />
 
-        <section class="singUp-area section-py-0">
-          <div class="container">
-            <div
-              class="row justify-content-center"
-              style={{ marginTop: "-45px" }}
-            >
-              <div class="col-xl-6 col-lg-8">
-                <div class="singUp-wrap">
-                  <h2 class="title">Create Your Account</h2>
-                  <p>
-                    Hey there! Ready to join the party? We just need a few
-                    details from you to get <br /> started. Let's do this!
-                  </p>
-                  <div class="signup_head">
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="content-right">
+                            
+                            <div class="signup_head">
                     <div
                       class={
                         level == 1
@@ -286,6 +235,7 @@ console.log('data...........'+data);
                       <img
                         src={line}
                         class="head_line"
+                        style={{width:'60px'}}
                       />
                     </div>
                     <div
@@ -306,6 +256,7 @@ console.log('data...........'+data);
                       <img
                         src={line}
                         class="head_line"
+                        style={{width:'60px'}}
                       />
                     </div>
                     <div
@@ -323,40 +274,51 @@ console.log('data...........'+data);
                       <h6>Payment info</h6>
                     </div>
                   </div>
-                  {level == 1 ? (
-                    <>
-                      <form onSubmit={submitLogin} class="account__form">
-                        <div class="row gutter-20">
-                          <div class="col-md-12">
-                            <div class="form-grp">
-                              <label for="fast-name">Referral Code</label>
-                              <input
+                                <h2 class="login-title fw-7 " >
+                                    Create A New Account
+                                </h2>
+                                <div class="register">
+                                    <p class="fw-5 fs-15 " >Already have an account?</p>
+                                    <a href="#" class="fw-5 fs-15 " >Sign in</a>
+                                </div>
+                                {level == 1 ? (
+                                <>
+                                <form onSubmit={submitLogin} class="form-login">
+                                    <div class="cols">
+                                        <fieldset class="tf-field field-username" >
+                                          
+                                                 <input
                                 type="text"
+                                 class="tf-input style-1"
                                 onChange={handle}
                                 name="referalCode"
                                 value={referral}
                                 placeholder="Referral Code"
+                                required="" 
                               />
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-grp">
-                              <label for="fast-name"> Name</label>
-                              <input
+                                            <label class="tf-field-label fs-15" for="field1">Referral Code</label>
+                                        </fieldset>
+                                    </div>
+                                    <div class="cols">
+                                        <fieldset class="tf-field field-email " >
+                                        <input
                                 type="text"
+                                  class="tf-input style-1"
                                 onChange={handle}
                                 id="fast-name"
                                 required
                                 name="name"
                                 placeholder="Name..."
                               />
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-grp">
-                              <label for="last-name">Mobile </label>
-                              <input
+                                            <label class="tf-field-label fs-15" for="field2">Name</label>
+                                        </fieldset>
+                                    </div>
+                                    <div class="cols">
+                                        <fieldset class="tf-field field-pass " >
+
+                                        <input
                                 type="number"
+                                class="tf-input style-1"
                                 onChange={handle}
                                 onBlur={handleEmail}
                                 id="last-name"
@@ -365,12 +327,13 @@ console.log('data...........'+data);
                                 maxLength={10}
                                 placeholder="Mobile..."
                               />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="form-grp">
-                          <label for="email">Email</label>
-                          <input
+                                          
+                                            <label class="tf-field-label fs-15" for="field3">Mobile</label>
+                                        </fieldset>
+                                    </div>
+                                    <div class="cols">
+                                        <fieldset class="tf-field field-pass-again " >
+                                        <input
                             type="email"
                             onChange={handle}
                             onBlur={handleEmail}
@@ -378,22 +341,36 @@ console.log('data...........'+data);
                             required
                             name="email"
                             placeholder="email..."
+                            class="tf-input style-1"
                           />
-                        </div>
-                        <div class="form-grp">
-                          <label for="email">Confirm Email</label>
-                          <input
+                                          
+                                            <label class="tf-field-label fs-15" for="field4">Email</label>
+                                        </fieldset>
+                                    </div>
+
+
+                                    <div class="cols">
+                                        <fieldset class="tf-field field-pass-again " >
+                                        <input
                             type="email"
+                            onChange={handle}
+                            onBlur={handleEmail}
                             id="email"
                             required
                             name="cemail"
-                            placeholder="Confirm email..."
+                            placeholder="email..."
+                            class="tf-input style-1"
                           />
-                        </div>
-                        <div class="form-grp">
-                          <label for="email">Gender</label>
-                          <select
-                            class="form-control"
+                                          
+                                            <label class="tf-field-label fs-15" for="field4">Confirm Email</label>
+                                        </fieldset>
+                                    </div>
+
+
+                                    <div class="cols">
+                                        <fieldset class="tf-field field-pass-again " >
+                                        <select
+                             class="form-control"
                             name="gender"
                             required
                             onChange={handle}
@@ -402,10 +379,15 @@ console.log('data...........'+data);
                             <option> Male</option>
                             <option> Female</option>
                           </select>
-                        </div>
-                        <div class="form-grp">
-                          <label for="email">State</label>
-                          <select
+                                          
+                                            <label class="tf-field-label fs-15" for="field4">Gender</label>
+                                        </fieldset>
+                                    </div>
+
+
+                                    <div class="cols">
+                                        <fieldset class="tf-field field-pass-again " >
+                                        <select
                             class="form-control"
                             name="state"
                             required
@@ -417,10 +399,16 @@ console.log('data...........'+data);
                                 <option>{row && row.name}</option>
                               ))}
                           </select>
-                        </div>
-                        <div class="form-grp">
-                          <label for="password">Password</label>
-                          <input
+                                          
+                                            <label class="tf-field-label fs-15" for="field4">State</label>
+                                        </fieldset>
+                                    </div>
+
+
+                                    <div class="cols">
+                                        <fieldset class="tf-field field-pass-again " >
+                                        <input
+                                        class="tf-input style-1"
                             type="password"
                             id="password"
                             name="password"
@@ -428,518 +416,109 @@ console.log('data...........'+data);
                             required
                             placeholder="password"
                           />
-                        </div>
-                        <div class="form-grp">
-                          <label for="confirm-password">Confirm Password</label>
-                          <input
+                                          
+                                            <label class="tf-field-label fs-15" for="field4">Password</label>
+                                        </fieldset>
+                                    </div>
+
+
+                                    <div class="cols">
+                                        <fieldset class="tf-field field-pass-again " >
+                                        <input
+                                        class="tf-input style-1"
                             type="password"
                             id="confirm-password"
                             name="cpassword"
                             required
                             placeholder="Confirm Password"
                           />
-                        </div>
-                        <button
-                          type="submit"
-                          class="btn btn-two arrow-btn"
-                          disabled={error}
-                          style={{ marginBottom: "20px" }}
-                        >
-                          Proceed to Course Selection
-                          <img
-                            src="assets/img/icons/right_arrow.svg"
-                            alt="img"
-                            class="injectable"
-                          />
-                        </button>
-                      </form>
-                    </>
+                                          
+                                            <label class="tf-field-label fs-15" for="field4">Confirm Password</label>
+                                        </fieldset>
+                                    </div>
+                                    <button class=" button-submit tf-btn w-100 " 
+                                        type="submit">
+                                        Proceed to Course Selection<i class="icon-arrow-top-right"></i>
+                                    </button>
+                                </form>
+
+                                </>
                   ) : null}
 
-                  <div className="tab-content" id="myTabContent">
-                    {level == 2 ? (
-                      <>
-                        <div
-                          className="tab-pane fade show active"
-                          id="grid"
-                          role="tabpanel"
-                          aria-labelledby="grid-tab"
-                        >
-                          <div className="">
-                            {course &&
-                              course.map((row) => (
-                                <div className={style.cal}>
-                                  <div className="courses__item shine__animate-item">
-                                    <div className="courses__item-thumb">
-                                      <a
-                                        href="course-details.html"
-                                        className="shine__animate-link"
-                                      >
-                                        <img
-                                          src={row.pictures.base_link}
-                                          alt="img"
-                                        />
-                                      </a>
-                                    </div>
-                                    <div className="courses__item-content">
-                                      <ul className="courses__item-meta list-wrap">
-                                        <li className="courses__item-tag">
-                                          <a href="course.html">Development</a>
-                                        </li>
-                                        <li className="avg-rating">
-                                          <i className="fas fa-star"></i> (4.8
-                                          Reviews)
-                                        </li>
-                                      </ul>
+                      
 
-                                      <h5 className="title">
-                                        <Link
-                                          to={`/courses-details-all/${row.courseId}`}
-                                        >
-                                          {row.name}
-                                        </Link>
-                                      </h5>
-                                      <p className="author">
-                                        By <a href="#">David Millar</a>
-                                      </p>
-                                      <div className="courses__item-bottom">
-                                        <div className="button">
-                                          {/* <a href="course-details.html">
-                                          <span className="text">
-                                            Enroll Now
-                                          </span>
-                                          <i className="flaticon-arrow-right"></i>
-                                        </a> */}
+                                <div class="swiper-slide">
+
+                                {level == 2 ? (
+                                     <>
+
+                                {course &&
+                              course.map((row) => (
+                                        <div class="course-item hover-img style-2 h240">
+                                            <div class="features image-wrap">
+                                                <img class="lazyload" data-src={row.pictures.base_link}
+                                                    src={row.pictures.base_link} alt="" />
+
+                                            </div>
+                                            <div class="content">
+
+                                                <h5 class="fw-5 line-clamp-2">
+                                                    <a href="#"> {row.name} </a>
+                                                </h5>
+
+                                                <div class="author">
+                                                    By:
+                                                    <a href="#" class="author">
+                                                        Digital Duniyaa</a>
+                                                </div>
+                                                <div class="bottom">
+                                                    <div class="h6 price fw-5">₹{row.price.toFixed(2)}</div>
+                                                    <a href="course-single-v2.html" class="tf-btn-arrow"><span
+                                                            class="fw-5 fs-15">Buy Now</span>
+                                                        <i class="icon-arrow-top-right"></i></a>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <h5 className="price">
-                                          {row.price.toFixed(2)}
-                                        </h5>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              ))}
-                          </div>
-                          <nav className="pagination__wrap mt-30">
-                            <button
-                              type="button"
-                              onClick={() => setlevel(level + 1)}
-                              class="btn btn-two arrow-btn"
-                              style={{ marginBottom: "20px" }}
-                            >
-                              Make Payment for 2499
-                              <img
-                                src="assets/img/icons/right_arrow.svg"
-                                alt="img"
-                                class="injectable"
-                              />
-                            </button>
-                          </nav>
-                        </div>
-                      </>
+                                     ))}
+                                        <button class=" button-submit tf-btn w-100 " 
+                                        type="button"  onClick={() => setlevel(level + 1)}>
+                                        Select Course Boundle<i class="icon-arrow-top-right"></i>
+                                    </button>
+
+                                    </>
                     ) : null}
 
                     {level == 3 ? (
                       <>
-                        <div>
-                          <img
-                            src="assets/img/raza.png"
+                                    <div>
+                                <img
+                            src="public/dist/img/raza.png"
                             alt="img"
                             class="injectable center"
                           />
-                          <nav className="pagination__wrap mt-30">
-                            <button
-                              type="button"
-                              onClick={() => orderCreate("2499")}
-                              class="btn btn-two arrow-btn"
-                            >
-                              Make Payment
-                              <img
-                                src="assets/img/icons/right_arrow.svg"
-                                alt="img"
-                                class="injectable"
-                              />
-                            </button>
-                          </nav>
-                        </div>
-                      </>
-                    ) : null}
-                    <div
-                      className="tab-pane fade"
-                      id="list"
-                      role="tabpanel"
-                      aria-labelledby="list-tab"
-                    >
-                      <div className="row courses__list-wrap row-cols-1">
-                        <div className={style.cal}>
-                          <div className="courses__item courses__item-three shine__animate-item">
-                            <div className="courses__item-thumb">
-                              <a
-                                href="course-details.html"
-                                className="shine__animate-link"
-                              >
-                                <img
-                                  src="assets/img/courses/course_thumb01.jpg"
-                                  alt="img"
-                                />
-                              </a>
-                            </div>
-                            <div className="courses__item-content">
-                              <ul className="courses__item-meta list-wrap">
-                                <li className="courses__item-tag">
-                                  <a href="course.html">Development</a>
-                                  <div className="avg-rating">
-                                    <i className="fas fa-star"></i> (4.8
-                                    Reviews)
-                                  </div>
-                                </li>
-                                <li className="price">
-                                  <del>$29.00</del>$15.00
-                                </li>
-                              </ul>
-                              <h5 className="title">
-                                <a href="course-details.html">
-                                  Resolving Conflicts Between Designers And
-                                  Engineers
-                                </a>
-                              </h5>
-                              <p className="author">
-                                By <a href="#">David Millar</a>
-                              </p>
-                              <p className="info">
-                                when an unknown printer took a galley of type
-                                and scrambled type specimen book It has survived
-                                not only.
-                              </p>
-                              <div className="courses__item-bottom">
-                                <div className="button">
-                                  <a href="course-details.html">
-                                    <span className="text">Enroll Now</span>
-                                    <i className="flaticon-arrow-right"></i>
-                                  </a>
+                           <button class=" button-submit tf-btn w-100 " 
+                                        type="button"  onClick={() => orderCreate("2499")}>
+                                        Make Payment for 2499<i class="icon-arrow-top-right"></i>
+                                    </button>
+
                                 </div>
-                              </div>
+
+                                </>
+) : null}
+                                 
+                                    </div>
+
+
+                                 
+
                             </div>
-                          </div>
                         </div>
-                        <div className={style.cal}>
-                          <div className="courses__item courses__item-three shine__animate-item">
-                            <div className="courses__item-thumb">
-                              <a
-                                href="course-details.html"
-                                className="shine__animate-link"
-                              >
-                                <img
-                                  src="assets/img/courses/course_thumb02.jpg"
-                                  alt="img"
-                                />
-                              </a>
-                            </div>
-                            <div className="courses__item-content">
-                              <ul className="courses__item-meta list-wrap">
-                                <li className="courses__item-tag">
-                                  <a href="course.html">Design</a>
-                                  <div className="avg-rating">
-                                    <i className="fas fa-star"></i> (4.5
-                                    Reviews)
-                                  </div>
-                                </li>
-                                <li className="price">$41.00</li>
-                              </ul>
-                              <h5 className="title">
-                                <a href="course-details.html">
-                                  Powerful Image Optimization Tools for this
-                                  year
-                                </a>
-                              </h5>
-                              <p className="author">
-                                By <a href="#">Jenny Wilson</a>
-                              </p>
-                              <p className="info">
-                                when an unknown printer took a galley of type
-                                and scrambled type specimen book It has survived
-                                not only.
-                              </p>
-                              <div className="courses__item-bottom">
-                                <div className="button">
-                                  <a href="course-details.html">
-                                    <span className="text">Enroll Now</span>
-                                    <i className="flaticon-arrow-right"></i>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className={style.cal}>
-                          <div className="courses__item courses__item-three shine__animate-item">
-                            <div className="courses__item-thumb">
-                              <a
-                                href="course-details.html"
-                                className="shine__animate-link"
-                              >
-                                <img
-                                  src="assets/img/courses/course_thumb03.jpg"
-                                  alt="img"
-                                />
-                              </a>
-                            </div>
-                            <div className="courses__item-content">
-                              <ul className="courses__item-meta list-wrap">
-                                <li className="courses__item-tag">
-                                  <a href="course.html">Marketing</a>
-                                  <div className="avg-rating">
-                                    <i className="fas fa-star"></i> (4.6
-                                    Reviews)
-                                  </div>
-                                </li>
-                                <li className="price">
-                                  <del>$24.00</del>$12.00
-                                </li>
-                              </ul>
-                              <h5 className="title">
-                                <a href="course-details.html">
-                                  Learning JavaScript With Imagination
-                                </a>
-                              </h5>
-                              <p className="author">
-                                By <a href="#">Wade Warren</a>
-                              </p>
-                              <p className="info">
-                                when an unknown printer took a galley of type
-                                and scrambled type specimen book It has survived
-                                not only.
-                              </p>
-                              <div className="courses__item-bottom">
-                                <div className="button">
-                                  <a href="course-details.html">
-                                    <span className="text">Enroll Now</span>
-                                    <i className="flaticon-arrow-right"></i>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className={style.cal}>
-                          <div className="courses__item courses__item-three shine__animate-item">
-                            <div className="courses__item-thumb">
-                              <a
-                                href="course-details.html"
-                                className="shine__animate-link"
-                              >
-                                <img
-                                  src="assets/img/courses/course_thumb04.jpg"
-                                  alt="img"
-                                />
-                              </a>
-                            </div>
-                            <div className="courses__item-content">
-                              <ul className="courses__item-meta list-wrap">
-                                <li className="courses__item-tag">
-                                  <a href="course.html">Finance</a>
-                                  <div className="avg-rating">
-                                    <i className="fas fa-star"></i> (4.9
-                                    Reviews)
-                                  </div>
-                                </li>
-                                <li className="price">
-                                  <del>$32.00</del>$19.00
-                                </li>
-                              </ul>
-                              <h5 className="title">
-                                <a href="course-details.html">
-                                  Resolving Conflicts Between Designers And
-                                  Engineers
-                                </a>
-                              </h5>
-                              <p className="author">
-                                By <a href="#">Robert Fox</a>
-                              </p>
-                              <p className="info">
-                                when an unknown printer took a galley of type
-                                and scrambled type specimen book It has survived
-                                not only.
-                              </p>
-                              <div className="courses__item-bottom">
-                                <div className="button">
-                                  <a href="course-details.html">
-                                    <span className="text">Enroll Now</span>
-                                    <i className="flaticon-arrow-right"></i>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className={style.cal}>
-                          <div className="courses__item courses__item-three shine__animate-item">
-                            <div className="courses__item-thumb">
-                              <a
-                                href="course-details.html"
-                                className="shine__animate-link"
-                              >
-                                <img
-                                  src="assets/img/courses/course_thumb05.jpg"
-                                  alt="img"
-                                />
-                              </a>
-                            </div>
-                            <div className="courses__item-content">
-                              <ul className="courses__item-meta list-wrap">
-                                <li className="courses__item-tag">
-                                  <a href="course.html">Data Science</a>
-                                  <div className="avg-rating">
-                                    <i className="fas fa-star"></i> (4.7
-                                    Reviews)
-                                  </div>
-                                </li>
-                                <li className="price">
-                                  <del>$50.00</del>$40.00
-                                </li>
-                              </ul>
-                              <h5 className="title">
-                                <a href="course-details.html">
-                                  A Look At Remix And The Differences With
-                                  Next.js
-                                </a>
-                              </h5>
-                              <p className="author">
-                                By <a href="#">Guy Hawkins</a>
-                              </p>
-                              <p className="info">
-                                when an unknown printer took a galley of type
-                                and scrambled type specimen book It has survived
-                                not only.
-                              </p>
-                              <div className="courses__item-bottom">
-                                <div className="button">
-                                  <a href="course-details.html">
-                                    <span className="text">Enroll Now</span>
-                                    <i className="flaticon-arrow-right"></i>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className={style.cal}>
-                          <div className="courses__item courses__item-three shine__animate-item">
-                            <div className="courses__item-thumb">
-                              <a
-                                href="course-details.html"
-                                className="shine__animate-link"
-                              >
-                                <img
-                                  src="assets/img/courses/course_thumb06.jpg"
-                                  alt="img"
-                                />
-                              </a>
-                            </div>
-                            <div className="courses__item-content">
-                              <ul className="courses__item-meta list-wrap">
-                                <li className="courses__item-tag">
-                                  <a href="course.html">Mathematic</a>
-                                  <div className="avg-rating">
-                                    <i className="fas fa-star"></i> (4.8
-                                    Reviews)
-                                  </div>
-                                </li>
-                                <li className="price">
-                                  <del>$30.00</del>$19.00
-                                </li>
-                              </ul>
-                              <h5 className="title">
-                                <a href="course-details.html">
-                                  An Accessibility-First Approach To Chart
-                                  Visual
-                                </a>
-                              </h5>
-                              <p className="author">
-                                By <a href="#">Sawpawlo Mark</a>
-                              </p>
-                              <p className="info">
-                                when an unknown printer took a galley of type
-                                and scrambled type specimen book It has survived
-                                not only.
-                              </p>
-                              <div className="courses__item-bottom">
-                                <div className="button">
-                                  <a href="course-details.html">
-                                    <span className="text">Enroll Now</span>
-                                    <i className="flaticon-arrow-right"></i>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className={style.cal}>
-                          <div className="courses__item courses__item-three shine__animate-item">
-                            <div className="courses__item-thumb">
-                              <a
-                                href="course-details.html"
-                                className="shine__animate-link"
-                              >
-                                <img
-                                  src="assets/img/courses/course_thumb07.jpg"
-                                  alt="img"
-                                />
-                              </a>
-                            </div>
-                            <div className="courses__item-content">
-                              <ul className="courses__item-meta list-wrap">
-                                <li className="courses__item-tag">
-                                  <a href="course.html">Development</a>
-                                  <div className="avg-rating">
-                                    <i className="fas fa-star"></i> (4.6
-                                    Reviews)
-                                  </div>
-                                </li>
-                                <li className="price">$11.00</li>
-                              </ul>
-                              <h5 className="title">
-                                <a href="course-details.html">
-                                  How To Build A Localized Website With Hugo And
-                                  Strapi
-                                </a>
-                              </h5>
-                              <p className="author">
-                                By <a href="#">Robert Fox</a>
-                              </p>
-                              <p className="info">
-                                when an unknown printer took a galley of type
-                                and scrambled type specimen book It has survived
-                                not only.
-                              </p>
-                              <div className="courses__item-bottom">
-                                <div className="button">
-                                  <a href="course-details.html">
-                                    <span className="text">Enroll Now</span>
-                                    <i className="flaticon-arrow-right"></i>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      {/* <nav className="pagination__wrap mt-30">
-                                    <ul className="list-wrap">
-                                        <li className="active"><a href="#">1</a></li>
-                                        <li><a href="courses.html">2</a></li>
-                                        <li><a href="courses.html">3</a></li>
-                                        <li><a href="courses.html">4</a></li>
-                                    </ul>
-                                </nav> */}
                     </div>
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
+            </section>
+
+
+        </div>
     </React.Fragment>
   );
 };

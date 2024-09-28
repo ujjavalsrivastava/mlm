@@ -1,115 +1,77 @@
 const footer =()=>{
     return (
         <>
-          <footer className="footer__area">
-        <div className="footer__top">
-            <div className="container">
-                <div className="row">
-                    <div className="col-xl-3 col-lg-4 col-md-6">
-                        <div className="footer__widget">
-                            <div className="logo mb-35">
-                                <a href="index-2.html"><img src="assets/img/logo/logo.png" alt="img" /></a>
-                            </div>
-                            <div className="footer__content">
-                                <p>when an unknown printer took galley of type and scrambled it to make pspecimen bookt has.</p>
-                                <ul className="list-wrap">
-                                    <li>463 7th Ave, NY 10018, USA</li>
-                                    <li>+123 88 9900 456</li>
-                                </ul>
+         <footer id="footer" class="footer style-2">
+                <div class="footer-wrap">
+                    <div class="footer-body">
+                        <div class="tf-container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="footer-body-wrap flex justify-between">
+                                        <div class="footer-more-infor">
+                                            <div class="footer-logo" style={{visibility: 'hidden'}}>
+                                                <a href="#">
+                                                    <img src="images/logo/logo.svg" alt="" />
+                                                </a>
+                                            </div>
+                                            <p class="pb-3">MD Digital Duniyaa Pvt. Ltd. is a leading digital solutions company dedicated to 
+                                                empowering youth by providing digital income opportunities through skill development courses and classes.</p>
+                                            <ul class="tf-social-icon flex items-center gap-10 pt-3">
+                                                <li>
+                                                    <a href="#"><i class="flaticon-facebook-1"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="icon-twitter"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="flaticon-instagram"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="flaticon-linkedin-1"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="footer-menu-list">
+                                            <h5 class="fw-5">Company</h5>
+                                            <ul>
+                                                <li><a href="about.html">About</a></li>
+                                                <li><a href="course-grid-basic.html">Courses</a></li>
+                                                <li><a href="instructor-list.html">Instructor</a></li>
+                                                <li><a href="event-list.html">Events</a></li>
+                                                <li><a href="become-teacher.html">Become a teacher</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="footer-menu-list">
+                                            <h5 class="fw-5">Useful Links</h5>
+                                            <ul>
+                                                <li><a href="#">Testimonials</a></li>
+                                                <li><a href="pricing.html">Pricing</a></li>
+                                                <li><a href="faq.html">FAQs</a></li>
+                                                <li><a href="help-center.html">Help Center</a></li>
+                                                <li><a href="terms.html">Terms</a></li>
+                                                <li><a href="#">Sitemap</a></li>
+                                                <li><a href="#">Privacy</a></li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                        <div className="footer__widget">
-                            <h4 className="footer__widget-title">Useful Links</h4>
-                            <div className="footer__link">
-                                <ul className="list-wrap">
-                                    <li><a href="events-details.html">Our values</a></li>
-                                    <li><a href="events-details.html">Our advisory board</a></li>
-                                    <li><a href="events-details.html">Our partners</a></li>
-                                    <li><a href="events-details.html">Become a partner</a></li>
-                                    <li><a href="events-details.html">Work at Future Learn</a></li>
-                                    <li><a href="events-details.html">Quizlet Plus</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                        <div className="footer__widget">
-                            <h4 className="footer__widget-title">Our Company</h4>
-                            <div className="footer__link">
-                                <ul className="list-wrap">
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="instructor-details.html">Become Teacher</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="instructor-details.html">Instructor</a></li>
-                                    <li><a href="events-details.html">Events</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-xl-3 col-lg-4 col-md-6">
-                        <div className="footer__widget">
-                            <h4 className="footer__widget-title">Get In Touch</h4>
-                            <div className="footer__contact-content">
-                                <p>when an unknown printer took <br /> galley type and scrambled</p>
-                                <ul className="list-wrap footer__social">
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/facebook.svg" alt="img" className="injectable" />
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/twitter.svg" alt="img" className="injectable" />
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/whatsapp.svg" alt="img" className="injectable" />
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/instagram.svg" alt="img" className="injectable" />
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="assets/img/icons/youtube.svg" alt="img" className="injectable"/>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="app-download">
-                                <a href="#"><img src="assets/img/others/google-play.svg" alt="img" /></a>
-                                <a href="#"><img src="assets/img/others/apple-store.svg" alt="img" /></a>
+                    <div class="footer-bottom">
+                        <div class="tf-container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="footer-bottom-wrap flex justify-center items-center">
+                                        <p>© 2024 DigitalDuniyaa.in (A Unit of MD Digital Duniyaa Pvt. Ltd.). All Rights Reserved</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div className="footer__bottom">
-            <div className="container">
-                <div className="row align-items-center">
-                    <div className="col-md-7">
-                        <div className="copy-right-text">
-                            <p>© 2010-2024 skillgro.com. All rights reserved.</p>
-                        </div>
-                    </div>
-                    <div className="col-md-5">
-                        <div className="footer__bottom-menu">
-                            <ul className="list-wrap">
-                                <li><a href="contact.html">Term of Use</a></li>
-                                <li><a href="contact.html">Privacy Policy</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+            </footer>
         </>
     )
 }
