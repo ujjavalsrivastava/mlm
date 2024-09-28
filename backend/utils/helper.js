@@ -197,7 +197,14 @@ const collectUserIdsByLevel = (user, level = 1, result = {}) => {
 };
 
 const saveRewards = async (userId, amount, isMonthlyReward, remark) => {
-  const getUserRewards = await Rewards.findOne({ userId, isMonthlyReward });
+  const getUserRewards = await Rewards.findOne({
+    user: userId,
+    isMonthlyReward,
+  });
+
+  if (amount === getUserRewards?.amount) {
+    return;
+  }
   let amountDiff = amount;
   if (getUserRewards) {
     amountDiff = amount - getUserRewards.amount;
@@ -210,8 +217,9 @@ const saveRewards = async (userId, amount, isMonthlyReward, remark) => {
       amount,
       isMonthlyReward,
       remark,
-    });
+    }).save();
   }
+
   const userPurchase = await UserPurchase.findOne({ userId });
   userPurchase.currentAmount += amountDiff;
   userPurchase.save();
@@ -265,9 +273,9 @@ const rewardsHandler = async (user) => {
     rewardsAmount += 19999;
   } else if (directChildMonthly > 150) {
     rewardsAmount += 14555;
-  } else if (directChildMonthly > 10) {
+  } else if (directChildMonthly > 100) {
     rewardsAmount += 9555;
-  } else if (directChildMonthly > 5) {
+  } else if (directChildMonthly > 50) {
     rewardsAmount += 4599;
   }
   if (rewardsAmount) {
