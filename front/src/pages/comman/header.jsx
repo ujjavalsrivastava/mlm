@@ -25,141 +25,255 @@ const header = () => {
 
     return (
         <>
-         <header>
-        <div className="tg-header__top">
-            <div className="container custom-container">
-                <div className="row">
-                    <div className="col-lg-6">
-                        <ul className="tg-header__top-info list-wrap">
-                            <li><img src="assets/img/icons/map_marker.svg" alt="Icon" /> <span>589 5th Ave, NY 10024, USA</span></li>
-                            <li><img src="assets/img/icons/envelope.svg" alt="Icon" /> <a href="mailto:info@skillgrodemo.com">info@skillgrodemo.com</a></li>
-                        </ul>
-                    </div>
-                    <div className="col-lg-6">
-                        <div className="tg-header__top-right">
-                            <div className="tg-header__phone">
-                                <img src="assets/img/icons/phone.svg" alt="Icon" />Call us: <a href="tel:0123456789">+123 599 8989</a>
-                            </div>
-                            <ul className="tg-header__top-social list-wrap">
-                                <li>Follow Us On :</li>
-                                <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i className="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i className="fab fa-whatsapp"></i></a></li>
-                                <li><a href="#"><i className="fab fa-linkedin-in"></i></a></li>
-                                <li><a href="#"><i className="fab fa-youtube"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
+        
+    
+      
+        <div class="tf-top-bar flex items-center justify-center">
+            <p>A Unit of MD Digital Duniyaa Pvt. Ltd.</p>
         </div>
-        <div id="header-fixed-height"></div>
-        <div id="sticky-header" className="tg-header__area">
-            <div className="container custom-container">
-                <div className="row">
-                    <div className="col-12">
-                        <div className="tgmenu__wrap">
-                            <nav className="tgmenu__nav">
-                                <div className="logo">
-                                    <Link to={'/'}><img src="assets/img/logo/logo.png" alt="Logo" /></Link>
-                                </div>
-                                <div className="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
-                                    <ul className="navigation">
-                                        <li className=""><Link to={'/'}>Home</Link>
-                                           
-                                        </li>
-                                        <li className="active menu-item-has-children"><a href="#">Courses</a>
-                                            <ul className="sub-menu">
-                                                <li className="active"><Link to={'/courses'}>All Courses</Link></li>
-                                                {/* <li><a href="course-details.html">Course Details</a></li>
-                                                <li><a href="lesson.html">Course Lesson</a></li> */}
-                                            </ul>
-                                        </li>
-                                        <li className=""><Link to={'/about-us'}>About us</Link>
-                                           
-                                        </li>
-                                        <li className=""><Link to={'/blogs'}>Blog</Link>
-                                           
-                                           </li>
-                                        
-                                    </ul>
-                                </div>
+       
+     
+        <header id="header_main" class="header">
+                <div class="header-inner">
+                    <div class="header-inner-wrap">
+                        <div class="header-left">
+                            <a class="mobile-nav-toggler mobile-button d-lg-none flex" href="#menu"></a>
+                            <div id="site-logo">
                                 
-                                <div className="tgmenu__action">
-                                    <ul className="list-wrap">
-                                        <li className="wishlist-icon">
-                                            <a href="cart.html" className="cart-count">
-                                                <img src="assets/img/icons/heart.svg" className="injectable" alt="img" />
-                                                <span className="wishlist-count">0</span>
-                                            </a>
-                                        </li>
-                                        <li className="mini-cart-icon">
-                                            <a href="cart.html" className="cart-count">
-                                                <img src="assets/img/icons/cart.svg" className="injectable" alt="img" />
-                                                <span className="mini-cart-count">0</span>
-                                            </a>
-                                        </li>
-                                        <li className="header-btn login-btn">
-                                            
-                                        
-                                            {profile ? (<>
-                                                <div class="dropdown show">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  {profile.name}
-  </a>
+                            <Link to={'/'}>
+                                    <img id="logo-header" src="assets/images/dg-logo.svg" alt="" />
+                             </Link>
+                            </div>
+                        </div>
+                        <div class="header-center flex-shrink-0">
+                            <nav class="main-menu">
+                                <ul class="navigation">
+                                <li><a href="shop-list.html">Home</a></li>
+                                    <li class="has-children">
+                                        <a href="javascript:void(0);">Our Couress</a>
+                                        <ul>
+                                            <li><a href="#">Instructor List</a></li>
+                                            <li><a href="#">Instructor Single</a></li>
+                                            <li><a href="#">Becomer a Teacher</a></li>
+                                            <li><a href="#">Event List </a></li>
+                                            <li><a href="#">Event Single</a></li>
 
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="#">Log Out</a>
-  
-  </div>
-</div>
-                                            </>)  : (<Link to={'login'}>Log in</Link>)}
-                                            
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            
-                                <div className="mobile-login-btn">
-                                    <a href="login.html"><img src="assets/img/icons/user.svg" alt="" className="injectable" /></a>
-                                </div>
-                                <div className="mobile-nav-toggler"><i className="tg-flaticon-menu-1"></i></div>
+                                        </ul>
+                                    </li>
+                                    <li><a href="shop-list.html">About Us</a></li>
+                                    <li><a href="shop-list.html">Contact</a></li>
+                                </ul>
                             </nav>
                         </div>
-                      
-                        <div className="tgmobile__menu">
-                            <nav className="tgmobile__menu-box">
-                                <div className="close-btn"><i className="tg-flaticon-close-1"></i></div>
-                                <div className="nav-logo">
-                                    <a href="#"><img src="assets/img/logo/logo.png" alt="Logo" /></a>
+                        <div class="header-right justify-end">
+   
+                            <a href="#" class="header-cart flex items-center justify-center">
+                                <i class="icon-shopcart fs-18"></i>
+                            </a>
+                            <div class="header-btn">
+                                <div class="header-login">
+                                    <Link to={'/login'}>
+                                    <a href="#" class="tf-button-default header-text">Log In</a>
+                                    </Link>
                                 </div>
-                                <div className="tgmobile__search">
-                                    <form action="#">
-                                        <input type="text" placeholder="Search here..." />
-                                        <button><i className="fas fa-search"></i></button>
-                                    </form>
+                                <div class="header-register">
+                                <Link to={'/register'}>
+                                    <a href="#" class="tf-button-default active header-text">Sign Up</a>
+                                    </Link>
                                 </div>
-                                <div className="tgmobile__menu-outer">
-                                  
+                                <div class="header-join d-lg-none flex">
+                                <Link to={'/login'}>
+                                    <a href="#" class="fs-15">Join</a>
+                                    </Link>
                                 </div>
-                                <div className="social-links">
-                                    <ul className="list-wrap">
-                                        <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i className="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i className="fab fa-instagram"></i></a></li>
-                                        <li><a href="#"><i className="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="#"><i className="fab fa-youtube"></i></a></li>
-                                    </ul>
-                                </div>
-                            </nav>
+                            </div>
                         </div>
-                        <div className="tgmobile__menu-backdrop"></div>
-                     
                     </div>
                 </div>
-            </div>
-        </div>
-    </header>
+                <nav class="d-lg-none" id="menu">
+                    <a class="close" aria-label="Close menu" href="#wrapper">
+                        <i class="flaticon-close-1"></i>
+                    </a>
+                    <ul>
+                        <li>
+                            <span>Categories</span>
+                            <ul>
+                                <li>
+                                    <span>Graphics & Design</span>
+                                    <ul>
+                                        <li><a href="categories.html">Human Resources</a></li>
+                                        <li><a href="categories.html">Operations</a></li>
+                                        <li>
+                                            <a href="categories.html">Supply Chain Management</a>
+                                        </li>
+                                        <li>
+                                            <a href="categories.html">Customer Service</a>
+                                        </li>
+                                        <li><a href="categories.html">Manufacturing</a></li>
+                                        <li>
+                                            <a href="categories.html">Health And Safety</a>
+                                        </li>
+                                        <li>
+                                            <a href="categories.html">Quality Management</a>
+                                        </li>
+                                        <li><a href="categories.html">E-commerce</a></li>
+                                        <li><a href="categories.html">Management</a></li>
+                                        <li><a href="categories.html">Sales</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span>Digital Marketing</span>
+                                    <ul>
+                                        <li><a href="categories.html">Human Resources</a></li>
+                                                                          </ul>
+                                  </li>
+                            </ul>
+                        </li>
+                        <li class="current">
+                            <span>Home</span>
+                            <ul>
+                                <li>
+                                    <a href="index-2.html">Home Page 01</a>
+                                </li>
+                                <li><a href="home-02.html">Home Page 02</a></li>
+                                <li><a href="home-03.html">Home Page 03</a></li>
+                                <li><a href="home-04.html">Home Page 04</a></li>
+                                <li><a href="home-05.html">Home Page 05</a></li>
+                                <li><a href="home-06.html">Home Page 06</a></li>
+                                <li class="current"><a href="home-07.html">Home Page 07</a></li>
+                                <li><a href="home-08.html">Home Page 08</a></li>
+                                <li><a href="home-09.html">Home Page 09</a></li>
+                                <li><a href="home-10.html">Home Page 10</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>Courses</span>
+                            <ul>
+                                <li>
+                                    <span>Course List</span>
+                                    <ul>
+                                        <li>
+                                            <a href="course-grid-basic.html">Course Grid Basic</a>
+                                        </li>
+                                        <li>
+                                            <a href="course-grid-modern.html">Course Grid Modern</a>
+                                        </li>
+                                        <li>
+                                            <a href="course-grid-left-sidebar.html">Course Grid Left Sidebar</a>
+                                        </li>
+                                        <li>
+                                            <a href="course-grid-right-sidebar.html">Course Grid Right Sidebar</a>
+                                        </li>
+                                        <li>
+                                            <a href="course-list-sidebar.html">Course List Sidebar</a>
+                                        </li>
+                                        <li>
+                                            <a href="all-list-style.html">Course All List Style</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span>Course Single</span>
+                                    <ul>
+                                        <li>
+                                            <a href="course-single-v1.html">Course Single 01</a>
+                                        </li>
+                                        <li>
+                                            <a href="course-single-v2.html">Course Single 02</a>
+                                        </li>
+                                        <li>
+                                            <a href="course-single-v3.html">Course Single 03</a>
+                                        </li>
+                                        <li>
+                                            <a href="course-single-v4.html">Course Single 04</a>
+                                        </li>
+                                        <li>
+                                            <a href="course-single-v5.html">Course Single 05</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span>Course Category</span>
+                                    <ul>
+                                        <li>
+                                            <a href="property-single-v1.html">Coaching</a>
+                                        </li>
+                                        <li>
+                                            <a href="categories.html">Categories</a>
+                                        </li>
+                                        <li>
+                                            <a href="categories.html">Online Business</a>
+                                        </li>
+                                        <li>
+                                            <a href="categories.html">Photography</a>
+                                        </li>
+                                        <li>
+                                            <a href="categories.html">Music & Audio</a>
+                                        </li>
+                                        <li>
+                                            <a href="categories.html">Photography</a>
+                                        </li>
+                                        <li>
+                                            <a href="categories.html">Programming & Tech</a>
+                                        </li>
+                                        <li>
+                                            <a href="categories.html">Graphics & Design</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>Pages</span>
+                            <ul>
+                                <li><a href="#">Instructor List</a></li>
+                                <li><a href="instructor-single.html">Instructor Single</a></li>
+                                <li><a href="become-teacher.html">Become a Teacher</a></li>
+                                <li><a href="event-list.html">Event List </a></li>
+                                <li><a href="event-single.html">Event Single</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="help-center.html">Help Center</a></li>
+                                <li><a href="pricing.html">Pricing</a></li>
+                                <li><a href="faq.html">Faq</a></li>
+                                <li><a href="terms.html">Terms</a></li>
+                                <li><a href="404.html">404</a></li>
+                                <li><a href="login.html">Login</a></li>
+                                <li><a href="register.html">Register</a></li>
+                                <li><a href="instructor-dashboard.html">Instructor Dashboard</a></li>
+                                <li><a href="student-dashboard.html">Student Dashboard</a></li>
+                                <li><a href="ui-elements.html">UI elements</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>Blog</span>
+                            <ul>
+                                <li><a href="blog-grid.html">Blog Grid</a></li>
+                                <li>
+                                    <a href="blog-list-v1.html">Blog List 01</a>
+                                </li>
+                                <li>
+                                    <a href="blog-list-v2.html">Blog List 02</a>
+                                </li>
+                                <li>
+                                    <a href="blog-single.html">Blog Single</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>Shop</span>
+                            <ul>
+                                <li><a href="shop-list.html">Shop List</a></li>
+                                <li><a href="shop-single.html">Shop Single</a></li>
+                                <li><a href="shop-cart.html">Shop Cart</a></li>
+                                <li><a href="shop-checkout.html">Shop Checkout</a></li>
+                                <li><a href="shop-order.html">Shop Order</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
         </>
     )
 }

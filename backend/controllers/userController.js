@@ -222,7 +222,8 @@ const checkUserExist = async (req, res) => {
 };
 
 const getRewards = async (req, res) => {
-  const isAdmin = req.user.role;
+  const isAdmin = req.user.role==='admin';
+ 
   if (isAdmin) {
     const rewards = await Rewards.find().populate('user');
     return res.json({ rewards });
