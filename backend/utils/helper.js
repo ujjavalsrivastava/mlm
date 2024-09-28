@@ -269,6 +269,7 @@ const rewardsHandler = async (user) => {
     await saveRewards(parentUser._id, rewardsAmount, false, remark);
     rewardsAmount = 0;
   }
+
   if (directChildMonthly > 8) {
     rewardsAmount += 19999;
   } else if (directChildMonthly > 6) {
@@ -276,6 +277,7 @@ const rewardsHandler = async (user) => {
   } else if (directChildMonthly >= 4) {
     rewardsAmount += 9555;
   } else if (directChildMonthly >= 2) {
+
     rewardsAmount += 4599;
   }
   if (rewardsAmount) {
