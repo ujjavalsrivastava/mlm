@@ -10,11 +10,8 @@ const Layout = () => {
       <Header />
       <SideBar />
       <Outlet />
-     
-          <Footer />
-        
-       </div>  
-         
+      <Footer />
+    </div>
   );
 };
 

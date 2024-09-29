@@ -173,7 +173,6 @@ a:focus {
   transition: none;
 }
 .content {
-  min-height: 250px;
   padding: 15px;
   margin-right: auto;
   margin-left: auto;
@@ -6643,28 +6642,28 @@ canvas {
   border-radius: 8px;
   width: 600;
   height: 800;
- }
+}
 
- .scroll {
+.scroll {
   overflow: auto;
 }
 
 .scroll:active::-webkit-scrollbar-thumb,
 .scroll:focus::-webkit-scrollbar-thumb,
 .scroll:hover::-webkit-scrollbar-thumb {
-    visibility: visible;
+  visibility: visible;
 }
 .scroll::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
-    visibility: hidden;
+  background-color: darkgrey;
+  visibility: hidden;
 }
 
 .scroll::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+  width: 4px;
+  height: 4px;
 }
 
-.closebtn{
+.closebtn {
   border: hidden;
   background: white;
   color: black;
@@ -6706,9 +6705,7 @@ canvas {
   cursor: pointer;
 }
 
-.testimgblur{
-    color: #787777;
-    filter: blur(1px);
+.testimgblur {
+  color: #787777;
+  filter: blur(1px);
 }
-
-

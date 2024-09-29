@@ -2715,6 +2715,14 @@ select {
   /* width: auto; */
 }
 
+.swiper-wrapper .sliderElement {
+  /* width: 33%; */
+}
+
+.carousel-home {
+  width: 50%;
+  margin: 10px auto;
+}
 .widget-saying-list .swiper-slide {
   margin-top: 20px;
 }
@@ -14811,6 +14819,7 @@ instructors-item
 .darksky .tf-accordion-default {
   background-color: #fff;
 }
+
 /*-------------- Responsive ----------------- */
 /* Media Queries
 -------------------------------------------------------------- */
