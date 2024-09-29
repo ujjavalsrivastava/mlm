@@ -71,9 +71,14 @@ const Rewards = () => {
 
         <div class="content">
           <div class="row">
-          <div class="col-4">
+          <div class="col-lg-4 col-sm-12">
             <table class="table">
   <thead class="thead-dark">
+  <tr>
+    <th colspan="3" style={{textAlign:'center'}}> Direct Team</th>
+
+      
+    </tr>
     <tr>
     <th scope="col">S.R</th>
       <th scope="col">Name</th>
@@ -104,9 +109,12 @@ const Rewards = () => {
 
             </div>
 
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-12">
             <table class="table">
   <thead class="thead-dark">
+  <tr>
+    <th colspan="3" style={{textAlign:'center'}}> 1 to 4 Level Team</th>
+    </tr>
     <tr>
     <th scope="col">S.R</th>
       <th scope="col">Name</th>
@@ -137,9 +145,12 @@ const Rewards = () => {
 
             </div>
 
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-12">
             <table class="table">
   <thead class="thead-dark">
+  <tr>
+    <th colspan="5" style={{textAlign:'center'}}> Reward Income</th>
+    </tr>
   <tr>
   <th scope="col">S.R</th>
     <th scope="col">Name</th>

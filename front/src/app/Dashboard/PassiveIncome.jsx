@@ -74,9 +74,12 @@ const PassiveIncome = () => {
 
 
 
-          <div class="col-6">
+          <div class="col-lg-6 col-sm-12">
             <table class="table">
   <thead class="thead-dark">
+  <tr>
+    <th colspan="3" style={{textAlign:'center'}}> Direct Team</th>
+    </tr>
     <tr>
     <th scope="col">S.R</th>
       <th scope="col">Name</th>
@@ -107,9 +110,12 @@ const PassiveIncome = () => {
 
             </div>
 
-            <div class="col-6">
+            <div class="col-lg-6 col-sm-12">
             <table class="table">
   <thead class="thead-dark">
+  <tr>
+    <th colspan="5" style={{textAlign:'center'}}> Reward Income</th>
+    </tr>
     <tr>
     <th scope="col">S.R</th>
       <th scope="col">Name</th>
