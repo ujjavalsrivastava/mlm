@@ -298,7 +298,7 @@ const MemberDashboard = () => {
                           {group && group.totalGroupUser.toFixed(2)}
                         </h1>
                         <span class="progress-description">
-                          All Team Sise
+                          All Team Size
                         </span>
                       </div>
                       <div class="progress">

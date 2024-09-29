@@ -34,21 +34,21 @@ const footer =()=>{
                                         <div class="footer-menu-list">
                                             <h5 class="fw-5">Company</h5>
                                             <ul>
-                                                <li><a href="about.html">About</a></li>
-                                                <li><a href="course-grid-basic.html">Courses</a></li>
-                                                <li><a href="instructor-list.html">Instructor</a></li>
-                                                <li><a href="event-list.html">Events</a></li>
-                                                <li><a href="become-teacher.html">Become a teacher</a></li>
+                                                <li><a href="#">About</a></li>
+                                                <li><a href="#">Courses</a></li>
+                                                <li><a href="#">Instructor</a></li>
+                                                <li><a href="#">Events</a></li>
+                                                <li><a href="#">Become a teacher</a></li>
                                             </ul>
                                         </div>
                                         <div class="footer-menu-list">
                                             <h5 class="fw-5">Useful Links</h5>
                                             <ul>
                                                 <li><a href="#">Testimonials</a></li>
-                                                <li><a href="pricing.html">Pricing</a></li>
-                                                <li><a href="faq.html">FAQs</a></li>
-                                                <li><a href="help-center.html">Help Center</a></li>
-                                                <li><a href="terms.html">Terms</a></li>
+                                                <li><a href="#">Pricing</a></li>
+                                                <li><a href="#">FAQs</a></li>
+                                                <li><a href="#">Help Center</a></li>
+                                                <li><a href="#">Terms</a></li>
                                                 <li><a href="#">Sitemap</a></li>
                                                 <li><a href="#">Privacy</a></li>
                                             </ul>

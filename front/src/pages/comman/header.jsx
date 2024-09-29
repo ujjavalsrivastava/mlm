@@ -49,7 +49,7 @@ const header = () => {
                         <div class="header-center flex-shrink-0">
                             <nav class="main-menu">
                                 <ul class="navigation">
-                                <li><a href="shop-list.html">Home</a></li>
+                                <li><a href="#">Home</a></li>
                                     <li class="has-children">
                                         <a href="javascript:void(0);">Our Couress</a>
                                         <ul>
@@ -61,8 +61,8 @@ const header = () => {
 
                                         </ul>
                                     </li>
-                                    <li><a href="shop-list.html">About Us</a></li>
-                                    <li><a href="shop-list.html">Contact</a></li>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Contact</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -264,7 +264,7 @@ const header = () => {
                         <li>
                             <span>Shop</span>
                             <ul>
-                                <li><a href="shop-list.html">Shop List</a></li>
+                                <li><a href="#">Shop List</a></li>
                                 <li><a href="shop-single.html">Shop Single</a></li>
                                 <li><a href="shop-cart.html">Shop Cart</a></li>
                                 <li><a href="shop-checkout.html">Shop Checkout</a></li>
