@@ -12,9 +12,52 @@ const Rewards = () => {
   const [AllTimeDirectTeam, setAllTimeDirectTeam] = useState(0);
   
   const dispatch = useDispatch();
-
+  
   const lowerLevels = lowerProfiles?.data[0]?.lowerLevel || [];
-  console.log('dddd '+ JSON.stringify(lowerLevels));
+  const [userArr, setUserArr] = useState([]);
+
+  useEffect(() => {
+    const fetchUserEarnings = async () => {
+      let serialNo = 1; // Initialize the serial number
+
+      // Recursive function to process each row and its nested rows
+      const processRow = async (row) => {
+        const response = await axios.get(`user/percent-earning?userId=${row._id}`);
+
+        // Create the current row with the serial number
+        const rows = [
+          <tr key={serialNo}> {/* Using serialNo as a key ensures unique keys */}
+            <td>{serialNo}</td>
+            <td>{row.name}</td>
+            <td>{response.data.overallEarning.toFixed(2)}</td>
+          </tr>,
+        ];
+        serialNo++; // Increment the serial number after processing the row
+
+        // If there are nested rows, process them recursively
+        if (row.lowerLevel && row.lowerLevel.length > 0) {
+          for (const lowerRow of row.lowerLevel) {
+            rows.push(...(await processRow(lowerRow)));
+          }
+        }
+
+        return rows;
+      };
+
+      // Process all top-level rows sequentially to ensure the correct order
+      const resultRows = [];
+      for (const row of lowerLevels) {
+        resultRows.push(...(await processRow(row)));
+      }
+
+      setUserArr(resultRows); // Set the final result in the state
+    };
+
+    fetchUserEarnings();
+  }, [lowerLevels]);
+
+
+ 
 
   const rewardsFun = async () => {
     try {
@@ -43,7 +86,6 @@ const Rewards = () => {
       dispatch(fetchLowerProfiles());
     }
   }, []);
-
   useEffect(() => {
     if (usersTotalEarnings.length !== lowerLevels.length) {
       const userIds = lowerLevels.map((u) => u._id);
@@ -98,7 +140,9 @@ const Rewards = () => {
                                       (u) => u.userId === lUser._id
                                     )?.totalEarning || 0
                                   }` || "₹0"
-                                : "₹0"}</td>
+                                : "₹0"}
+                                
+          </td>
 
         </tr>
      ))}
@@ -122,22 +166,9 @@ const Rewards = () => {
       
     </tr>
   </thead>
-  
-  {lowerLevels.map((lUser , i) => (
+  {userArr}
 
-      <tr>
-        <th scope="row">{i + 1}</th>
-        <td>{lUser.name}</td>
-        <td>   {usersTotalEarnings.length
-                                ? `₹${
-                                    usersTotalEarnings.find(
-                                      (u) => u.userId === lUser._id
-                                    )?.totalEarning || 0
-                                  }` || "₹0"
-                                : "₹0"}</td>
 
-        </tr>
-     ))}
       
  
 </table>
