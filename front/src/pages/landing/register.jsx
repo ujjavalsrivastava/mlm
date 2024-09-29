@@ -367,31 +367,35 @@ console.log('data...........'+data);
                                     </div>
 
 
-                                    <div class="cols">
+                                    <div class="cols" style={{marginTop:'-15px'}}>
                                         <fieldset class="tf-field field-pass-again " >
+                                        <label class="tf-field-label fs-15" for="field4">Gender</label><br /><br />
                                         <select
                              class="form-control"
                             name="gender"
                             required
                             onChange={handle}
+                            style={{marginTop:'-5px'}}
                           >
                             <option value=""> select Option</option>
                             <option> Male</option>
                             <option> Female</option>
                           </select>
                                           
-                                            <label class="tf-field-label fs-15" for="field4">Gender</label>
+                                           
                                         </fieldset>
                                     </div>
 
 
-                                    <div class="cols">
+                                    <div class="cols" style={{marginTop:'-17px'}}>
                                         <fieldset class="tf-field field-pass-again " >
+                                        <label class="tf-field-label fs-15" for="field4">State</label>
                                         <select
                             class="form-control"
                             name="state"
                             required
                             onChange={handle}
+                            style={{marginTop:'50px'}}
                           >
                             <option value=""> select State</option>
                             {state &&
@@ -400,7 +404,7 @@ console.log('data...........'+data);
                               ))}
                           </select>
                                           
-                                            <label class="tf-field-label fs-15" for="field4">State</label>
+                                          
                                         </fieldset>
                                     </div>
 
