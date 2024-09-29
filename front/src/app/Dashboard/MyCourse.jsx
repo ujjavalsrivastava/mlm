@@ -15,6 +15,14 @@ const MyCourse = () => {
     }
     
   }
+  const truncate = (str, num) => {
+    if (str.length <= num) {
+      return str;
+    }
+    return str.slice(0, num) + "...";
+  };
+
+
 
  
 
@@ -45,9 +53,10 @@ const MyCourse = () => {
               <Link to={`/course-details/${row.courseId}`}>   
                   <div class="info-box">
                     <div class="info-box-content">
-                    <img src={row.pictures?.base_link} alt="" class="responsive img-fluid img-thumbnail step1" />
+                    
+                    <img src={row.pictures?.base_link} alt="" class="responsive img-fluid img-thumbnail step1" style={{height:'156px', width:'260px'}}/>
                     </div>
-                     <span style={{textAligh:'center',color:'black',marginLeft:'40px',textTransform: 'capitalize', fontWeight: 'bold'}}>{row.name}</span> 
+                     <span style={{textAligh:'center',color:'black',textTransform: 'capitalize', fontWeight: 'bold'}} title={row.name}> {truncate(row.name, 35)} </span>
                  
                   </div>
                   </Link>
