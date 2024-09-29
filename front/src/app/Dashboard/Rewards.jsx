@@ -1,8 +1,21 @@
 import { useEffect, useState } from "react";
 import { axios } from "../../helper/httpHelper";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLowerProfiles } from "../../store/lowerLevel";
 
 const Rewards = () => {
   const [data, setData] = useState([]);
+
+
+  const lowerProfiles = useSelector((state) => state.levels);
+  const [usersTotalEarnings, setUsersTotalEarnings] = useState([]);
+  const [AllTimeDirectTeam, setAllTimeDirectTeam] = useState(0);
+  
+  const dispatch = useDispatch();
+
+  const lowerLevels = lowerProfiles?.data[0]?.lowerLevel || [];
+  console.log('dddd '+ JSON.stringify(lowerLevels));
+
   const rewardsFun = async () => {
     try {
       const response = await axios.get("user/rewards");
@@ -12,9 +25,32 @@ const Rewards = () => {
     }
   };
 
+  const fetchUsersEarnings = async (userIds) => {
+    try {
+      const response = await axios({
+        method: "get",
+        url: `user/total-earning?userId=${userIds.join(",")}`,
+      });
+      if (response.data?.length) {
+        setUsersTotalEarnings(response.data);
+      }
+    } catch (error) {}
+  };
+
   useEffect(() => {
     rewardsFun();
+    if (lowerProfiles.status !== "succeeded") {
+      dispatch(fetchLowerProfiles());
+    }
   }, []);
+
+  useEffect(() => {
+    if (usersTotalEarnings.length !== lowerLevels.length) {
+      const userIds = lowerLevels.map((u) => u._id);
+
+      userIds.length && fetchUsersEarnings(userIds);
+    }
+  }, [lowerLevels]);
 
   return (
     <>
@@ -35,7 +71,73 @@ const Rewards = () => {
 
         <div class="content">
           <div class="row">
-            <div class="col-12">
+          <div class="col-4">
+            <table class="table">
+  <thead class="thead-dark">
+    <tr>
+    <th scope="col">S.R</th>
+      <th scope="col">Name</th>
+      <th scope="col">Amount</th>
+      
+    </tr>
+  </thead>
+  
+  {lowerLevels.map((lUser , i) => (
+
+      <tr>
+        <th scope="row">{i + 1}</th>
+        <td>{lUser.name}</td>
+        <td>   {usersTotalEarnings.length
+                                ? `₹${
+                                    usersTotalEarnings.find(
+                                      (u) => u.userId === lUser._id
+                                    )?.totalEarning || 0
+                                  }` || "₹0"
+                                : "₹0"}</td>
+
+        </tr>
+     ))}
+      
+ 
+</table>
+
+
+            </div>
+
+            <div class="col-4">
+            <table class="table">
+  <thead class="thead-dark">
+    <tr>
+    <th scope="col">S.R</th>
+      <th scope="col">Name</th>
+      <th scope="col">Amount</th>
+      
+    </tr>
+  </thead>
+  
+  {lowerLevels.map((lUser , i) => (
+
+      <tr>
+        <th scope="row">{i + 1}</th>
+        <td>{lUser.name}</td>
+        <td>   {usersTotalEarnings.length
+                                ? `₹${
+                                    usersTotalEarnings.find(
+                                      (u) => u.userId === lUser._id
+                                    )?.totalEarning || 0
+                                  }` || "₹0"
+                                : "₹0"}</td>
+
+        </tr>
+     ))}
+      
+ 
+</table>
+
+
+            </div>
+
+            <div class="col-4">
             <table class="table">
   <thead class="thead-dark">
   <tr>
