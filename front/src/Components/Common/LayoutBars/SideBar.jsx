@@ -111,6 +111,13 @@ const SideBar = () => {
                 Wise Team Size
               </Link>
             </li>
+
+            <li>
+              <Link to={"/invoice"}>
+                <i class="fa fa-steam" style={{ marginRight: "7px" }}></i> Invoice
+                
+              </Link>
+            </li>
       
             <li>
               <Link to={"/passive-income"}>
