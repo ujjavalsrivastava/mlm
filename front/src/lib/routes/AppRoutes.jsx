@@ -19,6 +19,8 @@ import Login from "../../pages/landing/login";
 import Register from "../../pages/landing/register";
 import Aboutus from "../../pages/landing/aboutUs";
 import Blog from "../../pages/landing/Blog";
+import Disclaimer from "../../pages/landing/Disclaimer";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -32,6 +34,8 @@ const router = createBrowserRouter(
       <Route path="/blogs" element={<Blog />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/disclaimer" element={<Disclaimer />} />
+      
       </Route>
 
       <Route element={<RouteAuth />}>
