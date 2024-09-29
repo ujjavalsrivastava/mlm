@@ -34,6 +34,8 @@ const referal = () => {
     }
     if (profile?.status !== "succeeded") {
       dispatch(fetchProfile());
+      setText(profile.data?.referalCode);
+      setText1(`${window.location.origin}/register?referralCode=${profile.data && profile.data?.referalCode}`);
     }else{
       
     }
