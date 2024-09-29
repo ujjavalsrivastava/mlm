@@ -37,15 +37,16 @@ const footer =()=>{
                                         <div class="footer-menu-list">
                                             <h5 class="fw-5">Company</h5>
                                             <ul>
-                                                <li><a href="#">About</a></li>
-                                                <li><a href="#">Contact us</a></li>
+                                            <li><Link to={'/about-us'}>About Us </Link> </li>
+                                            <li><Link to={'/contact-us'}>Contact Us </Link> </li>
 ?
                                             </ul>
                                         </div>
                                         <div class="footer-menu-list">
                                             <h5 class="fw-5">Useful Links</h5>
                                             <ul>
-                                                <li><Link to={'/disclaimer'}>Disclaimer Refund Policy</Link> </li>
+                                                <li><Link to={'/disclaimer'}>Disclaimer </Link> </li>
+                                                <li><Link to={'/refund'}> Refund Policy</Link> </li>
                                                 
                                             </ul>
                                         </div>
