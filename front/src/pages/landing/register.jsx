@@ -501,7 +501,7 @@ console.log('data...........'+data);
                             class="injectable center"
                           />
                            <button class=" button-submit tf-btn w-100 " 
-                                        type="button"  onClick={() => orderCreate("2499")}>
+                                        type="button"  onClick={() => orderCreate("2948.82")}>
                                         Make Payment for 2499<i class="icon-arrow-top-right"></i>
                                     </button>
 
