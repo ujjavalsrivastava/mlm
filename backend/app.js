@@ -5,7 +5,7 @@ const levelPercent = require("./routes/level-percentage");
 const kycRoute = require("./routes/kyc-route");
 const { userRoutes, productRoutes, videoRoutes } = require("./routes");
 const connectDB = require("./config/connection");
-
+const path =  require("path");
 const morgan = require("morgan");
 (async () => {
   require("./config/connection");
@@ -15,6 +15,7 @@ const morgan = require("morgan");
   app.use(
     cors({
       origin: [  
+        "http://localhost:5173",
         "http://35.154.235.131:80"
       ],
 
@@ -56,9 +57,17 @@ const morgan = require("morgan");
     res.status(500).send({ error: err.message });
   });
 
-  app.use("/", (req, res) => {
-    res.status(200).json({ status: "success", message: "Route not defined" });
-  });
+  // app.use("/", (req, res) => {
+  //   res.status(200).json({ status: "success", message: "Route not defined" });
+  // });
+
+  
+app.use(express.static(path.join(__dirname, './../front/dist')));
+
+// Catch all handler for React routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + './../front/dist/index.html'));
+});
 
   connectDB()
     .then(() => {
