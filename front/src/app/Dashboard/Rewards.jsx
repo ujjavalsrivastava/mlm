@@ -23,13 +23,13 @@ const Rewards = () => {
       const processRow = async (row, serial, depth) => {
         if (depth > 4) return []; // Stop if depth exceeds 4
 
-        const response = await axios.get("user/percent-earning?userId=" + row._id);
+      //  const response = await axios.get("user/percent-earning?userId=" + row._id);
         
         const currentRow = (
           <tr key={serial.current}>
             <td>{serial.current++}</td> {/* Increment the serial number */}
             <td>{row.name}</td>
-            <td>{response.data.overallEarning}</td>
+
           </tr>
         );
 
@@ -56,7 +56,6 @@ const Rewards = () => {
 
     fetchUserEarnings();
   }, [lowerLevels]);
-
 
 
  
@@ -159,12 +158,12 @@ const Rewards = () => {
             <table class="table">
   <thead class="thead-dark">
   <tr>
-    <th colspan="3" style={{textAlign:'center'}}> 1 to 4 Level Team</th>
+    <th colspan="2" style={{textAlign:'center'}}> 1 to 4 Level Team</th>
     </tr>
     <tr>
     <th scope="col">S.R</th>
       <th scope="col">Name</th>
-      <th scope="col">Amount</th>
+     
       
     </tr>
   </thead>
