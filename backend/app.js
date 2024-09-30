@@ -15,7 +15,7 @@ const morgan = require("morgan");
   app.use(
     cors({
       origin: [  
-        "http://35.154.235.131:443"
+        "http://35.154.235.131:80"
       ],
 
       credentials: true,
