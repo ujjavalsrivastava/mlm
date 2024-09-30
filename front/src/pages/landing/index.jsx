@@ -37,7 +37,7 @@ function Landing() {
                   <div className="col-12">
                     <div className="content">
                       <div>
-                        <div className="widget box-sub-tag fade-item fade-item-1 ">
+                        <div className="widget box-sub-tag  ">
                           <div className="sub-tag-icon">
                             <i className="icon-flash"></i>
                           </div>
@@ -45,17 +45,19 @@ function Landing() {
                             <p>We are Digital Duniyaa</p>
                           </div>
                         </div>
-                        <h1
-                          className="fade-item fade-item-1 fw-7 "
-                          style={{ textShadow: "0 2px black" }}
-                        >
-                          हुनर से शिखर तक
-                        </h1>
-                        <div className="bottom-btns fade-item fade-item-1">
-                          <a href="#" className="tf-btn style-secondary">
-                            View Our Programs
-                            <i className="icon-arrow-top-right"></i>
-                          </a>
+                        <div data-aos-duration="1000">
+                          <h1
+                            className="fw-7 "
+                            style={{ textShadow: "0 2px black" }}
+                          >
+                            हुनर से शिखर तक
+                          </h1>
+                          <div className="bottom-btns">
+                            <a href="#" className="tf-btn style-secondary">
+                              View Our Programs
+                              <i className="icon-arrow-top-right"></i>
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -90,11 +92,11 @@ function Landing() {
                       <p>About Us</p>
                     </div>
                   </div>
-                  <div>
+                  <div data-aos-duration="1000">
                     <h2 className="title-content fw-7 font-cardo">
                       <span className="tf-secondary-color">
                         Digital Duniyaa
-                      </span>{" "}
+                      </span>
                       : Digital Income <br /> Opportunities For Youth
                     </h2>
 
@@ -235,15 +237,17 @@ function Landing() {
                     </svg>
                   </div>
                   <div className="content">
-                    <h4>
-                      <a className="fw-5" href="#">
-                        Why Digital Duniyaa
-                      </a>
-                    </h4>
-                    <p>
-                      Skill-Focused Training: 20,000+ professionals and <br />
-                      free exclusive training.
-                    </p>
+                    <div data-aos-duration="1000">
+                      <h4>
+                        <a className="fw-5" href="#">
+                          Why Digital Duniyaa
+                        </a>
+                      </h4>
+                      <p>
+                        Skill-Focused Training: 20,000+ professionals and <br />
+                        free exclusive training.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -292,15 +296,17 @@ function Landing() {
                     </svg>
                   </div>
                   <div className="content">
-                    <h4>
-                      <a className="fw-5" href="#">
-                        Our Vision
-                      </a>
-                    </h4>
-                    <p>
-                      Empowering youth to earn multiple incomes <br />
-                      through skill development
-                    </p>
+                    <div data-aos-duration="1000">
+                      <h4>
+                        <a className="fw-5" href="#">
+                          Our Vision
+                        </a>
+                      </h4>
+                      <p>
+                        Empowering youth to earn multiple incomes <br />
+                        through skill development
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -365,16 +371,18 @@ function Landing() {
                     </svg>
                   </div>
                   <div className="content">
-                    <h4>
-                      <a className="fw-5" href="#">
-                        About Us
-                      </a>
-                    </h4>
-                    <p>
-                      We have come to you with a focus on <br />
-                      "Siksha" (Education), "Hunar" (Skills), and "Seva"
-                      (Service).
-                    </p>
+                    <div data-aos-duration="1000">
+                      <h4>
+                        <a className="fw-5" href="#">
+                          About Us
+                        </a>
+                      </h4>
+                      <p>
+                        We have come to you with a focus on <br />
+                        "Siksha" (Education), "Hunar" (Skills), and "Seva"
+                        (Service).
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -387,15 +395,17 @@ function Landing() {
             <div className="row">
               <div className="col-12">
                 <div className="heading-section">
-                  <h2
-                    className="fw-7 font-cardo  animated"
-                    data-wow-delay="0.1s"
-                  >
-                    Digital Entrepreneurship Bundles
-                  </h2>
-                  <div className="flex items-center justify-between flex-wrap gap-10">
-                    <div className="sub fs-15 " data-wow-delay="0.2s">
-                      Outpace the competition with our course
+                  <div data-aos-duration="1000">
+                    <h2
+                      className="fw-7 font-cardo  animated"
+                      data-wow-delay="0.1s"
+                    >
+                      Digital Entrepreneurship Bundles
+                    </h2>
+                    <div className="flex items-center justify-between flex-wrap gap-10">
+                      <div className="sub fs-15 " data-wow-delay="0.2s">
+                        Outpace the competition with our course
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -737,15 +747,17 @@ function Landing() {
             <div className="row">
               <div className="col-12">
                 <div className="heading-section text-center">
-                  <h2
-                    className="fw-7 font-cardo  animated"
-                    data-wow-delay="0.1s"
-                  >
-                    Upcoming Academic Programs
-                  </h2>
-                  <div className="sub fs-15 " data-wow-delay="0.2s">
-                    Unlock your future with our upskilling courses and endless
-                    growth opportunities.
+                  <div data-aos-duration="1000">
+                    <h2
+                      className="fw-7 font-cardo  animated"
+                      data-wow-delay="0.1s"
+                    >
+                      Upcoming Academic Programs
+                    </h2>
+                    <div className="sub fs-15 " data-wow-delay="0.2s">
+                      Unlock your future with our upskilling courses and endless
+                      growth opportunities.
+                    </div>
                   </div>
                 </div>
                 <div
@@ -753,104 +765,111 @@ function Landing() {
                   data-preview="3"
                   data-space="28"
                 >
-                  <div className="swiper-wrapper grid-sw-5">
-                    <div className="swiper-slide">
-                      <a href="#">
-                        <div className="academisc-item">
-                          <div className="image-wrap">
-                            <img
-                              className=" ls-is-cached lazyloaded"
-                              data-src="assets/images/section/academisc-1.jpg"
-                              src="assets/images/section/academisc-1.jpg"
-                              alt=""
-                            />
+                  <div className="swiper-wrapper">
+                    <Carousel
+                      autoPlay
+                      className="carousel-home"
+                      showArrows
+                      swipeable
+                    >
+                      <div className="swiper-slide">
+                        <a href="#">
+                          <div className="academisc-item">
+                            <div className="image-wrap">
+                              <img
+                                className=" ls-is-cached lazyloaded"
+                                data-src="assets/images/section/academisc-1.jpg"
+                                src="assets/images/section/academisc-1.jpg"
+                                alt=""
+                              />
+                            </div>
+                            <div className="content">
+                              <p>
+                                State wise 10th and 12th
+                                <br /> Coaching className
+                              </p>
+                            </div>
                           </div>
-                          <div className="content">
-                            <p>
-                              State wise 10th and 12th
-                              <br /> Coaching className
-                            </p>
+                        </a>
+                      </div>
+                      <div className="swiper-slide">
+                        <a href="#">
+                          <div className="academisc-item">
+                            <div className="image-wrap">
+                              <img
+                                className=" ls-is-cached lazyloaded"
+                                data-src="assets/images/section/academisc-2.jpg"
+                                src="assets/images/section/academisc-2.jpg"
+                                alt=""
+                              />
+                            </div>
+                            <div className="content">
+                              <p>
+                                CBSE Board 10th and <br /> 12th Class
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div className="swiper-slide">
-                      <a href="#">
-                        <div className="academisc-item">
-                          <div className="image-wrap">
-                            <img
-                              className=" ls-is-cached lazyloaded"
-                              data-src="assets/images/section/academisc-2.jpg"
-                              src="assets/images/section/academisc-2.jpg"
-                              alt=""
-                            />
+                        </a>
+                      </div>
+                      <div className="swiper-slide">
+                        <a href="#">
+                          <div className="academisc-item">
+                            <div className="image-wrap">
+                              <img
+                                className=" ls-is-cached lazyloaded"
+                                data-src="assets/images/section/academisc-3.jpg"
+                                src="assets/images/section/academisc-3.jpg"
+                                alt=""
+                              />
+                            </div>
+                            <div className="content">
+                              <p>
+                                AI (Artificial Inteligence) <br /> special crack
+                                Course
+                              </p>
+                            </div>
                           </div>
-                          <div className="content">
-                            <p>
-                              CBSE Board 10th and <br /> 12th Class
-                            </p>
+                        </a>
+                      </div>
+                      <div className="swiper-slide">
+                        <a href="#">
+                          <div className="academisc-item">
+                            <div className="image-wrap">
+                              <img
+                                className=" ls-is-cached lazyloaded"
+                                data-src="assets/images/section/academisc-4.jpg"
+                                src="assets/images/section/academisc-4.jpg"
+                                alt=""
+                              />
+                            </div>
+                            <div className="content">
+                              <p>
+                                Online <br /> Learning
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div className="swiper-slide">
-                      <a href="#">
-                        <div className="academisc-item">
-                          <div className="image-wrap">
-                            <img
-                              className=" ls-is-cached lazyloaded"
-                              data-src="assets/images/section/academisc-3.jpg"
-                              src="assets/images/section/academisc-3.jpg"
-                              alt=""
-                            />
+                        </a>
+                      </div>
+                      <div className="swiper-slide">
+                        <a href="#">
+                          <div className="academisc-item">
+                            <div className="image-wrap">
+                              <img
+                                className=" ls-is-cached lazyloaded"
+                                data-src="assets/images/section/academisc-5.jpg"
+                                src="assets/images/section/academisc-5.jpg"
+                                alt=""
+                              />
+                            </div>
+                            <div className="content">
+                              <p>
+                                Global <br /> Education
+                              </p>
+                            </div>
                           </div>
-                          <div className="content">
-                            <p>
-                              AI (Artificial Inteligence) <br /> special crack
-                              Course
-                            </p>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div className="swiper-slide">
-                      <a href="#">
-                        <div className="academisc-item">
-                          <div className="image-wrap">
-                            <img
-                              className=" ls-is-cached lazyloaded"
-                              data-src="assets/images/section/academisc-4.jpg"
-                              src="assets/images/section/academisc-4.jpg"
-                              alt=""
-                            />
-                          </div>
-                          <div className="content">
-                            <p>
-                              Online <br /> Learning
-                            </p>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div className="swiper-slide">
-                      <a href="#">
-                        <div className="academisc-item">
-                          <div className="image-wrap">
-                            <img
-                              className=" ls-is-cached lazyloaded"
-                              data-src="assets/images/section/academisc-5.jpg"
-                              src="assets/images/section/academisc-5.jpg"
-                              alt=""
-                            />
-                          </div>
-                          <div className="content">
-                            <p>
-                              Global <br /> Education
-                            </p>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
+                        </a>
+                      </div>
+                    </Carousel>
                   </div>
                 </div>
               </div>
@@ -872,44 +891,48 @@ function Landing() {
                     />
                   </div>
                   <div className="content  bg-4">
-                    <h2
-                      className="font-cardo fw-7  animated"
-                      data-wow-delay="0.1s"
-                    >
-                      Why Choose Us?
-                    </h2>
-                    <p className="" data-wow-delay="0.2s">
-                      Digital Duniyaa provides skill-based classes in Digital
-                      Marketing, Website Creation, Ads Campaigns, and more. Earn
-                      lakhs monthly with our unique income plan and free
-                      training from top trainees. Join 20,000+ trained,
-                      including 1,000+ millionaires.
-                    </p>
-                    <div className="tags " data-wow-delay="0.3s">
-                      <div className="tag">
-                        <i className="flaticon-check"></i>
-                        <span>Skill-Focused Training</span>
+                    <div data-aos-duration="1000">
+                      <h2
+                        className="font-cardo fw-7  animated"
+                        data-wow-delay="0.1s"
+                      >
+                        Why Choose Us?
+                      </h2>
+                      <p className="" data-wow-delay="0.2s">
+                        Digital Duniyaa provides skill-based classes in Digital
+                        Marketing, Website Creation, Ads Campaigns, and more.
+                        Earn lakhs monthly with our unique income plan and free
+                        training from top trainees. Join 20,000+ trained,
+                        including 1,000+ millionaires.
+                      </p>
+                      <div className="tags " data-wow-delay="0.3s">
+                        <div className="tag">
+                          <i className="flaticon-check"></i>
+                          <span>Skill-Focused Training</span>
+                        </div>
+                        <div className="tag">
+                          <i className="flaticon-check"></i>
+                          <span>20,000+ Trained Professionals</span>
+                        </div>
+                        <div className="tag">
+                          <i className="flaticon-check"></i>
+                          <span>1,000 Millionaire Success Stories</span>
+                        </div>
+                        <div className="tag">
+                          <i className="flaticon-check"></i>
+                          <span>Earn Lakhs Each Month</span>
+                        </div>
+                        <div className="tag">
+                          <i className="flaticon-check"></i>
+                          <span>
+                            Exclusive Free Training by Our Top Trainees
+                          </span>
+                        </div>
                       </div>
-                      <div className="tag">
-                        <i className="flaticon-check"></i>
-                        <span>20,000+ Trained Professionals</span>
-                      </div>
-                      <div className="tag">
-                        <i className="flaticon-check"></i>
-                        <span>1,000 Millionaire Success Stories</span>
-                      </div>
-                      <div className="tag">
-                        <i className="flaticon-check"></i>
-                        <span>Earn Lakhs Each Month</span>
-                      </div>
-                      <div className="tag">
-                        <i className="flaticon-check"></i>
-                        <span>Exclusive Free Training by Our Top Trainees</span>
-                      </div>
+                      <a href="#" className="tf-btn " data-wow-delay="0.4s">
+                        Join Today<i className="icon-arrow-top-right"></i>
+                      </a>
                     </div>
-                    <a href="#" className="tf-btn " data-wow-delay="0.4s">
-                      Join Today<i className="icon-arrow-top-right"></i>
-                    </a>
                   </div>
                 </div>
               </div>
@@ -922,20 +945,23 @@ function Landing() {
             <div className="row">
               <div className="col-md-6">
                 <div className="teachers-content">
-                  <h2
-                    className="title font-cardo fw-7 lesp-1  animated"
-                    data-wow-delay="0.1s"
-                  >
-                    Meet <br />
-                    <span className="tf-secondary-color">Our Founders </span>
-                  </h2>
-                  <p className="fs-15 " data-wow-delay="0.2s">
-                    Sir Devendra Maurya (Founder) and Miss Mahima Maurya <br />
-                    (Co-Founder) are visionary founders committed to <br />
-                    empowering youth through skill-focused training <br />
-                    and entrepreneurship.
-                    <br />
-                  </p>
+                  <div data-aos-duration="1000">
+                    <h2
+                      className="title font-cardo fw-7 lesp-1  animated"
+                      data-wow-delay="0.1s"
+                    >
+                      Meet <br />
+                      <span className="tf-secondary-color">Our Founders </span>
+                    </h2>
+                    <p className="fs-15 " data-wow-delay="0.2s">
+                      Sir Devendra Maurya (Founder) and Miss Mahima Maurya{" "}
+                      <br />
+                      (Co-Founder) are visionary founders committed to <br />
+                      empowering youth through skill-focused training <br />
+                      and entrepreneurship.
+                      <br />
+                    </p>
+                  </div>
                 </div>
               </div>
               <div className="col-md-6">
@@ -980,12 +1006,14 @@ function Landing() {
               <div className="col-lg-12">
                 <div className="page-faq-content faq-1 ">
                   <div className="heading-section">
-                    <h2 className="font-cardo " data-wow-delay="0s">
-                      Frequently Asked Questions
-                    </h2>
-                    <p className="fs-15 " data-wow-delay="0s">
-                      Answers to the burning questions in your mind.
-                    </p>
+                    <div data-aos-duration="1000">
+                      <h2 className="font-cardo " data-wow-delay="0s">
+                        Frequently Asked Questions
+                      </h2>
+                      <p className="fs-15 " data-wow-delay="0s">
+                        Answers to the burning questions in your mind.
+                      </p>
+                    </div>
                   </div>
                   <div
                     className="tf-accordion-default tf-accordion "
@@ -1156,12 +1184,14 @@ function Landing() {
               <div className="col-lg-12">
                 <div className="main-section">
                   <div className="content-inner">
-                    <h2 className="font-cardo fw-7">Business Opportunity</h2>
-                    <p className="fs-15">
-                      Digital Duniyaa empowers youth aged 15 to 35 to achieve
-                      financial freedom and break free from job dependency,
-                      enabling them to pursue their dreams independently.
-                    </p>
+                    <div data-aos-duration="1000">
+                      <h2 className="font-cardo fw-7">Business Opportunity</h2>
+                      <p className="fs-15">
+                        Digital Duniyaa empowers youth aged 15 to 35 to achieve
+                        financial freedom and break free from job dependency,
+                        enabling them to pursue their dreams independently.
+                      </p>
+                    </div>
                     <ul className="wrap-list-text-check1">
                       <li>
                         <i className="icon-check"></i>
