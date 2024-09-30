@@ -62,12 +62,13 @@ const morgan = require("morgan");
   // });
 
   
-app.use(express.static(path.join(__dirname, './../front/dist')));
+app.use(express.static(path.join(__dirname, './dist')));
 
 // Catch all handler for React routing
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + './../front/dist/index.html'));
+  res.sendFile(path.join(__dirname + './dist/index.html'));
 });
+
 
   connectDB()
     .then(() => {
