@@ -17,8 +17,8 @@ const morgan = require("morgan");
       origin: [
         "http://localhost:6006",
         "http://192.168.1.69:6006",
-        "http://localhost:5173",
-        "http://35.154.235.131:5173"
+        "http://localhost:443",
+        "http://35.154.235.131:443",
       ],
 
       credentials: true,
