@@ -35,10 +35,10 @@ function Landing() {
               <div className="tf-container">
                 <div className="row">
                   <div className="col-12">
-                    <div className="content">
+                    <div className="content" >
                       <div>
-                        <div className="widget box-sub-tag fade-item fade-item-1 ">
-                          <div className="sub-tag-icon">
+                        <div className="widget box-sub-tag">
+                          <div className="sub-tag-icon" >
                             <i className="icon-flash"></i>
                           </div>
                           <div className="sub-tag-title">
@@ -46,12 +46,12 @@ function Landing() {
                           </div>
                         </div>
                         <h1
-                          className="fade-item fade-item-1 fw-7 "
+                          className=" fw-7 "
                           style={{ textShadow: "0 2px black" }}
                         >
                           हुनर से शिखर तक
                         </h1>
-                        <div className="bottom-btns fade-item fade-item-1">
+                        <div className="bottom-btns ">
                           <a href="#" className="tf-btn style-secondary">
                             View Our Programs
                             <i className="icon-arrow-top-right"></i>
