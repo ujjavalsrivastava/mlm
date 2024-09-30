@@ -14,11 +14,8 @@ const morgan = require("morgan");
   const app = express();
   app.use(
     cors({
-      origin: [
-        "http://localhost:6006",
-        "http://192.168.1.69:6006",
-        "http://localhost:5173",
-        "http://35.154.235.131:5173"
+      origin: [  
+        "http://35.154.235.131:443"
       ],
 
       credentials: true,
