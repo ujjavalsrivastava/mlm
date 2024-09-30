@@ -603,7 +603,7 @@ function Landing() {
                             <img
                               className="lazyload"
                               data-src="assets/images/courses/courses-06.jpg"
-                              src="assets/images/courses/courses-03.jpg"
+                              src="/assets/images/courses/courses-03.jpg"
                               alt=""
                             />
                           </div>
