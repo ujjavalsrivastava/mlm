@@ -54,9 +54,9 @@ const morgan = require("morgan");
     res.status(500).send({ error: err.message });
   });
 
-  app.use("/", (req, res) => {
-    res.status(200).json({ status: "success", message: "Route not defined" });
-  });
+  // app.use("/", (req, res) => {
+  //   res.status(200).json({ status: "success", message: "Route not defined" });
+  // });
 
   app.use(express.static(path.join(__dirname, "/dist")));
 
