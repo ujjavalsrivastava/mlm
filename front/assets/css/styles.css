@@ -1468,7 +1468,7 @@ a:focus {
   font-weight: 500;
   line-height: 19px;
   color: var(--Secondary) !important;
-  background-color: var(--Primary) !important;
+  /* background-color: var(--Primary) !important; */
 }
 #menu > a.close {
   position: absolute;
@@ -8881,6 +8881,7 @@ instructors-item
 .icons-box .icons.has-ellipse {
   margin-bottom: 42px;
 }
+
 .icons-box .icons.has-ellipse::after {
   content: "";
   position: absolute;
@@ -13721,10 +13722,10 @@ instructors-item
 .section-about-box.style-1 .box-img .wrap-image-agent::before {
   position: absolute;
   content: "";
-  top: -20px;
-  right: 20px;
-  bottom: 20px;
-  left: -20px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
   border-radius: 92px 24px 92px 24px;
   border: 1px solid var(--Secondary);
   z-index: -1;

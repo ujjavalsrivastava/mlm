@@ -4,12 +4,101 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
 
+const subMenu = [
+  { url: "/category", title: "Human Resources" },
+  { url: "/category", title: "Operations" },
+  { url: "/category", title: "Supply Chain Management" },
+  { url: "/category", title: "Customer Service" },
+  { url: "/category", title: "Manufacturing" },
+  { url: "/category", title: "Health And Safety" },
+  { url: "/category", title: "Quality Management" },
+  { url: "/category", title: "E-commerce" },
+  { url: "/category", title: "Management" },
+  { url: "/category", title: "Sales" },
+];
+
+const menuItems = [
+  {
+    title: "Categories",
+    sub: [
+      { title: "Graphics & Design", sub: subMenu },
+      {
+        title: "Digital Marketing",
+        sub: subMenu,
+      },
+      {
+        title: "Bussiness",
+        sub: subMenu,
+      },
+      {
+        title: "Music & Audio",
+        sub: subMenu,
+      },
+      {
+        title: "Data",
+        sub: subMenu,
+      },
+      {
+        title: "Video & Animation",
+        sub: subMenu,
+      },
+      {
+        title: "Photography",
+        sub: subMenu,
+      },
+      {
+        title: "Lifestyle",
+        sub: subMenu,
+      },
+      {
+        title: "Writing & translation",
+        sub: subMenu,
+      },
+      {
+        title: "Programming & tech",
+        sub: subMenu,
+      },
+    ],
+  },
+  {
+    title: "Home",
+    sub: [
+      { url: "/category", title: "Home 1" },
+      { url: "/category", title: "Home 2" },
+      { url: "/category", title: "Home 3" },
+      { url: "/category", title: "Home 4" },
+    ],
+  },
+  { title: "Courses", sub: [{ title: "Course List" }] },
+  {
+    title: "Pages",
+    sub: [
+      { url: "/category", title: "page 1" },
+      { url: "/category", title: "page 2" },
+    ],
+  },
+  {
+    title: "Blog",
+    sub: [
+      { url: "/category", title: "Blog List" },
+      { url: "/category", title: "faq " },
+    ],
+  },
+  {
+    title: "Shop",
+    sub: [{ title: "shop List" }, { url: "/category", title: "checkout " }],
+  },
+];
+
 const header = () => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("token");
     window.location.assign("/login");
   };
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState([]);
+  const [menu, setMenu] = useState(menuItems);
   const [profile, setprofile] = useState(null);
   const fetchProfile = async () => {
     const response = await axios.get("user/profile");
@@ -20,7 +109,35 @@ const header = () => {
     fetchProfile();
   }, []);
 
-  console.log(profile);
+  const handleNavbar = (value) => {
+    if (!value) {
+      setSelectedMenu([]);
+      setMenu(menuItems);
+    }
+    setShowSidebar(value);
+  };
+
+  console.log({ menu });
+
+  const handleMenuClick = (menuItem) => {
+    if (menuItem.sub) {
+      setSelectedMenu((p) => [...p, menuItem.title]);
+      setMenu(menuItem.sub);
+    } else {
+      navigate(menuItem.url);
+    }
+  };
+
+  const renderTitle = (navItem) => (
+    <li onClick={() => handleMenuClick(navItem)} className="menu_item_header">
+      <span>{navItem.title}</span>
+      {navItem.sub ? <p>&#129170;</p> : null}
+    </li>
+  );
+
+  const menuHeading = selectedMenu.length
+    ? selectedMenu[selectedMenu.length - 1]
+    : "Menu";
 
   return (
     <>
@@ -34,7 +151,8 @@ const header = () => {
             <div class="header-left">
               <a
                 class="mobile-nav-toggler mobile-button d-lg-none flex"
-                href="#menu"
+                href="#"
+                onClick={() => handleNavbar(true)}
               ></a>
               <div id="site-logo">
                 <Link to={"/"}>
@@ -112,268 +230,26 @@ const header = () => {
           </div>
         </div>
         {/* pending side work */}
-        <nav class="d-lg-none" id="menu" style={{display:'none'}}>
-          <a class="close" aria-label="Close menu" href="#wrapper">
+        <nav
+          id="menu"
+          style={{
+            display: showSidebar ? "block" : "none",
+          }}
+        >
+          <a
+            class="close"
+            aria-label="Close menu"
+            href="#"
+            onClick={() => handleNavbar(false)}
+          >
             <i class="flaticon-close-1"></i>
           </a>
+          <p className="menu_heading_element">{menuHeading}</p>
+          <hr />
           <ul>
-            <li>
-              <span>Categories</span>
-              <ul>
-                <li>
-                  <span>Graphics & Design</span>
-                  <ul>
-                    <li>
-                      <a href="categories.html">Human Resources</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Operations</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Supply Chain Management</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Customer Service</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Manufacturing</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Health And Safety</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Quality Management</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">E-commerce</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Management</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Sales</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>Digital Marketing</span>
-                  <ul>
-                    <li>
-                      <a href="categories.html">Human Resources</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li class="current">
-              <span>Home</span>
-              <ul>
-                <li>
-                  <a href="index-2.html">Home Page 01</a>
-                </li>
-                <li>
-                  <a href="home-02.html">Home Page 02</a>
-                </li>
-                <li>
-                  <a href="home-03.html">Home Page 03</a>
-                </li>
-                <li>
-                  <a href="home-04.html">Home Page 04</a>
-                </li>
-                <li>
-                  <a href="home-05.html">Home Page 05</a>
-                </li>
-                <li>
-                  <a href="home-06.html">Home Page 06</a>
-                </li>
-                <li class="current">
-                  <a href="home-07.html">Home Page 07</a>
-                </li>
-                <li>
-                  <a href="home-08.html">Home Page 08</a>
-                </li>
-                <li>
-                  <a href="home-09.html">Home Page 09</a>
-                </li>
-                <li>
-                  <a href="home-10.html">Home Page 10</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <span>Courses</span>
-              <ul>
-                <li>
-                  <span>Course List</span>
-                  <ul>
-                    <li>
-                      <a href="course-grid-basic.html">Course Grid Basic</a>
-                    </li>
-                    <li>
-                      <a href="course-grid-modern.html">Course Grid Modern</a>
-                    </li>
-                    <li>
-                      <a href="course-grid-left-sidebar.html">
-                        Course Grid Left Sidebar
-                      </a>
-                    </li>
-                    <li>
-                      <a href="course-grid-right-sidebar.html">
-                        Course Grid Right Sidebar
-                      </a>
-                    </li>
-                    <li>
-                      <a href="course-list-sidebar.html">Course List Sidebar</a>
-                    </li>
-                    <li>
-                      <a href="all-list-style.html">Course All List Style</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>Course Single</span>
-                  <ul>
-                    <li>
-                      <a href="course-single-v1.html">Course Single 01</a>
-                    </li>
-                    <li>
-                      <a href="course-single-v2.html">Course Single 02</a>
-                    </li>
-                    <li>
-                      <a href="course-single-v3.html">Course Single 03</a>
-                    </li>
-                    <li>
-                      <a href="course-single-v4.html">Course Single 04</a>
-                    </li>
-                    <li>
-                      <a href="course-single-v5.html">Course Single 05</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>Course Category</span>
-                  <ul>
-                    <li>
-                      <a href="property-single-v1.html">Coaching</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Categories</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Online Business</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Photography</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Music & Audio</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Photography</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Programming & Tech</a>
-                    </li>
-                    <li>
-                      <a href="categories.html">Graphics & Design</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <span>Pages</span>
-              <ul>
-                <li>
-                  <a href="#">Instructor List</a>
-                </li>
-                <li>
-                  <a href="instructor-single.html">Instructor Single</a>
-                </li>
-                <li>
-                  <a href="become-teacher.html">Become a Teacher</a>
-                </li>
-                <li>
-                  <a href="event-list.html">Event List </a>
-                </li>
-                <li>
-                  <a href="event-single.html">Event Single</a>
-                </li>
-                <li>
-                  <a href="about.html">About</a>
-                </li>
-                <li>
-                  <a href="contact.html">Contact</a>
-                </li>
-                <li>
-                  <a href="help-center.html">Help Center</a>
-                </li>
-                <li>
-                  <a href="pricing.html">Pricing</a>
-                </li>
-                <li>
-                  <a href="faq.html">Faq</a>
-                </li>
-                <li>
-                  <a href="terms.html">Terms</a>
-                </li>
-                <li>
-                  <a href="404.html">404</a>
-                </li>
-                <li>
-                  <a href="login.html">Login</a>
-                </li>
-                <li>
-                  <a href="register.html">Register</a>
-                </li>
-                <li>
-                  <a href="instructor-dashboard.html">Instructor Dashboard</a>
-                </li>
-                <li>
-                  <a href="student-dashboard.html">Student Dashboard</a>
-                </li>
-                <li>
-                  <a href="ui-elements.html">UI elements</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <span>Blog</span>
-              <ul>
-                <li>
-                  <a href="blog-grid.html">Blog Grid</a>
-                </li>
-                <li>
-                  <a href="blog-list-v1.html">Blog List 01</a>
-                </li>
-                <li>
-                  <a href="blog-list-v2.html">Blog List 02</a>
-                </li>
-                <li>
-                  <a href="blog-single.html">Blog Single</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <span>Shop</span>
-              <ul>
-                <li>
-                  <a href="#">Shop List</a>
-                </li>
-                <li>
-                  <a href="shop-single.html">Shop Single</a>
-                </li>
-                <li>
-                  <a href="shop-cart.html">Shop Cart</a>
-                </li>
-                <li>
-                  <a href="shop-checkout.html">Shop Checkout</a>
-                </li>
-                <li>
-                  <a href="shop-order.html">Shop Order</a>
-                </li>
-              </ul>
-            </li>
+            {menu.map((menuItem) => (
+              <>{renderTitle(menuItem)}</>
+            ))}
           </ul>
         </nav>
       </header>

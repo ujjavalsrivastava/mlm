@@ -1467,7 +1467,11 @@ a:focus {
   font-weight: 500;
   line-height: 19px;
   color: var(--Secondary) !important;
-  background-color: var(--Primary) !important;
+  position: absolute;
+  top: -30px;
+  height: 100vh;
+  min-width: 70vw;
+  background-color: white;
 }
 #menu > a.close {
   position: absolute;
@@ -15853,7 +15857,29 @@ instructors-item
 .dashboard_navigationbar .dropbtn {
   display: none;
 }
+.icons .has-ellipse svg {
+  margin-top: 25px !important;
+}
 
+.menu_item_header {
+  cursor: pointer;
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 30px;
+  color: #000000;
+  font-size: 20px;
+}
+.menu_item_header p {
+  font-size: 28px;
+}
+.menu_heading_element {
+  margin: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--Secondary);
+}
 @media (max-width: 1149px) {
   .section-dashboard-right {
     margin-left: 0px;
@@ -16157,6 +16183,18 @@ instructors-item
   }
 }
 @media (max-width: 550px) {
+  .carousel-home {
+    width: 90%;
+  }
+  .section-teachers-1 .teachers-image .teachers-upskill-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .section-teachers-1 .teachers-image .teachers-upskill-wrap .teachers-upskill {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+
   .grid-list-items-3,
   .grid-list-items-4,
   .grid-layout-4,

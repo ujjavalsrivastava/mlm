@@ -158,6 +158,7 @@ function Landing() {
                       height="50"
                       viewBox="0 0 50 50"
                       fill="none"
+                      style={{ marginTop: "25px" }}
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
@@ -257,6 +258,7 @@ function Landing() {
                       height="50"
                       viewBox="0 0 50 50"
                       fill="none"
+                      style={{ marginTop: "25px" }}
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
@@ -316,6 +318,7 @@ function Landing() {
                       height="61"
                       viewBox="0 0 50 51"
                       fill="none"
+                      style={{ marginTop: "25px" }}
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
