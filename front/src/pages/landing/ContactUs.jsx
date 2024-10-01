@@ -183,8 +183,8 @@ const ContactUs = ()=>{
                     <div class="tf-container">
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="img-left wow fadeInLeft" data-wow-delay="0">
-                                    <img class="lazyload" data-src="" src="assets/images/page-title/page-title-home2-1.jpg"
+                                <div class="img-left">
+                                    <img class="lazyload" data-src="/assets/images/page-title-home2-1.jpg" src="/assets/images/page-title-home2-1.jpg"
                                         alt="" />
 
                                 </div>

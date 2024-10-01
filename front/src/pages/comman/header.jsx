@@ -168,11 +168,11 @@ const header = () => {
               <nav class="main-menu">
                 <ul class="navigation">
                   <li>
-                    <a href="#">Home</a>
+                  <Link to={'/'}>Home</Link>
                   </li>
                   <li class="has-children">
-                    <a href="javascript:void(0);">Our Couress</a>
-                    <ul>
+                    <a href="/#course">Our Couress</a>
+                    {/* <ul>
                       <li>
                         <a href="#">Instructor List</a>
                       </li>
@@ -188,13 +188,13 @@ const header = () => {
                       <li>
                         <a href="#">Event Single</a>
                       </li>
-                    </ul>
+                    </ul> */}
                   </li>
                   <li>
-                    <a href="#">About Us</a>
+                    <Link to={'about-us'}>About Us</Link>
                   </li>
                   <li>
-                    <a href="#">Contact</a>
+                  <Link to={'contact-us'}>Contact</Link>
                   </li>
                 </ul>
               </nav>
