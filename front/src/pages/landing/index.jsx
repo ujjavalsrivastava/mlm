@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
+// Import Bootstrap CSS and JS
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 
 function Landing() {
   const [product, setProduct] = useState(null);
@@ -133,7 +137,7 @@ function Landing() {
                       <img
                         className="lazyload"
                         data-src="assets/images/about-2.jpg"
-                        src="assets/images/section/about-3.jpg"
+                        src="assets/images/about-2.jpg"
                         alt=""
                       />
                     </div>
@@ -141,7 +145,7 @@ function Landing() {
                       <img
                         className="lazyload"
                         data-src="assets/images/about-3.jpg"
-                        src="assets/images/section/about-4.jpg"
+                        src="assets/images/about-3.jpg"
                         alt=""
                       />
                     </div>
