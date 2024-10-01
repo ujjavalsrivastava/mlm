@@ -58,11 +58,11 @@ const morgan = require("morgan");
   //   res.status(200).json({ status: "success", message: "Route not defined" });
   // });
 
-  app.use(express.static(path.join(__dirname, "./dist")));
+  app.use(express.static(path.join(__dirname, "/dist")));
 
   // Catch all handler for React routing
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname + "./dist/index.html"));
+    res.sendFile(path.join(__dirname + "/dist/index.html"));
   });
 
   connectDB()
