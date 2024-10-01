@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
+
 const footer =()=>{
+    
     return (
         <>
          <footer id="footer" class="footer style-2">
@@ -34,23 +37,17 @@ const footer =()=>{
                                         <div class="footer-menu-list">
                                             <h5 class="fw-5">Company</h5>
                                             <ul>
-                                                <li><a href="#">About</a></li>
-                                                <li><a href="#">Courses</a></li>
-                                                <li><a href="#">Instructor</a></li>
-                                                <li><a href="#">Events</a></li>
-                                                <li><a href="#">Become a teacher</a></li>
+                                            <li><Link to={'/about-us'}>About Us </Link> </li>
+                                            <li><Link to={'/contact-us'}>Contact Us </Link> </li>
+?
                                             </ul>
                                         </div>
                                         <div class="footer-menu-list">
                                             <h5 class="fw-5">Useful Links</h5>
                                             <ul>
-                                                <li><a href="#">Testimonials</a></li>
-                                                <li><a href="#">Pricing</a></li>
-                                                <li><a href="#">FAQs</a></li>
-                                                <li><a href="#">Help Center</a></li>
-                                                <li><a href="#">Terms</a></li>
-                                                <li><a href="#">Sitemap</a></li>
-                                                <li><a href="#">Privacy</a></li>
+                                                <li><Link to={'/disclaimer'}>Disclaimer </Link> </li>
+                                                <li><Link to={'/refund'}> Refund Policy</Link> </li>
+                                                
                                             </ul>
                                         </div>
 

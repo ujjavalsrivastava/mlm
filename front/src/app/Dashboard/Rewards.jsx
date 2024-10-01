@@ -20,37 +20,38 @@ const Rewards = () => {
     const fetchUserEarnings = async () => {
       let serialNo = 1; // Initialize the serial number
 
-      // Recursive function to process each row and its nested rows
-      const processRow = async (row) => {
-        const response = await axios.get(`user/percent-earning?userId=${row._id}`);
+      const processRow = async (row, serial, depth) => {
+        if (depth > 4) return []; // Stop if depth exceeds 4
 
-        // Create the current row with the serial number
-        const rows = [
-          <tr key={serialNo}> {/* Using serialNo as a key ensures unique keys */}
-            <td>{serialNo}</td>
+      //  const response = await axios.get("user/percent-earning?userId=" + row._id);
+        
+        const currentRow = (
+          <tr key={serial.current}>
+            <td>{serial.current++}</td> {/* Increment the serial number */}
             <td>{row.name}</td>
-            <td>{response.data.overallEarning.toFixed(2)}</td>
-          </tr>,
-        ];
-        serialNo++; // Increment the serial number after processing the row
 
-        // If there are nested rows, process them recursively
-        if (row.lowerLevel && row.lowerLevel.length > 0) {
+          </tr>
+        );
+
+        const rows = [currentRow]; // Start with the current row
+
+        // Process lower levels if any and increment depth
+        if (row.lowerLevel) {
           for (const lowerRow of row.lowerLevel) {
-            rows.push(...(await processRow(lowerRow)));
+            rows.push(...(await processRow(lowerRow, serial, depth + 1))); // Recursive call with incremented depth
           }
         }
 
         return rows;
       };
 
-      // Process all top-level rows sequentially to ensure the correct order
-      const resultRows = [];
-      for (const row of lowerLevels) {
-        resultRows.push(...(await processRow(row)));
-      }
+      const serial = { current: serialNo }; // Using an object to pass by reference
 
-      setUserArr(resultRows); // Set the final result in the state
+      const results = await Promise.all(
+        lowerLevels.map(async (row) => await processRow(row, serial, 1)) // Start with depth 1
+      );
+
+      setUserArr(results.flat());
     };
 
     fetchUserEarnings();
@@ -157,12 +158,12 @@ const Rewards = () => {
             <table class="table">
   <thead class="thead-dark">
   <tr>
-    <th colspan="3" style={{textAlign:'center'}}> 1 to 4 Level Team</th>
+    <th colspan="2" style={{textAlign:'center'}}> 1 to 4 Level Team</th>
     </tr>
     <tr>
     <th scope="col">S.R</th>
       <th scope="col">Name</th>
-      <th scope="col">Amount</th>
+     
       
     </tr>
   </thead>

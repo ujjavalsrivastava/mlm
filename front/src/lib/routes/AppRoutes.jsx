@@ -18,7 +18,11 @@ import CoursesDetails from "../../pages/landing/courseDetails";
 import Login from "../../pages/landing/login";
 import Register from "../../pages/landing/register";
 import Aboutus from "../../pages/landing/aboutUs";
+import Refund from "../../pages/landing/Refund";
+import ContactUs from "../../pages/landing/ContactUs";
 import Blog from "../../pages/landing/Blog";
+import Disclaimer from "../../pages/landing/Disclaimer";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -32,6 +36,10 @@ const router = createBrowserRouter(
       <Route path="/blogs" element={<Blog />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/disclaimer" element={<Disclaimer />} />
+      <Route path="/refund" element={<Refund />} />
+      <Route path="/contact-us" element={<ContactUs />} />
+      
       </Route>
 
       <Route element={<RouteAuth />}>

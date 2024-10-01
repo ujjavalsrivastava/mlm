@@ -37,7 +37,7 @@ function Landing() {
                   <div className="col-12">
                     <div className="content">
                       <div>
-                        <div className="widget box-sub-tag  ">
+                        <div className="widget box-sub-tag">
                           <div className="sub-tag-icon">
                             <i className="icon-flash"></i>
                           </div>
@@ -45,19 +45,17 @@ function Landing() {
                             <p>We are Digital Duniyaa</p>
                           </div>
                         </div>
-                        <div data-aos-duration="1000">
-                          <h1
-                            className="fw-7 "
-                            style={{ textShadow: "0 2px black" }}
-                          >
-                            हुनर से शिखर तक
-                          </h1>
-                          <div className="bottom-btns">
-                            <a href="#" className="tf-btn style-secondary">
-                              View Our Programs
-                              <i className="icon-arrow-top-right"></i>
-                            </a>
-                          </div>
+                        <h1
+                          className=" fw-7 "
+                          style={{ textShadow: "0 2px black" }}
+                        >
+                          हुनर से शिखर तक
+                        </h1>
+                        <div className="bottom-btns ">
+                          <a href="#" className="tf-btn style-secondary">
+                            View Our Programs
+                            <i className="icon-arrow-top-right"></i>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -613,7 +611,7 @@ function Landing() {
                             <img
                               className="lazyload"
                               data-src="assets/images/courses/courses-06.jpg"
-                              src="assets/images/courses/courses-03.jpg"
+                              src="/assets/images/courses/courses-03.jpg"
                               alt=""
                             />
                           </div>

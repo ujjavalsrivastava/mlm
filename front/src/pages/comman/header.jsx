@@ -111,7 +111,8 @@ const header = () => {
             </div>
           </div>
         </div>
-        <nav class="d-lg-none" id="menu">
+        {/* pending side work */}
+        <nav class="d-lg-none" id="menu" style={{display:'none'}}>
           <a class="close" aria-label="Close menu" href="#wrapper">
             <i class="flaticon-close-1"></i>
           </a>
