@@ -14,7 +14,7 @@ const morgan = require("morgan");
   const app = express();
   app.use(
     cors({
-      origin: ["http://localhost:5173", "http://35.154.235.131:80"],
+      origin: ["http://localhost", "http://35.154.235.131:80"],
 
       credentials: true,
     })
@@ -54,9 +54,9 @@ const morgan = require("morgan");
     res.status(500).send({ error: err.message });
   });
 
-  // app.use("/", (req, res) => {
-  //   res.status(200).json({ status: "success", message: "Route not defined" });
-  // });
+  app.use("/", (req, res) => {
+    res.status(200).json({ status: "success", message: "Route not defined" });
+  });
 
   app.use(express.static(path.join(__dirname, "/dist")));
 

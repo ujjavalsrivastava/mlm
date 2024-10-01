@@ -208,7 +208,7 @@ console.log('data...........'+data);
                             <div class="img-left " >
                                 <img class=" ls-is-cached lazyloaded"
                                    
-                                     src="assets/images/page-title-home2-1.jpg" alt="" />
+                                     src="assets/images/login-img.jpg" alt="" />
 
                             </div>
 

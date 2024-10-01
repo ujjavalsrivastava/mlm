@@ -19,41 +19,33 @@ const Rewards = () => {
   useEffect(() => {
     const fetchUserEarnings = async () => {
       let serialNo = 1; // Initialize the serial number
-
-      const processRow = async (row, serial, depth) => {
-        if (depth > 4) return []; // Stop if depth exceeds 4
-
-      //  const response = await axios.get("user/percent-earning?userId=" + row._id);
-        
-        const currentRow = (
-          <tr key={serial.current}>
-            <td>{serial.current++}</td> {/* Increment the serial number */}
-            <td>{row.name}</td>
-
-          </tr>
-        );
-
-        const rows = [currentRow]; // Start with the current row
-
-        // Process lower levels if any and increment depth
-        if (row.lowerLevel) {
-          for (const lowerRow of row.lowerLevel) {
-            rows.push(...(await processRow(lowerRow, serial, depth + 1))); // Recursive call with incremented depth
+  
+      // Flatten the tree structure into a list and assign depth level
+      const flattenHierarchy = (users, depth = 1) => {
+        let flatUsers = [];
+        for (const user of users) {
+          flatUsers.push({ ...user, depth }); // Add the depth to user data
+          if (user.lowerLevel && depth < 4) {
+            flatUsers = [...flatUsers, ...flattenHierarchy(user.lowerLevel, depth + 1)];
           }
         }
-
-        return rows;
+        return flatUsers;
       };
-
-      const serial = { current: serialNo }; // Using an object to pass by reference
-
-      const results = await Promise.all(
-        lowerLevels.map(async (row) => await processRow(row, serial, 1)) // Start with depth 1
-      );
-
-      setUserArr(results.flat());
+  
+      // Assuming lowerLevels is a prop or coming from an API
+      const flatUsers = flattenHierarchy(lowerLevels);
+  
+      const rows = flatUsers.map((user) => (
+        <tr key={serialNo}>
+          <td>{serialNo++}</td>
+          <td>{user.name}</td>
+        
+        </tr>
+      ));
+  
+      setUserArr(rows);
     };
-
+  
     fetchUserEarnings();
   }, [lowerLevels]);
 

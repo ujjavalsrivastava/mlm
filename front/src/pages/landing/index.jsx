@@ -42,22 +42,27 @@ function Landing() {
                             <i className="icon-flash"></i>
                           </div>
                           <div className="sub-tag-title">
-                            <p>We are Digital Duniyaa</p>
+                            <p style={{fontSize: '30px',fontWeight: "bold"}}>We are Digital Duniyaa</p>
                           </div>
                         </div>
                         <h1
                           className=" fw-7 "
-                          style={{ textShadow: "0 2px black" }}
+                          style={{ textShadow: "0 2px black",marginBottom:'-137px' }}
                         >
                           हुनर से शिखर तक
-                        </h1>
-                        <div className="bottom-btns ">
+                          <br/>
+                          <div className="bottom-btns " style={{marginTop:'10px'}}>
+                            <Link to={'/register'}>
                           <a href="#" className="tf-btn style-secondary">
-                            View Our Programs
+                            Join Today
                             <i className="icon-arrow-top-right"></i>
                           </a>
+                          </Link>
                         </div>
+                        </h1>
+                     
                       </div>
+                      
                     </div>
                     <div className="bot-wrap"></div>
                   </div>
@@ -766,7 +771,7 @@ function Landing() {
                   data-preview="3"
                   data-space="28"
                 >
-                  <div className="swiper-wrapper">
+                  <div className="swiper-wrapper" id="course">
                     <Carousel
                       autoPlay
                       className="carousel-home"
@@ -979,7 +984,7 @@ function Landing() {
                       </div>
 
                       <div className="name">
-                        <span>Devendra Maurya</span>
+                        <span style={{fontWeight:'bold'}}>Sir Devendra Maurya </span>
                       </div>
                     </div>
                     <div className="teachers-upskill">
@@ -992,7 +997,7 @@ function Landing() {
                         />
                       </div>
                       <div className="name">
-                        <span>Mahima Maurya</span>
+                        <span style={{fontWeight:'bold'}}>Mahima Maurya</span>
                       </div>
                     </div>
                   </div>
