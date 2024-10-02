@@ -59,7 +59,9 @@ const login = () => {
                                 </h2>
                                 <div class="register">
                                     <p class="fw-5 fs-15 " >Don’t have an account?</p>
-                                    <a href="#" class="fw-5 fs-15 " >Join here</a>
+                                    <Link to={'/register'} class="fw-5 fs-15" >
+                                    Join here
+                                    </Link>
                                 </div>
                                 <form onSubmit={submitLogin} class="form-login">
                                     <div class="cols">

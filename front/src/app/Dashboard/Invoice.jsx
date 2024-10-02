@@ -98,7 +98,7 @@ const Invoice = () => {
                       <td>449.82</td>
                       <td>2948.82</td>
                       <td>{row.status}</td>
-                      <td>{row.timestamp}</td>
+                      <td>{row?.timestamp}</td>
                     </tr>
                   ))}
               </table>
@@ -138,7 +138,7 @@ const Invoice = () => {
                     </p>
                     <p>
                       <strong>Invoice Date: </strong>
-                      {convertInvoiceDateFormat(data[0].timestamp)}
+                      {data[0]?.timestamp && convertInvoiceDateFormat(data[0]?.timestamp)}
                     </p>
                     <p>
                       <strong>Invoice Amount: </strong> ₹2948.82
