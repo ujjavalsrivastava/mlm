@@ -6,7 +6,7 @@ import {
 // import Login from "../../app/root/Login";
 // import Register from "../../app/root/Register";
 import Purchage from "../../app/root/Purchage";
-import Comingsoon from "../../app/Dashboard/ComingSoon";
+
 import RouteAuth from "../../middleware/RouteAuth";
 import Layout from "../../app/root/Layout";
 import FrontLayout from "../../pages/FrontLayout";
