@@ -66,7 +66,7 @@ const Tree = () => {
           </ol>
         </div>
       
-        <div className="custom-tree">
+        <div className="custom-tree tree-sidebar" >
           <div class="org-chart">
             {lowerProfile?.data?.map((rootNode) => (
               <ul>{renderNode(rootNode)}</ul>

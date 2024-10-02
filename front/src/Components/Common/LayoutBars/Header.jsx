@@ -34,7 +34,7 @@ const Header = () => {
               <img src="dist/img/logo-n.png" alt="" />
             </span>
             <span class="logo-lg">
-              <img src="dist/img/logo.png" alt="" />
+              <img src="assets/images/dg-logo.svg" alt="" />
             </span>
           </a>
         </Link>
@@ -45,28 +45,7 @@ const Header = () => {
               <a class="sidebar-toggle" data-toggle="push-menu" href="#"></a>
             </li>
           </ul>
-          <div class="pull-left search-box">
-            <form action="#" method="get" class="search-form">
-              <div class="input-group">
-                <input
-                  name="search"
-                  class="form-control"
-                  placeholder="Search..."
-                  type="text"
-                />
-                <span class="input-group-btn">
-                  <button
-                    type="submit"
-                    name="search"
-                    id="search-btn"
-                    class="btn btn-flat"
-                  >
-                    <i class="fa fa-search"></i>
-                  </button>
-                </span>
-              </div>
-            </form>
-          </div>
+          
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <li class="dropdown messages-menu">
