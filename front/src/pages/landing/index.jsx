@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./home.css";
 import { Link } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-// Import Bootstrap CSS and JS
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 
 function Landing() {
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState([]);
   const [orderId, setOrderId] = useState("");
   const [productId, setproductId] = useState("");
+  const [cci, setCci] = useState(0);
+  const [uap, setUap] = useState(0);
+  const [centerSlidePercentage, setCenterSlidePercentage] = useState(33.33);
 
   const fetchProduct = async () => {
     try {
@@ -23,8 +24,47 @@ function Landing() {
     }
   };
 
-  useEffect((row) => {
+  const handleNextCourse = () => {
+    if (cci < 4 + product.length) {
+      setCci(cci + 1);
+    }
+  };
+
+  const handlePrevousCourse = () => {
+    if (cci > 1) {
+      setCci(cci - 1);
+    }
+  };
+  const handleNextUpcoming = () => {
+    if (uap < 3) {
+      setUap(uap + 1);
+    }
+  };
+
+  const handlePrevousUpcoming = () => {
+    if (uap > 1) {
+      setUap(uap - 1);
+    }
+  };
+
+  useEffect(() => {
     fetchProduct();
+    const updateCenterSlidePercentage = () => {
+      if (window.innerWidth < 768) {
+        setCenterSlidePercentage(100);
+      } else if (window.innerWidth < 1024) {
+        setCenterSlidePercentage(50);
+      } else {
+        setCenterSlidePercentage(33.33);
+      }
+    };
+
+    updateCenterSlidePercentage();
+
+    window.addEventListener("resize", updateCenterSlidePercentage);
+
+    return () =>
+      window.removeEventListener("resize", updateCenterSlidePercentage);
   }, []);
 
   return (
@@ -46,27 +86,33 @@ function Landing() {
                             <i className="icon-flash"></i>
                           </div>
                           <div className="sub-tag-title">
-                            <p style={{fontSize: '30px',fontWeight: "bold"}}>We are Digital Duniyaa</p>
+                            <p style={{ fontSize: "30px", fontWeight: "bold" }}>
+                              We are Digital Duniyaa
+                            </p>
                           </div>
                         </div>
                         <h1
                           className=" fw-7 "
-                          style={{ textShadow: "0 2px black",marginBottom:'-137px' }}
+                          style={{
+                            textShadow: "0 2px black",
+                            marginBottom: "-137px",
+                          }}
                         >
                           हुनर से शिखर तक
-                          <br/>
-                          <div className="bottom-btns " style={{marginTop:'10px'}}>
-                            <Link to={'/register'}>
-                          <a href="#" className="tf-btn style-secondary">
-                            Join Today
-                            <i className="icon-arrow-top-right"></i>
-                          </a>
-                          </Link>
-                        </div>
+                          <br />
+                          <div
+                            className="bottom-btns "
+                            style={{ marginTop: "10px" }}
+                          >
+                            <Link to={"/register"}>
+                              <a href="#" className="tf-btn style-secondary">
+                                Join Today
+                                <i className="icon-arrow-top-right"></i>
+                              </a>
+                            </Link>
+                          </div>
                         </h1>
-                     
                       </div>
-                      
                     </div>
                     <div className="bot-wrap"></div>
                   </div>
@@ -425,53 +471,60 @@ function Landing() {
                 >
                   <div className="swiper-wrapper">
                     <Carousel
-                      autoPlay
                       className="carousel-home"
-                      showArrows
-                      swipeable
+                      showThumbs={false}
+                      showStatus={false}
+                      interval={3000}
+                      centerMode
+                      autoPlay
+                      centerSlidePercentage={centerSlidePercentage}
+                      showIndicators={false}
+                      showArrows={false}
+                      selectedItem={cci}
+                      onChange={(index) => setCci(index)}
                     >
-                      {Array.isArray(product) ? (
-                        product.map((row) => (
-                          <div className="swiper-slide sliderElement">
-                            <div className="course-item hover-img style-2 h240">
-                              <div className="features image-wrap">
-                                <img
-                                  className="lazyload"
-                                  data-src={row.pictures.base_link}
-                                  src={row.pictures.base_link}
-                                  alt=""
-                                />
-                              </div>
-                              <div className="content">
-                                <h5 className="fw-5 line-clamp-2">
-                                  <a href="#">{row.name} </a>
-                                </h5>
-
-                                <div className="author">
-                                  By:
-                                  <a href="#" className="author">
-                                    Digital Duniyaa
-                                  </a>
+                      {Array.isArray(product)
+                        ? product.map((row) => (
+                            <div className="swiper-slide sliderElement">
+                              <div className="course-item hover-img style-2 h240">
+                                <div className="features image-wrap">
+                                  <img
+                                    className="lazyload"
+                                    data-src={row.pictures.base_link}
+                                    src={row.pictures.base_link}
+                                    alt=""
+                                  />
                                 </div>
-                                <div className="bottom">
-                                  <div className="h6 price fw-5">
-                                    ₹{row.price.toFixed(2)}
+                                <div className="content">
+                                  <h5 className="fw-5 line-clamp-2">
+                                    <a href="#">{row.name} </a>
+                                  </h5>
+
+                                  <div className="author">
+                                    By:
+                                    <a href="#" className="author">
+                                      Digital Duniyaa
+                                    </a>
                                   </div>
-                                  <a
-                                    href="course-single-v2.html"
-                                    className="tf-btn-arrow"
-                                  >
-                                    <span className="fw-5 fs-15">Buy Now</span>
-                                    <i className="icon-arrow-top-right"></i>
-                                  </a>
+                                  <div className="bottom">
+                                    <div className="h6 price fw-5">
+                                      ₹{row.price.toFixed(2)}
+                                    </div>
+                                    <a
+                                      href="course-single-v2.html"
+                                      className="tf-btn-arrow"
+                                    >
+                                      <span className="fw-5 fs-15">
+                                        Buy Now
+                                      </span>
+                                      <i className="icon-arrow-top-right"></i>
+                                    </a>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        ))
-                      ) : (
-                        <div></div>
-                      )}
+                          ))
+                        : undefined}
 
                       <div className="swiper-slide sliderElement">
                         <div className="course-item hover-img style-2 h240">
@@ -694,8 +747,14 @@ function Landing() {
                   </div>
                   {/* <div className="swiper-pagination pagination-slider pagination-courses5 pt-32"></div> */}
                 </div>
-                <div className="swiper-button-prev btns-style-arrow courses5-prev"></div>
-                <div className="swiper-button-next btns-style-arrow courses5-next"></div>
+                <div
+                  className="swiper-button-prev btns-style-arrow courses5-prev"
+                  onClick={handlePrevousCourse}
+                ></div>
+                <div
+                  className="swiper-button-next btns-style-arrow courses5-next"
+                  onClick={handleNextCourse}
+                ></div>
               </div>
               <div className="row ">
                 <div className="col-12 d-flex justify-center">
@@ -777,10 +836,18 @@ function Landing() {
                 >
                   <div className="swiper-wrapper" id="course">
                     <Carousel
-                      autoPlay
                       className="carousel-home"
-                      showArrows
-                      swipeable
+                      showThumbs={false}
+                      showStatus={false}
+                      infiniteLoop
+                      autoPlay
+                      interval={3000}
+                      centerMode
+                      centerSlidePercentage={centerSlidePercentage}
+                      showIndicators={false}
+                      selectedItem={uap}
+                      showArrows={false}
+                      onChange={(index) => setUap(index)}
                     >
                       <div className="swiper-slide">
                         <a href="#">
@@ -882,6 +949,16 @@ function Landing() {
                     </Carousel>
                   </div>
                 </div>
+                <div
+                  className="swiper-button-prev btns-style-arrow courses5-prev"
+                  style={{ marginTop: "20px" }}
+                  onClick={handlePrevousUpcoming}
+                ></div>
+                <div
+                  className="swiper-button-next btns-style-arrow courses5-next"
+                  style={{ marginTop: "20px" }}
+                  onClick={handleNextUpcoming}
+                ></div>
               </div>
             </div>
           </div>
@@ -988,7 +1065,9 @@ function Landing() {
                       </div>
 
                       <div className="name">
-                        <span style={{fontWeight:'bold'}}>Sir Devendra Maurya </span>
+                        <span style={{ fontWeight: "bold" }}>
+                          Sir Devendra Maurya{" "}
+                        </span>
                       </div>
                     </div>
                     <div className="teachers-upskill">
@@ -1001,7 +1080,9 @@ function Landing() {
                         />
                       </div>
                       <div className="name">
-                        <span style={{fontWeight:'bold'}}>Mahima Maurya</span>
+                        <span style={{ fontWeight: "bold" }}>
+                          Mahima Maurya
+                        </span>
                       </div>
                     </div>
                   </div>

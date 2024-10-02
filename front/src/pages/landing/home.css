@@ -2721,12 +2721,18 @@ select {
 
 .swiper-wrapper .sliderElement {
   /* width: 33%; */
+  margin: 0px 10px;
 }
 
 .carousel-home {
-  width: 50%;
+  width: 100%;
   margin: 10px auto;
 }
+.carousel-home .sliderElement .course-item,
+.carousel-home .academisc-item {
+  margin: 0px 10px;
+}
+
 .widget-saying-list .swiper-slide {
   margin-top: 20px;
 }
@@ -2823,10 +2829,10 @@ select {
   border: 0;
 }
 .btns-style-arrow.swiper-button-prev {
-  left: -71px;
+  left: 0px;
 }
 .btns-style-arrow.swiper-button-next {
-  right: -71px;
+  right: 0px;
 }
 
 .swiper-bottom {
