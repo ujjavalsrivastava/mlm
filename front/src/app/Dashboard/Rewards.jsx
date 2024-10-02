@@ -131,7 +131,7 @@ const Rewards = () => {
                                 ? `₹${
                                     usersTotalEarnings.find(
                                       (u) => u.userId === lUser._id
-                                    )?.totalEarning || 0
+                                    )?.totalEarning?.toFixed(2) || 0
                                   }` || "₹0"
                                 : "₹0"}
                                 

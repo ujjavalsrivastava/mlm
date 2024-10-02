@@ -276,9 +276,9 @@ const register = () => {
                   <h2 class="login-title fw-7 ">Create A New Account</h2>
                   <div class="register">
                     <p class="fw-5 fs-15 ">Already have an account?</p>
-                    <a href="#" class="fw-5 fs-15 ">
-                      Sign in
-                    </a>
+                    <Link to={'/login'} class="fw-5 fs-15" >
+                                    Sign In
+                                    </Link>
                   </div>
                   {level == 1 ? (
                     <>

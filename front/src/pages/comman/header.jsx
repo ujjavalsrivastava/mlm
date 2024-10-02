@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { fetchProfile } from "../../store/profileReducer";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { menuItems } from "./constants";
 
 const header = () => {
