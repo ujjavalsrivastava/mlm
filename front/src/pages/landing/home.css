@@ -2719,9 +2719,13 @@ select {
   /* width: auto; */
 }
 
-.swiper-wrapper .sliderElement {
-  /* width: 33%; */
+.swiper-wrapper .sliderElement,
+.carousel-home .academisc-item {
   margin: 0px 10px;
+}
+.carousel-home .sliderElement .course-item,
+.carousel-home .academisc-item {
+  width: 100%;
 }
 
 .carousel-home {
@@ -2833,6 +2837,39 @@ select {
 }
 .btns-style-arrow.swiper-button-next {
   right: 0px;
+}
+.carousel-container {
+  position: relative;
+}
+
+.carousel-card {
+  padding: 30px 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Move the dot indicators below the carousel */
+.carousel .control-dots {
+  position: absolute;
+  bottom: -15px !important; /* Adjust this value as needed to move the dots further below */
+  width: 100%;
+  text-align: center;
+}
+
+.carousel .control-dots .dot {
+  background-color: #007bff;
+  width: 12px;
+  height: 12px;
+  margin: 0 5px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.carousel .control-dots .dot.selected {
+  background-color: #e27447;
 }
 
 .swiper-bottom {
@@ -14961,9 +14998,7 @@ instructors-item
   .section-become-instructor .main-section .content-img {
     display: none;
   }
-  .btns-style-arrow {
-    display: none;
-  }
+
   .badge-item {
     padding: 10px;
     gap: 10px;
@@ -15627,6 +15662,9 @@ instructors-item
   }
   .profile-wrap .profile-btn {
     flex-direction: column;
+  }
+  .btns-style-arrow {
+    display: none;
   }
   .tf-accordion-default {
     padding: 10px 15px;

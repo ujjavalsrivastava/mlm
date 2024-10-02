@@ -469,7 +469,7 @@ function Landing() {
                   className="swiper-container slider-courses-5 "
                   data-wow-delay="0.4s"
                 >
-                  <div className="swiper-wrapper">
+                  <div className="swiper-wrapper carousel-container">
                     <Carousel
                       className="carousel-home"
                       showThumbs={false}
@@ -478,14 +478,14 @@ function Landing() {
                       centerMode
                       autoPlay
                       centerSlidePercentage={centerSlidePercentage}
-                      showIndicators={false}
+                      showIndicators={true}
                       showArrows={false}
                       selectedItem={cci}
                       onChange={(index) => setCci(index)}
                     >
                       {Array.isArray(product)
                         ? product.map((row) => (
-                            <div className="swiper-slide sliderElement">
+                            <div className="swiper-slide carousel-card sliderElement">
                               <div className="course-item hover-img style-2 h240">
                                 <div className="features image-wrap">
                                   <img
@@ -526,7 +526,7 @@ function Landing() {
                           ))
                         : undefined}
 
-                      <div className="swiper-slide sliderElement">
+                      <div className="swiper-slide carousel-card sliderElement">
                         <div className="course-item hover-img style-2 h240">
                           <div className="features image-wrap">
                             <img
@@ -563,7 +563,7 @@ function Landing() {
                         </div>
                       </div>
 
-                      <div className="swiper-slide sliderElement">
+                      <div className="swiper-slide carousel-card sliderElement">
                         <div className="course-item hover-img style-2 h240">
                           <div className="features image-wrap">
                             <img
@@ -598,7 +598,7 @@ function Landing() {
                         </div>
                       </div>
 
-                      <div className="swiper-slide sliderElement">
+                      <div className="swiper-slide carousel-card sliderElement">
                         <div className="course-item hover-img style-2 h240">
                           <div className="features image-wrap">
                             <img
@@ -635,7 +635,7 @@ function Landing() {
                         </div>
                       </div>
 
-                      <div className="swiper-slide sliderElement">
+                      <div className="swiper-slide carousel-card sliderElement">
                         <div className="course-item hover-img style-2 h240">
                           <div className="features image-wrap">
                             <img
@@ -670,7 +670,7 @@ function Landing() {
                         </div>
                       </div>
 
-                      <div className="swiper-slide sliderElement">
+                      <div className="swiper-slide carousel-card sliderElement">
                         <div className="course-item hover-img style-2 h240">
                           <div className="features image-wrap">
                             <img
@@ -707,7 +707,7 @@ function Landing() {
                         </div>
                       </div>
 
-                      <div className="swiper-slide sliderElement">
+                      <div className="swiper-slide carousel-card sliderElement">
                         <div className="course-item hover-img style-2 h240">
                           <div className="features image-wrap">
                             <img
@@ -833,7 +833,10 @@ function Landing() {
                   data-preview="3"
                   data-space="28"
                 >
-                  <div className="swiper-wrapper" id="course">
+                  <div
+                    className="swiper-wrapper carousel-container"
+                    id="course"
+                  >
                     <Carousel
                       className="carousel-home"
                       showThumbs={false}
@@ -843,12 +846,12 @@ function Landing() {
                       interval={3000}
                       centerMode
                       centerSlidePercentage={centerSlidePercentage}
-                      showIndicators={false}
+                      showIndicators={true}
                       selectedItem={uap}
                       showArrows={false}
                       onChange={(index) => setUap(index)}
                     >
-                      <div className="swiper-slide">
+                      <div className="swiper-slide carousel-card">
                         <a href="#">
                           <div className="academisc-item">
                             <div className="image-wrap">
@@ -868,7 +871,7 @@ function Landing() {
                           </div>
                         </a>
                       </div>
-                      <div className="swiper-slide">
+                      <div className="swiper-slide carousel-card">
                         <a href="#">
                           <div className="academisc-item">
                             <div className="image-wrap">
@@ -887,7 +890,7 @@ function Landing() {
                           </div>
                         </a>
                       </div>
-                      <div className="swiper-slide">
+                      <div className="swiper-slide carousel-card">
                         <a href="#">
                           <div className="academisc-item">
                             <div className="image-wrap">
@@ -907,7 +910,7 @@ function Landing() {
                           </div>
                         </a>
                       </div>
-                      <div className="swiper-slide">
+                      <div className="swiper-slide carousel-card">
                         <a href="#">
                           <div className="academisc-item">
                             <div className="image-wrap">
@@ -926,7 +929,7 @@ function Landing() {
                           </div>
                         </a>
                       </div>
-                      <div className="swiper-slide">
+                      <div className="swiper-slide carousel-card">
                         <a href="#">
                           <div className="academisc-item">
                             <div className="image-wrap">

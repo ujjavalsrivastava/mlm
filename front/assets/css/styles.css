@@ -14944,9 +14944,7 @@ instructors-item
   .section-become-instructor .main-section .content-img {
     display: none;
   }
-  .btns-style-arrow {
-    display: none;
-  }
+
   .badge-item {
     padding: 10px;
     gap: 10px;
@@ -15486,6 +15484,9 @@ instructors-item
   .section-become-instructor .content-right {
     padding-top: 30px;
     padding-left: 0px;
+  }
+  .btns-style-arrow {
+    display: none;
   }
   .section-event .wrap-item {
     grid-template-columns: repeat(1, 1fr);
