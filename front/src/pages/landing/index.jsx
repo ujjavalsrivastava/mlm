@@ -758,7 +758,6 @@ function Landing() {
               </div>
               <div className="row ">
                 <div className="col-12 d-flex justify-center">
-                  
                   <Link to={"/register"}>
                     <a href="#" className="tf-btn">
                       Buy this bundle @ ₹2499{" "}

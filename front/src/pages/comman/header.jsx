@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { fetchProfile } from "../../store/profileReducer";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { menuItems } from "./constants";
 
 const header = () => {
@@ -43,6 +43,7 @@ const header = () => {
       setMenu(menuItem.sub);
     } else {
       navigate(menuItem.url);
+      handleNavbar(false);
     }
   };
 
