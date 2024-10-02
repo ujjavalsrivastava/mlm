@@ -1,0 +1,84 @@
+.invoice-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.invoice-header img {
+  width: 120px;
+}
+.invoice-header,
+.invoice-footer {
+  text-align: left;
+  padding: 10px;
+}
+.invoice-body {
+  margin-top: 20px;
+}
+.invoice-body p {
+  margin: 3px 0px;
+  line-height: 1.4;
+}
+.company-details,
+.customer-details {
+  width: 50%;
+  float: left;
+  margin-bottom: 20px;
+}
+.invoice-info {
+  width: 50%;
+  float: left;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 15px;
+}
+.companyname {
+  font-size: 14px;
+}
+.customer-details > h2 {
+  font-size: 14px;
+}
+.clear {
+  clear: both;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+table,
+th,
+td {
+  border: 1px solid #efefef;
+}
+#invotblhead th {
+  padding: 3px;
+  font-size: 13px;
+}
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+th {
+  background-color: #f0f0f0;
+}
+.total {
+  font-weight: bold;
+  font-size: 16px;
+}
+.total td {
+  background-color: #f8f8f8;
+}
+
+.downloadBtnContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin: 8px;
+}

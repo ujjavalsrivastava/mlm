@@ -92,6 +92,7 @@ const menuItems = [
 
 const header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const logout = () => {
     localStorage.removeItem("token");
     window.location.assign("/login");
@@ -109,6 +110,12 @@ const header = () => {
     fetchProfile();
   }, []);
 
+  useEffect(() => {
+    if (location.hash === "#course") {
+      document.getElementById("course")?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [location]);
+
   const handleNavbar = (value) => {
     if (!value) {
       setSelectedMenu([]);
@@ -116,8 +123,6 @@ const header = () => {
     }
     setShowSidebar(value);
   };
-
-  console.log({ menu });
 
   const handleMenuClick = (menuItem) => {
     if (menuItem.sub) {
@@ -168,10 +173,10 @@ const header = () => {
               <nav class="main-menu">
                 <ul class="navigation">
                   <li>
-                  <Link to={'/'}>Home</Link>
+                    <Link to={"/"}>Home</Link>
                   </li>
                   <li class="has-children">
-                    <a href="/#course">Our Couress</a>
+                    <Link to="/#course">Our Couress</Link>
                     {/* <ul>
                       <li>
                         <a href="#">Instructor List</a>
@@ -191,10 +196,10 @@ const header = () => {
                     </ul> */}
                   </li>
                   <li>
-                    <Link to={'about-us'}>About Us</Link>
+                    <Link to={"about-us"}>About Us</Link>
                   </li>
                   <li>
-                  <Link to={'contact-us'}>Contact</Link>
+                    <Link to={"contact-us"}>Contact</Link>
                   </li>
                 </ul>
               </nav>
