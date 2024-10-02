@@ -17,7 +17,7 @@ export const menuItems = [
      url:'/'
   },
   {
-    title: "Our Couress",
+    title: "Our Course",
     url:"/#course"
    
   },

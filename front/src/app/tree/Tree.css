@@ -10,6 +10,9 @@
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
 }
+.img-circle{
+    width: 40px !important;
+}
 
 .org-chart li {
     float: left;
@@ -75,4 +78,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: scroll;
+    height: 100%;
+}
+.tree-sidebar{
+    margin-left: 230px;
 }

@@ -820,10 +820,11 @@ ul.fa-ul {
   }
 }
 .main-sidebar {
-  height: 200%;
+
   position: absolute;
   top: 0;
   left: 0;
+  bottom: 0;
   padding-top: 60px;
   /* min-height: 100%; */
   width: 230px;
