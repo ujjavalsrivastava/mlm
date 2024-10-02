@@ -1,9 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axios } from "../helper/httpHelper";
 
-export const fetchProfile = createAsyncThunk("profile", async () => {
-  const response = await axios.get("user/profile");
-  return response.data;
+export const fetchProfile = createAsyncThunk("profile", async (_, thunkApi) => {
+  try {
+    const response = await axios.get("user/profile");
+    return response.data;
+  } catch (error) {
+    return thunkApi.rejectWithValue(error.message);
+  }
 });
 
 const apiSlice = createSlice({

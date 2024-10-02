@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { axios } from "../../../helper/httpHelper";
 import logo from "../../../../public/dist/img/img1.jpg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProfile } from "../../../store/profileReducer";
 
 const Header = () => {
   const navigator = useNavigate();
   const [show, setShow] = useState(false);
-
+  const profile = useSelector((state) => state.profile?.data || {});
   const handleToggle = () => {
     setShow((p) => !p);
   };
@@ -15,17 +17,13 @@ const Header = () => {
     localStorage.clear();
     window.location.assign("/login");
   };
-  const [profile, setprofile] = useState({});
-  const fetchProfile = async () => {
-    const response = await axios.get("user/profile");
-    setprofile(response.data);
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchProfile();
+    if (!profile?._id) {
+      dispatch(fetchProfile());
+    }
   }, []);
-
-  console.log(profile);
 
   return (
     <>

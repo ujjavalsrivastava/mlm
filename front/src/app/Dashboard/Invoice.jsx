@@ -2,9 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import { axios } from "../../helper/httpHelper";
 import styles from "./invoice.module.css";
 import html2pdf from "html2pdf.js";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProfile } from "../../store/profileReducer";
+import { convertInvoiceDateFormat } from "../../utils/helper";
 
 const Invoice = () => {
   const [data, setData] = useState([]);
+  const profile = useSelector((state) => state.profile?.data);
+  const dispatch = useDispatch();
+  console.log({ profile, data });
+
   const invoiceRef = useRef();
 
   const invoiceFun = async () => {
@@ -31,6 +38,9 @@ const Invoice = () => {
 
   useEffect(() => {
     invoiceFun();
+    if (!profile?._id) {
+      dispatch(fetchProfile());
+    }
   }, []);
 
   return (
@@ -113,25 +123,29 @@ const Invoice = () => {
 
                   <div className={styles["customer-details"]}>
                     <h2>BILLED TO:</h2>
-                    <p>Customer Name</p>
-                    <p>Customer Address Line 1</p>
-                    <p>City, ZIP Code</p>
-                    <p>Email: customer@example.com</p>
-                    <p>Phone: +123 456 789</p>
+                    <p>{profile.name}</p>
+                    <p>{profile.address}</p>
+                    <p>
+                      {profile.city}, {profile.pincode} {profile.country}
+                    </p>
+                    <p>{profile.email}</p>
+                    <p>{profile.mobile}</p>
                   </div>
 
                   <div className={styles["invoice-info"]}>
                     <p>
-                      <strong>Invoice No:</strong> #INV-00123
+                      <strong>Invoice No:</strong> #{data[0]?._id}
                     </p>
                     <p>
-                      <strong>Invoice Date:</strong> September 25, 2024
+                      <strong>Invoice Date: </strong>
+                      {convertInvoiceDateFormat(data[0].timestamp)}
                     </p>
                     <p>
-                      <strong>Invoice Amount:</strong> $429.00
+                      <strong>Invoice Amount: </strong> ₹2948.82
                     </p>
                     <p>
-                      <strong>Paid:</strong> Yes
+                      <strong>Paid: </strong>
+                      {data[0]?.status === "success" ? "Yes" : "No"}
                     </p>
                   </div>
 
@@ -148,36 +162,24 @@ const Invoice = () => {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Product 1</td>
-                        <td>2</td>
-                        <td>$50.00 * 2</td>
-                        <td>$100.00</td>
-                      </tr>
-                      <tr>
-                        <td>Product 2</td>
+                        <td>Digital Entrepreneurship Bundles</td>
                         <td>1</td>
-                        <td>$200.00 * 1</td>
-                        <td>$200.00</td>
-                      </tr>
-                      <tr>
-                        <td>Product 3</td>
-                        <td>3</td>
-                        <td>$30.00 *1</td>
-                        <td>$90.00</td>
+                        <td>₹2499.00 * 1</td>
+                        <td>₹2499.00</td>
                       </tr>
                     </tbody>
                     <tfoot>
                       <tr className={styles.total}>
                         <td colspan="3">Subtotal</td>
-                        <td>$390.00</td>
+                        <td>₹2499.00</td>
                       </tr>
                       <tr className={styles.total}>
                         <td colspan="3">GST (18%)</td>
-                        <td>$39.00</td>
+                        <td>₹449.82.00</td>
                       </tr>
                       <tr className={styles.total}>
                         <td colspan="3">Total Amount</td>
-                        <td>$429.00</td>
+                        <td>₹2948.82</td>
                       </tr>
                     </tfoot>
                   </table>

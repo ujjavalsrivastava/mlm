@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { axios } from "../../helper/httpHelper";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLowerProfiles } from "../../store/lowerLevel";
-import moment from 'moment'
+import moment from "moment";
+import { fetchProfile } from "../../store/profileReducer";
 
 const MemberDashboard = () => {
   const [todayDirectTeam, setTodayDirectTeam] = useState(0);
@@ -10,7 +11,7 @@ const MemberDashboard = () => {
   const lowerProfiles = useSelector((state) => state.levels);
   const [usersTotalEarnings, setUsersTotalEarnings] = useState([]);
   const [AllTimeDirectTeam, setAllTimeDirectTeam] = useState(0);
-  
+  const user = useSelector((state) => state.profile?.data || {});
   const dispatch = useDispatch();
 
   const lowerLevels = lowerProfiles?.data[0]?.lowerLevel || [];
@@ -36,24 +37,19 @@ const MemberDashboard = () => {
 
   const fetchPurchage = async () => {
     try {
-  
       const response = await axios.get("user/lower-users");
-      //const total = response[0].lowerLevel.reduce((acc, item) => acc + item.value, 0);
-       // setSum(total);
-       setAllTimeDirectTeam(response.data[0]?.lowerLevel.length)
-        let todayTeamcout = 0;
-       const todayteam = await response.data[0]?.lowerLevel.map((row) => {
-        const d1 =moment(new Date()).format('DD/MM/YYYY') ;
-        const d2 = moment(new Date(row.createdAt)).format('DD/MM/YYYY');
-        console.log('d1 '+d1);
-        console.log('d2 '+d2);
-        if(d1 == d2){
+      setAllTimeDirectTeam(response.data[0]?.lowerLevel.length);
+      let todayTeamcout = 0;
+      const todayteam = await response.data[0]?.lowerLevel.map((row) => {
+        const d1 = moment(new Date()).format("DD/MM/YYYY");
+        const d2 = moment(new Date(row.createdAt)).format("DD/MM/YYYY");
+
+        if (d1 == d2) {
           todayTeamcout += 1;
         }
-      
-    });
-       
-       setTodayDirectTeam(todayTeamcout);
+      });
+
+      setTodayDirectTeam(todayTeamcout);
     } catch (error) {
       console.log(error.message);
     }
@@ -68,23 +64,13 @@ const MemberDashboard = () => {
     }
   };
 
-  const [user, setuser] = useState({});
-
-  const fetchProfile = async () => {
-    const response = await axios.get("user/profile");
-    setuser(response.data);
-  };
- 
-  // const cnt = purchageHistry.length;
-
-  //  for (var i=0; i<cnt; i++) {
-  //      total += purchageHistry[i].amount;
-  //  }
-  // console.log('toatl '+ data);
   useEffect(() => {
     fetchPurchage();
-    fetchProfile();
     groupStatus();
+    if (!user?._id) {
+      dispatch(fetchProfile());
+    }
+
     if (lowerProfiles.status !== "succeeded") {
       dispatch(fetchLowerProfiles());
     }
@@ -96,7 +82,9 @@ const MemberDashboard = () => {
           <h1>Welcome {user && user.name}! </h1>
           <ol class="breadcrumb">
             <li>
-            <a href="#" style={{color:'black'}}>Home /  Affiliate Panel </a>
+              <a href="#" style={{ color: "black" }}>
+                Home / Affiliate Panel{" "}
+              </a>
             </li>
             {/* <li>
               <i class="fa fa-angle-right"></i> Dashboard
@@ -139,7 +127,7 @@ const MemberDashboard = () => {
                       <i class="ti-bar-chart f-20 text-danger"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                        {group && group.total7DaysEarning.toFixed(2)}
+                          {group && group.total7DaysEarning.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           Last 7 Days Earning
@@ -164,7 +152,7 @@ const MemberDashboard = () => {
                       <i class="ti-panel f-20 text-info"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                        {group && group.total30DaysEarning.toFixed(2)}
+                          {group && group.total30DaysEarning.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           Last 30 Days Earning
@@ -212,7 +200,6 @@ const MemberDashboard = () => {
                 </div>
               </div>
 
-
               <div class="info-box">
                 <div class="row">
                   <div class="col-lg-3 col-sm-6 col-xs-12">
@@ -220,7 +207,7 @@ const MemberDashboard = () => {
                       <i class="ti-face-smile f-20 text-blue"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                         {todayDirectTeam.toFixed(2)}
+                          {todayDirectTeam.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           Today Direct Team
@@ -245,7 +232,7 @@ const MemberDashboard = () => {
                       <i class="ti-bar-chart f-20 text-danger"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                         {AllTimeDirectTeam.toFixed(2)}
+                          {AllTimeDirectTeam.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           All Time Direct Team
@@ -272,9 +259,7 @@ const MemberDashboard = () => {
                         <h1 class="f-25 text-black">
                           {group && group.todayGroupUser.toFixed(2)}
                         </h1>
-                        <span class="progress-description">
-                          Today Team
-                        </span>
+                        <span class="progress-description">Today Team</span>
                       </div>
                       <div class="progress">
                         <div
@@ -297,9 +282,7 @@ const MemberDashboard = () => {
                         <h1 class="f-25 text-black">
                           {group && group.totalGroupUser.toFixed(2)}
                         </h1>
-                        <span class="progress-description">
-                          All Team Size
-                        </span>
+                        <span class="progress-description">All Team Size</span>
                       </div>
                       <div class="progress">
                         <div
@@ -320,7 +303,6 @@ const MemberDashboard = () => {
             </div>
           </div>
 
-        
           <div class="row">
             <div class="col-lg-8">
               <div class="info-box">
@@ -346,28 +328,41 @@ const MemberDashboard = () => {
                 </div> */}
                 <div id="area"></div>
               </div>
-           
             </div>
             <div class="col-lg-4 m-b-3">
               <div>
                 <div class="box box-widget widget-user-2">
                   <div class="widget-user-header bg-yellow">
-                    <h5 style={{color:'white'}}>Your Recent Sales</h5>
+                    <h5 style={{ color: "white" }}>Your Recent Sales</h5>
                     {/* <h5>Checkout my contacts here</h5> */}
                   </div>
-                  <ul class="products-list product-list-in-box scroll" style={{height:"311px"}}>
+                  <ul
+                    class="products-list product-list-in-box scroll"
+                    style={{ height: "311px" }}
+                  >
                     {lowerLevels.map((lUser) => (
                       <li class="item">
                         <div class="product-img">
-                          <img src="./dist/img/img1.jpg" alt="Product Image" style={{borderRadius:'50%'}}
-                            />
+                          <img
+                            src="./dist/img/img1.jpg"
+                            alt="Product Image"
+                            style={{ borderRadius: "50%" }}
+                          />
                         </div>
                         <div class="product-info">
-                          <a href="#" class="product-title" style={{color:'black',fontWeight: 'bold', textTransform: 'capitalize'}}>
+                          <a
+                            href="#"
+                            class="product-title"
+                            style={{
+                              color: "black",
+                              fontWeight: "bold",
+                              textTransform: "capitalize",
+                            }}
+                          >
                             {lUser.name}
                           </a>
                           <span class="product-description">
-                            <a href="#" style={{color:'black'}}>
+                            <a href="#" style={{ color: "black" }}>
                               {usersTotalEarnings.length
                                 ? `₹${
                                     usersTotalEarnings.find(

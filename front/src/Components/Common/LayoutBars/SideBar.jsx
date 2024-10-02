@@ -4,21 +4,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { axios } from "../../../helper/httpHelper";
 import { useEffect, useState } from "react";
 import logo from "../../../../public/dist/img/img1.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProfile } from "../../../store/profileReducer";
 const SideBar = () => {
   const navigator = useNavigate();
+  const profile = useSelector((state) => state.profile?.data || {});
+  const dispatch = useDispatch();
 
   const logout = () => {
     localStorage.clear();
     navigator("/login");
   };
-  const [profile, setprofile] = useState({});
-  const fetchProfile = async () => {
-    const response = await axios.get("user/profile");
-    setprofile(response.data);
-  };
 
   useEffect(() => {
-    fetchProfile();
+    if (!profile?._id) {
+      dispatch(fetchProfile());
+    }
   }, []);
 
   return (
@@ -114,24 +115,30 @@ const SideBar = () => {
 
             <li>
               <Link to={"/invoice"}>
-                <i class="fa fa-steam" style={{ marginRight: "7px" }}></i> Invoice
-                
+                <i class="fa fa-steam" style={{ marginRight: "7px" }}></i>{" "}
+                Invoice
               </Link>
             </li>
-      
+
             <li>
               <Link to={"/passive-income"}>
-             
-              <i class="fa fa-trophy" aria-hidden="true" style={{ marginRight: "7px" }}></i>
+                <i
+                  class="fa fa-trophy"
+                  aria-hidden="true"
+                  style={{ marginRight: "7px" }}
+                ></i>
                 Passive income
               </Link>
             </li>
 
             <li>
               <Link to={"/rewards"}>
-                 
-              <i class="fa fa-trophy" aria-hidden="true" style={{ marginRight: "7px" }}></i>
-               Rewards
+                <i
+                  class="fa fa-trophy"
+                  aria-hidden="true"
+                  style={{ marginRight: "7px" }}
+                ></i>
+                Rewards
               </Link>
             </li>
 
@@ -145,7 +152,6 @@ const SideBar = () => {
                 Change Password
               </Link>
             </li>
-
 
             {profile && profile.role == "admin" ? (
               <>
