@@ -393,7 +393,7 @@ const register = () => {
                           </fieldset>
                         </div>
 
-                        <div class="cols" style={{ marginTop: "-17px" }}>
+                        <div class="cols" style={{ marginTop: "-15px" }}>
                           <fieldset class="tf-field field-pass-again ">
                             <label class="tf-field-label fs-15" for="field4">
                               State

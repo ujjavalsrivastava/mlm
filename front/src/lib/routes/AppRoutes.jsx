@@ -22,7 +22,8 @@ import Refund from "../../pages/landing/Refund";
 import ContactUs from "../../pages/landing/ContactUs";
 import Blog from "../../pages/landing/Blog";
 import Disclaimer from "../../pages/landing/Disclaimer";
-
+import Condition from "../../pages/landing/Condition";
+import Privacy from "../../pages/landing/Privacy";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -39,7 +40,8 @@ const router = createBrowserRouter(
       <Route path="/disclaimer" element={<Disclaimer />} />
       <Route path="/refund" element={<Refund />} />
       <Route path="/contact-us" element={<ContactUs />} />
-      
+      <Route path="/terms-condition" element={<Condition />} />
+      <Route path="/privacy-policy" element={<Privacy />} />
       </Route>
 
       <Route element={<RouteAuth />}>
