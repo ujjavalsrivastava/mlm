@@ -47,7 +47,9 @@ const footer =()=>{
                                             <ul>
                                                 <li><Link to={'/disclaimer'}>Disclaimer </Link> </li>
                                                 <li><Link to={'/refund'}> Refund Policy</Link> </li>
-                                                
+                                                <li><Link to={'/terms-condition'}> Terms and Conditions</Link> </li>
+                                                <li><Link to={'/privacy-policy'}> Privacy Policy</Link> </li>
+                                                    
                                             </ul>
                                         </div>
 
