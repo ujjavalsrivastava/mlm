@@ -90,7 +90,7 @@ const header = () => {
                     <Link to={"/"}>Home</Link>
                   </li>
                   <li class="has-children">
-                    <Link to="/#course">Our Couress</Link>
+                    <Link to="/#course">Our Course</Link>
                   </li>
                   <li>
                     <Link to={"about-us"}>About Us</Link>

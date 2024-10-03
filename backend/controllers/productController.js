@@ -83,7 +83,8 @@ const createProductOrder = async (req, res) => {
   } else {
     userPurchaseHistory.products.unshift(createProduct);
     const savedData = await userPurchaseHistory.save();
-    await distributeUserPercentage(userId, amount, userLevelShare);
+    //amount
+    await distributeUserPercentage(userId, '2499' , userLevelShare);
     return res.json({ message: "Order created successfull", savedData });
   }
   res.json(userPurchaseHistory);
