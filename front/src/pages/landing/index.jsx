@@ -497,7 +497,7 @@ function Landing() {
                                 </div>
                                 <div className="content">
                                   <h5 className="fw-5 line-clamp-2">
-                                    <a href="#">{row.name} </a>
+                                    {row.name} 
                                   </h5>
 
                                   <div className="author">
@@ -510,15 +510,7 @@ function Landing() {
                                     <div className="h6 price fw-5">
                                       ₹{row.price.toFixed(2)}
                                     </div>
-                                    <a
-                                      href="course-single-v2.html"
-                                      className="tf-btn-arrow"
-                                    >
-                                      <span className="fw-5 fs-15">
-                                        Buy Now
-                                      </span>
-                                      <i className="icon-arrow-top-right"></i>
-                                    </a>
+                                   
                                   </div>
                                 </div>
                               </div>
@@ -538,9 +530,9 @@ function Landing() {
                           </div>
                           <div className="content">
                             <h5 className="fw-5 line-clamp-2">
-                              <a href="course-single-v2.html">
+                             
                                 Advance Digital Marketing
-                              </a>
+                              
                             </h5>
 
                             <div className="author">
@@ -551,13 +543,7 @@ function Landing() {
                             </div>
                             <div className="bottom">
                               <div className="h6 price fw-5">₹60,000</div>
-                              <a
-                                href="course-single-v2.html"
-                                className="tf-btn-arrow"
-                              >
-                                <span className="fw-5 fs-15">Buy Now</span>
-                                <i className="icon-arrow-top-right"></i>
-                              </a>
+                             
                             </div>
                           </div>
                         </div>
@@ -575,7 +561,7 @@ function Landing() {
                           </div>
                           <div className="content">
                             <h5 className="fw-5 line-clamp-2">
-                              <a href="course-single-v2.html">Sales Funnel</a>
+                              Sales Funnel
                             </h5>
 
                             <div className="author">
@@ -586,13 +572,7 @@ function Landing() {
                             </div>
                             <div className="bottom">
                               <div className="h6 price fw-5">₹30,000</div>
-                              <a
-                                href="course-single-v2.html"
-                                className="tf-btn-arrow"
-                              >
-                                <span className="fw-5 fs-15">Buy Now</span>
-                                <i className="icon-arrow-top-right"></i>
-                              </a>
+                              
                             </div>
                           </div>
                         </div>
@@ -604,15 +584,15 @@ function Landing() {
                             <img
                               className="lazyload"
                               data-src="assets/images/courses/courses-04.jpg"
-                              src="assets/images/courses/courses-03.jpg"
+                              src="assets/images/courses/courses-04.jpg"
                               alt=""
                             />
                           </div>
                           <div className="content">
                             <h5 className="fw-5 line-clamp-2">
-                              <a href="course-single-v2.html">
+                              
                                 Social Media Growth Program
-                              </a>
+                              
                             </h5>
 
                             <div className="author">
@@ -623,13 +603,7 @@ function Landing() {
                             </div>
                             <div className="bottom">
                               <div className="h6 price fw-5">₹20,000</div>
-                              <a
-                                href="course-single-v2.html"
-                                className="tf-btn-arrow"
-                              >
-                                <span className="fw-5 fs-15">Buy Now</span>
-                                <i className="icon-arrow-top-right"></i>
-                              </a>
+                             
                             </div>
                           </div>
                         </div>
@@ -641,13 +615,13 @@ function Landing() {
                             <img
                               className="lazyload"
                               data-src="assets/images/courses/courses-05.jpg"
-                              src="assets/images/courses/courses-03.jpg"
+                              src="assets/images/courses/courses-05.jpg"
                               alt=""
                             />
                           </div>
                           <div className="content">
                             <h5 className="fw-5 line-clamp-2">
-                              <a href="course-single-v2.html">Video Editing</a>
+                              Video Editing
                             </h5>
 
                             <div className="author">
@@ -658,13 +632,7 @@ function Landing() {
                             </div>
                             <div className="bottom">
                               <div className="h6 price fw-5">₹10,000</div>
-                              <a
-                                href="course-single-v2.html"
-                                className="tf-btn-arrow"
-                              >
-                                <span className="fw-5 fs-15">Buy Now</span>
-                                <i className="icon-arrow-top-right"></i>
-                              </a>
+                             
                             </div>
                           </div>
                         </div>
@@ -676,15 +644,15 @@ function Landing() {
                             <img
                               className="lazyload"
                               data-src="assets/images/courses/courses-06.jpg"
-                              src="/assets/images/courses/courses-03.jpg"
+                              src="/assets/images/courses/courses-06.jpg"
                               alt=""
                             />
                           </div>
                           <div className="content">
                             <h5 className="fw-5 line-clamp-2">
-                              <a href="course-single-v2.html">
+                              
                                 English Speaking
-                              </a>
+                              
                             </h5>
 
                             <div className="author">
@@ -695,13 +663,7 @@ function Landing() {
                             </div>
                             <div className="bottom">
                               <div className="h6 price fw-5">₹10,000</div>
-                              <a
-                                href="course-single-v2.html"
-                                className="tf-btn-arrow"
-                              >
-                                <span className="fw-5 fs-15">Buy Now</span>
-                                <i className="icon-arrow-top-right"></i>
-                              </a>
+                             
                             </div>
                           </div>
                         </div>
@@ -713,15 +675,15 @@ function Landing() {
                             <img
                               className="lazyload"
                               data-src="assets/images/courses/courses-07.jpg"
-                              src="assets/images/courses/courses-03.jpg"
+                              src="assets/images/courses/courses-07.jpg"
                               alt=""
                             />
                           </div>
                           <div className="content">
                             <h5 className="fw-5 line-clamp-2">
-                              <a href="course-single-v2.html">
+                              
                                 Complete Web Creation
-                              </a>
+                              
                             </h5>
 
                             <div className="author">
@@ -732,13 +694,7 @@ function Landing() {
                             </div>
                             <div className="bottom">
                               <div className="h6 price fw-5">₹50,000</div>
-                              <a
-                                href="course-single-v2.html"
-                                className="tf-btn-arrow"
-                              >
-                                <span className="fw-5 fs-15">Buy Now</span>
-                                <i className="icon-arrow-top-right"></i>
-                              </a>
+                             
                             </div>
                           </div>
                         </div>
@@ -760,7 +716,7 @@ function Landing() {
                 <div className="col-12 d-flex justify-center">
                   <Link to={"/register"}>
                     <a href="#" className="tf-btn">
-                      Buy this bundle @ ₹2499{" "}
+                      Buy this bundle @ ₹2948.82{" "}
                       <i className="icon-arrow-top-right"></i>
                     </a>
                   </Link>

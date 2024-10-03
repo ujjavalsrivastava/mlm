@@ -55,7 +55,39 @@ const register = () => {
   const submitLogin = async (e) => {
     e.preventDefault();
 
-    setlevel(level + 1);
+console.log(JSON.stringify(data));
+    const { email, cemail,password,cpassword} = data;
+
+
+   
+      const emailUser = await axios.get(`/user/valid?email=${email}`);
+
+      if (emailUser?.data && emailUser.data.inValid) {
+        setError(true);
+        toast.error("User with this email already exist please login");
+        return;
+      }
+    
+
+    if (email  != cemail) {
+      
+        setError(true);
+        toast.error("Email and Confirm Email not match");
+        return;
+      
+    }
+
+    if (password  != cpassword) {
+      
+      setError(true);
+      toast.error("Password and Confirm Password not match");
+      return;
+    
+  }
+    if(!error){
+      setlevel(level + 1);
+    }
+   
 
     // try {
     //   const response = await axios.post("user/register", data);
@@ -196,6 +228,14 @@ const register = () => {
     fetchProduct();
     fetchCourse();
     stateFun();
+    const dropdownIds = ["selectgender", "selectstate"];
+
+    dropdownIds.forEach(id => {
+      const selctelement = document.getElementById(id);
+      if (selctelement) {
+        selctelement.removeAttribute("style");
+      }
+    });
   }, []);
 
   return (
@@ -224,6 +264,7 @@ const register = () => {
                       }
                     >
                       <img
+                      onClick={() =>setlevel(1)}
                         src={process}
                         class="personal_image"
                         style={{ width: "40px" }}
@@ -246,6 +287,7 @@ const register = () => {
                     >
                       <img
                         src={process}
+                        onClick={() =>setlevel(2)}
                         class="course_image"
                         style={{ width: "40px" }}
                       />
@@ -267,6 +309,7 @@ const register = () => {
                     >
                       <img
                         src={process}
+                        onClick={() =>setlevel(3)}
                         class="payment_image"
                         style={{ width: "40px" }}
                       />
@@ -282,7 +325,170 @@ const register = () => {
                   </div>
                   {level == 1 ? (
                     <>
-                      <form onSubmit={submitLogin} class="form-login">
+                     <form onSubmit={submitLogin} className="form-login form-checkout" >
+                        <div class="cols">
+                          <fieldset class="tf-field field-username">
+                            <input
+                              type="text"
+                              class="tf-input style-1"
+                              onChange={handle}
+                              name="referalCode"
+                              value={referral}
+                              placeholder="Referral Code"
+                              required=""
+                            />
+                            <label class="tf-field-label fs-15" for="field1">
+                              Referral Code
+                            </label>
+                          </fieldset>
+                        </div>
+                        <div class="cols">
+                          <fieldset class="tf-field field-email ">
+                            <input
+                              type="text"
+                              class="tf-input style-1"
+                              onChange={handle}
+                              id="fast-name"
+                              required
+                              name="name"
+                              placeholder="Name..."
+                              autocomplete="off"
+                            />
+                            <label class="tf-field-label fs-15" for="field2">
+                              Name
+                            </label>
+                          </fieldset>
+                          <fieldset class="tf-field field-pass ">
+                            <input
+                              type="number"
+                              class="tf-input style-1"
+                              onChange={handle}
+                              onBlur={handleEmail}
+                              id="last-name"
+                              required
+                              name="mobile"
+                              maxLength={10}
+                              placeholder="Mobile..."
+                              autocomplete="off"
+                            />
+
+                            <label class="tf-field-label fs-15" for="field3">
+                              Mobile
+                            </label>
+                          </fieldset>
+                        </div>
+                        <div class="cols">
+                          <fieldset class="tf-field field-pass-again ">
+                            <input
+                              type="email"
+                              onChange={handle}
+                              onBlur={handleEmail}
+                              id="email"
+                              required
+                              name="email"
+                              placeholder="email..."
+                              class="tf-input style-1"
+                              autocomplete="off"
+                            />
+
+                            <label class="tf-field-label fs-15" for="field4">
+                              Email
+                            </label>
+                          </fieldset>
+                          <fieldset class="tf-field field-pass-again ">
+                            <input
+                              type="email"
+                              onChange={handle}
+                              onBlur={handleEmail}
+                              id="email"
+                              required
+                              name="cemail"
+                              placeholder="email..."
+                              class="tf-input style-1"
+                              autocomplete="off"
+                            />
+
+                            <label class="tf-field-label fs-15" for="field4">
+                              Confirm Email
+                            </label>
+                          </fieldset>
+                        </div>
+                        <div class="cols">
+                        <fieldset class="tf-field field-pass-again ">
+                        <div id="selectgender" class="tf-select mb-50 tf-select-label">
+                                    <select                               class="default"
+                              name="gender"
+                              required
+                              onChange={handle}
+                              style={{ marginTop: "-5px" }}>
+                               <option value="" selected></option>
+                              <option> Male</option>
+                              <option> Female</option>
+                                    </select>
+                                    <label class="select-label" for="">Gender</label>
+                        </div>
+                                </fieldset>
+                        <fieldset class="tf-field field-pass-again ">
+                        <div id="selectstate" class="tf-select mb-50 tf-select-label">
+                                    <select                               class="default"
+                              name="state"
+                              required
+                              onChange={handle}>
+                               <option value="" selected></option>
+                               {state &&
+                                state.map((row) => (
+                                  <option>{row && row.name}</option>
+                                ))}
+                                    </select>
+                                    <label class="select-label" for="">State</label>
+                        </div>
+                                </fieldset>
+                        </div> {/* end cols */}
+
+                        <div class="cols">
+                          <fieldset class="tf-field field-pass-again ">
+                            <input
+                              class="tf-input style-1"
+                              type="password"
+                              id="password"
+                              name="password"
+                              onChange={handle}
+                              required
+                              placeholder="password"
+                              autocomplete="off"
+                            />
+
+                            <label class="tf-field-label fs-15" for="field4">
+                              Password
+                            </label>
+                          </fieldset>
+                          <fieldset class="tf-field field-pass-again ">
+                            <input
+                              class="tf-input style-1"
+                              type="password"
+                              id="confirm-password"
+                              name="cpassword"
+                              onChange={handle}
+                              required
+                              placeholder="Confirm Password"
+                              autocomplete="off"
+                            />
+
+                            <label class="tf-field-label fs-15" for="field4">
+                              Confirm Password
+                            </label>
+                          </fieldset>
+                        </div>
+
+                        <button
+                          class=" button-submit tf-btn w-100 "
+                          type="submit"
+                        >
+                          Proceed to Course Selection
+                          <i class="icon-arrow-top-right"></i>
+                        </button>
+                      </form>
+                      {/* <form onSubmit={submitLogin} class="form-login">
                         <div class="cols">
                           <fieldset class="tf-field field-username">
                             <input
@@ -455,27 +661,26 @@ const register = () => {
                           Proceed to Course Selection
                           <i class="icon-arrow-top-right"></i>
                         </button>
-                      </form>
+                      </form> */}
                     </>
                   ) : null}
 
                   <div class="swiper-slide">
                     {level == 2 ? (
                       <>
-                        {course &&
-                          course.map((row) => (
+                        
                             <div class="course-item hover-img style-2 h240">
                               <div class="features image-wrap">
                                 <img
                                   class="lazyload"
-                                  data-src={row.pictures.base_link}
-                                  src={row.pictures.base_link}
-                                  alt=""
+                                  data-src="assets/images/courses/courses-02.jpg"
+                                  src="assets/images/courses/courses-02.jpg"
+                                 
                                 />
                               </div>
                               <div class="content">
                                 <h5 class="fw-5 line-clamp-2">
-                                  <a href="#"> {row.name} </a>
+                                  <a href="#"> Advance Digital Marketing</a>
                                 </h5>
 
                                 <div class="author">
@@ -486,19 +691,13 @@ const register = () => {
                                 </div>
                                 <div class="bottom">
                                   <div class="h6 price fw-5">
-                                    ₹{row.price.toFixed(2)}
+                                    ₹2948.82
                                   </div>
-                                  <a
-                                    href="course-single-v2.html"
-                                    class="tf-btn-arrow"
-                                  >
-                                    <span class="fw-5 fs-15">Buy Now</span>
-                                    <i class="icon-arrow-top-right"></i>
-                                  </a>
+                                  
                                 </div>
                               </div>
                             </div>
-                          ))}
+                        
                         <button
                           class=" button-submit tf-btn w-100 "
                           type="button"
@@ -521,7 +720,7 @@ const register = () => {
                           <button
                             class=" button-submit tf-btn w-100 "
                             type="button"
-                            onClick={() => orderCreate("2948.82")}
+                            onClick={() => orderCreate("2948")}
                           >
                             Make Payment for 2499
                             <i class="icon-arrow-top-right"></i>
