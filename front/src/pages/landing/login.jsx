@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/img/body-bg.jpg";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { axios } from "../../helper/httpHelper";
 import { toast } from "react-toastify";
 
@@ -15,6 +15,14 @@ const login = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const token = localStorage.getItem("token");
+
+  const checklogin =()=>{
+    if(token){
+      navigate('/my-course');
+    }
+  }
 
   const submitLogin = async (e) => {
     e.preventDefault();
@@ -33,6 +41,10 @@ const login = () => {
     }
   };
 
+
+  useEffect(()=>{
+    checklogin();
+  },[])
 
     return (
 
