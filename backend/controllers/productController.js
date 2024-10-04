@@ -53,12 +53,11 @@ const paymentVerification = async (req, res) => {
 };
 
 const createProductOrder = async (req, res) => {
+  const currentUser = req.user;
   const { paymentMethod, status, orderId, paymentId, signature, amount } =
     req.body;
   const userId = getUserId(req);
-  const [userPurchaseHistory] = await Promise.all([
-    UserPurchase.findOne({ userId }),
-  ]);
+  const userPurchaseHistory = await UserPurchase.findOne({ userId });
 
   const createProduct = {
     orderId,
@@ -83,8 +82,9 @@ const createProductOrder = async (req, res) => {
   } else {
     userPurchaseHistory.products.unshift(createProduct);
     const savedData = await userPurchaseHistory.save();
-    //amount
-    await distributeUserPercentage(userId, '2499' , userLevelShare);
+    if (currentUser.parentId) {
+      await distributeUserPercentage(userId, amount, userLevelShare);
+    }
     return res.json({ message: "Order created successfull", savedData });
   }
   res.json(userPurchaseHistory);

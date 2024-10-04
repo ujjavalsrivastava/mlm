@@ -44,9 +44,9 @@ const createUser = async (req, res) => {
       await referedUser.save();
     }
     await UserPurchase({ userId: savedUser._id, currentAmount: 0 }).save();
-    await rewardsHandler(referedUser);
     await PercentDistribution({ userId: savedUser._id }).save();
     await bankDetails({ email, user: savedUser._id }).save();
+    await rewardsHandler(referedUser);
     return res.status(200).json({ message: "user created successfully" });
   } catch (error) {
     console.log({ error });
@@ -222,14 +222,13 @@ const checkUserExist = async (req, res) => {
 };
 
 const getRewards = async (req, res) => {
-  const isAdmin = req.user.role==='admin';
- 
+  const isAdmin = req.user.role === "admin";
   if (isAdmin) {
-    const rewards = await Rewards.find().populate('user');
+    const rewards = await Rewards.find().populate("user");
     return res.json({ rewards });
   }
   const userId = getUserId(req);
-  const rewards = await Rewards.find({ user: userId }).populate('user');;
+  const rewards = await Rewards.find({ user: userId }).populate("user");
   res.json({ rewards });
 };
 

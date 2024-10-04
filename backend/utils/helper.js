@@ -20,7 +20,7 @@ function generateReferralCode(len = 8) {
 
 // Function to recursively populate lowerLevel
 async function populateLowerLevel(user, counter = 0) {
-  if (!user.lowerLevel || user.lowerLevel.length === 0 || counter >= 12) {
+  if (!user?.lowerLevel || user?.lowerLevel?.length === 0 || counter >= 12) {
     return user;
   }
   await user.populate("lowerLevel");
@@ -270,14 +270,13 @@ const rewardsHandler = async (user) => {
     rewardsAmount = 0;
   }
 
-  if (directChildMonthly > 8) {
+  if (directChildMonthly > 200) {
     rewardsAmount += 19999;
-  } else if (directChildMonthly > 6) {
+  } else if (directChildMonthly > 150) {
     rewardsAmount += 14555;
-  } else if (directChildMonthly >= 4) {
+  } else if (directChildMonthly >= 100) {
     rewardsAmount += 9555;
-  } else if (directChildMonthly >= 2) {
-
+  } else if (directChildMonthly >= 50) {
     rewardsAmount += 4599;
   }
   if (rewardsAmount) {

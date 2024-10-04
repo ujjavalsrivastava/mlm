@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import style from "./home.module.css";
-import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
 import process from "./../../../public/dist/img/process.png";
@@ -8,9 +6,6 @@ import line from "./../../../public/dist/img/line.png";
 import axios1 from "axios";
 import { toast } from "react-toastify";
 const register = () => {
-  const [product, setProduct] = useState(null);
-  const [orderId, setOrderId] = useState("");
-  const [productId, setproductId] = useState("");
   const [referral, setReferral] = useState(null);
   const [error, setError] = useState(false);
 
@@ -19,7 +14,6 @@ const register = () => {
 
   const [data, setData] = useState(null);
   const [state, setState] = useState(null);
-  const [course, setcourse] = useState(null);
 
   const stateFun = async () => {
     try {
@@ -34,16 +28,6 @@ const register = () => {
       console.log(error);
     }
   };
-  console.log("state " + state);
-
-  const fetchCourse = async () => {
-    try {
-      const response = await axios.get("vimeo/courses");
-      setcourse(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handle = (e) => {
     setData((pre) => ({
@@ -54,62 +38,27 @@ const register = () => {
 
   const submitLogin = async (e) => {
     e.preventDefault();
-
-console.log(JSON.stringify(data));
-    const { email, cemail,password,cpassword} = data;
-
-
-   
-      const emailUser = await axios.get(`/user/valid?email=${email}`);
-
-      if (emailUser?.data && emailUser.data.inValid) {
-        setError(true);
-        toast.error("User with this email already exist please login");
-        return;
-      }
-    
-
-    if (email  != cemail) {
-      
-        setError(true);
-        toast.error("Email and Confirm Email not match");
-        return;
-      
+    const { email, cemail, password, cpassword } = data;
+    const emailUser = await axios.get(`/user/valid?email=${email}`);
+    if (emailUser?.data && emailUser.data.inValid) {
+      setError(true);
+      toast.error("User with this email already exist please login");
+      return;
     }
 
-    if (password  != cpassword) {
-      
+    if (email != cemail) {
+      setError(true);
+      toast.error("Email and Confirm Email not match");
+      return;
+    }
+
+    if (password != cpassword) {
       setError(true);
       toast.error("Password and Confirm Password not match");
       return;
-    
-  }
-    if(!error){
-      setlevel(level + 1);
     }
-   
-
-    // try {
-    //   const response = await axios.post("user/register", data);
-    //    console.log(response)
-    //   if (response.status == "200") {
-
-    //     navigate("/login");
-    //     toast.success(response.data.message);
-    //   } else {
-    //     toast.error(response.data.error);
-    //   }
-    // } catch (error) {
-    //   toast.error(error.message);
-    // }
-  };
-
-  const fetchProduct = async () => {
-    try {
-      const response = await axios.get("vimeo/courses");
-      setProduct(response.data);
-    } catch (error) {
-      console.log(error);
+    if (!error) {
+      setlevel(level + 1);
     }
   };
 
@@ -145,60 +94,41 @@ console.log(JSON.stringify(data));
         currency: "INR",
         receipt: "xyz product purchased",
       });
-      setOrderId(response.data.order_id);
 
-      handlePayment(price);
+      const oId = response.data.order_id;
+
+      handlePayment(price, oId);
     } catch (error) {
       console.log(error);
     }
   };
-  // const handlePaymentComplete = async(response) => {
-  //   const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
-  //     response;
-  //   const response = await axios.post('product/order',{"productId":"66ca081771a6103598651071", "paymentId":razorpay_payment_id,"orderId":razorpay_order_id, "paymentMethod":"upi", "status":"created","signature":razorpay_signature})
-  // };
-  const handlePayment = (price) => {
+
+  const handlePayment = (price, oId) => {
     const options = {
-      key: import.meta.env.VITE_PAYMENT_KEY, // Enter the Key ID generated from the Dashboard
-      amount: price * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      key: import.meta.env.VITE_PAYMENT_KEY,
+      amount: price * 100,
       currency: "INR",
       name: "Merchant Name",
       description: "Test Transaction",
-      order_id: orderId, // This is a sample Order ID. Pass the `id` obtained in the previous step
-      handler: async function (response) {
-        console.log("payment data " + JSON.stringify(response));
-        // Send this data to your server to verify the payment
+      order_id: oId,
+      handler: async function ({ razorpay_payment_id }) {
         try {
-          // const result = await axios.post('product/payment-verification', response);
-          // if(result.status==200){
-          const userReponse = await axios.post("user/register", data);
-          //response.razorpay_order_id
+          await axios.post("user/register", data);
           const response = await axios.post("user/login", {
             email: data.email,
             password: data.password,
           });
           localStorage.setItem("token", response.data.token);
-          // if (response.data.code == "801") {
-
-          //   navigate("/my-course");
-          //   toast.success(response.data.message);
-          // } else {
-          //   toast.error(response.data.error);
-          // }
           const productOrder = await axios.post("product/order", {
-            amount: price,
-            paymentId: response.razorpay_payment_id,
-            orderId: orderId,
+            amount: 2499,
+            paymentId: razorpay_payment_id,
+            orderId: oId,
             paymentMethod: "upi",
             status: "success",
             signature: "123sddfgdf",
           });
-
+          toast.success(productOrder.data.message);
           navigate("/my-course");
-          toast.success(result.data.msg);
-          // }else{
-          //   toast.error(result.data.msg);
-          // }
         } catch (error) {
           console.log(error);
         }
@@ -219,18 +149,15 @@ console.log(JSON.stringify(data));
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
   };
-  console.log("data..........." + data);
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const value = queryParams.get("referralCode"); // 'myParam' is the name of the query parameter
     setReferral(value);
     setData(value);
-    fetchProduct();
-    fetchCourse();
     stateFun();
     const dropdownIds = ["selectgender", "selectstate"];
 
-    dropdownIds.forEach(id => {
+    dropdownIds.forEach((id) => {
       const selctelement = document.getElementById(id);
       if (selctelement) {
         selctelement.removeAttribute("style");
@@ -264,7 +191,7 @@ console.log(JSON.stringify(data));
                       }
                     >
                       <img
-                      onClick={() =>setlevel(1)}
+                        onClick={() => setlevel(1)}
                         src={process}
                         class="personal_image"
                         style={{ width: "40px" }}
@@ -287,7 +214,7 @@ console.log(JSON.stringify(data));
                     >
                       <img
                         src={process}
-                        onClick={() =>setlevel(2)}
+                        onClick={() => setlevel(2)}
                         class="course_image"
                         style={{ width: "40px" }}
                       />
@@ -309,7 +236,7 @@ console.log(JSON.stringify(data));
                     >
                       <img
                         src={process}
-                        onClick={() =>setlevel(3)}
+                        onClick={() => setlevel(3)}
                         class="payment_image"
                         style={{ width: "40px" }}
                       />
@@ -319,13 +246,16 @@ console.log(JSON.stringify(data));
                   <h2 class="login-title fw-7 ">Create A New Account</h2>
                   <div class="register">
                     <p class="fw-5 fs-15 ">Already have an account?</p>
-                    <Link to={'/login'} class="fw-5 fs-15" >
-                                    Sign In
-                                    </Link>
+                    <Link to={"/login"} class="fw-5 fs-15">
+                      Sign In
+                    </Link>
                   </div>
                   {level == 1 ? (
                     <>
-                     <form onSubmit={submitLogin} className="form-login form-checkout" >
+                      <form
+                        onSubmit={submitLogin}
+                        className="form-login form-checkout"
+                      >
                         <div class="cols">
                           <fieldset class="tf-field field-username">
                             <input
@@ -414,37 +344,51 @@ console.log(JSON.stringify(data));
                           </fieldset>
                         </div>
                         <div class="cols">
-                        <fieldset class="tf-field field-pass-again ">
-                        <div id="selectgender" class="tf-select mb-50 tf-select-label">
-                                    <select                               class="default"
-                              name="gender"
-                              required
-                              onChange={handle}
-                              style={{ marginTop: "-5px" }}>
-                               <option value="" selected></option>
-                              <option> Male</option>
-                              <option> Female</option>
-                                    </select>
-                                    <label class="select-label" for="">Gender</label>
-                        </div>
-                                </fieldset>
-                        <fieldset class="tf-field field-pass-again ">
-                        <div id="selectstate" class="tf-select mb-50 tf-select-label">
-                                    <select                               class="default"
-                              name="state"
-                              required
-                              onChange={handle}>
-                               <option value="" selected></option>
-                               {state &&
-                                state.map((row) => (
-                                  <option>{row && row.name}</option>
-                                ))}
-                                    </select>
-                                    <label class="select-label" for="">State</label>
-                        </div>
-                                </fieldset>
-                        </div> {/* end cols */}
-
+                          <fieldset class="tf-field field-pass-again ">
+                            <div
+                              id="selectgender"
+                              class="tf-select mb-50 tf-select-label"
+                            >
+                              <select
+                                class="default"
+                                name="gender"
+                                required
+                                onChange={handle}
+                                style={{ marginTop: "-5px" }}
+                              >
+                                <option value="" selected></option>
+                                <option> Male</option>
+                                <option> Female</option>
+                              </select>
+                              <label class="select-label" for="">
+                                Gender
+                              </label>
+                            </div>
+                          </fieldset>
+                          <fieldset class="tf-field field-pass-again ">
+                            <div
+                              id="selectstate"
+                              class="tf-select mb-50 tf-select-label"
+                            >
+                              <select
+                                class="default"
+                                name="state"
+                                required
+                                onChange={handle}
+                              >
+                                <option value="" selected></option>
+                                {state &&
+                                  state.map((row) => (
+                                    <option>{row && row.name}</option>
+                                  ))}
+                              </select>
+                              <label class="select-label" for="">
+                                State
+                              </label>
+                            </div>
+                          </fieldset>
+                        </div>{" "}
+                        {/* end cols */}
                         <div class="cols">
                           <fieldset class="tf-field field-pass-again ">
                             <input
@@ -479,7 +423,6 @@ console.log(JSON.stringify(data));
                             </label>
                           </fieldset>
                         </div>
-
                         <button
                           class=" button-submit tf-btn w-100 "
                           type="submit"
@@ -668,36 +611,31 @@ console.log(JSON.stringify(data));
                   <div class="swiper-slide">
                     {level == 2 ? (
                       <>
-                        
-                            <div class="course-item hover-img style-2 h240">
-                              <div class="features image-wrap">
-                                <img
-                                  class="lazyload"
-                                  data-src="assets/images/courses/courses-02.jpg"
-                                  src="assets/images/courses/courses-02.jpg"
-                                 
-                                />
-                              </div>
-                              <div class="content">
-                                <h5 class="fw-5 line-clamp-2">
-                                  <a href="#"> Advance Digital Marketing</a>
-                                </h5>
+                        <div class="course-item hover-img style-2 h240">
+                          <div class="features image-wrap">
+                            <img
+                              class="lazyload"
+                              data-src="assets/images/courses/courses-02.jpg"
+                              src="assets/images/courses/courses-02.jpg"
+                            />
+                          </div>
+                          <div class="content">
+                            <h5 class="fw-5 line-clamp-2">
+                              <a href="#"> Advance Digital Marketing</a>
+                            </h5>
 
-                                <div class="author">
-                                  By:
-                                  <a href="#" class="author">
-                                    Digital Duniyaa
-                                  </a>
-                                </div>
-                                <div class="bottom">
-                                  <div class="h6 price fw-5">
-                                    ₹2948.82
-                                  </div>
-                                  
-                                </div>
-                              </div>
+                            <div class="author">
+                              By:
+                              <a href="#" class="author">
+                                Digital Duniyaa
+                              </a>
                             </div>
-                        
+                            <div class="bottom">
+                              <div class="h6 price fw-5">₹2948.82</div>
+                            </div>
+                          </div>
+                        </div>
+
                         <button
                           class=" button-submit tf-btn w-100 "
                           type="button"

@@ -13,12 +13,10 @@ const percent = new Schema({
       receiverId: {
         type: Types.ObjectId,
         ref: "User",
-        required: true,
       },
       senderId: {
         type: Types.ObjectId,
         ref: "User",
-        required: true,
       },
       createdAt: {
         type: Date,
