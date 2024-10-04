@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import logo from "../../../../public/dist/img/img1.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfile } from "../../../store/profileReducer";
-const SideBar = () => {
+const SideBar = ({ showSidebar }) => {
   const navigator = useNavigate();
   const profile = useSelector((state) => state.profile?.data || {});
   const dispatch = useDispatch();
@@ -21,6 +21,8 @@ const SideBar = () => {
       dispatch(fetchProfile());
     }
   }, []);
+
+  console.log({ showSidebar });
 
   return (
     <>

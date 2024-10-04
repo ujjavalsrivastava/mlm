@@ -6,9 +6,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfile } from "../../../store/profileReducer";
 
-const Header = () => {
-  const navigator = useNavigate();
+const Header = ({ handleSidebarClick }) => {
   const [show, setShow] = useState(false);
+
   const profile = useSelector((state) => state.profile?.data || {});
   const handleToggle = () => {
     setShow((p) => !p);
@@ -42,7 +42,12 @@ const Header = () => {
         <nav class="navbar blue-bg navbar-static-top">
           <ul class="nav navbar-nav pull-left">
             <li>
-              <a class="sidebar-toggle" data-toggle="push-menu" href="#"></a>
+              <a
+                class="sidebar-toggle"
+                onClick={handleSidebarClick}
+                data-toggle="push-menu"
+                href="#"
+              ></a>
             </li>
           </ul>
 
