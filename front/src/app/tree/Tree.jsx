@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLowerProfiles } from "../../store/lowerLevel";
 import "./Tree.css";
 import { axios } from "../../helper/httpHelper";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 
 const Tree = () => {
   const lowerProfile = useSelector((state) => state.levels);
