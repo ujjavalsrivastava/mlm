@@ -28,7 +28,7 @@ const Header = () => {
   return (
     <>
       <header class="main-header">
-        <Link to={"/dashboard"}>
+        <Link to={"/my-course"}>
           <a href="javascript:void(0)" class="logo blue-bg">
             <span class="logo-mini">
               <img src="dist/img/logo-n.png" alt="" />
@@ -45,7 +45,7 @@ const Header = () => {
               <a class="sidebar-toggle" data-toggle="push-menu" href="#"></a>
             </li>
           </ul>
-          
+
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <li class="dropdown messages-menu">

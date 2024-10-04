@@ -8,14 +8,16 @@ const connectDB = require("./config/connection");
 const path = require("path");
 const morgan = require("morgan");
 (async () => {
-  require("./config/connection");
   const PORT = process.env.APP_PORT;
   const chalk = (await import("chalk")).default;
   const app = express();
   app.use(
     cors({
-      origin: ["http://localhost", "http://35.154.235.131:80"],
-
+      origin: [
+        "http://localhost",
+        "http://35.154.235.131:80",
+        "https://www.digitalduniyaa.in",
+      ],
       credentials: true,
     })
   );

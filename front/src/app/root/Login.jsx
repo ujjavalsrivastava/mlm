@@ -23,7 +23,7 @@ const LoginPage = () => {
 
       if (response.data.code == "801") {
         localStorage.setItem("token", response.data.token);
-        navigate("/dashboard");
+        navigate("/my-course");
         toast.success(response.data.message);
       } else {
         toast.error(response.data.error);
@@ -94,15 +94,12 @@ const LoginPage = () => {
                 </div>
               </div>
             </form>
-          
 
             <div className="m-t-2">
               Don't have an account?{" "}
-              <Link to={'/register'} className="text-center">
-             
-             Sign Up
-           
-           </Link>
+              <Link to={"/register"} className="text-center">
+                Sign Up
+              </Link>
             </div>
           </div>
         </div>
