@@ -149,7 +149,15 @@ const register = () => {
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
   };
+
+  const token = localStorage.getItem("token");
+  const checklogin =()=>{
+    if(token){
+      navigate('/my-course');
+    }
+  }
   useEffect(() => {
+    checklogin();
     const queryParams = new URLSearchParams(window.location.search);
     const value = queryParams.get("referralCode"); // 'myParam' is the name of the query parameter
     setReferral(value);
@@ -631,7 +639,7 @@ const register = () => {
                               </a>
                             </div>
                             <div class="bottom">
-                              <div class="h6 price fw-5">₹2948.82</div>
+                              <div class="h6  fw-5">₹2948.82</div>
                             </div>
                           </div>
                         </div>
@@ -651,7 +659,7 @@ const register = () => {
                       <>
                         <div>
                           <img
-                            src="public/dist/img/raza.png"
+                            src="assets/images/raza.png"
                             alt="img"
                             class="injectable center"
                           />
@@ -660,7 +668,7 @@ const register = () => {
                             type="button"
                             onClick={() => orderCreate("2948")}
                           >
-                            Make Payment for 2499
+                            Make Payment for 2948
                             <i class="icon-arrow-top-right"></i>
                           </button>
                         </div>

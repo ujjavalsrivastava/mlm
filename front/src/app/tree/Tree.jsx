@@ -9,13 +9,16 @@ const Tree = () => {
   const lowerProfile = useSelector((state) => state.levels);
 
   const [showBal, setShowBal] = useState({});
-
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
   const showBalance = async (id) => {
     const response = await axios.get("user/percent-earning?userId=" + id);
     setShowBal(response.data);
+    setShowModal(true);
   };
+
+  console.log(showModal);
   useEffect(() => {
     if (lowerProfile.status !== "succeeded") {
       dispatch(fetchLowerProfiles());
@@ -24,10 +27,10 @@ const Tree = () => {
 
   const renderNode = (node) => (
     <li key={node._id}>
-      <div class="image text-center">
+      <div className="image text-center">
         <img
           src="dist/img/img1.jpg"
-          class="img-circle"
+          className="img-circle"
           alt="User Image"
           height={"50px"}
         />
@@ -51,24 +54,24 @@ const Tree = () => {
 
   return (
     <>
-    <div className="App">
-     <div class="content-header sty-one">
-          <h1 class="text-black" style={{marginLeft:'225px'}}> Hierarchy</h1>
-          <ol class="breadcrumb">
+    <div classNameName="App">
+     <div className="content-header sty-one">
+          <h1 className="text-black" style={{marginLeft:'225px'}}> Hierarchy</h1>
+          <ol className="breadcrumb">
             <li>
             <a href="#" style={{color:'black'}}>Home / Hierarchy </a>
             </li>
-            {/* <li class="sub-bread">
-              <i class="fa fa-angle-right"></i> Change Password
+            {/* <li className="sub-bread">
+              <i className="fa fa-angle-right"></i> Change Password
             </li>
             <li>
-              <i class="fa fa-angle-right"></i> Password
+              <i className="fa fa-angle-right"></i> Password
             </li> */}
           </ol>
         </div>
       
-        <div className="custom-tree tree-sidebar" >
-          <div class="org-chart">
+        <div classNameName="custom-tree tree-sidebar" >
+          <div className="org-chart">
             {lowerProfile?.data?.map((rootNode) => (
               <ul>{renderNode(rootNode)}</ul>
             ))}
@@ -77,82 +80,83 @@ const Tree = () => {
       </div>
 
       <div
-        class="modal fade"
-        id="balanceModal"
+        className={`modal fade ${showModal?'show':''}`}
+       style={{display:showModal?'block':'none'}}
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 Show Balance
               </h5>
               <button
+              onClick={() => setShowModal(false)}
                 type="button"
-                class="close closebtn"
+                className="close closebtn"
                 data-dismiss="modal"
                 aria-label="Close"
               >
                <span aria-hidden="true" style={{fontWeight: 'bold'}}>&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-lg-3 col-xs-6">
-                  <div class="info-box">
-                    <span class="info-box-icon bg-aqua">
-                      <i class="icon-briefcase"></i>
+            <div className="modal-body">
+              <div className="row">
+                <div className="col-lg-3 col-xs-6">
+                  <div className="info-box">
+                    <span className="info-box-icon bg-aqua">
+                      <i className="icon-briefcase"></i>
                     </span>
-                    <div class="info-box-content">
-                      <span class="info-box-number">
+                    <div className="info-box-content">
+                      <span className="info-box-number">
                         {showBal && parseInt(showBal.oneDayEarning) }
                       </span>
-                      <span class="info-box-text">Today's</span>
+                      <span className="info-box-text">Today's</span>
                     </div>
                   </div>
                 </div>
 
-                <div class="col-lg-3 col-xs-6">
-                  <div class="info-box">
-                    <span class="info-box-icon bg-green">
-                      <i class="icon-pencil"></i>
+                <div className="col-lg-3 col-xs-6">
+                  <div className="info-box">
+                    <span className="info-box-icon bg-green">
+                      <i className="icon-pencil"></i>
                     </span>
-                    <div class="info-box-content">
-                      <span class="info-box-number">
+                    <div className="info-box-content">
+                      <span className="info-box-number">
                         {showBal && parseInt(showBal.oneWeekEarning)}
                       </span>
-                      <span class="info-box-text">Last 7 Days</span>
+                      <span className="info-box-text">Last 7 Days</span>
                     </div>
                   </div>
                 </div>
 
-                <div class="col-lg-3 col-xs-6">
-                  <div class="info-box">
-                    <span class="info-box-icon bg-yellow">
-                      <i class="icon-wallet"></i>
+                <div className="col-lg-3 col-xs-6">
+                  <div className="info-box">
+                    <span className="info-box-icon bg-yellow">
+                      <i className="icon-wallet"></i>
                     </span>
-                    <div class="info-box-content">
-                      <span class="info-box-number">
+                    <div className="info-box-content">
+                      <span className="info-box-number">
                         {showBal && parseInt(showBal.oneMonthEarning)}
                       </span>
-                      <span class="info-box-text">Last 30 Days</span>
+                      <span className="info-box-text">Last 30 Days</span>
                     </div>
                   </div>
                 </div>
 
-                <div class="col-lg-3 col-xs-6">
-                  <div class="info-box">
-                    <span class="info-box-icon bg-red">
-                      <i class="icon-layers"></i>
+                <div className="col-lg-3 col-xs-6">
+                  <div className="info-box">
+                    <span className="info-box-icon bg-red">
+                      <i className="icon-layers"></i>
                     </span>
-                    <div class="info-box-content">
-                      <span class="info-box-number">
+                    <div className="info-box-content">
+                      <span className="info-box-number">
                         {showBal && parseInt(showBal.overallEarning)}
                       </span>
-                      <span class="info-box-text">All Time</span>
+                      <span className="info-box-text">All Time</span>
                     </div>
                   </div>
                 </div>
