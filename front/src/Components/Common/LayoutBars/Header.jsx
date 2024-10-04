@@ -6,9 +6,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfile } from "../../../store/profileReducer";
 
-const Header = () => {
-  const navigator = useNavigate();
+const Header = ({}) => {
   const [show, setShow] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(true);
+
   const profile = useSelector((state) => state.profile?.data || {});
   const handleToggle = () => {
     setShow((p) => !p);
@@ -24,6 +25,34 @@ const Header = () => {
       dispatch(fetchProfile());
     }
   }, []);
+
+  useEffect(() => {
+    const updateCenterSlidePercentage = () => {
+      if (window.innerWidth < 768) {
+        document.body.classList.remove("sidebar-collapse");
+        if (showSidebar) {
+          document.body.classList.add("sidebar-open");
+        } else {
+          document.body.classList.remove("sidebar-open");
+        }
+      } else {
+        document.body.classList.add("sidebar-open");
+        if (showSidebar) {
+          document.body.classList.remove("sidebar-collapse");
+        } else {
+          document.body.classList.add("sidebar-collapse");
+        }
+      }
+    };
+    updateCenterSlidePercentage();
+    window.addEventListener("resize", updateCenterSlidePercentage);
+    return () =>
+      window.removeEventListener("resize", updateCenterSlidePercentage);
+  }, [showSidebar]);
+
+  const handleSidebarClick = () => {
+    setShowSidebar((p) => !p);
+  };
 
   return (
     <>
@@ -42,7 +71,12 @@ const Header = () => {
         <nav class="navbar blue-bg navbar-static-top">
           <ul class="nav navbar-nav pull-left">
             <li>
-              <a class="sidebar-toggle" data-toggle="push-menu" href="#"></a>
+              <a
+                class="sidebar-toggle"
+                onClick={handleSidebarClick}
+                data-toggle="push-menu"
+                href="#"
+              ></a>
             </li>
           </ul>
 
