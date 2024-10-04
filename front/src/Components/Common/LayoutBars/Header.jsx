@@ -6,8 +6,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfile } from "../../../store/profileReducer";
 
-const Header = ({ handleSidebarClick }) => {
+const Header = ({}) => {
   const [show, setShow] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const profile = useSelector((state) => state.profile?.data || {});
   const handleToggle = () => {
@@ -24,6 +25,34 @@ const Header = ({ handleSidebarClick }) => {
       dispatch(fetchProfile());
     }
   }, []);
+
+  useEffect(() => {
+    const updateCenterSlidePercentage = () => {
+      if (window.innerWidth < 768) {
+        document.body.classList.remove("sidebar-collapse");
+        if (showSidebar) {
+          document.body.classList.add("sidebar-open");
+        } else {
+          document.body.classList.remove("sidebar-open");
+        }
+      } else {
+        document.body.classList.add("sidebar-open");
+        if (showSidebar) {
+          document.body.classList.remove("sidebar-collapse");
+        } else {
+          document.body.classList.add("sidebar-collapse");
+        }
+      }
+    };
+    updateCenterSlidePercentage();
+    window.addEventListener("resize", updateCenterSlidePercentage);
+    return () =>
+      window.removeEventListener("resize", updateCenterSlidePercentage);
+  }, [showSidebar]);
+
+  const handleSidebarClick = () => {
+    setShowSidebar((p) => !p);
+  };
 
   return (
     <>
