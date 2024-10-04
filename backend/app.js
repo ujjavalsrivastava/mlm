@@ -17,6 +17,7 @@ const morgan = require("morgan");
         "http://localhost",
         "http://35.154.235.131:80",
         "https://www.digitalduniyaa.in",
+        "https://digitalduniyaa.in",
       ],
       credentials: true,
     })
