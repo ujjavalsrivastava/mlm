@@ -8,6 +8,8 @@ import { fetchProfile } from "../../store/profileReducer";
 const MemberDashboard = () => {
   const [todayDirectTeam, setTodayDirectTeam] = useState(0);
   const [group, setgroup] = useState(0);
+  const [showBal, setShowBal] = useState(0);
+  
   const lowerProfiles = useSelector((state) => state.levels);
   const [usersTotalEarnings, setUsersTotalEarnings] = useState([]);
   const [AllTimeDirectTeam, setAllTimeDirectTeam] = useState(0);
@@ -64,11 +66,18 @@ const MemberDashboard = () => {
     }
   };
 
+  const showBalance = async (id) => {
+    const response = await axios.get("user/percent-earning?userId=" + id);
+    setShowBal(response.data);
+  };
+
   useEffect(() => {
     fetchPurchage();
     groupStatus();
     if (!user?._id) {
       dispatch(fetchProfile());
+    }else{
+      showBalance(user?._id)
     }
 
     if (lowerProfiles.status !== "succeeded") {
@@ -102,7 +111,7 @@ const MemberDashboard = () => {
                       <i class="ti-face-smile f-20 text-blue"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                          {group && group.todayTeamEarning.toFixed(2)}
+                          {showBal && showBal.oneDayEarning.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           Today's Earning
@@ -127,7 +136,7 @@ const MemberDashboard = () => {
                       <i class="ti-bar-chart f-20 text-danger"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                          {group && group.total7DaysEarning.toFixed(2)}
+                          {showBal && showBal.oneWeekEarning.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           Last 7 Days Earning
@@ -152,7 +161,7 @@ const MemberDashboard = () => {
                       <i class="ti-panel f-20 text-info"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                          {group && group.total30DaysEarning.toFixed(2)}
+                          {showBal && showBal.oneMonthEarning.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           Last 30 Days Earning
@@ -177,7 +186,7 @@ const MemberDashboard = () => {
                       <i class="ti-wallet f-20 text-green"></i>
                       <div class="info-box-content">
                         <h1 class="f-25 text-black">
-                          {group && group.totalTeamEarning.toFixed(2)}
+                          {showBal && showBal.overallEarning.toFixed(2)}
                         </h1>
                         <span class="progress-description">
                           All Time Earning
