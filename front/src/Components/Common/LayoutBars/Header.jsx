@@ -8,7 +8,7 @@ import { fetchProfile } from "../../../store/profileReducer";
 
 const Header = ({}) => {
   const [show, setShow] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(true);
 
   const profile = useSelector((state) => state.profile?.data || {});
   const handleToggle = () => {
