@@ -22,6 +22,7 @@ const getVideo = async (req, res) => {
             link: item.link,
             duration: item.duration,
             player_embed_url: item.player_embed_url,
+            embed: item.embed.html,
           });
         });
       }
