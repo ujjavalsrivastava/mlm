@@ -928,6 +928,7 @@ ul.fa-ul {
   padding: 0;
   background-color: #2f3742;
 }
+
 .sidebar-menu > li {
   position: relative;
   margin: 0;
@@ -6710,4 +6711,8 @@ canvas {
 .testimgblur {
   color: #787777;
   filter: blur(1px);
+}
+
+.sidebar-menu li.selected {
+  background-color: #29313b;
 }

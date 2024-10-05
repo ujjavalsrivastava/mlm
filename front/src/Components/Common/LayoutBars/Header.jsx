@@ -48,8 +48,6 @@ const Header = () => {
       window.removeEventListener("resize", updateCenterSlidePercentage);
   }, [showSidebar]);
 
-  console.log({ showSidebar });
-
   const handleSidebarClick = () => {
     setShowSidebar((p) => !p);
   };
@@ -239,7 +237,11 @@ const Header = () => {
                   data-toggle="dropdown"
                 >
                   <img
-                    src="dist/img/img1.jpg"
+                    src={
+                      profile?.image
+                        ? URL.createObjectURL(profile.image)
+                        : "dist/img/img1.jpg"
+                    }
                     class="user-image"
                     alt="User Image"
                   />

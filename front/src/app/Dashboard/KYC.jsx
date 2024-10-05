@@ -2,15 +2,28 @@ import { useEffect, useState } from "react";
 import { axios } from "../../helper/httpHelper";
 import { toast } from "react-toastify";
 
+const requiredFields = [
+  { field: "fullname", name: "Fullname" },
+  { field: "mobile", name: "Mobile Number" },
+  { field: "addharNo", name: "Addhar Number" },
+  { field: "addharName", name: "Addhar Name" },
+  { field: "panNo", name: "Pan Number" },
+  { field: "panName", name: "Pan Name" },
+  { field: "BankName", name: "Bank Name" },
+  { field: "accHolderName", name: "Account Holder Name" },
+  { field: "accNo", name: "Account Number" },
+  { field: "ifscCode", name: "IFSC code" },
+];
+
 const KYC = () => {
-  const [kycSave, SetkycSave] = useState(null);
   const [kyc, setKyc] = useState({});
-  const [data, setdata] = useState(null);
   const [error, setError] = useState(false);
   const [file, setFile] = useState(false);
-  
+
   const fetchUserKyc = async () => {
     const userKyc = await axios.get("/kyc");
+    console.log({ userKyc });
+
     if (userKyc.data?.bank) {
       setKyc(userKyc.data.bank);
     }
@@ -23,41 +36,24 @@ const KYC = () => {
     }));
   };
 
-  const handleFile = (e)=>{
+  const handleFile = (e) => {
     setFile(e.target.files[0]);
-  }
+  };
 
-
-  console.log('kyc '+ JSON.stringify(kyc));
   const saveKycData = async (e) => {
-    try {
-      e.preventDefault();
-      const formData =  new FormData();
-      formData.append('fullname',kyc.fullname);
-      formData.append('mobile',kyc.mobile);
-      formData.append('document',kyc.document);
-      formData.append('addharNo',kyc.addharNo);
-      formData.append('addharName',kyc.addharName);
-      formData.append('panNo',kyc.panNo);
-      formData.append('panName',kyc.panName);
-      formData.append('BankName',kyc.BankName);
-      formData.append('accHolderName',kyc.accHolderName);
-      formData.append('accNo',kyc.accNo);
-      formData.append('ifscCode',kyc.ifscCode);
-      formData.append('Inbank',kyc.Inbank);
-      formData.append('InbankName',kyc.InbankName);
-      formData.append('InaccountNumber',kyc.InaccountNumber);
-      formData.append('InifscCode',kyc.InifscCode);
-      formData.append('file',file);
-      
+    e.preventDefault();
 
-      const response = await axios.post("kyc-update", formData);
-      if (response.status == 200 && response.data.bank) {
-        toast.success(response.data.message);
-        setKyc(response.data.bank);
-      } else {
-        toast.error(response.data.message);
+    for (let { field, name } of requiredFields) {
+      if (!kyc[field]) {
+        toast.error(`${name} is required`);
+        return;
       }
+    }
+
+    try {
+      const response = await axios.post("kyc-update", kyc);
+      toast.success(response.data.message);
+      setKyc(response.data.bank);
     } catch (error) {
       toast.error(error.message);
     }
@@ -78,12 +74,6 @@ const KYC = () => {
                 Home / KYC Details{" "}
               </a>
             </li>
-            {/* <li class="sub-bread">
-              <i class="fa fa-angle-right"></i> KYC
-            </li> */}
-            {/* <li>
-              <i class="fa fa-angle-right"></i> KYC Details
-            </li> */}
           </ol>
         </div>
 
@@ -148,10 +138,6 @@ const KYC = () => {
                             value={kyc.document}
                             onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-briefcase form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-4" style={{ marginTop: "20px" }}>
@@ -165,10 +151,6 @@ const KYC = () => {
                             placeholder="Addhar number..."
                             onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-4" style={{ marginTop: "20px" }}>
@@ -182,10 +164,6 @@ const KYC = () => {
                             placeholder="Addhar Name..."
                             onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-4" style={{ marginTop: "20px" }}>
@@ -193,16 +171,12 @@ const KYC = () => {
                           <label class="control-label">Pan Number</label>
                           <input
                             class="form-control"
-                            type="text"
+                            type="number"
                             name="panNo"
                             value={kyc.panNo}
                             placeholder="Pan Number..."
                             onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-4" style={{ marginTop: "20px" }}>
@@ -216,10 +190,6 @@ const KYC = () => {
                             placeholder="Pan Name..."
                             onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -234,10 +204,6 @@ const KYC = () => {
                             placeholder="Bank Name..."
                             onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -254,10 +220,6 @@ const KYC = () => {
                             placeholder="Account Holder Name..."
                             onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-4" style={{ marginTop: "20px" }}>
@@ -271,10 +233,6 @@ const KYC = () => {
                             placeholder="Account Number..."
                             onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-4" style={{ marginTop: "20px" }}>
@@ -288,10 +246,6 @@ const KYC = () => {
                             placeholder="IFSC Code..."
                             onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -313,10 +267,6 @@ const KYC = () => {
                             value={kyc.Inbank}
                             onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-4" style={{ marginTop: "20px" }}>
@@ -331,10 +281,6 @@ const KYC = () => {
                             value={kyc.InbankName}
                             onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-4" style={{ marginTop: "20px" }}>
@@ -347,10 +293,6 @@ const KYC = () => {
                             value={kyc.InaccountNumber}
                             onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-4" style={{ marginTop: "22px" }}>
@@ -363,10 +305,6 @@ const KYC = () => {
                             value={kyc.InifscCode}
                             onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-4" style={{ marginTop: "22px" }}>
@@ -374,11 +312,12 @@ const KYC = () => {
                           <label class="control-label">
                             Upload Cancel Cheque / Passbook / Bank
                           </label>
-                          <input class="form-control" type="file" name="file" onChange={handleFile} />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
+                          <input
+                            class="form-control"
+                            type="file"
+                            name="file"
+                            onChange={handleFile}
+                          />
                         </div>
                       </div>
 
@@ -391,10 +330,6 @@ const KYC = () => {
                             name="otp"
                             onChange={handleChange}
                           />
-                          {/* <span
-                            class="fa fa-globe form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-12 p-3 " style={{ marginTop: "20px" }}>

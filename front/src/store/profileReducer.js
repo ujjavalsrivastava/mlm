@@ -4,6 +4,12 @@ import { axios } from "../helper/httpHelper";
 export const fetchProfile = createAsyncThunk("profile", async (_, thunkApi) => {
   try {
     const response = await axios.get("user/profile");
+    const profilePic = await axios.get("user/profile-picture", {
+      responseType: "blob",
+    });
+    if (profilePic.status === 200) {
+      response.data.image = profilePic.data;
+    }
     return response.data;
   } catch (error) {
     return thunkApi.rejectWithValue(error.message);
@@ -14,7 +20,7 @@ const apiSlice = createSlice({
   name: "profile",
   initialState: {
     data: [],
-    status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
+    status: "idle",
     error: null,
   },
   reducers: {},
