@@ -108,13 +108,20 @@ const header = () => {
       {profile?._id ? (
          <div class="header-register">
          <Link to={"/my-course"}>
-           <a href="#" class="tf-button-default active header-text" style={{border:'hidden',background:'white',color:'black',borderBlockColor:'white'}}>
-           {profile.name}
+           <a href="#" class="tf-button-default active header-text" style={{background:'white',color:'black',border:'hidden'}}>
+             {profile.name}
            </a>
          </Link>
        </div>
       ) : (
 <>
+<div class="header-login">
+                  <Link to={"/login"}>
+                    <a href="#" class="tf-button-default header-text">
+                      Log In
+                    </a>
+                  </Link>
+                </div>
 <div class="header-register">
         <Link to={"/register"}>
           <a href="#" class="tf-button-default active header-text">
