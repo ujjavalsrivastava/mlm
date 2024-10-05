@@ -29,9 +29,9 @@ const Header = () => {
       if (window.innerWidth < 768) {
         document.body.classList.remove("sidebar-collapse");
         if (showSidebar) {
-          document.body.classList.add("sidebar-open");
-        } else {
           document.body.classList.remove("sidebar-open");
+        } else {
+          document.body.classList.add("sidebar-open");
         }
       } else {
         document.body.classList.add("sidebar-open");
@@ -75,9 +75,6 @@ const Header = () => {
 
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-              
-              
-
               <li class="dropdown user user-menu p-ph-res">
                 <a
                   href="#"
@@ -98,7 +95,8 @@ const Header = () => {
                     class="hidden-xs"
                     style={{ textTransform: "capitalize" }}
                   >
-                    {profile && profile.name} <i class="fa fa-angle-double-down"></i>
+                    {profile && profile.name}{" "}
+                    <i class="fa fa-angle-double-down"></i>
                   </span>
                 </a>
                 {show && (
