@@ -6,26 +6,20 @@ import VimeoVideo from "./VimeoVideo";
 import play from "./../../../public/dist/img/play.png";
 const MyCouseDetails = () => {
   const [course, setcourse] = useState(null);
-  const [video, setvideo] = useState(null);
-  const [videoName, setvideoName] = useState(null);
+  const [videoData, setVideoData] = useState({});
   const { id } = useParams();
-  console.log("courseId " + id);
 
   const courseVideo = async () => {
     try {
       const response = await axios.get(`vimeo/video?courseId=${id}`);
-      setcourse(response.data.data);
-      getVideo(
-        response.data.data[0]?.player_embed_url,
-        response.data.data[0]?.name
-      );
+      const data = response?.data?.data || [];
+      setcourse(data);
+      setVideoData(data[0]);
+
+      getVideo(data[0]?.player_embed_url, data[0]?.name);
     } catch (error) {
       console.log(error);
     }
-  };
-  const getVideo = (videoId, name) => {
-    setvideoName(name);
-    setvideo(videoId);
   };
 
   useEffect(() => {
@@ -50,18 +44,12 @@ const MyCouseDetails = () => {
         <div class="content">
           <div class="row">
             <div class="col-lg-8 m-b-3">
-              <div class="ml-auto modal-iframe-wrapper video-container">
-                {video && (
-                  <iframe
-                    src={`${video}&app_id=477203`}
-                    frameborder="0"
-                    allowfullscreen
-                    title="Vimeo Video"
-                  ></iframe>
-                )}
-              </div>
+              <div
+                class="ml-auto modal-iframe-wrapper video-container"
+                dangerouslySetInnerHTML={{ __html: videoData?.embed }}
+              ></div>
               <div style={{ padding: "15px" }}>
-                <h6>{videoName && videoName}</h6>
+                <h6>{videoData.name}</h6>
               </div>
             </div>
             <div class="col-lg-4 m-b-3">
@@ -85,9 +73,7 @@ const MyCouseDetails = () => {
                             <img src={play} alt="Product Image" />
                             <a
                               href="javascript:void(0)"
-                              onClick={() =>
-                                getVideo(row.player_embed_url, row.name)
-                              }
+                              onClick={() => setVideoData(row)}
                               class="product-title"
                               style={{ color: "black" }}
                             >
