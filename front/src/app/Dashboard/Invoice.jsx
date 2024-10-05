@@ -85,7 +85,7 @@ const Invoice = () => {
                     <th scope="col">GST</th>
                     <th scope="col">Total</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Timestap</th>
+                    <th scope="col">Timestamp</th>
                   </tr>
                 </thead>
 

@@ -10,8 +10,16 @@ const header = () => {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile?.data || {});
   const logout = () => {
-    localStorage.removeItem("token");
-    window.location.assign("/login");
+
+    const userConfirmed = window.confirm("Are you sure you want to proceed?");
+    if (userConfirmed) {
+      localStorage.removeItem("token");
+      window.location.assign("/login");
+    } else {
+      // User clicked Cancel
+      console.log("User canceled.");
+    }
+   
   };
   const [showSidebar, setShowSidebar] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState([]);
@@ -108,8 +116,8 @@ const header = () => {
       {profile?._id ? (
          <div class="header-register">
          <Link to={"/my-course"}>
-           <a href="#" class="tf-button-default active header-text" style={{background:'white',color:'black',border:'hidden'}}>
-             {profile.name}
+           <a href="#" class="tf-button-default active header-text">
+             My Account
            </a>
          </Link>
        </div>

@@ -13,6 +13,7 @@ const {
   getRewards,
   handleForgotPassword,
   verifyResetCode,
+  contectForm
 } = require("../controllers/userController");
 
 const {
@@ -38,7 +39,7 @@ router.post("/register", tryCatch(asyncHandler(createUser)));
 router.post("/login", tryCatch(asyncHandler(loginHandler)));
 router.post("/forgot-password", tryCatch(asyncHandler(handleForgotPassword)));
 router.post("/verify-reset-code", tryCatch(asyncHandler(verifyResetCode)));
-
+router.post("/contect-form", tryCatch(asyncHandler(contectForm)));
 // auth required
 router.get("/profile", tryCatch(asyncHandler(getUserProfile)));
 router.get("/courses", tryCatch(asyncHandler(getUserCourses)));

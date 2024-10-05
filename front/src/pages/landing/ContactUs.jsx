@@ -1,6 +1,81 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { axios } from "../../helper/httpHelper";
 
 const ContactUs = ()=>{
+
+const[data,setData] =useState({
+    name : "",email:"",mobile:"",message:""
+});
+const[loading,setLoading] =useState(false);
+const[error,setError] =useState(false)
+ 
+  const handle = (e) => {
+    setData((pre) => ({
+      ...pre,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+
+
+  const submitContact = async (e) => {
+    e.preventDefault();
+    try {
+        setError(false);
+const{name,email,mobile,message} = data;
+        if (name == "") {
+            
+               setError(true);
+               toast.error("Name is Required");
+               return;
+             }
+
+             if (email == "") {
+           
+                setError(true);
+                toast.error("Email is Required");
+                return;
+              }
+
+              if (mobile == "") {
+           
+                setError(true);
+                toast.error("Mobile is Required");
+                return;
+              }
+
+              if (mobile.length != "10") {
+           
+                setError(true);
+                toast.error("Invalid Mobile");
+                return;
+              }
+
+              if (message == "") {
+           
+                setError(true);
+                toast.error("message is Required");
+                return;
+              }
+              
+
+        setLoading(true);
+      const response = await axios.post("contect-form", data);
+      setLoading(false);
+      if (response.data.state == "200") {
+      
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+
+
     return (
         <React.Fragment>
 
@@ -198,40 +273,38 @@ const ContactUs = ()=>{
                                         <p>Have a question or feedback? Fill out the form below, and we'll get back to
                                             you as soon as possible.</p>
                                     </div>
-                                    <form action="#" class="contact-form">
+                                    <form onSubmit={submitContact} class="contact-form">
                                         <div class="cols">
                                             <fieldset class="tf-field " data-wow-delay="0">
                                                 <input class="tf-input style-1" id="field1" type="text" placeholder=""
-                                                    name="text" tabindex="2" value="" aria-required="true"
-                                                    required="" />
+                                                    name="name" onChange={handle} 
+                                                    />
                                                 <label class="tf-field-label fs-15" for="field1">Name</label>
                                             </fieldset>
                                         </div>
                                         <div class="cols">
                                             <fieldset class="tf-field " data-wow-delay="0">
                                                 <input class="tf-input style-1" id="field2" type="email" placeholder=""
-                                                    name="email" tabindex="2" value="creativelayers088@gmail.com"
-                                                    aria-required="true" required="" />
+                                                    name="email"  onChange={handle} />                                           
                                                 <label class="tf-field-label fs-15" for="field2">Email</label>
                                             </fieldset>
                                         </div>
                                         <div class="cols">
                                             <fieldset class="tf-field " data-wow-delay="0">
-                                                <input class="tf-input style-1" id="field1" type="text" placeholder=""
-                                                    name="text" tabindex="2" value="" aria-required="true"
-                                                    required="" />
+                                                <input class="tf-input style-1" id="field1" type="number" placeholder=""
+                                                    name="mobile" onChange={handle} />
+                                                   
                                                 <label class="tf-field-label fs-15" for="field1">Mobile</label>
                                             </fieldset>
                                         </div>
                                         <fieldset class="tf-field " data-wow-delay="0">
-                                            <textarea class="tf-input style-1" name="message" rows="4" placeholder=""
-                                                tabindex="2" aria-required="true" required=""></textarea>
+                                            <textarea   onChange={handle} class="tf-input style-1" name="message" ></textarea>
                                             <label class="tf-field-label type-textarea fs-15" for="">Message</label>
                                         </fieldset>
 
-                                        <button class=" button-submit tf-btn w-100 " data-wow-delay="0"
+                                        <button class=" button-submit tf-btn w-100 " disabled={loading} data-wow-delay="0"
                                             type="submit">
-                                            Submit<i class="icon-arrow-top-right"></i>
+                                            {loading ? 'Proccesing...' : 'Submit'} <i class="icon-arrow-top-right"></i>
                                         </button>
                                     </form>
                                 </div>

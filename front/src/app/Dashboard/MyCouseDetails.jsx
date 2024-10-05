@@ -54,7 +54,7 @@ const MyCouseDetails = () => {
                 <div class="box box-widget widget-user-2">
                   <div class="widget-user-header bg-yellow">
                     <h6 style={{ color: "white", marginTop: "14px" }}>
-                      Digital Marketing
+                     Our Courses
                     </h6>
                     {/* <h5>Checkout my contacts here</h5> */}
                   </div>

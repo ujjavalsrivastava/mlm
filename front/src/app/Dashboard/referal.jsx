@@ -66,7 +66,7 @@ const referal = () => {
               <div class="card ">
                 <div class="card-header bg-blue">
                   <span class="text-white m-b-0">My Referral Code</span>
-                  <button onClick={handleCopy} class="btn btn-default btn-sm" style={{marginLeft:'382px'}}>Copy</button>
+                  <button onClick={handleCopy} class="btn btn-info" style={{float:'right'}} >Copy</button>
                 </div>
                 <div class="card-body">
                  
@@ -93,7 +93,7 @@ const referal = () => {
               <div class="card ">
                 <div class="card-header bg-blue">
                   <span class="text-white m-b-0">My Referral Code</span>
-                  <button  onClick={handleCopy1} class="btn btn-default btn-sm m-b-0" style={{marginLeft:'382px'}}>Copy</button>
+                  <button  onClick={handleCopy1} class="btn btn-info" style={{float:'right'}}>Copy</button>
                 </div>
                 <div class="card-body">
                  

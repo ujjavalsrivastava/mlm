@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 const ProfileUpload = ()=>{
   const[file,setFile] = useState(null);
-
+  const[loading,setLoading] = useState(false);
   const handleFile = (e)=>{
     setFile(e.target.files[0]);
   }
@@ -15,7 +15,9 @@ try{
 
   const formData = new FormData();
   formData.append('profilePicture', file);
+  setLoading(true);
   const response = await httpFileAxios.post('user/profile-picture',formData);
+  setLoading(false);
    toast.success(response.data.message);
 }catch(error){
 console.log(error);
@@ -63,6 +65,8 @@ console.log(error);
                               id="file"
                               class="custom-file-input"
                               type="file"
+                              accept=".jpg, .jpeg, .png"
+                              required
                               onChange={handleFile}
                             />
                             
@@ -71,8 +75,8 @@ console.log(error);
                       </div>
                       <br/><br/>
                       <div class="col-md-12">
-                        <button type="submit" class="btn btn-success">
-                          Submit
+                        <button type="submit" class="btn btn-success" disabled={loading}>
+                       {loading ? 'Processing...' : 'Submit'}   
                         </button>
                       </div>
                     </div>

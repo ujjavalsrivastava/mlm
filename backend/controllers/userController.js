@@ -314,7 +314,39 @@ const verifyResetCode = async (req, res) => {
   }
 };
 
+const contectForm = async(req,res)=>{
+
+   try{
+    // Create a nodemailer transporter
+    const transporter = nodemailer.createTransport({
+      host: process.env.MAIL_HOST,
+      port: process.env.MAIL_PORT,
+      secure: false,
+      auth: {
+        user: process.env.MAIL_USERNAME,
+        pass: process.env.MAIL_PASSWORD,
+      },
+    });
+
+    // Send the 6-digit code via email
+    await transporter.sendMail({
+      to: "digitalduniya2407@gmail.com",
+      from: process.env.MAIL_USERNAME,
+      subject: "contect US",
+      html: `<p>Name : <b>${req.body.name}</b></p>
+            <p>Email: <b>${req.body.Email}</b></p>
+              <p>Mobile: <b>${req.body.mobile}</b></p>
+              <p>Message: <b>${req.body.message}</b></p>
+            `,
+    });
+    res.status(200).send({ message: "contect send Succefully",status:200  });
+  } catch (error) {
+    res.status(500).send({ message: "Server error" });
+  }
+}
+
 module.exports = {
+  contectForm,
   createUser,
   loginHandler,
   getUserProfile,

@@ -141,7 +141,10 @@ const PassiveIncome = () => {
         
    
    ))}
-  
+   {data.length == 0 ? ( <tr>
+      <td colSpan={5}>Data Not found</td>
+     
+      </tr>) : null}
       
  
 </table>
