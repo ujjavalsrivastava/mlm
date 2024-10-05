@@ -4,9 +4,14 @@ import { axios } from "../helper/httpHelper";
 export const fetchProfile = createAsyncThunk("profile", async (_, thunkApi) => {
   try {
     const response = await axios.get("user/profile");
-    const profilePic = await axios.get("user/profile-picture", {
-      responseType: "blob",
-    });
+    let profilePic = {};
+    try {
+      profilePic = await axios.get("user/profile-picture", {
+        responseType: "blob",
+      });
+    } catch (error) {
+      console.log({ error });
+    }
     if (profilePic.status === 200) {
       response.data.image = profilePic.data;
     }
