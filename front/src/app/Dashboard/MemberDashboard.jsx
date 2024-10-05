@@ -117,18 +117,7 @@ const MemberDashboard = () => {
                           Today's Earning
                         </span>
                       </div>
-                      <div class="progress">
-                        <div
-                          class="progress-bar bg-success"
-                          role="progressbar"
-                          aria-valuenow="80"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                          style={{ width: "40%", height: "6px" }}
-                        >
-                          <span class="sr-only">40% Complete</span>
-                        </div>
-                      </div>
+                    
                     </div>
                   </div>
                   <div class="col-lg-3 col-sm-6 col-xs-12">
@@ -142,18 +131,7 @@ const MemberDashboard = () => {
                           Last 7 Days Earning
                         </span>
                       </div>
-                      <div class="progress">
-                        <div
-                          class="progress-bar bg-danger"
-                          role="progressbar"
-                          aria-valuenow="80"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                          style={{ width: "50%", height: "6px" }}
-                        >
-                          <span class="sr-only">50% Complete</span>
-                        </div>
-                      </div>
+                      
                     </div>
                   </div>
                   <div class="col-lg-3 col-sm-6 col-xs-12">
@@ -167,18 +145,7 @@ const MemberDashboard = () => {
                           Last 30 Days Earning
                         </span>
                       </div>
-                      <div class="progress">
-                        <div
-                          class="progress-bar bg-info"
-                          role="progressbar"
-                          aria-valuenow="80"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                          style={{ width: "65%", height: "6px" }}
-                        >
-                          <span class="sr-only">65% Complete</span>
-                        </div>
-                      </div>
+                     
                     </div>
                   </div>
                   <div class="col-lg-3 col-sm-6 col-xs-12">
@@ -192,18 +159,7 @@ const MemberDashboard = () => {
                           All Time Earning
                         </span>
                       </div>
-                      <div class="progress">
-                        <div
-                          class="progress-bar bg-green"
-                          role="progressbar"
-                          aria-valuenow="80"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                          style={{ width: "85%", height: "6px" }}
-                        >
-                          <span class="sr-only">85% Complete</span>
-                        </div>
-                      </div>
+                     
                     </div>
                   </div>
                 </div>
@@ -222,18 +178,7 @@ const MemberDashboard = () => {
                           Today Direct Team
                         </span>
                       </div>
-                      <div class="progress">
-                        <div
-                          class="progress-bar bg-success"
-                          role="progressbar"
-                          aria-valuenow="80"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                          style={{ width: "40%", height: "6px" }}
-                        >
-                          <span class="sr-only">30% Complete</span>
-                        </div>
-                      </div>
+                      
                     </div>
                   </div>
                   <div class="col-lg-3 col-sm-6 col-xs-12">
@@ -247,18 +192,7 @@ const MemberDashboard = () => {
                           All Time Direct Team
                         </span>
                       </div>
-                      <div class="progress">
-                        <div
-                          class="progress-bar bg-danger"
-                          role="progressbar"
-                          aria-valuenow="80"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                          style={{ width: "50%", height: "6px" }}
-                        >
-                          <span class="sr-only">50% Complete</span>
-                        </div>
-                      </div>
+                     
                     </div>
                   </div>
                   <div class="col-lg-3 col-sm-6 col-xs-12">
@@ -270,18 +204,7 @@ const MemberDashboard = () => {
                         </h1>
                         <span class="progress-description">Today Team</span>
                       </div>
-                      <div class="progress">
-                        <div
-                          class="progress-bar bg-info"
-                          role="progressbar"
-                          aria-valuenow="80"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                          style={{ width: "65%", height: "6px" }}
-                        >
-                          <span class="sr-only">65% Complete</span>
-                        </div>
-                      </div>
+                  
                     </div>
                   </div>
                   <div class="col-lg-3 col-sm-6 col-xs-12">
@@ -293,18 +216,7 @@ const MemberDashboard = () => {
                         </h1>
                         <span class="progress-description">All Team Size</span>
                       </div>
-                      <div class="progress">
-                        <div
-                          class="progress-bar bg-green"
-                          role="progressbar"
-                          aria-valuenow="80"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                          style={{ width: "85%", height: "6px" }}
-                        >
-                          <span class="sr-only">85% Complete</span>
-                        </div>
-                      </div>
+                  
                     </div>
                   </div>
                 </div>
@@ -376,7 +288,7 @@ const MemberDashboard = () => {
                                 ? `₹${
                                     usersTotalEarnings.find(
                                       (u) => u.userId === lUser._id
-                                    )?.totalEarning || 0
+                                    )?.totalEarning.toFixed(2) || 0
                                   }` || "₹0"
                                 : "₹0"}
                             </a>
@@ -384,6 +296,14 @@ const MemberDashboard = () => {
                         </div>
                       </li>
                     ))}
+
+                    { (lowerLevels.length ==10) ? ( <span class="product-description">
+                       <a href="#" style={{ color: "black" }}>
+                        Data Not Found
+                       </a>
+                     </span>):null
+                      
+                    }
                   </ul>
                 </div>
               </div>

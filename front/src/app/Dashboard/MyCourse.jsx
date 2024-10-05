@@ -56,7 +56,7 @@ const MyCourse = () => {
                     
                     <img src={row.pictures?.base_link} alt="" class="responsive img-fluid img-thumbnail step1" style={{height:'156px', width:'260px'}}/>
                     </div>
-                     <span style={{textAligh:'center',color:'black',textTransform: 'capitalize', fontWeight: 'bold'}} title={row.name}> {truncate(row.name, 35)} </span>
+                     <span style={{textAligh:'center',color:'black',textTransform: 'capitalize', fontWeight: 'bold'}} title={row.name}> {truncate(row.name, 25)} </span>
                  
                   </div>
                   </Link>

@@ -49,7 +49,7 @@ const router = createBrowserRouter(
       <Route path="/privacy-policy" element={<Privacy />} />
       <Route path="/forgot" element={<Forgot />} />
      
-      <Route path="/change-password" element={<ChangePassword />} />
+      <Route path="/chng-password" element={<ChangePassword />} />
       
       </Route>
 

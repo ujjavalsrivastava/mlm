@@ -31,7 +31,7 @@ const Forgot = () => {
         
         setLoading(false);
       if (response.data.status == 200) {
-        navigate("/change-password", { state: { emaildata: data } });
+        navigate("/forgot-password", { state: { emaildata: data } });
        
         toast.success(response.data.message);
       } else {
