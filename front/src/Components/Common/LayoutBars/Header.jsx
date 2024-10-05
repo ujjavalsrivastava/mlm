@@ -48,6 +48,8 @@ const Header = () => {
       window.removeEventListener("resize", updateCenterSlidePercentage);
   }, [showSidebar]);
 
+  console.log({ showSidebar });
+
   const handleSidebarClick = () => {
     setShowSidebar((p) => !p);
   };
