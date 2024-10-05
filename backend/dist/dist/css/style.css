@@ -69,11 +69,18 @@ body {
 }
 .content-wrapper,
 .main-footer {
-  -webkit-transition: -webkit-transform 0.3s ease-in-out,
+  -webkit-transition:
+    -webkit-transform 0.3s ease-in-out,
     margin 0.3s ease-in-out;
-  -moz-transition: -moz-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
-  -o-transition: -o-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+  -moz-transition:
+    -moz-transform 0.3s ease-in-out,
+    margin 0.3s ease-in-out;
+  -o-transition:
+    -o-transform 0.3s ease-in-out,
+    margin 0.3s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    margin 0.3s ease-in-out;
   margin-left: 230px;
   z-index: 820;
 }
@@ -292,7 +299,7 @@ b {
   border-left: 0;
   border-right: 0;
   border-top: 0;
-  content: ;
+  content:;
   margin: 0;
   display: inherit;
 }
@@ -823,10 +830,18 @@ ul.fa-ul {
   width: 230px;
   background: #2f3742;
   z-index: 810;
-  -webkit-transition: -webkit-transform 0.3s ease-in-out, width 0.3s ease-in-out;
-  -moz-transition: -moz-transform 0.3s ease-in-out, width 0.3s ease-in-out;
-  -o-transition: -o-transform 0.3s ease-in-out, width 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  -webkit-transition:
+    -webkit-transform 0.3s ease-in-out,
+    width 0.3s ease-in-out;
+  -moz-transition:
+    -moz-transform 0.3s ease-in-out,
+    width 0.3s ease-in-out;
+  -o-transition:
+    -o-transform 0.3s ease-in-out,
+    width 0.3s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    width 0.3s ease-in-out;
 }
 @media (max-width: 767px) {
   .main-sidebar {
@@ -6696,4 +6711,8 @@ canvas {
 .testimgblur {
   color: #787777;
   filter: blur(1px);
+}
+
+.sidebar-menu li.selected {
+  background-color: #29313b;
 }
