@@ -48,7 +48,7 @@ const router = createBrowserRouter(
       <Route path="/terms-condition" element={<Condition />} />
       <Route path="/privacy-policy" element={<Privacy />} />
       <Route path="/forgot" element={<Forgot />} />
-      <Route path="/verify-otp" element={<VerifyOTP />} />
+     
       <Route path="/change-password" element={<ChangePassword />} />
       
       </Route>

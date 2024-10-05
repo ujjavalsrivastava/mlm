@@ -242,7 +242,7 @@ const handleForgotPassword = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).send({ message: "User not found" });
+      return res.status(200).send({ message: "User not found",status:201 });
     }
 
     // Generate a 6-digit code
@@ -273,7 +273,7 @@ const handleForgotPassword = async (req, res) => {
             <p>Your 6-digit code is: <b>${resetCode}</b></p>
             <p>This code will expire in 10 minutes.</p>`,
     });
-    res.status(200).send({ message: "Password reset code sent to your email" });
+    res.status(200).send({ message: "Password reset code sent to your email",status:200  });
   } catch (error) {
     res.status(500).send({ message: "Server error" });
   }
@@ -286,7 +286,7 @@ const verifyResetCode = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).send({ message: "User not found" });
+      return res.status(200).send({ message: "User not found",status:201 });
     }
 
     const now = new Date();
@@ -299,7 +299,7 @@ const verifyResetCode = async (req, res) => {
     // Check if the code is valid and not expired
     console.log(user);
     if (`${user.resetPasswordCode}` !== `${resetCode}` || differenceInMin < 0) {
-      return res.status(400).send({ message: "Invalid or expired reset code" });
+      return res.status(200).send({ message: "Invalid or expired reset code", status:201});
     }
 
     user.password = newPassword;
@@ -307,7 +307,7 @@ const verifyResetCode = async (req, res) => {
     user.resetPasswordExpires = null;
     await user.save();
 
-    res.status(200).send({ message: "Password has been reset successfully" });
+    res.status(200).send({ message: "Password has been reset successfully",status:200 });
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "Server error" });

@@ -44,6 +44,13 @@ console.log(data)
       [e.target.name]: e.target.value,
     }));
   };
+
+  const checklevel =(level)=>{
+    const {name,mobile, email, cemail,gender,state, password, cpassword } = data;
+    if (name != "" && mobile !="" && email !="" && cemail !="" && gender !="" && state !=""&& password !=""&& cpassword !="") {
+      setlevel(level);
+    }
+  } 
  
   const submitLogin = async (e) => {
     e.preventDefault();
@@ -263,7 +270,7 @@ console.log(data)
                       }
                     >
                       <img
-                        onClick={() => setlevel(1)}
+                        onClick={() => checklevel(1)}
                         src={process}
                         class="personal_image"
                         style={{ width: "40px" }}
@@ -286,7 +293,7 @@ console.log(data)
                     >
                       <img
                         src={process}
-                        onClick={() => setlevel(2)}
+                        onClick={() => checklevel(2)}
                         class="course_image"
                         style={{ width: "40px" }}
                       />
@@ -308,7 +315,7 @@ console.log(data)
                     >
                       <img
                         src={process}
-                        onClick={() => setlevel(3)}
+                        onClick={() => checklevel(3)}
                         class="payment_image"
                         style={{ width: "40px" }}
                       />
