@@ -4,7 +4,6 @@ import { fetchLowerProfiles } from "../../store/lowerLevel";
 import "./Tree.css";
 import { axios } from "../../helper/httpHelper";
 
-
 const Tree = () => {
   const lowerProfile = useSelector((state) => state.levels);
 
@@ -41,7 +40,11 @@ const Tree = () => {
           data-toggle="modal"
           data-target="#balanceModal"
           onClick={() => showBalance(node._id)}
-          style={{color:'black',fontWeight: 'normal', textTransform: 'capitalize'}}
+          style={{
+            color: "black",
+            fontWeight: "normal",
+            textTransform: "capitalize",
+          }}
         >
           {node.name}
         </a>
@@ -54,24 +57,20 @@ const Tree = () => {
 
   return (
     <>
-    <div classNameName="App">
-     <div className="content-header sty-one">
-          <h1 className="text-black" style={{marginLeft:'225px'}}> Hierarchy</h1>
-          <ol className="breadcrumb">
+      <div className="content-wrapper">
+        <div class="content-header sty-one">
+          <h1 class="text-black">Hierarchy</h1>
+          <ol class="breadcrumb">
             <li>
-            <a href="#" style={{color:'black'}}>Home / Hierarchy </a>
+              <a href="#" style={{ color: "black" }}>
+                Home / Hierarchy
+              </a>
             </li>
-            {/* <li className="sub-bread">
-              <i className="fa fa-angle-right"></i> Change Password
-            </li>
-            <li>
-              <i className="fa fa-angle-right"></i> Password
-            </li> */}
           </ol>
         </div>
-      
-        <div classNameName="custom-tree tree-sidebar" >
-          <div className="org-chart">
+
+        <div className="custom-tree tree-sidebar">
+          <div class="org-chart">
             {lowerProfile?.data?.map((rootNode) => (
               <ul>{renderNode(rootNode)}</ul>
             ))}
@@ -80,8 +79,8 @@ const Tree = () => {
       </div>
 
       <div
-        className={`modal fade ${showModal?'show':''}`}
-       style={{display:showModal?'block':'none'}}
+        className={`modal fade ${showModal ? "show" : ""}`}
+        style={{ display: showModal ? "block" : "none" }}
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
@@ -94,13 +93,15 @@ const Tree = () => {
                 Show Balance
               </h5>
               <button
-              onClick={() => setShowModal(false)}
+                onClick={() => setShowModal(false)}
                 type="button"
                 className="close closebtn"
                 data-dismiss="modal"
                 aria-label="Close"
               >
-               <span aria-hidden="true" style={{fontWeight: 'bold'}}>&times;</span>
+                <span aria-hidden="true" style={{ fontWeight: "bold" }}>
+                  &times;
+                </span>
               </button>
             </div>
             <div className="modal-body">
@@ -112,7 +113,7 @@ const Tree = () => {
                     </span>
                     <div className="info-box-content">
                       <span className="info-box-number">
-                        {showBal && parseInt(showBal.oneDayEarning) }
+                        {showBal && parseInt(showBal.oneDayEarning)}
                       </span>
                       <span className="info-box-text">Today's</span>
                     </div>
