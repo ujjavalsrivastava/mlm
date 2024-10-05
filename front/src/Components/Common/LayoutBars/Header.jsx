@@ -69,12 +69,7 @@ const Header = () => {
         <nav class="navbar blue-bg navbar-static-top">
           <ul class="nav navbar-nav pull-left">
             <li>
-              <a
-                class="sidebar-toggle"
-                onClick={handleSidebarClick}
-                data-toggle="push-menu"
-                href="#"
-              ></a>
+              <a class="sidebar-toggle" onClick={handleSidebarClick}></a>
             </li>
           </ul>
 
@@ -265,28 +260,6 @@ const Header = () => {
                       listStyleType: "none",
                     }}
                   >
-                    {/* <li class="user-header">
-                      <div class="pull-left user-img">
-                        <img
-                          src="dist/img/img1.jpg"
-                          class="img-responsive"
-                          alt="User"
-                          style={{ 
-                          borderRadius: "50%",
-                          width: "43px",
-                          padding: "5px",
-                          }}
-                        />
-                      </div>
-                      <p class="text-left">
-                        {profile && profile.name}
-                        <small> {profile && profile.email}</small>
-                      </p>
-                      <div class="view-link text-left">
-                        <a href="#">View Profile</a>
-                      </div>
-                    </li> */}
-
                     <li>
                       <Link
                         to={"/profile"}
