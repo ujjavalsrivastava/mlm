@@ -26,7 +26,7 @@ const MyCouseDetails = () => {
   };
 
  
-
+console.log(video)
   useEffect(() => {
     courseVideo();
     
@@ -57,11 +57,14 @@ const MyCouseDetails = () => {
                     <div class="ml-auto modal-iframe-wrapper video-container" >
                       {video && (
                         <iframe
-                          src={video}
+                          src={`${video}&badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479`}
                           frameborder="0" 
                           allowfullscreen
                           title="Vimeo Video"
                         ></iframe>
+
+
+                        // <iframe src="https://player.vimeo.com/video/1009266713?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="EMAIL CAMPAIGN -"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
                       )}
                     {/* </div> */}
                   {/* </div> */}

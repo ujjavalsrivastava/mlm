@@ -12,9 +12,18 @@ const register = () => {
   const [level, setlevel] = useState(1);
   const navigate = useNavigate();
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({
+    name: "",
+    mobile: "",
+    email: "",
+    cemail: "",
+    gender: "Male",
+    state: "Andaman and Nicobar Islands",
+    password: "",
+    cpassword: ""
+  });
   const [state, setState] = useState(null);
-
+console.log(data)
   const stateFun = async () => {
     try {
       const response = await axios1.post(
@@ -35,10 +44,42 @@ const register = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
+ 
   const submitLogin = async (e) => {
     e.preventDefault();
-    const { email, cemail, password, cpassword } = data;
+    const {name,mobile, email, cemail,gender,state, password, cpassword } = data;
+
+    if (name == "") {
+   console.log(name)
+      setError(true);
+      toast.error("Name is Required");
+      return;
+    }
+
+    if (mobile === '') {
+      setError(true);
+      toast.error("Mobile is Required");
+      return;
+    }
+
+    
+    if (mobile.length !== 10) {
+      setError(true);
+      toast.error("Invalid is Mobile");
+      return;
+    }
+
+    if (email === '') {
+      setError(true);
+      toast.error("Email is Required");
+      return;
+    }
+
+    if (cemail === '') {
+      setError(true);
+      toast.error("Confirm Email is Required");
+      return;
+    }
     const emailUser = await axios.get(`/user/valid?email=${email}`);
     if (emailUser?.data && emailUser.data.inValid) {
       setError(true);
@@ -49,6 +90,29 @@ const register = () => {
     if (email != cemail) {
       setError(true);
       toast.error("Email and Confirm Email not match");
+      return;
+    }
+
+    if (gender === '') {
+      setError(true);
+      toast.error("Gender is Required");
+      return;
+    }
+
+    if (state === '') {
+      setError(true);
+      toast.error("state is Required");
+      return;
+    }
+
+    if (password === '') {
+      setError(true);
+      toast.error("password is Required");
+      return;
+    }
+    if (cpassword === '') {
+      setError(true);
+      toast.error("Confirm password is Required");
       return;
     }
 
@@ -161,7 +225,7 @@ const register = () => {
     const queryParams = new URLSearchParams(window.location.search);
     const value = queryParams.get("referralCode"); // 'myParam' is the name of the query parameter
     setReferral(value);
-    setData(value);
+    //setData(value);
     stateFun();
     const dropdownIds = ["selectgender", "selectstate"];
 
@@ -273,7 +337,7 @@ const register = () => {
                               name="referalCode"
                               value={referral}
                               placeholder="Referral Code"
-                              required=""
+                              
                             />
                             <label class="tf-field-label fs-15" for="field1">
                               Referral Code
@@ -287,7 +351,7 @@ const register = () => {
                               class="tf-input style-1"
                               onChange={handle}
                               id="fast-name"
-                              required
+                              value={data.name}
                               name="name"
                               placeholder="Name..."
                               autocomplete="off"
@@ -303,7 +367,7 @@ const register = () => {
                               onChange={handle}
                               onBlur={handleEmail}
                               id="last-name"
-                              required
+                              value={data.mobile}
                               name="mobile"
                               maxLength={10}
                               placeholder="Mobile..."
@@ -322,7 +386,7 @@ const register = () => {
                               onChange={handle}
                               onBlur={handleEmail}
                               id="email"
-                              required
+                              value={data.email}
                               name="email"
                               placeholder="email..."
                               class="tf-input style-1"
@@ -339,7 +403,7 @@ const register = () => {
                               onChange={handle}
                               onBlur={handleEmail}
                               id="email"
-                              required
+                              value={data.cemail}
                               name="cemail"
                               placeholder="email..."
                               class="tf-input style-1"
@@ -360,13 +424,13 @@ const register = () => {
                               <select
                                 class="default"
                                 name="gender"
-                                required
+                                
                                 onChange={handle}
                                 style={{ marginTop: "-5px" }}
                               >
-                                <option value="" selected></option>
-                                <option> Male</option>
-                                <option> Female</option>
+                               
+                                <option selected={data.gender == 'Male' ? true:false}> Male</option>
+                                <option selected={data.gender == 'Female' ? true:false}> Female</option>
                               </select>
                               <label class="select-label" for="">
                                 Gender
@@ -381,13 +445,13 @@ const register = () => {
                               <select
                                 class="default"
                                 name="state"
-                                required
+                                
                                 onChange={handle}
                               >
-                                <option value="" selected></option>
+                                
                                 {state &&
                                   state.map((row) => (
-                                    <option>{row && row.name}</option>
+                                    <option selected={data.state == row.name ? true:false}>{row && row.name}</option>
                                   ))}
                               </select>
                               <label class="select-label" for="">
@@ -405,7 +469,7 @@ const register = () => {
                               id="password"
                               name="password"
                               onChange={handle}
-                              required
+                              value={data.password}
                               placeholder="password"
                               autocomplete="off"
                             />
@@ -421,7 +485,7 @@ const register = () => {
                               id="confirm-password"
                               name="cpassword"
                               onChange={handle}
-                              required
+                              value={data.cpassword}
                               placeholder="Confirm Password"
                               autocomplete="off"
                             />
