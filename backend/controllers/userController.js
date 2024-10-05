@@ -14,6 +14,9 @@ const path = require("path");
 const fs = require("fs");
 const bankDetails = require("../models/bank-details-model");
 const Rewards = require("../models/rewards-modal");
+const nodemailer = require("nodemailer");
+const { generateCode } = require("../utils/gen");
+const { getMinutesDifference } = require("../utils/dateTime");
 
 const createUser = async (req, res) => {
   const { email, name, password, referalCode } = req.body;
@@ -232,6 +235,85 @@ const getRewards = async (req, res) => {
   res.json({ rewards });
 };
 
+const handleForgotPassword = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    // Generate a 6-digit code
+    const resetCode = generateCode();
+
+    // Store the code and expiry time (e.g., 10 minutes from now)
+    user.resetPasswordCode = resetCode;
+    user.resetPasswordExpires = Date.now() + 10 * 60 * 1000; // expire in 10 minutes
+    await user.save();
+
+    // Create a nodemailer transporter
+    const transporter = nodemailer.createTransport({
+      host: process.env.MAIL_HOST,
+      port: process.env.MAIL_PORT,
+      secure: false,
+      auth: {
+        user: process.env.MAIL_USERNAME,
+        pass: process.env.MAIL_PASSWORD,
+      },
+    });
+
+    // Send the 6-digit code via email
+    await transporter.sendMail({
+      to: user.email,
+      from: process.env.MAIL_USERNAME,
+      subject: "Your Password Reset Code",
+      html: `<p>You requested a password reset</p>
+            <p>Your 6-digit code is: <b>${resetCode}</b></p>
+            <p>This code will expire in 10 minutes.</p>`,
+    });
+    res.status(200).send({ message: "Password reset code sent to your email" });
+  } catch (error) {
+    res.status(500).send({ message: "Server error" });
+  }
+};
+
+const verifyResetCode = async (req, res) => {
+  const { email, resetCode, newPassword } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    const now = new Date();
+
+    const differenceInMin = getMinutesDifference(
+      user.resetPasswordExpires,
+      `${now}`
+    );
+
+    // Check if the code is valid and not expired
+    console.log(user);
+    if (`${user.resetPasswordCode}` !== `${resetCode}` || differenceInMin < 0) {
+      return res.status(400).send({ message: "Invalid or expired reset code" });
+    }
+
+    user.password = newPassword;
+    user.resetPasswordCode = null;
+    user.resetPasswordExpires = null;
+    await user.save();
+
+    res.status(200).send({ message: "Password has been reset successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Server error" });
+  }
+};
+
 module.exports = {
   createUser,
   loginHandler,
@@ -244,4 +326,6 @@ module.exports = {
   getInvoice,
   checkUserExist,
   getRewards,
+  handleForgotPassword,
+  verifyResetCode,
 };

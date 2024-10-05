@@ -6,6 +6,8 @@ const userSchema = new Schema(
     name: { type: String, required: true, default: "user" },
     email: { type: String, required: true, unique: true },
     mobile: { type: Number, default: null },
+    resetPasswordCode: { type: Number, default: null },
+    resetPasswordExpires: { type: Date, default: null },
     gender: {
       type: String,
       default: null,
@@ -17,7 +19,6 @@ const userSchema = new Schema(
     city: { type: String, default: null },
     occupation: { type: String, default: null },
     address: { type: String, default: null },
-    vimeoAccessToken: { type: String, default: null },
     referalCode: {
       type: String,
       required: true,

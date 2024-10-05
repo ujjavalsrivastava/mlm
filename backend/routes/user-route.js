@@ -11,6 +11,8 @@ const {
   getInvoice,
   checkUserExist,
   getRewards,
+  handleForgotPassword,
+  verifyResetCode,
 } = require("../controllers/userController");
 
 const {
@@ -34,6 +36,8 @@ const router = express.Router();
 
 router.post("/register", tryCatch(asyncHandler(createUser)));
 router.post("/login", tryCatch(asyncHandler(loginHandler)));
+router.post("/forgot-password", tryCatch(asyncHandler(handleForgotPassword)));
+router.post("/verify-reset-code", tryCatch(asyncHandler(verifyResetCode)));
 
 // auth required
 router.get("/profile", tryCatch(asyncHandler(getUserProfile)));

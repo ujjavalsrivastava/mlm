@@ -7,6 +7,8 @@ const unAuthRoutes = {
   "/api/user/register": true,
   "/api/vimeo/courses": true,
   "/api/product/create/order": true,
+  "/api/user/forgot-password": true,
+  "/api/user/verify-reset-code": true,
 };
 
 const auth = async (req, res, next) => {

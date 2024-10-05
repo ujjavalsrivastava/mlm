@@ -5,7 +5,14 @@ const Product = require("../models/product-model");
 const getVideo = async (req, res) => {
   const { courseId } = req.query;
   vimeoClient(process.env.VIMEO_ACCESS_TOKEN).request(
-    `/albums/${courseId}/videos`,
+    {
+      method: "GET",
+      path: `/albums/${courseId}/videos`,
+      query: {
+        fields:
+          "player_embed_url, privacy.embed, embed.html, name, uri, link, description, duration",
+      },
+    },
     (error, body, statusCode, headers) => {
       if (error) {
         console.error("Error fetching video details:", error);
@@ -22,7 +29,7 @@ const getVideo = async (req, res) => {
             link: item.link,
             duration: item.duration,
             player_embed_url: item.player_embed_url,
-            embed: item.embed.html,
+            embed: item.embed?.html,
           });
         });
       }
