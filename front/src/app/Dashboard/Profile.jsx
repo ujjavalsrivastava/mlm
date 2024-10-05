@@ -4,10 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import axios1 from "axios";
 import { axios } from "../../helper/httpHelper";
 import { toast } from "react-toastify";
+
 const Profile = () => {
   const dispatch = useDispatch();
-  // const profile = useSelector((state) => state.profile);
   const [profile, setProfile] = useState([]);
+
   const profileFun = async () => {
     const response = await axios.get("user/profile");
     setProfile(response.data);
@@ -30,6 +31,18 @@ const Profile = () => {
 
   const saveProfile = async (e) => {
     e.preventDefault();
+    if (!profile.mobile) {
+      toast.error("Mobile No is Required");
+      return;
+    }
+    if (!profile.name) {
+      toast.error("Name is Required");
+      return;
+    }
+    if (!profile.pincode) {
+      toast.error("Pin code is Required");
+      return;
+    }
     try {
       const response = await axios.post("user/profile", profile);
       if (response) {
@@ -65,15 +78,9 @@ const Profile = () => {
           <ol class="breadcrumb">
             <li>
               <a href="#" style={{ color: "black" }}>
-                Home / Profile{" "}
+                Home / Profile
               </a>
             </li>
-            {/* <li class="sub-bread">
-              <i class="fa fa-angle-right"></i> Profile
-            </li> */}
-            {/* <li>
-              <i class="fa fa-angle-right"></i> Profile
-            </li> */}
           </ol>
         </div>
 
@@ -91,10 +98,6 @@ const Profile = () => {
                         <div class="form-group has-feedback">
                           <label class="control-label">Sponsor Name</label>
                           <input class="form-control" type="text" />
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-6">
@@ -103,10 +106,6 @@ const Profile = () => {
                             Sponsor Mobile No.
                           </label>
                           <input class="form-control" type="text" />
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                     </div>
@@ -123,7 +122,7 @@ const Profile = () => {
                 >
                   <h5 class="text-white m-b-0">Personal Information</h5>
                   <p style={{ color: "white" }}>
-                    Kindly complete your KYC, to change the name.{" "}
+                    Kindly complete your KYC, to change the name.
                   </p>
                 </div>
                 <div class="card-body">
@@ -136,13 +135,11 @@ const Profile = () => {
                             class="form-control"
                             name="name"
                             type="text"
+                            required
+                            title="Name is required"
                             value={profile && profile.name}
                             onChange={handle}
                           />
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
                       <div class="col-md-6">
@@ -154,10 +151,6 @@ const Profile = () => {
                             type="text"
                             disabled
                           />
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -171,10 +164,6 @@ const Profile = () => {
                             name="email"
                             disabled
                           />
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -188,10 +177,6 @@ const Profile = () => {
                             onChange={handle}
                             type="text"
                           />
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -204,29 +189,16 @@ const Profile = () => {
                             onChange={handle}
                           >
                             <option
-                              selected={
-                                profile && profile.gender == "Male"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.gender == "Male"}
                             >
                               Male
                             </option>
                             <option
-                              selected={
-                                profile && profile.gender == "Female"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.gender == "Female"}
                             >
                               Female
                             </option>
                           </select>
-
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -236,14 +208,10 @@ const Profile = () => {
                           <input
                             class="form-control"
                             value={profile && profile.dob}
-                            type="text"
+                            type="date"
                             name="dob"
                             onChange={handle}
                           />
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -261,10 +229,6 @@ const Profile = () => {
                                 : "India"}
                             </option>
                           </select>
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -288,10 +252,6 @@ const Profile = () => {
                                 </option>
                               ))}
                           </select>
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -305,10 +265,6 @@ const Profile = () => {
                             name="city"
                             onChange={handle}
                           />
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -318,14 +274,10 @@ const Profile = () => {
                           <input
                             class="form-control"
                             value={profile && profile.pincode}
-                            type="text"
+                            type="number"
                             name="pincode"
                             onChange={handle}
                           />
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -340,209 +292,125 @@ const Profile = () => {
                             <option value="">Select Occupation</option>
                             <option
                               value="1"
-                              selected={
-                                profile && profile.occupation == "1"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "1"}
                             >
                               Students
                             </option>
                             <option
                               value="2"
-                              selected={
-                                profile && profile.occupation == "2"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "2"}
                             >
                               Working professionals
                             </option>
                             <option
                               value="3"
-                              selected={
-                                profile && profile.occupation == "3"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "3"}
                             >
                               Entrepreneurs
                             </option>
                             <option
                               value="4"
-                              selected={
-                                profile && profile.occupation == "4"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "4"}
                             >
                               Artists
                             </option>
                             <option
                               value="5"
-                              selected={
-                                profile && profile.occupation == "5"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "5"}
                             >
                               Healthcare workers
                             </option>
                             <option
                               value="6"
-                              selected={
-                                profile && profile.occupation == "6"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "6"}
                             >
                               Educators
                             </option>
                             <option
                               value="7"
-                              selected={
-                                profile && profile.occupation == "7"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "7"}
                             >
                               Service industry workers
                             </option>
                             <option
                               value="8"
-                              selected={
-                                profile && profile.occupation == "8"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "8"}
                             >
                               Engineers
                             </option>
                             <option
                               value="9"
-                              selected={
-                                profile && profile.occupation == "9"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "9"}
                             >
                               Lawyers
                             </option>
                             <option
                               value="10"
-                              selected={
-                                profile && profile.occupation == "10"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "10"}
                             >
                               Accountants
                             </option>
                             <option
                               value="11"
-                              selected={
-                                profile && profile.occupation == "11"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "11"}
                             >
                               Sales professionals
                             </option>
                             <option
                               value="12"
-                              selected={
-                                profile && profile.occupation == "12"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "12"}
                             >
                               Scientists
                             </option>
                             <option
                               value="13"
-                              selected={
-                                profile && profile.occupation == "13"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "13"}
                             >
                               Social workers
                             </option>
                             <option
                               value="14"
-                              selected={
-                                profile && profile.occupation == "14"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "14"}
                             >
                               Tradespeople (e.g. plumbers, electricians)
                             </option>
                             <option
                               value="15"
-                              selected={
-                                profile && profile.occupation == "15"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "15"}
                             >
                               Military personnel
                             </option>
                             <option
                               value="16"
-                              selected={
-                                profile && profile.occupation == "16"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "16"}
                             >
                               Public servants (e.g. government employees)
                             </option>
                             <option
                               value="17"
-                              selected={
-                                profile && profile.occupation == "17"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "17"}
                             >
                               Freelancers
                             </option>
                             <option
                               value="18"
-                              selected={
-                                profile && profile.occupation == "18"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "18"}
                             >
                               Information technology professionals
                             </option>
                             <option
                               value="19"
-                              selected={
-                                profile && profile.occupation == "19"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "19"}
                             >
                               Writers and journalists
                             </option>
                             <option
                               value="20"
-                              selected={
-                                profile && profile.occupation == "20"
-                                  ? true
-                                  : false
-                              }
+                              selected={profile && profile.occupation == "20"}
                             >
                               Musicians and performers
                             </option>
                           </select>
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 
@@ -556,26 +424,18 @@ const Profile = () => {
                           >
                             <option>English</option>
                           </select>
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 
                       <div class="col-md-12" style={{ marginTop: "20px" }}>
                         <div class="form-group has-feedback">
-                          <label class="control-label">Addresh</label>
+                          <label class="control-label">Address</label>
                           <textarea
                             class="form-control"
                             name="address"
                             onChange={handle}
                             value={profile && profile.address}
                           ></textarea>
-                          {/* <span
-                            class="fa fa-user form-control-feedback"
-                            aria-hidden="true"
-                          ></span>{" "} */}
                         </div>
                       </div>
 

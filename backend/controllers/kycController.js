@@ -1,48 +1,46 @@
 const bankKycModel = require("../models/bank-details-model");
 
 const kycUpdate = async (req, res) => {
+  const user = req.user;
+  const {
+    fullname,
+    email,
+    mobile,
+    document,
+    addharNo,
+    addharName,
+    panName,
+    panNo,
+    BankName,
+    accHolderName,
+    accNo,
+    ifscCode,
+    InaccountNumber,
+    Inbank,
+    InbankName,
+    InifscCode,
+  } = req.body;
   try {
-    const user = req.user;
-
-    const kycData = {
-      fullname: req.body.fullname,
-      email: req.body.email,
-      mobile: req.body.mobile,
-      document: req.body.document,
-      addharNo: req.body.addharNo,
-      addharName: req.body.addharName,
-      panName: req.body.panName,
-      panNo: req.body.panNo,
-      BankName: req.body.BankName,
-      accHolderName: req.body.accHolderName,
-      accNo: req.body.accNo,
-      ifscCode: req.body.ifscCode,
-      Inbank: req.body.Inbank,
-      InbankName: req.body.InbankName,
-      InaccountNumber: req.body.InaccountNumber,
-      InifscCode: req.body.InifscCode,
-    };
-
     const bank = await bankKycModel.findOne({
       email: user.email,
     });
 
-    bank.fullname = req.body.fullname;
-    bank.email = req.body.email;
-    bank.mobile = req.body.mobile;
-    bank.document = req.body.document;
-    bank.addharNo = req.body.addharNo;
-    bank.addharName = req.body.addharName;
-    bank.panName = req.body.panName;
-    bank.panNo = req.body.panNo;
-    bank.BankName = req.body.BankName;
-    bank.accHolderName = req.body.accHolderName;
-    bank.accNo = req.body.accN;
-    bank.ifscCode = req.body.ifscCode;
-    bank.Inbank = req.body.Inbank;
-    bank.InbankName = req.body.InbankName;
-    bank.InaccountNumber = req.body.InaccountNumber;
-    bank.InifscCode = req.body.InifscCode;
+    bank.fullname = fullname;
+    bank.email = email;
+    bank.mobile = mobile;
+    bank.document = document;
+    bank.addharNo = addharNo;
+    bank.addharName = addharName;
+    bank.panName = panName;
+    bank.panNo = panNo;
+    bank.BankName = BankName;
+    bank.accHolderName = accHolderName;
+    bank.accNo = accNo;
+    bank.ifscCode = ifscCode;
+    bank.Inbank = Inbank;
+    bank.InbankName = InbankName;
+    bank.InaccountNumber = InaccountNumber;
+    bank.InifscCode = InifscCode;
     await bank.save();
 
     res.json({ message: "Kyc Updated Successfully", bank });

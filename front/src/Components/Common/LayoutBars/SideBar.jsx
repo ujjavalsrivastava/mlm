@@ -1,13 +1,16 @@
 // import { IoMdHome } from "react-icons/io";
 
-import { Link, useNavigate } from "react-router-dom";
-import { axios } from "../../../helper/httpHelper";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import logo from "../../../../public/dist/img/img1.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfile } from "../../../store/profileReducer";
+import { menuItems } from "./constants";
+
 const SideBar = () => {
   const navigator = useNavigate();
+  const { pathname } = useLocation();
+
   const profile = useSelector((state) => state.profile?.data || {});
   const dispatch = useDispatch();
 
@@ -28,7 +31,11 @@ const SideBar = () => {
         <div class="sidebar">
           <div class="user-panel">
             <div class="image text-center">
-              <img src={logo} class="img-circle" alt="User Image" />
+              <img
+                src={profile?.image ? URL.createObjectURL(profile.image) : logo}
+                class="img-circle"
+                alt="User Image"
+              />
             </div>
             <div class="info">
               <p style={{ textTransform: "capitalize" }}>
@@ -48,114 +55,21 @@ const SideBar = () => {
 
           <ul class="sidebar-menu" data-widget="tree">
             <li class="header">PERSONAL</li>
-            <li>
-              <Link to={"/profile"}>
-                <i class="fa fa-user" style={{ marginRight: "7px" }}></i> My
-                Profile
-              </Link>
-            </li>
-            <li>
-              <Link to={"/my-course"}>
-                <i
-                  class="fa fa-graduation-cap"
-                  style={{ marginRight: "7px" }}
-                ></i>
-                My Course
-              </Link>
-            </li>
-            <li>
-              <Link to={"/kyc"}>
-                <i class="fa fa-users" style={{ marginRight: "7px" }}></i> KYC
-              </Link>
-            </li>
-            <li>
-              <Link to={"/member-dashboard"}>
-                <i class="fa fa-building" style={{ marginRight: "7px" }}></i>
-                Affiliate Panel
-              </Link>
-            </li>
-            <li>
-              <Link to={"/referal-link"}>
-                <i class="fa fa-refresh" style={{ marginRight: "7px" }}></i>
-                Referal
-              </Link>
-            </li>
-            <li>
-              <Link to={"/profile-upload"}>
-                <i class="fa fa-upload" style={{ marginRight: "7px" }}></i>
-                Profile Upload
-              </Link>
-            </li>
-            <li>
-              <Link to={"/tree"}>
-                <i
-                  class="fa fa-sitemap"
-                  aria-hidden="true"
-                  style={{ marginRight: "7px" }}
-                ></i>
-                Hierarchy
-              </Link>
-            </li>
-            <li>
-              <Link to={"/level-wise-report"}>
-                <i
-                  class="fa fa-sort-amount-asc"
-                  style={{ marginRight: "7px" }}
-                ></i>
-                Level Wise Income
-              </Link>
-            </li>
-
-            <li>
-              <Link to={"/team-size"}>
-                <i class="fa fa-steam" style={{ marginRight: "7px" }}></i> Level
-                Wise Team Size
-              </Link>
-            </li>
-
-            <li>
-              <Link to={"/invoice"}>
-                <i class="fa fa-steam" style={{ marginRight: "7px" }}></i>
-                Invoice
-              </Link>
-            </li>
-
-            <li>
-              <Link to={"/passive-income"}>
-                <i
-                  class="fa fa-trophy"
-                  aria-hidden="true"
-                  style={{ marginRight: "7px" }}
-                ></i>
-                Passive income
-              </Link>
-            </li>
-
-            <li>
-              <Link to={"/rewards"}>
-                <i
-                  class="fa fa-trophy"
-                  aria-hidden="true"
-                  style={{ marginRight: "7px" }}
-                ></i>
-                Rewards
-              </Link>
-            </li>
-
-            <li>
-              <Link to={"/change-password"}>
-                <i
-                  class="fa fa-key"
-                  aria-hidden="true"
-                  style={{ marginRight: "7px" }}
-                ></i>
-                Change Password
-              </Link>
-            </li>
+            {menuItems.map((item) => (
+              <li
+                key={item.title}
+                className={item.url === pathname ? "selected" : ""}
+              >
+                <Link to={item.url}>
+                  <i class={item.icon} style={{ marginRight: "7px" }}></i>
+                  {item.title}
+                </Link>
+              </li>
+            ))}
 
             {profile && profile.role == "admin" ? (
               <>
-                <li>
+                <li className={pathname === "/level" ? "selected" : ""}>
                   <Link to={"/level"}>
                     <i
                       class="fa fa-level-up"
