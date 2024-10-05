@@ -104,27 +104,37 @@ const header = () => {
             <div class="header-right justify-end">
            
               <div class="header-btn">
-                <div class="header-login">
-                  <Link to={"/login"}>
-                    <a href="#" class="tf-button-default header-text">
-                      Log In
-                    </a>
-                  </Link>
-                </div>
-                <div class="header-register">
-                  <Link to={"/register"}>
-                    <a href="#" class="tf-button-default active header-text">
-                      Sign Up
-                    </a>
-                  </Link>
-                </div>
-                <div class="header-join d-lg-none flex">
-                  <Link to={"/login"}>
-                    <a href="#" class="fs-15">
-                      Join
-                    </a>
-                  </Link>
-                </div>
+                
+      {profile?._id ? (
+         <div class="header-register">
+         <Link to={"/my-course"}>
+           <a href="#" class="tf-button-default active header-text" style={{border:'hidden',background:'white',color:'black',borderBlockColor:'white'}}>
+           {profile.name}
+           </a>
+         </Link>
+       </div>
+      ) : (
+<>
+<div class="header-register">
+        <Link to={"/register"}>
+          <a href="#" class="tf-button-default active header-text">
+            Sign Up
+          </a>
+        </Link>
+      </div>
+      <div class="header-join d-lg-none flex">
+        <Link to={"/login"}>
+          <a href="#" class="fs-15">
+            Join
+          </a>
+        </Link>
+      </div>
+</>
+        
+
+      )}
+
+             
               </div>
             </div>
           </div>
