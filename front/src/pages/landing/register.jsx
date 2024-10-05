@@ -87,7 +87,7 @@ console.log(data)
       return;
     }
 
-    if (email != cemail) {
+    if (email !== cemail) {
       setError(true);
       toast.error("Email and Confirm Email not match");
       return;
@@ -116,7 +116,7 @@ console.log(data)
       return;
     }
 
-    if (password != cpassword) {
+    if (password !== cpassword) {
       setError(true);
       toast.error("Password and Confirm Password not match");
       return;
