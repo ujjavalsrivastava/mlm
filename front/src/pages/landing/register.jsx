@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 const register = () => {
   const [referral, setReferral] = useState(null);
   const [error, setError] = useState(false);
+  const [storeToken, setStoreToken] = useState("");
 
   const [level, setlevel] = useState(1);
   const navigate = useNavigate();
@@ -20,10 +21,10 @@ const register = () => {
     gender: "Male",
     state: "Andaman and Nicobar Islands",
     password: "",
-    cpassword: ""
+    cpassword: "",
   });
   const [state, setState] = useState(null);
-console.log(data)
+  console.log(data);
   const stateFun = async () => {
     try {
       const response = await axios1.post(
@@ -45,44 +46,54 @@ console.log(data)
     }));
   };
 
-  const checklevel =(level)=>{
-    const {name,mobile, email, cemail,gender,state, password, cpassword } = data;
-    if (name != "" && mobile !="" && email !="" && cemail !="" && gender !="" && state !=""&& password !=""&& cpassword !="") {
+  const checklevel = (level) => {
+    const { name, mobile, email, cemail, gender, state, password, cpassword } =
+      data;
+    if (
+      name != "" &&
+      mobile != "" &&
+      email != "" &&
+      cemail != "" &&
+      gender != "" &&
+      state != "" &&
+      password != "" &&
+      cpassword != ""
+    ) {
       setlevel(level);
     }
-  } 
- 
+  };
+
   const submitLogin = async (e) => {
     e.preventDefault();
-    const {name,mobile, email, cemail,gender,state, password, cpassword } = data;
+    const { name, mobile, email, cemail, gender, state, password, cpassword } =
+      data;
 
     if (name == "") {
-   console.log(name)
+      console.log(name);
       setError(true);
       toast.error("Name is Required");
       return;
     }
 
-    if (mobile === '') {
+    if (mobile === "") {
       setError(true);
       toast.error("Mobile is Required");
       return;
     }
 
-    
     if (mobile.length !== 10) {
       setError(true);
       toast.error("Invalid is Mobile");
       return;
     }
 
-    if (email === '') {
+    if (email === "") {
       setError(true);
       toast.error("Email is Required");
       return;
     }
 
-    if (cemail === '') {
+    if (cemail === "") {
       setError(true);
       toast.error("Confirm Email is Required");
       return;
@@ -100,24 +111,24 @@ console.log(data)
       return;
     }
 
-    if (gender === '') {
+    if (gender === "") {
       setError(true);
       toast.error("Gender is Required");
       return;
     }
 
-    if (state === '') {
+    if (state === "") {
       setError(true);
       toast.error("state is Required");
       return;
     }
 
-    if (password === '') {
+    if (password === "") {
       setError(true);
       toast.error("password is Required");
       return;
     }
-    if (cpassword === '') {
+    if (cpassword === "") {
       setError(true);
       toast.error("Confirm password is Required");
       return;
@@ -154,12 +165,9 @@ console.log(data)
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const value = queryParams.get("referral");
 
   const orderCreate = async (price) => {
     try {
-      var token = localStorage.getItem("token");
-
       const response = await axios.post("product/create/order", {
         amount: price * 100,
         currency: "INR",
@@ -174,6 +182,24 @@ console.log(data)
     }
   };
 
+  const handleLogin = async () => {
+    await axios.post("user/register", data);
+    const response = await axios.post("user/login", {
+      email: data.email,
+      password: data.password,
+    });
+    setStoreToken(response.data.token);
+    localStorage.setItem("token", response.data.token);
+    await axios.get("user/store-reward");
+  };
+
+  const token = localStorage.getItem("token");
+  const checklogin = () => {
+    if (token) {
+      navigate("/my-course");
+    }
+  };
+
   const handlePayment = (price, oId) => {
     const options = {
       key: import.meta.env.VITE_PAYMENT_KEY,
@@ -184,12 +210,11 @@ console.log(data)
       order_id: oId,
       handler: async function ({ razorpay_payment_id }) {
         try {
-          await axios.post("user/register", data);
-          const response = await axios.post("user/login", {
-            email: data.email,
-            password: data.password,
-          });
-          localStorage.setItem("token", response.data.token);
+          await handleLogin();
+        } catch (error) {
+          console.log(error);
+        }
+        try {
           const productOrder = await axios.post("product/order", {
             amount: 2499,
             paymentId: razorpay_payment_id,
@@ -201,6 +226,7 @@ console.log(data)
           toast.success(productOrder.data.message);
           navigate("/my-course");
         } catch (error) {
+          if (token || storeToken) navigate("/my-course");
           console.log(error);
         }
       },
@@ -221,12 +247,6 @@ console.log(data)
     rzp1.open();
   };
 
-  const token = localStorage.getItem("token");
-  const checklogin =()=>{
-    if(token){
-      navigate('/my-course');
-    }
-  }
   useEffect(() => {
     checklogin();
     const queryParams = new URLSearchParams(window.location.search);
@@ -344,7 +364,6 @@ console.log(data)
                               name="referalCode"
                               value={referral}
                               placeholder="Referral Code"
-                              
                             />
                             <label class="tf-field-label fs-15" for="field1">
                               Referral Code
@@ -431,13 +450,25 @@ console.log(data)
                               <select
                                 class="default"
                                 name="gender"
-                                
                                 onChange={handle}
                                 style={{ marginTop: "-5px" }}
                               >
-                               
-                                <option selected={data.gender == 'Male' ? true:false}> Male</option>
-                                <option selected={data.gender == 'Female' ? true:false}> Female</option>
+                                <option
+                                  selected={
+                                    data.gender == "Male" ? true : false
+                                  }
+                                >
+                                  {" "}
+                                  Male
+                                </option>
+                                <option
+                                  selected={
+                                    data.gender == "Female" ? true : false
+                                  }
+                                >
+                                  {" "}
+                                  Female
+                                </option>
                               </select>
                               <label class="select-label" for="">
                                 Gender
@@ -452,13 +483,17 @@ console.log(data)
                               <select
                                 class="default"
                                 name="state"
-                                
                                 onChange={handle}
                               >
-                                
                                 {state &&
                                   state.map((row) => (
-                                    <option selected={data.state == row.name ? true:false}>{row && row.name}</option>
+                                    <option
+                                      selected={
+                                        data.state == row.name ? true : false
+                                      }
+                                    >
+                                      {row && row.name}
+                                    </option>
                                   ))}
                               </select>
                               <label class="select-label" for="">
@@ -510,7 +545,7 @@ console.log(data)
                           <i class="icon-arrow-top-right"></i>
                         </button>
                       </form>
-                                         </>
+                    </>
                   ) : null}
 
                   <div class="">

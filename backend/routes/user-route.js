@@ -13,7 +13,8 @@ const {
   getRewards,
   handleForgotPassword,
   verifyResetCode,
-  contectForm
+  contectForm,
+  handleRewardStore,
 } = require("../controllers/userController");
 
 const {
@@ -70,5 +71,6 @@ router.get("/invoice", tryCatch(asyncHandler(getInvoice)));
 router.get("/valid", tryCatch(asyncHandler(checkUserExist)));
 router.get("/level-earning", tryCatch(asyncHandler(getEachLevelEarning)));
 router.get("/rewards", tryCatch(asyncHandler(getRewards)));
+router.get("/store-reward", tryCatch(asyncHandler(handleRewardStore)));
 
 module.exports = router;

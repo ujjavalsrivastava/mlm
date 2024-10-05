@@ -46,15 +46,22 @@ const createUser = async (req, res) => {
       referedUser.lowerLevel.push(savedUser._id);
       await referedUser.save();
     }
-    await UserPurchase({ userId: savedUser._id, currentAmount: 0 }).save();
-    await PercentDistribution({ userId: savedUser._id }).save();
-    await bankDetails({ email, user: savedUser._id }).save();
-    await rewardsHandler(referedUser);
     return res.status(200).json({ message: "user created successfully" });
   } catch (error) {
     console.log({ error });
     res.json(error);
   }
+};
+
+const handleRewardStore = async (req, res) => {
+  const user = req.user;
+  const userId = getUserId(req);
+  const referedUser = req.user.populate("parentId");
+  await UserPurchase({ userId, currentAmount: 0 }).save();
+  await PercentDistribution({ userId }).save();
+  await bankDetails({ email: user.email, user: userId }).save();
+  await rewardsHandler(referedUser);
+  res.json({ message: "stored successfully" });
 };
 
 const loginHandler = async (req, res) => {
@@ -334,9 +341,8 @@ const verifyResetCode = async (req, res) => {
   }
 };
 
-const contectForm = async(req,res)=>{
-
-   try{
+const contectForm = async (req, res) => {
+  try {
     // Create a nodemailer transporter
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,
@@ -359,11 +365,11 @@ const contectForm = async(req,res)=>{
               <p>Message: <b>${req.body.message}</b></p>
             `,
     });
-    res.status(200).send({ message: "contect send Succefully",status:200  });
+    res.status(200).send({ message: "contect send Succefully", status: 200 });
   } catch (error) {
     res.status(500).send({ message: "Server error" });
   }
-}
+};
 
 module.exports = {
   contectForm,
@@ -380,4 +386,5 @@ module.exports = {
   getRewards,
   handleForgotPassword,
   verifyResetCode,
+  handleRewardStore,
 };
