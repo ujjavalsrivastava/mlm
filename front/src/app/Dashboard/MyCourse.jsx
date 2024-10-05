@@ -4,17 +4,15 @@ import { Link } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
 import { RiCheckboxBlankCircleLine } from "@remixicon/react";
 const MyCourse = () => {
-  const[product,setProduct]=useState(null);
-  const fetchProduct = async()=>{
-    try{
-      const response =  await axios.get('vimeo/courses');
+  const [product, setProduct] = useState(null);
+  const fetchProduct = async () => {
+    try {
+      const response = await axios.get("vimeo/courses");
       setProduct(response.data);
-    }catch(error){
-             
+    } catch (error) {
       toast.error(error?.response?.data?.error);
     }
-    
-  }
+  };
   const truncate = (str, num) => {
     if (str.length <= num) {
       return str;
@@ -22,13 +20,9 @@ const MyCourse = () => {
     return str.slice(0, num) + "...";
   };
 
-
-
- 
-
-  useEffect(()=>{
+  useEffect(() => {
     fetchProduct();
-  },[])
+  }, []);
 
   return (
     <>
@@ -37,33 +31,47 @@ const MyCourse = () => {
           <h1>My Course</h1>
           <ol class="breadcrumb">
             <li>
-              <a href="#" style={{color:'black'}}>Home /  My Courses </a>
+              <a href="#" style={{ color: "black" }}>
+                Home / My Courses{" "}
+              </a>
             </li>
             {/* <li>
                 My Courses
             </li> */}
           </ol>
         </div>
-       
 
         <div class="content">
           <div class="row">
-            {product && product.map(row=>(
-                  <div class="col-lg-3 col-xs-6">
-              <Link to={`/course-details/${row.courseId}`}>   
-                  <div class="info-box">
-                    <div class="info-box-content">
-                    
-                    <img src={row.pictures?.base_link} alt="" class="responsive img-fluid img-thumbnail step1" style={{height:'156px', width:'260px'}}/>
+            {Array.isArray(product) &&
+              product.map((row) => (
+                <div class="col-lg-3 col-xs-6">
+                  <Link to={`/course-details/${row.courseId}`}>
+                    <div class="info-box">
+                      <div class="info-box-content">
+                        <img
+                          src={row.pictures?.base_link}
+                          alt=""
+                          class="responsive img-fluid img-thumbnail step1"
+                          style={{ height: "156px", width: "260px" }}
+                        />
+                      </div>
+                      <span
+                        style={{
+                          textAligh: "center",
+                          color: "black",
+                          textTransform: "capitalize",
+                          fontWeight: "bold",
+                        }}
+                        title={row.name}
+                      >
+                        {" "}
+                        {truncate(row.name, 25)}{" "}
+                      </span>
                     </div>
-                     <span style={{textAligh:'center',color:'black',textTransform: 'capitalize', fontWeight: 'bold'}} title={row.name}> {truncate(row.name, 25)} </span>
-                 
-                  </div>
                   </Link>
-                 
-                  </div>
-            ))}
-           
+                </div>
+              ))}
 
             {/* <div class="col-lg-3 col-xs-6">
             <div class="info-box">

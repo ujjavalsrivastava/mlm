@@ -34,7 +34,6 @@ const MyCouseDetails = () => {
                 Home / Course Details
               </a>
             </li>
-            =
           </ol>
         </div>
 
@@ -54,7 +53,7 @@ const MyCouseDetails = () => {
                 <div class="box box-widget widget-user-2">
                   <div class="widget-user-header bg-yellow">
                     <h6 style={{ color: "white", marginTop: "14px" }}>
-                     Our Courses
+                      Our Courses
                     </h6>
                     {/* <h5>Checkout my contacts here</h5> */}
                   </div>

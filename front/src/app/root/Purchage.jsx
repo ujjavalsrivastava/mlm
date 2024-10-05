@@ -4,50 +4,46 @@ import { Link, useNavigate } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
 import { toast } from "react-toastify";
 const Purchage = () => {
-  const[product,setProduct]=useState(null);
+  const [product, setProduct] = useState(null);
   const [orderId, setOrderId] = useState("");
   const [productId, setproductId] = useState("");
   const navigate = useNavigate();
-  const fetchProduct = async()=>{
-    try{
-      const response =  await axios.get('vimeo/courses');
+  const fetchProduct = async () => {
+    try {
+      const response = await axios.get("vimeo/courses");
       setProduct(response.data);
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-    
-  }
+  };
 
-
-
-  const orderCreate = async(id,price)=>{
-    try{
-     
+  const orderCreate = async (id, price) => {
+    try {
       var token = localStorage.getItem("token");
-      
-      if(token == null){
-        toast.error('please Login First');
+
+      if (token == null) {
+        toast.error("please Login First");
         return false;
       }
 
-     const response =  await axios.post('product/create/order',{
+      const response = await axios.post("product/create/order", {
         amount: price * 100,
         currency: "INR",
         receipt: "xyz product purchased",
       });
       setOrderId(response.data.order_id);
       setproductId(id);
-      handlePayment(price,id);
-    }catch(error){
-      console.log(error)
+      handlePayment(price, id);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
   // const handlePaymentComplete = async(response) => {
   //   const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
   //     response;
-  //   const response = await axios.post('product/order',{"productId":"66ca081771a6103598651071", "paymentId":razorpay_payment_id,"orderId":razorpay_order_id, "paymentMethod":"upi", "status":"created","signature":razorpay_signature}) 
+  //   const response = await axios.post('product/order',{"productId":"66ca081771a6103598651071", "paymentId":razorpay_payment_id,"orderId":razorpay_order_id, "paymentMethod":"upi", "status":"created","signature":razorpay_signature})
   // };
-  const handlePayment = (price,courseId) => {
+  const handlePayment = (price, courseId) => {
     const options = {
       key: import.meta.env.VITE_PAYMENT_KEY, // Enter the Key ID generated from the Dashboard
       amount: price * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -56,24 +52,30 @@ const Purchage = () => {
       description: "Test Transaction",
       order_id: orderId, // This is a sample Order ID. Pass the `id` obtained in the previous step
       handler: async function (response) {
-        
-          // Send this data to your server to verify the payment
-          try{
-            const result = await axios.post('product/payment-verification', response);
-            if(result.status==200){
-              const productOrder= await axios.post('product/order',{"productId":courseId, "paymentId":response.razorpay_payment_id,"orderId":response.razorpay_order_id, "paymentMethod":"upi", "status":"success","signature":response.razorpay_signature});
-              navigate('/my-course');
-              toast.success(productOrder.data.message);
-            }else{
-              toast.error(result.data.msg);
-            }
-          }catch(error){
-          console.log(error)
+        // Send this data to your server to verify the payment
+        try {
+          const result = await axios.post(
+            "product/payment-verification",
+            response
+          );
+          if (result.status == 200) {
+            const productOrder = await axios.post("product/order", {
+              productId: courseId,
+              paymentId: response.razorpay_payment_id,
+              orderId: response.razorpay_order_id,
+              paymentMethod: "upi",
+              status: "success",
+              signature: response.razorpay_signature,
+            });
+            navigate("/my-course");
+            toast.success(productOrder.data.message);
+          } else {
+            toast.error(result.data.msg);
           }
-         
-         
-         
-        },
+        } catch (error) {
+          console.log(error);
+        }
+      },
       prefill: {
         name: "Test User",
         email: "test.user@example.com",
@@ -91,9 +93,9 @@ const Purchage = () => {
     rzp1.open();
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchProduct();
-  },[])
+  }, []);
 
   return (
     <>
@@ -109,26 +111,33 @@ const Purchage = () => {
             </li>
           </ol>
         </div>
-       
 
         <div class="content">
           <div class="row">
-            {product && product.map(row=>(
-                  <div class="col-lg-3 col-xs-6">
-                 
-                  <div class="info-box">s
-                  <div class="info-box-content">
-                    <img src={row.pictures.base_link} alt="" class="responsive img-fluid img-thumbnail step1" />
+            {Array.isArray(product) &&
+              product.map((row) => (
+                <div class="col-lg-3 col-xs-6">
+                  <div class="info-box">
+                    s
+                    <div class="info-box-content">
+                      <img
+                        src={row.pictures.base_link}
+                        alt=""
+                        class="responsive img-fluid img-thumbnail step1"
+                      />
                     </div>
-                  <span style={{textAligh:'center'}}>{row.name}</span> 
-                  <div>Price : {row.price}</div>
-                  <button onClick={() => orderCreate(row.id,row.price)} type="button" class="btn btn-primary btn-sm">Order Now</button>
-      
+                    <span style={{ textAligh: "center" }}>{row.name}</span>
+                    <div>Price : {row.price}</div>
+                    <button
+                      onClick={() => orderCreate(row.id, row.price)}
+                      type="button"
+                      class="btn btn-primary btn-sm"
+                    >
+                      Order Now
+                    </button>
                   </div>
-                 
-                  </div>
-            ))}
-           
+                </div>
+              ))}
 
             {/* <div class="col-lg-3 col-xs-6">
             <div class="info-box">

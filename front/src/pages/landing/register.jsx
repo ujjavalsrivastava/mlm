@@ -68,74 +68,62 @@ const register = () => {
     const { name, mobile, email, cemail, gender, state, password, cpassword } =
       data;
 
-    if (name == "") {
+    if (!name) {
       console.log(name);
-      setError(true);
       toast.error("Name is Required");
       return;
     }
 
-    if (mobile === "") {
-      setError(true);
+    if (!mobile) {
       toast.error("Mobile is Required");
       return;
     }
 
     if (mobile.length !== 10) {
-      setError(true);
       toast.error("Invalid is Mobile");
       return;
     }
 
-    if (email === "") {
-      setError(true);
+    if (!email) {
       toast.error("Email is Required");
       return;
     }
 
-    if (cemail === "") {
-      setError(true);
+    if (!cemail) {
       toast.error("Confirm Email is Required");
       return;
     }
     const emailUser = await axios.get(`/user/valid?email=${email}`);
     if (emailUser?.data && emailUser.data.inValid) {
-      setError(true);
       toast.error("User with this email already exist please login");
       return;
     }
 
     if (email !== cemail) {
-      setError(true);
       toast.error("Email and Confirm Email not match");
       return;
     }
 
-    if (gender === "") {
-      setError(true);
+    if (!gender) {
       toast.error("Gender is Required");
       return;
     }
 
-    if (state === "") {
-      setError(true);
+    if (!state) {
       toast.error("state is Required");
       return;
     }
 
-    if (password === "") {
-      setError(true);
+    if (!password) {
       toast.error("password is Required");
       return;
     }
-    if (cpassword === "") {
-      setError(true);
+    if (!cpassword) {
       toast.error("Confirm password is Required");
       return;
     }
 
     if (password !== cpassword) {
-      setError(true);
       toast.error("Password and Confirm Password not match");
       return;
     }
@@ -183,11 +171,7 @@ const register = () => {
   };
 
   const handleLogin = async () => {
-    await axios.post("user/register", data);
-    const response = await axios.post("user/login", {
-      email: data.email,
-      password: data.password,
-    });
+    const response = await axios.post("user/register", data);
     setStoreToken(response.data.token);
     localStorage.setItem("token", response.data.token);
     await axios.get("user/store-reward");
@@ -458,7 +442,6 @@ const register = () => {
                                     data.gender == "Male" ? true : false
                                   }
                                 >
-                                  {" "}
                                   Male
                                 </option>
                                 <option
@@ -466,7 +449,6 @@ const register = () => {
                                     data.gender == "Female" ? true : false
                                   }
                                 >
-                                  {" "}
                                   Female
                                 </option>
                               </select>
@@ -501,7 +483,7 @@ const register = () => {
                               </label>
                             </div>
                           </fieldset>
-                        </div>{" "}
+                        </div>
                         {/* end cols */}
                         <div class="cols">
                           <fieldset class="tf-field field-pass-again ">

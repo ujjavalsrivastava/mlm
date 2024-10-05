@@ -46,7 +46,13 @@ const createUser = async (req, res) => {
       referedUser.lowerLevel.push(savedUser._id);
       await referedUser.save();
     }
-    return res.status(200).json({ message: "user created successfully" });
+    const token = jwt.sign(
+      { email, userId: savedUser._id },
+      process.env.TOKEN_SECRET
+    );
+    return res
+      .status(200)
+      .json({ message: "user created successfully", token });
   } catch (error) {
     console.log({ error });
     res.json(error);

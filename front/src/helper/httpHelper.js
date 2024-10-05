@@ -1,7 +1,7 @@
 import { default as createAxios } from "axios";
 
 const axios = createAxios.create({
-  baseURL: `${import.meta.env.VITE_BACKEND_URL}/api`,
+  baseURL: `/api`,
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -27,7 +27,7 @@ axios.interceptors.request.use(
 );
 
 const httpFileAxios = createAxios.create({
-  baseURL: `${import.meta.env.VITE_BACKEND_URL}/api`,
+  baseURL: `/api`,
   headers: {
     "Content-Type": "multipart/form-data",
   },
