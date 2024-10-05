@@ -2,6 +2,7 @@ export const menuItems = [
   { title: "My Profile", url: "/profile", icon: "fa fa-user" },
   { title: "My Course", url: "/my-course", icon: "fa fa-graduation-cap" },
   { title: "KYC", url: "/kyc", icon: "fa fa-users" },
+  { title: "Profile Upload", url: "/profile-upload", icon: "fa fa-upload" },
   {
     title: "Affiliate Panel",
     url: "/member-dashboard",
