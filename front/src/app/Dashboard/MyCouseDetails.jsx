@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
-import VimeoVideo from "./VimeoVideo";
 import play from "./../../../public/dist/img/play.png";
 const MyCouseDetails = () => {
   const [course, setcourse] = useState(null);
@@ -15,8 +14,6 @@ const MyCouseDetails = () => {
       const data = response?.data?.data || [];
       setcourse(data);
       setVideoData(data[0]);
-
-      getVideo(data[0]?.player_embed_url, data[0]?.name);
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +43,7 @@ const MyCouseDetails = () => {
             <div class="col-lg-8 m-b-3">
               <div
                 class="ml-auto modal-iframe-wrapper video-container"
-                dangerouslySetInnerHTML={{ __html: videoData?.embed }}
+                dangerouslySetInnerHTML={{ __html: videoData.embed }}
               ></div>
               <div style={{ padding: "15px" }}>
                 <h6>{videoData.name}</h6>
