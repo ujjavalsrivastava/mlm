@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 import { axios } from "../../helper/httpHelper";
-import VimeoVideo from "./VimeoVideo";
 import play from "./../../../public/dist/img/play.png";
 const MyCouseDetails = () => {
   const [course, setcourse] = useState(null);
@@ -15,18 +14,10 @@ const MyCouseDetails = () => {
       const data = response?.data?.data || [];
       setcourse(data);
       setVideoData(data[0]);
-
-      getVideo(data[0]?.player_embed_url, data[0]?.name);
     } catch (error) {
       console.log(error);
     }
   };
-  const getVideo = (videoId, name) => {
-    setvideoName(name);
-    setvideo(videoId);
-  };
-
- 
 
   useEffect(() => {
     courseVideo();
@@ -50,25 +41,13 @@ const MyCouseDetails = () => {
         <div class="content">
           <div class="row">
             <div class="col-lg-8 m-b-3">
-               {/* <div class="col-12"> */}
-                  {/* <div style={{textAlign:'center'}}>  */}
-                    <div class="ml-auto modal-iframe-wrapper video-container" >
-                      {video && (
-                        <iframe
-                          src={video}
-                          frameborder="0" 
-                          allowfullscreen
-                          title="Vimeo Video"
-                        ></iframe>
-                      )}
-                    {/* </div> */}
-                  {/* </div> */}
-                {/* <div id="area"></div> */}
-                
+              <div
+                class="ml-auto modal-iframe-wrapper video-container"
+                dangerouslySetInnerHTML={{ __html: videoData.embed }}
+              ></div>
+              <div style={{ padding: "15px" }}>
+                <h6>{videoData.name}</h6>
               </div>
-              <div style={{padding:'15px'}}>
-                  <h6>{videoName && videoName}</h6>
-                </div>
             </div>
             <div class="col-lg-4 m-b-3">
               <div>
