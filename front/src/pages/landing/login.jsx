@@ -114,8 +114,9 @@ const login = () => {
                                             <input type="checkbox"/>
                                             <span class="btn-checkbox"></span>
                                         </label>
-                                        <a href="#" class="fs-15 " data-wow-delay="0.1s">Forgot your
-                                            password?</a>
+                                        <Link to={'/forgot'}>Forgot your
+                                        password?</Link>
+                                      
                                     </div>
 
                                     <button class=" button-submit tf-btn w-100 " 

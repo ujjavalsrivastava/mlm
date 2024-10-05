@@ -5,7 +5,12 @@ import { axios } from "../../helper/httpHelper";
 import { toast } from "react-toastify";
 
 const Forgot = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({
+    email:""
+  });
+
+  const [loading, setLoading] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -16,35 +21,27 @@ const Forgot = () => {
     }));
   };
 
-  const token = localStorage.getItem("token");
 
-  const checklogin =()=>{
-    if(token){
-      navigate('/my-course');
-    }
-  }
 
   const submitLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("user/login", data);
-
-      if (response.data.code == "801") {
-        localStorage.setItem("token", response.data.token);
-        navigate("/my-course");
+        setLoading(true);
+      const response = await axios.post("user/forgot-password", data);
+        
+        setLoading(false);
+      if (response.data.status == 200) {
+        navigate("/change-password", { state: { emaildata: data } });
+       
         toast.success(response.data.message);
       } else {
-        toast.error(response.data.error);
+        toast.error(response.data.message);
       }
     } catch (error) {
       toast.error(error.message);
     }
   };
 
-
-  useEffect(()=>{
-    checklogin();
-  },[])
 
     return (
 
@@ -95,9 +92,9 @@ const Forgot = () => {
                                    
                                    
 
-                                    <button class=" button-submit tf-btn w-100 " 
+                                    <button class=" button-submit tf-btn w-100 "  disabled={loading}
                                         type="submit">
-                                        Send OTP<i class="icon-arrow-top-right"></i>
+                                      {loading ? 'Proccesing...':'Send OTP'}  <i class="icon-arrow-top-right"></i>
                                     </button>
                                 </form>
 

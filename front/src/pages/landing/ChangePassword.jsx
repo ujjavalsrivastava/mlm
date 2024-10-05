@@ -1,13 +1,24 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,useLocation } from "react-router-dom";
 import backgroundImage from "../../assets/img/body-bg.jpg";
 import React, { useEffect, useState } from "react";
 import { axios } from "../../helper/httpHelper";
 import { toast } from "react-toastify";
 
-const ChangePassword = () => {
-  const [data, setData] = useState(null);
 
+const ChangePassword = () => {
+  const [data, setData] = useState({
+    otp:"",
+    password:"",
+    cpassword:""
+  });
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+// Access the email data from location.state
+const emaildata = location.state?.emaildata || {}; // Fallback to an empty object if no state is passed
+
+// Now you can use emaildata in this component
+console.log("Email data passed:", emaildata);
 
   const handle = (e) => {
     setData((pre) => ({
@@ -16,35 +27,57 @@ const ChangePassword = () => {
     }));
   };
 
-  const token = localStorage.getItem("token");
 
-  const checklogin =()=>{
-    if(token){
-      navigate('/my-course');
-    }
-  }
 
   const submitLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("user/login", data);
 
-      if (response.data.code == "801") {
-        localStorage.setItem("token", response.data.token);
-        navigate("/my-course");
-        toast.success(response.data.message);
-      } else {
-        toast.error(response.data.error);
-      }
+        const {otp, password, cpassword } = data;
+
+        if (otp == "") {
+           
+            setError(true);
+            toast.error("OTP is Required");
+            return;
+          }
+
+        if (password == "") {
+           
+               setError(true);
+               toast.error("Passsword is Required");
+               return;
+             }
+
+             if (cpassword == "") {
+                
+                   setError(true);
+                   toast.error("Confirm is Required");
+                   return;
+                 }
+
+                 if (password !== cpassword) {
+                    setError(true);
+                    toast.error("Password and Confirm Password not match");
+                    return;
+                  }
+
+
+    const response = await axios.post("user/verify-reset-code", {email:emaildata.email,resetCode:data.otp,newPassword:data.password});
+
+    if (response.data.status == "200") {
+      navigate("/login");
+      toast.success(response.data.message);
+    } else {
+      toast.error(response.data.message);
+    }
+     
     } catch (error) {
       toast.error(error.message);
     }
   };
 
 
-  useEffect(()=>{
-    checklogin();
-  },[])
 
     return (
 
@@ -76,6 +109,27 @@ const ChangePassword = () => {
                                     </Link>
                                 </div>
                                 <form onSubmit={submitLogin} class="form-login">
+
+                                                    
+                                <div class="cols">
+                                        <fieldset class="tf-field field-username " >
+                                        <input
+                            type="text"
+                            onChange={handle}
+                            
+                          
+                            
+                            name="otp"
+                            placeholder="otp..."
+                            class="tf-input style-1"
+                          />
+                                           
+                                            <label class="tf-field-label fs-15" for="field1">OTP </label>
+                                        </fieldset>
+                                    </div>
+                                   
+
+                                    
                                     <div class="cols">
                                         <fieldset class="tf-field field-username " >
                                         <input
@@ -100,7 +154,7 @@ const ChangePassword = () => {
                             onChange={handle}
                             
                           
-                            required
+                            
                             name="cpassword"
                             placeholder="email..."
                             class="tf-input style-1"
