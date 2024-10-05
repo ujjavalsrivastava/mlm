@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 
 const footer =()=>{
+
+    const handleClick = () => {
+        // Scroll to the top of the page when clicked
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth', // Optional: Add smooth scrolling
+        });
+    }
     
     return (
         <>
@@ -37,18 +45,18 @@ const footer =()=>{
                                         <div class="footer-menu-list">
                                             <h5 class="fw-5">Company</h5>
                                             <ul>
-                                            <li><Link to={'/about-us'}>About Us </Link> </li>
-                                            <li><Link to={'/contact-us'}>Contact Us </Link> </li>
+                                            <li><Link to={'/about-us'} onClick={handleClick}>About Us </Link> </li>
+                                            <li><Link to={'/contact-us'} onClick={handleClick}>Contact Us </Link> </li>
 ?
                                             </ul>
                                         </div>
                                         <div class="footer-menu-list">
                                             <h5 class="fw-5">Useful Links</h5>
                                             <ul>
-                                                <li><Link to={'/disclaimer'}>Disclaimer </Link> </li>
-                                                <li><Link to={'/refund'}> Refund Policy</Link> </li>
-                                                <li><Link to={'/terms-condition'}> Terms and Conditions</Link> </li>
-                                                <li><Link to={'/privacy-policy'}> Privacy Policy</Link> </li>
+                                                <li><Link to={'/disclaimer'} onClick={handleClick}>Disclaimer </Link> </li>
+                                                <li><Link to={'/refund'} onClick={handleClick}> Refund Policy</Link> </li>
+                                                <li><Link to={'/terms-condition'} onClick={handleClick}> Terms and Conditions</Link> </li>
+                                                <li><Link to={'/privacy-policy'} onClick={handleClick}> Privacy Policy</Link> </li>
                                                     
                                             </ul>
                                         </div>
