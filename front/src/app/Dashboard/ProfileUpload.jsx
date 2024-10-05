@@ -6,6 +6,7 @@ import { fetchProfile } from "../../store/profileReducer";
 
 const ProfileUpload = () => {
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
   const profile = useSelector((state) => state.profile.data);
   const dispatch = useDispatch();
 
@@ -30,13 +31,16 @@ const ProfileUpload = () => {
     try {
       const formData = new FormData();
       formData.append("profilePicture", file);
+      setLoading(true);
       const response = await httpFileAxios.post(
         "user/profile-picture",
         formData
       );
+      setLoading(false);
       dispatch(fetchProfile());
       toast.success(response.data.message);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -71,8 +75,9 @@ const ProfileUpload = () => {
                               id="file"
                               class="custom-file-input"
                               type="file"
+                              accept=".jpg, .jpeg, .png"
+                              required
                               onChange={handleFile}
-                              accept=".jpg, .jpeg"
                             />
                           </label>
                         </div>
@@ -80,8 +85,16 @@ const ProfileUpload = () => {
                       <br />
                       <br />
                       <div class="col-md-12">
-                        <button type="submit" class="btn btn-success">
-                          {profile.image ? "Update Image" : "Upload Image"}
+                        <button
+                          type="submit"
+                          class="btn btn-success"
+                          disabled={loading}
+                        >
+                          {loading
+                            ? "Processing..."
+                            : profile.image
+                              ? "Update Image"
+                              : "Upload Image"}
                         </button>
                       </div>
                     </div>

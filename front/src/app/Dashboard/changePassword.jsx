@@ -29,6 +29,8 @@ const changePassword = () => {
             
             toast.error(response.data.error)
           }else{
+              localStorage.clear();
+             window.location.assign("/login");
             toast.success(response.data.message)
           }
             }catch(error){
