@@ -24,6 +24,11 @@ import Blog from "../../pages/landing/Blog";
 import Disclaimer from "../../pages/landing/Disclaimer";
 import Condition from "../../pages/landing/Condition";
 import Privacy from "../../pages/landing/Privacy";
+import Forgot from "../../pages/landing/Forgot";
+import VerifyOTP from "../../pages/landing/VerifyOTP";
+import ChangePassword from "../../pages/landing/ChangePassword";
+
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -42,6 +47,10 @@ const router = createBrowserRouter(
       <Route path="/contact-us" element={<ContactUs />} />
       <Route path="/terms-condition" element={<Condition />} />
       <Route path="/privacy-policy" element={<Privacy />} />
+      <Route path="/forgot" element={<Forgot />} />
+      <Route path="/verify-otp" element={<VerifyOTP />} />
+      <Route path="/change-password" element={<ChangePassword />} />
+      
       </Route>
 
       <Route element={<RouteAuth />}>

@@ -89,7 +89,7 @@ const header = () => {
                   <li>
                     <Link to={"/"}>Home</Link>
                   </li>
-                  <li class="has-children">
+                  <li >
                     <Link to="/#course">Our Course</Link>
                   </li>
                   <li>
@@ -102,9 +102,7 @@ const header = () => {
               </nav>
             </div>
             <div class="header-right justify-end">
-              <a href="#" class="header-cart flex items-center justify-center">
-                <i class="icon-shopcart fs-18"></i>
-              </a>
+           
               <div class="header-btn">
                 <div class="header-login">
                   <Link to={"/login"}>
