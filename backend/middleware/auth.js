@@ -9,6 +9,7 @@ const unAuthRoutes = {
   "/api/product/create/order": true,
   "/api/user/forgot-password": true,
   "/api/user/verify-reset-code": true,
+  "/api/user/check-refrealcode?referalCode": true,
 };
 
 const auth = async (req, res, next) => {
