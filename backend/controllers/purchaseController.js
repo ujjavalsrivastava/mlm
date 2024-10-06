@@ -2,6 +2,22 @@ const UserPurchase = require("../models/purchase-history-model");
 const PercentDistribution = require("../models/percentage-distribution-model");
 const { handlePromiseError, getUserId } = require("../utils/helper");
 const { oneDayAgo, oneMonthAgo, oneWeekAgo } = require("../utils/dateTime");
+const Withdraw = require("../models/withdraw.model");
+const BankDetails = require("../models/bank-details-model");
+
+const requiredKycFields = [
+  "fullname",
+  "email",
+  "mobile",
+  "addharNo",
+  "addharName",
+  "panName",
+  "panNo",
+  "BankName",
+  "accHolderName",
+  "ifscCode",
+  "accNo",
+];
 
 const handleProductPurchase = async (req, res) => {};
 const getUserProductsAndBalance = async (req, res) => {
@@ -90,10 +106,45 @@ const getUserTotalEarning = async (req, res) => {
   });
 };
 
+const handleWithdrawRequest = async (req, res) => {
+  const userId = getUserId(req);
+  const { amount, message } = req.body;
+
+  const bankDetails = await BankDetails.findOne({ user: userId });
+  for (let kycDetail of requiredKycFields) {
+    if (!bankDetails[kycDetail]) {
+      return res
+        .status(400)
+        .json({ error: "Kyc Not completed", field: kycDetail });
+    }
+  }
+  const userAccount = await UserPurchase.findOne({ userId });
+  console.log({ amount });
+  if (userAccount.currentAmount < amount) {
+    return res.status(400).json({ error: "Insufficient Balance" });
+  }
+  const reqData = { user: userId, amount, message };
+  const withdraw = await Withdraw(reqData).save();
+  res.json(withdraw);
+};
+
+const handleUserWithdrawRequest = async (req, res) => {
+  const role = req.user.role;
+  const userId = getUserId(req);
+  let query = { user: userId };
+  if (role === "admin") {
+    query = {};
+  }
+  const data = await Withdraw.find(query).populate("user").populate("approvar");
+  res.json(data);
+};
+
 module.exports = {
   handleProductPurchase,
   getUserAccountAndPurcheseHistory,
   getUserPercentDistribution,
   getUserProductsAndBalance,
   getUserTotalEarning,
+  handleWithdrawRequest,
+  handleUserWithdrawRequest,
 };

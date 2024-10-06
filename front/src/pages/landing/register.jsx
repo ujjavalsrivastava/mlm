@@ -14,7 +14,7 @@ const register = () => {
   const navigate = useNavigate();
 
   const [data, setData] = useState({
-    referalCode:"",
+    referalCode: "",
     name: "",
     mobile: "",
     email: "",
@@ -66,14 +66,27 @@ const register = () => {
 
   const submitLogin = async (e) => {
     e.preventDefault();
-    const { referalCode,name, mobile, email, cemail, gender, state, password, cpassword } = data;
+    const {
+      referalCode,
+      name,
+      mobile,
+      email,
+      cemail,
+      gender,
+      state,
+      password,
+      cpassword,
+    } = data;
 
-      
-      const refrealCode = await axios.get(`/user/check-refrealcode?referalCode=${referalCode}`);
+    if (referalCode) {
+      const refrealCode = await axios.get(
+        `/user/check-refrealcode?referalCode=${referalCode}`
+      );
       if (refrealCode?.data && refrealCode.data.inValid == false) {
         toast.error("refrealCode code is not valid");
         return;
       }
+    }
 
     if (!name) {
       console.log(name);
@@ -129,14 +142,14 @@ const register = () => {
       toast.error("Confirm password is Required");
       return;
     }
-    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{8,}$/; 
+    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{8,}$/;
 
     if (!regex.test(password)) {
-      toast.error("Password must be at least 8 characters long, contain both letters and numbers.");
+      toast.error(
+        "Password must be atleast 8 characters long and it should contain both letters and numbers."
+      );
       return;
-      //setErrorMessage('Password must be at least 8 characters long, contain both letters and numbers.');
     }
-
 
     if (password !== cpassword) {
       toast.error("Password and Confirm Password not match");
@@ -176,6 +189,8 @@ const register = () => {
         currency: "INR",
         receipt: "xyz product purchased",
       });
+
+      console.log({ response });
 
       const oId = response.data.order_id;
 
@@ -232,10 +247,10 @@ const register = () => {
       prefill: {
         name: data.name,
         email: data.email,
-        contact:data.mobile,
+        contact: data.mobile,
       },
       notes: {
-        address: data.state
+        address: data.state,
       },
       theme: {
         color: "#F37254",
@@ -245,16 +260,16 @@ const register = () => {
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
   };
-console.log(data);
+  console.log(data);
   useEffect(() => {
     checklogin();
     const queryParams = new URLSearchParams(window.location.search);
     const value = queryParams.get("referralCode"); // 'myParam' is the name of the query parameter
     setReferral(value);
-    if(value){
-      data.referalCode  = value;
+    if (value) {
+      data.referalCode = value;
     }
-    
+
     stateFun();
     const dropdownIds = ["selectgender", "selectstate"];
 

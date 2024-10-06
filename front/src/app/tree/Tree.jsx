@@ -57,7 +57,7 @@ const Tree = () => {
 
   return (
     <>
-      <div className="content-wrapper">
+      <div className="content-wrapper treeContainerElement">
         <div class="content-header sty-one">
           <h1 class="text-black">Hierarchy</h1>
           <ol class="breadcrumb">
@@ -68,7 +68,6 @@ const Tree = () => {
             </li>
           </ol>
         </div>
-
         <div className="custom-tree tree-sidebar">
           <div class="org-chart">
             {lowerProfile?.data?.map((rootNode) => (

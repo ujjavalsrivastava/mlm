@@ -28,29 +28,30 @@ import Forgot from "../../pages/landing/Forgot";
 import VerifyOTP from "../../pages/landing/VerifyOTP";
 import ChangePassword from "../../pages/landing/ChangePassword";
 
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       {/* <Route path="/" element={<Purchage />} /> */}
-      
+
       <Route element={<FrontLayout />}>
-      <Route path="/" element={<Landing />} />
-      <Route path="/courses" element={<Courses />} />
-      <Route path="/courses-details-all/:courseId" element={<CoursesDetails />} />
-      <Route path="/about-us" element={<Aboutus />} />
-      <Route path="/blogs" element={<Blog />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/disclaimer" element={<Disclaimer />} />
-      <Route path="/refund" element={<Refund />} />
-      <Route path="/contact-us" element={<ContactUs />} />
-      <Route path="/terms-condition" element={<Condition />} />
-      <Route path="/privacy-policy" element={<Privacy />} />
-      <Route path="/forgot" element={<Forgot />} />
-     
-      <Route path="/chng-password" element={<ChangePassword />} />
-      
+        <Route path="/" element={<Landing />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route
+          path="/courses-details-all/:courseId"
+          element={<CoursesDetails />}
+        />
+        <Route path="/about-us" element={<Aboutus />} />
+        <Route path="/blogs" element={<Blog />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/disclaimer" element={<Disclaimer />} />
+        <Route path="/refund" element={<Refund />} />
+        <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/terms-condition" element={<Condition />} />
+        <Route path="/privacy-policy" element={<Privacy />} />
+        <Route path="/forgot" element={<Forgot />} />
+
+        <Route path="/update-password" element={<ChangePassword />} />
       </Route>
 
       <Route element={<RouteAuth />}>

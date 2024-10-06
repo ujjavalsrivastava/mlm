@@ -30,6 +30,8 @@ const {
   getUserPercentDistribution,
   getUserProductsAndBalance,
   getUserTotalEarning,
+  handleWithdrawRequest,
+  handleUserWithdrawRequest,
 } = require("../controllers/purchaseController");
 const { tryCatch, asyncHandler } = require("../utils/helper");
 const { getUserCourses } = require("../controllers/productController");
@@ -74,5 +76,13 @@ router.get("/valid", tryCatch(asyncHandler(checkUserExist)));
 router.get("/level-earning", tryCatch(asyncHandler(getEachLevelEarning)));
 router.get("/rewards", tryCatch(asyncHandler(getRewards)));
 router.get("/store-reward", tryCatch(asyncHandler(handleRewardStore)));
+router.post(
+  "/withdrawal-request",
+  tryCatch(asyncHandler(handleWithdrawRequest))
+);
+router.get(
+  "/withdrawal-request",
+  tryCatch(asyncHandler(handleUserWithdrawRequest))
+);
 
 module.exports = router;

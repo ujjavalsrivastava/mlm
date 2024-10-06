@@ -89,3 +89,6 @@
   overflow: scroll;
   min-width: 100vw;
 }
+.treeContainerElement {
+  overflow: auto;
+}

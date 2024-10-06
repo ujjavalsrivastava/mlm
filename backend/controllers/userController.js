@@ -103,6 +103,7 @@ const updateProfile = async (req, res) => {
     city,
     occupation,
     address,
+    pincode,
   } = req.body;
   user.name = name || user.name;
   user.mobile = mobile || user.mobile;
@@ -115,6 +116,7 @@ const updateProfile = async (req, res) => {
   user.city = city || user.city;
   user.occupation = occupation || user.occupation;
   user.address = address || user.address;
+  user.pincode = pincode || user.pincode;
   await user.save();
   res.json({ message: "user data updated successfully" });
 };
@@ -134,35 +136,6 @@ const changePassword = async (req, res) => {
   user.password = newPassword;
   await user.save();
   res.json({ message: "Password update successfully" });
-};
-
-// Sample data structure
-const user = {
-  name: "User1",
-  lowerLevelUsers: [
-    {
-      name: "User2",
-      lowerLevelUsers: [
-        {
-          name: "User3",
-          lowerLevelUsers: [],
-        },
-        {
-          name: "User4",
-          lowerLevelUsers: [],
-        },
-      ],
-    },
-    {
-      name: "User5",
-      lowerLevelUsers: [
-        {
-          name: "User6",
-          lowerLevelUsers: [],
-        },
-      ],
-    },
-  ],
 };
 
 function countUsersAtEachLevel(
@@ -377,21 +350,18 @@ const contectForm = async (req, res) => {
   }
 };
 
-const checkRrefrealcode = async(req,res)=>{
-
-  //const {referalCode } = req.body;
-
+const checkRrefrealcode = async (req, res) => {
   try {
     const { referalCode } = req.query;
-    if(referalCode == ''){
+    if (referalCode == "") {
       res.json({ inValid: true });
     }
-  const user = await User.findOne({ referalCode });
-  res.json({ inValid: !!user });
+    const user = await User.findOne({ referalCode });
+    res.json({ inValid: !!user });
   } catch (error) {
     res.status(500).send({ message: "Server error" });
   }
-}
+};
 
 module.exports = {
   contectForm,
