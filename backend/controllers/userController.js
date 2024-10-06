@@ -377,8 +377,25 @@ const contectForm = async (req, res) => {
   }
 };
 
+const checkRrefrealcode = async(req,res)=>{
+
+  //const {referalCode } = req.body;
+
+  try {
+    const { referalCode } = req.query;
+    if(referalCode == ''){
+      res.json({ inValid: true });
+    }
+  const user = await User.findOne({ referalCode });
+  res.json({ inValid: !!user });
+  } catch (error) {
+    res.status(500).send({ message: "Server error" });
+  }
+}
+
 module.exports = {
   contectForm,
+  checkRrefrealcode,
   createUser,
   loginHandler,
   getUserProfile,

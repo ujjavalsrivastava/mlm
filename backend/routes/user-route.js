@@ -3,6 +3,7 @@ const {
   createUser,
   loginHandler,
   getUserProfile,
+  checkRrefrealcode,
   updateProfile,
   changePassword,
   getUserLevelStatus,
@@ -41,6 +42,7 @@ router.post("/login", tryCatch(asyncHandler(loginHandler)));
 router.post("/forgot-password", tryCatch(asyncHandler(handleForgotPassword)));
 router.post("/verify-reset-code", tryCatch(asyncHandler(verifyResetCode)));
 router.post("/contect-form", tryCatch(asyncHandler(contectForm)));
+router.get("/check-refrealcode", tryCatch(asyncHandler(checkRrefrealcode)));
 // auth required
 router.get("/profile", tryCatch(asyncHandler(getUserProfile)));
 router.get("/courses", tryCatch(asyncHandler(getUserCourses)));
