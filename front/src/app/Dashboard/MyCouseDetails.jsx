@@ -42,10 +42,10 @@ const MyCouseDetails = () => {
             <div class="col-lg-8 m-b-3">
               <div
                 class="ml-auto modal-iframe-wrapper video-container"
-                dangerouslySetInnerHTML={{ __html: videoData.embed }}
+                dangerouslySetInnerHTML={{ __html: videoData?.embed }}
               ></div>
               <div style={{ padding: "15px" }}>
-                <h6>{videoData.name}</h6>
+                <h6>{videoData?.name}</h6>
               </div>
             </div>
             <div class="col-lg-4 m-b-3">
