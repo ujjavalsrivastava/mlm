@@ -117,8 +117,8 @@ const Invoice = () => {
                     <p>Chiraigaon, Varanasi,</p>
                     <p>Uttar Pradesh</p>
                     <p>India, 221112</p>
-                    <p>Email: company@example.com</p>
-                    <p>Phone: +123 456 789</p>
+                    <p>Email: info@digitalduniyaa.in</p>
+                    <p>Phone: +91 9170355968</p>
                   </div>
 
                   <div className={styles["customer-details"]}>

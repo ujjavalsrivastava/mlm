@@ -230,12 +230,12 @@ const register = () => {
         }
       },
       prefill: {
-        name: "Test User",
-        email: "test.user@example.com",
-        contact: "9999999999",
+        name: data.name,
+        email: data.email,
+        contact:data.mobile,
       },
       notes: {
-        address: "Test Address",
+        address: data.state
       },
       theme: {
         color: "#F37254",
