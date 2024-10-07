@@ -7,6 +7,7 @@ const { userRoutes, productRoutes, videoRoutes } = require("./routes");
 const connectDB = require("./config/connection");
 const path = require("path");
 const morgan = require("morgan");
+const logger = require("./config/logger");
 (async () => {
   const PORT = process.env.APP_PORT;
   const chalk = (await import("chalk")).default;
@@ -77,6 +78,7 @@ const morgan = require("morgan");
       });
     })
     .catch((err) => {
+      logger.error(JSON.stringify(err));
       console.log("MONGO db connection failed !!! ", err);
     });
 })();

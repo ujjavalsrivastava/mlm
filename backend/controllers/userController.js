@@ -17,6 +17,7 @@ const Rewards = require("../models/rewards-modal");
 const nodemailer = require("nodemailer");
 const { generateCode } = require("../utils/gen");
 const { getMinutesDifference } = require("../utils/dateTime");
+const logger = require("../config/logger");
 
 const createUser = async (req, res) => {
   const { email, name, password, referalCode } = req.body;
@@ -54,8 +55,8 @@ const createUser = async (req, res) => {
       .status(200)
       .json({ message: "user created successfully", token });
   } catch (error) {
-    console.log({ error });
-    res.json(error);
+    logger.error(`createUser ${JSON.stringify(error)}`);
+    res.status(400).json(error);
   }
 };
 
@@ -63,21 +64,31 @@ const handleRewardStore = async (req, res) => {
   const user = req.user;
   const userId = getUserId(req);
   const referedUser = req.user.populate("parentId");
-  await UserPurchase({ userId, currentAmount: 0 }).save();
-  await PercentDistribution({ userId }).save();
-  await bankDetails({ email: user.email, user: userId }).save();
-  await rewardsHandler(referedUser);
-  res.json({ message: "stored successfully" });
+  try {
+    await UserPurchase({ userId, currentAmount: 0 }).save();
+    await PercentDistribution({ userId }).save();
+    await bankDetails({ email: user.email, user: userId }).save();
+    await rewardsHandler(referedUser);
+    res.json({ message: "stored successfully" });
+  } catch (error) {
+    logger.error(`handleRewardStore ${JSON.stringify(error)}`);
+    res.json(error);
+  }
 };
 
 const loginHandler = async (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password)
+  if (!email || !password) {
+    logger.error("email and password required to login");
     return res
       .status(400)
       .json({ error: "email and password required to login", code: 802 });
+  }
   const user = await User.findOne({ email });
-  if (!user) return res.json({ error: "User not found", code: 802 });
+  if (!user) {
+    logger.error("User with email not found to login");
+    return res.json({ error: "User not found", code: 802 });
+  }
   const passwordMatched = await bcrypt.compare(password, `${user.password}`);
   if (!passwordMatched)
     return res.json({ error: "email id or password is incorrect", code: 802 });
@@ -277,6 +288,7 @@ const handleForgotPassword = async (req, res) => {
       .status(200)
       .send({ message: "Password reset code sent to your email", status: 200 });
   } catch (error) {
+    logger.error(`forgotPasswordMail ${JSON.stringify(error)}`);
     res.status(500).send({ message: "Server error" });
   }
 };
@@ -299,7 +311,6 @@ const verifyResetCode = async (req, res) => {
     );
 
     // Check if the code is valid and not expired
-    console.log(user);
     if (`${user.resetPasswordCode}` !== `${resetCode}` || differenceInMin < 0) {
       return res
         .status(200)
@@ -315,7 +326,7 @@ const verifyResetCode = async (req, res) => {
       .status(200)
       .send({ message: "Password has been reset successfully", status: 200 });
   } catch (error) {
-    console.error(error);
+    logger.error(`verifyResetCode ${JSON.stringify(error)}`);
     res.status(500).send({ message: "Server error" });
   }
 };
@@ -346,6 +357,7 @@ const contectForm = async (req, res) => {
     });
     res.status(200).send({ message: "contect send Succefully", status: 200 });
   } catch (error) {
+    logger.error(`verifyResetCode ${JSON.stringify(error)}`);
     res.status(500).send({ message: "Server error" });
   }
 };

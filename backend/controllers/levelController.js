@@ -6,7 +6,6 @@ const {
   getUserId,
   flattenUsers,
   usersJoinedToday,
-  totalAmountPipeline,
   joinedToday,
   checkDaysCount,
   collectUserIdsByLevel,

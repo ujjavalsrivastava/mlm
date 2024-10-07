@@ -5,6 +5,7 @@ const PercentDistribution = require("../models/percentage-distribution-model");
 const UserPurchase = require("../models/purchase-history-model");
 const levels = Array.from({ length: 8 }, (_, i) => `level${i}`);
 const Rewards = require("../models/rewards-modal");
+const logger = require("../config/logger");
 
 const handlePromiseError = async (promise) =>
   await promise.then((data) => [null, data]).catch((error) => [error, null]);
@@ -73,6 +74,9 @@ const distributeUserPercentage = async (
   const [userError, user] = await handlePromiseError(
     User.aggregate(parentPipelineUpToLevel(associateId, 9)).exec()
   );
+  if (userError) {
+    logger.error(`${JSON.stringify(userError)}`);
+  }
   const allUser = user[0]?.parentUsers;
 
   const eachLevelShareList = levels.map((l) => userLevelShare[l] || 0);
@@ -117,8 +121,8 @@ function tryCatch(fn) {
     try {
       await fn(req, res, next);
     } catch (error) {
+      logger.error(`tryCatch ${JSON.stringify(error)}`);
       console.log("error in tryCatch", JSON.stringify(error));
-
       next(error);
     }
   };
@@ -179,7 +183,10 @@ const totalAmountPipeline = (userIds) => [
 
 const asyncHandler = (requestHandler) => {
   return (req, res, next) => {
-    Promise.resolve(requestHandler(req, res, next)).catch((err) => next(err));
+    Promise.resolve(requestHandler(req, res, next)).catch((err) => {
+      next(err);
+      logger.error(`asyncHandler ${JSON.stringify(err)}`);
+    });
   };
 };
 

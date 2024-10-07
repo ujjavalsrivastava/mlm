@@ -4,6 +4,7 @@ const { handlePromiseError, getUserId } = require("../utils/helper");
 const { oneDayAgo, oneMonthAgo, oneWeekAgo } = require("../utils/dateTime");
 const Withdraw = require("../models/withdraw.model");
 const BankDetails = require("../models/bank-details-model");
+const logger = require("../config/logger");
 
 const requiredKycFields = [
   "fullname",
@@ -26,6 +27,7 @@ const getUserProductsAndBalance = async (req, res) => {
     UserPurchase.findOne({ userId })
   );
   if (error) {
+    logger.error(`getUserProductsAndBalance ${JSON.stringify(error)}`);
     return res.status(400).json({ error });
   }
   res.json(productsAndBalance);
@@ -56,6 +58,7 @@ const getUserPercentDistribution = async (req, res) => {
     });
   }
   if (error) {
+    logger.error(`getUserPercentDistribution ${JSON.stringify(error)}`);
     return res.status(400).json({ error });
   }
   res.json({ oneDayEarning, oneWeekEarning, oneMonthEarning, overallEarning });
@@ -72,6 +75,12 @@ const getUserAccountAndPurcheseHistory = async (req, res) => {
     await handlePromiseError(PercentDistribution.findOne({ userId }));
 
   if (productPurchaseError || percentDistributionError) {
+    logger.error(
+      `getUserAccountAndPurcheseHistory ${JSON.stringify({
+        percentDistributionError,
+        productPurchaseError,
+      })}`
+    );
     return res
       .status(400)
       .json({ percentDistributionError, productPurchaseError });
@@ -88,6 +97,11 @@ const getUserTotalEarning = async (req, res) => {
       PercentDistribution.find({ userId: { $in: userIds } })
     );
 
+    if (error) {
+      logger.error(`getUserTotalEarning ${error}`);
+      return res.status(400).json(error);
+    }
+
     const distributions = [];
     percentDistributions.forEach((user) => {
       const userTotalEarning = user.purchaseHistory.reduce(
@@ -101,6 +115,9 @@ const getUserTotalEarning = async (req, res) => {
     });
     return res.json(distributions);
   }
+  logger.error(
+    `getUserTotalEarning "userIds should be comma seperated user ids in query params"`
+  );
   res.status(400).json({
     error: "userIds should be comma seperated user ids in query params",
   });
@@ -119,7 +136,6 @@ const handleWithdrawRequest = async (req, res) => {
     }
   }
   const userAccount = await UserPurchase.findOne({ userId });
-  console.log({ amount });
   if (userAccount.currentAmount < amount) {
     return res.status(400).json({ error: "Insufficient Balance" });
   }
