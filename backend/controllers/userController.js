@@ -75,7 +75,7 @@ const handleRewardStore = async (req, res) => {
     await rewardsHandler(referedUser);
     res.json({ message: "stored successfully" });
   } catch (error) {
-    logger.error(`handleRewardStore ${JSON.stringify(error)}`);
+    logger.error(`handleRewardStore ${userId} ${JSON.stringify(error)}`);
     res.json(error);
   }
 };
@@ -288,7 +288,7 @@ const handleForgotPassword = async (req, res) => {
       .status(200)
       .send({ message: "Password reset code sent to your email", status: 200 });
   } catch (error) {
-    logger.error(`forgotPasswordMail ${JSON.stringify(error)}`);
+    logger.error(`forgotPasswordMail ${email} ${JSON.stringify(error)}`);
     res.status(500).send({ message: "Server error" });
   }
 };
@@ -326,7 +326,7 @@ const verifyResetCode = async (req, res) => {
       .status(200)
       .send({ message: "Password has been reset successfully", status: 200 });
   } catch (error) {
-    logger.error(`verifyResetCode ${JSON.stringify(error)}`);
+    logger.error(`verifyResetCode ${email} ${JSON.stringify(error)}`);
     res.status(500).send({ message: "Server error" });
   }
 };
@@ -357,7 +357,7 @@ const contectForm = async (req, res) => {
     });
     res.status(200).send({ message: "contect send Succefully", status: 200 });
   } catch (error) {
-    logger.error(`verifyResetCode ${JSON.stringify(error)}`);
+    logger.error(`verifyResetCode ${getUserId(req)} ${JSON.stringify(error)}`);
     res.status(500).send({ message: "Server error" });
   }
 };

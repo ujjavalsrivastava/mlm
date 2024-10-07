@@ -75,7 +75,9 @@ const distributeUserPercentage = async (
     User.aggregate(parentPipelineUpToLevel(associateId, 9)).exec()
   );
   if (userError) {
-    logger.error(`${JSON.stringify(userError)}`);
+    logger.error(
+      `distributeUserPercentage ${associateId} ${JSON.stringify(userError)}`
+    );
   }
   const allUser = user[0]?.parentUsers;
 
@@ -121,7 +123,7 @@ function tryCatch(fn) {
     try {
       await fn(req, res, next);
     } catch (error) {
-      logger.error(`tryCatch ${JSON.stringify(error)}`);
+      logger.error(`tryCatch ${req?.user?._id} ${JSON.stringify(error)}`);
       console.log("error in tryCatch", JSON.stringify(error));
       next(error);
     }
