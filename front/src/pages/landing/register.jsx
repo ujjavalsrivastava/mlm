@@ -245,9 +245,9 @@ const register = () => {
         }
       },
       prefill: {
-        name: data.name,
-        email: data.email,
-        contact: data.mobile,
+        name: data?.name,
+        email: data?.email,
+        contact: data?.mobile,
       },
       notes: {
         address: data.state,
@@ -258,6 +258,14 @@ const register = () => {
     };
 
     const rzp1 = new window.Razorpay(options);
+
+    razorpay.on('payment.failed', (response) => {
+      console.log('Payment failed:', response.error);
+      toast.error('Payment failed:', response.error);
+     // return;
+      // Handle failed payment on the frontend
+  });
+
     rzp1.open();
   };
   console.log(data);

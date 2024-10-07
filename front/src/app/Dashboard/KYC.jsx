@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { axios } from "../../helper/httpHelper";
 import { toast } from "react-toastify";
-
+ 
 const requiredFields = [
   { field: "fullname", name: "Fullname" },
   { field: "mobile", name: "Mobile Number" },
@@ -171,7 +171,7 @@ const KYC = () => {
                           <label class="control-label">Pan Number</label>
                           <input
                             class="form-control"
-                            type="number"
+                            type="text"
                             name="panNo"
                             value={kyc.panNo}
                             placeholder="Pan Number..."
