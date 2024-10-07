@@ -9,6 +9,7 @@ const {
 } = require("../utils/helper");
 const { getAlbumById } = require("../vimeo/helper");
 const LevelPercentage = require("../models/level-percentage-model");
+const logger = require("../config/logger");
 
 const createRazorpayOrder = async (req, res) => {
   const { amount, currency, receipt } = req.body;
@@ -27,6 +28,7 @@ const createRazorpayOrder = async (req, res) => {
       amount: response.amount,
     });
   } catch (error) {
+    logger.error(`createRazorpayOrder Not able to create order.${error}`);
     res.status(400).json({
       message: "Not able to create order. Please try again!",
       error,
@@ -48,6 +50,7 @@ const paymentVerification = async (req, res) => {
   if (expectedSignature === razorpay_signature) {
     res.json({ msg: "Payment successful" }, 200);
   } else {
+    logger.error(`paymentVerification failed`);
     res.status(400).json({ msg: "Payment verification failed" });
   }
 };
@@ -70,6 +73,10 @@ const createProductOrder = async (req, res) => {
     LevelPercentage.findOne()
   );
 
+  if (shareError) {
+    logger.error(`createProductOrder ${shareError}`);
+  }
+
   if (!userPurchaseHistory) {
     const addPurchase = await new UserPurchase({
       userId,
@@ -83,7 +90,11 @@ const createProductOrder = async (req, res) => {
     userPurchaseHistory.products.unshift(createProduct);
     const savedData = await userPurchaseHistory.save();
     if (currentUser.parentId) {
-      await distributeUserPercentage(userId, amount, userLevelShare);
+      try {
+        await distributeUserPercentage(userId, amount, userLevelShare);
+      } catch (error) {
+        logger.error(`createProductOrder distributeUserPercentage ${error}`);
+      }
     }
     return res.json({ message: "Order created successfull", savedData });
   }

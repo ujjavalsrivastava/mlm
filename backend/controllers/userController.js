@@ -23,15 +23,19 @@ const createUser = async (req, res) => {
   const { email, name, password, referalCode } = req.body;
   try {
     const user = await User.findOne({ email });
-    if (user)
+    if (user) {
+      logger.error("User with this email already exist");
       return res
         .status(400)
         .json({ error: "User with this email already exist" });
+    }
     const referedUser = referalCode
       ? await User.findOne({ referalCode })
       : null;
-    if (referalCode && !referedUser)
+    if (referalCode && !referedUser) {
+      logger.error("createUser invalid referal code");
       return res.status(400).json({ error: "Invalid referal code" });
+    }
 
     const userData = {
       name,
@@ -92,9 +96,7 @@ const loginHandler = async (req, res) => {
   const passwordMatched = await bcrypt.compare(password, `${user.password}`);
   if (!passwordMatched)
     return res.json({ error: "email id or password is incorrect", code: 802 });
-
   const token = jwt.sign({ email, userId: user._id }, process.env.TOKEN_SECRET);
-
   res.json({ message: "Login Successful", token, code: 801 });
 };
 
