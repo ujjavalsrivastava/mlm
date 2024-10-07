@@ -259,7 +259,7 @@ const register = () => {
 
     const rzp1 = new window.Razorpay(options);
 
-    razorpay.on('payment.failed', (response) => {
+    rzp1.on('payment.failed', (response) => {
       console.log('Payment failed:', response.error);
       toast.error('Payment failed:', response.error);
      // return;
