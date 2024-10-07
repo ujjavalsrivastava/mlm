@@ -83,14 +83,12 @@ const handleRewardStore = async (req, res) => {
 const loginHandler = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    logger.error("email and password required to login");
     return res
       .status(400)
       .json({ error: "email and password required to login", code: 802 });
   }
   const user = await User.findOne({ email });
   if (!user) {
-    logger.error("User with email not found to login");
     return res.json({ error: "User not found", code: 802 });
   }
   const passwordMatched = await bcrypt.compare(password, `${user.password}`);
