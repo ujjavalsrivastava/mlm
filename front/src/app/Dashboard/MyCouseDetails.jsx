@@ -25,10 +25,10 @@ const MyCouseDetails = () => {
 
   return (
     <>
-      <div class="content-wrapper">
-        <div class="content-header sty-one">
+      <div className="content-wrapper">
+        <div className="content-header sty-one">
           <h5>My Course </h5>
-          <ol class="breadcrumb">
+          <ol className="breadcrumb">
             <li>
               <a href="#" style={{ color: "black" }}>
                 Home / Course Details
@@ -37,40 +37,40 @@ const MyCouseDetails = () => {
           </ol>
         </div>
 
-        <div class="content">
-          <div class="row">
-            <div class="col-lg-8 m-b-3">
+        <div className="content">
+          <div className="row">
+            <div className="col-lg-8 m-b-3">
               <div
-                class="ml-auto modal-iframe-wrapper video-container"
+                className="ml-auto modal-iframe-wrapper video-container"
                 dangerouslySetInnerHTML={{ __html: videoData?.embed }}
               ></div>
               <div style={{ padding: "15px" }}>
                 <h6>{videoData?.name}</h6>
               </div>
             </div>
-            <div class="col-lg-4 m-b-3">
+            <div className="col-lg-4 m-b-3">
               <div>
-                <div class="box box-widget widget-user-2">
-                  <div class="widget-user-header bg-yellow">
+                <div className="box box-widget widget-user-2">
+                  <div className="widget-user-header bg-yellow">
                     <h6 style={{ color: "white", marginTop: "14px" }}>
                       Our Courses
                     </h6>
                     {/* <h5>Checkout my contacts here</h5> */}
                   </div>
                   <ul
-                    class="products-list product-list-in-box scroll"
+                    className="products-list product-list-in-box scroll"
                     style={{ height: "430px" }}
                   >
                     {course &&
                       course.map((row, index) => (
-                        <li class="item">
-                          <div class="videoContainer">
+                        <li className="item" key={`key=${index}`}>
+                          <div className="videoContainer">
                             <p>{index + 1}.</p>
                             <img src={play} alt="Product Image" />
                             <a
                               href="javascript:void(0)"
                               onClick={() => setVideoData(row)}
-                              class="product-title"
+                              className="product-title"
                               style={{ color: "black" }}
                             >
                               {row.name}

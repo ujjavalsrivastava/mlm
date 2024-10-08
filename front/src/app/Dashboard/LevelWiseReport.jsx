@@ -12,16 +12,15 @@ const LevelWiseReport = () => {
       console.log(error);
     }
   };
-  const LevelFatch = async()=>{
-    try{
-        const response =  await axios.get('level-percentage');
-        setLevel(response.data[0]);
-    }catch(error){
-        console.log(error);
+  const LevelFatch = async () => {
+    try {
+      const response = await axios.get("level-percentage");
+      setLevel(response.data[0]);
+    } catch (error) {
+      console.log(error);
     }
-
- }
- const price ='2499';
+  };
+  const price = "2499";
 
   useEffect(() => {
     levelFun();
@@ -30,24 +29,24 @@ const LevelWiseReport = () => {
 
   return (
     <>
-      <div class="content-wrapper">
-        <div class="content-header sty-one">
+      <div className="content-wrapper">
+        <div className="content-header sty-one">
           <h1>Level Wise Income </h1>
-          <ol class="breadcrumb">
+          <ol className="breadcrumb">
             <li>
               <a href="#" style={{ color: "black" }}>
                 Home / Level Wise Income
               </a>
             </li>
             {/* <li>
-              <i class="fa fa-angle-right"></i> Dashboard
+              <i className="fa fa-angle-right"></i> Dashboard
             </li> */}
           </ol>
         </div>
 
-        <div class="content">
-          <div class="row">
-            <div class="col-12">
+        <div className="content">
+          <div className="row">
+            <div className="col-12">
               {(() => {
                 const arr = [];
                 const len = data?.totalByLevel
@@ -55,32 +54,30 @@ const LevelWiseReport = () => {
                   : 0;
 
                 for (let i = 2; i <= len; i++) {
-               
                   arr.push(
-                    <div class="info-box">
-                      <div class="row">
-                        <div class="col-lg-4 col-sm-6 col-xs-12">
+                    <div className="info-box">
+                      <div className="row">
+                        <div className="col-lg-4 col-sm-6 col-xs-12">
                           <div>
-                            <i class="ti-face-smile f-20 text-blue"></i>
+                            <i className="ti-face-smile f-20 text-blue"></i>
                             <div
-                              class="info-box-content"
+                              className="info-box-content"
                               style={{ padding: "16px" }}
                             >
-                              <h2 class="f-25 text-black">Level {i - 1}</h2>
-                         
+                              <h2 className="f-25 text-black">Level {i - 1}</h2>
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-sm-6 col-xs-12">
+                        <div className="col-lg-4 col-sm-6 col-xs-12">
                           <div>
-                            <i class="ti-face-smile f-20 text-blue"></i>
-                            <div class="info-box-content">
-                              <h4 class="f-25 text-black">
-                              {(price *  level?.[`level${i - 2}`])/100 * data?.createdTodayByLevel?.[i] || 0}
-                            
+                            <i className="ti-face-smile f-20 text-blue"></i>
+                            <div className="info-box-content">
+                              <h4 className="f-25 text-black">
+                                {((price * level?.[`level${i - 2}`]) / 100) *
+                                  data?.createdTodayByLevel?.[i] || 0}
                               </h4>
                               <span
-                                class="progress-description"
+                                className="progress-description"
                                 style={{ color: "black" }}
                               >
                                 Today's Income
@@ -88,15 +85,16 @@ const LevelWiseReport = () => {
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-sm-6 col-xs-12">
+                        <div className="col-lg-4 col-sm-6 col-xs-12">
                           <div>
-                            <i class="ti-bar-chart f-20 text-danger"></i>
-                            <div class="info-box-content">
-                              <h4 class="f-25 text-black">
-                              {(price *  level?.[`level${i - 2}`])/100 * data?.totalByLevel?.[i] || 0}
+                            <i className="ti-bar-chart f-20 text-danger"></i>
+                            <div className="info-box-content">
+                              <h4 className="f-25 text-black">
+                                {((price * level?.[`level${i - 2}`]) / 100) *
+                                  data?.totalByLevel?.[i] || 0}
                               </h4>
                               <span
-                                class="progress-description"
+                                className="progress-description"
                                 style={{ color: "black" }}
                               >
                                 All Time Income

@@ -484,8 +484,11 @@ function Landing() {
                       onChange={(index) => setCci(index)}
                     >
                       {Array.isArray(product)
-                        ? product.map((row) => (
-                            <div className="swiper-slide carousel-card sliderElement">
+                        ? product.map((row, idx) => (
+                            <div
+                              key={`key=${idx}`}
+                              className="swiper-slide carousel-card sliderElement"
+                            >
                               <div className="course-item hover-img style-2 h240">
                                 <div className="features image-wrap">
                                   <img
@@ -497,7 +500,7 @@ function Landing() {
                                 </div>
                                 <div className="content">
                                   <h5 className="fw-5 line-clamp-2">
-                                    {row.name} 
+                                    {row.name}
                                   </h5>
 
                                   <div className="author">
@@ -510,7 +513,6 @@ function Landing() {
                                     <div className="h6 price fw-5">
                                       ₹{row.price.toFixed(2)}
                                     </div>
-                                   
                                   </div>
                                 </div>
                               </div>
@@ -530,9 +532,7 @@ function Landing() {
                           </div>
                           <div className="content">
                             <h5 className="fw-5 line-clamp-2">
-                             
-                                Advance Digital Marketing
-                              
+                              Advance Digital Marketing
                             </h5>
 
                             <div className="author">
@@ -543,7 +543,6 @@ function Landing() {
                             </div>
                             <div className="bottom">
                               <div className="h6 price fw-5">₹60,000</div>
-                             
                             </div>
                           </div>
                         </div>
@@ -560,9 +559,7 @@ function Landing() {
                             />
                           </div>
                           <div className="content">
-                            <h5 className="fw-5 line-clamp-2">
-                              Sales Funnel
-                            </h5>
+                            <h5 className="fw-5 line-clamp-2">Sales Funnel</h5>
 
                             <div className="author">
                               By:
@@ -572,7 +569,6 @@ function Landing() {
                             </div>
                             <div className="bottom">
                               <div className="h6 price fw-5">₹30,000</div>
-                              
                             </div>
                           </div>
                         </div>
@@ -590,9 +586,7 @@ function Landing() {
                           </div>
                           <div className="content">
                             <h5 className="fw-5 line-clamp-2">
-                              
-                                Social Media Growth Program
-                              
+                              Social Media Growth Program
                             </h5>
 
                             <div className="author">
@@ -603,7 +597,6 @@ function Landing() {
                             </div>
                             <div className="bottom">
                               <div className="h6 price fw-5">₹20,000</div>
-                             
                             </div>
                           </div>
                         </div>
@@ -620,9 +613,7 @@ function Landing() {
                             />
                           </div>
                           <div className="content">
-                            <h5 className="fw-5 line-clamp-2">
-                              Video Editing
-                            </h5>
+                            <h5 className="fw-5 line-clamp-2">Video Editing</h5>
 
                             <div className="author">
                               By:
@@ -632,7 +623,6 @@ function Landing() {
                             </div>
                             <div className="bottom">
                               <div className="h6 price fw-5">₹10,000</div>
-                             
                             </div>
                           </div>
                         </div>
@@ -650,9 +640,7 @@ function Landing() {
                           </div>
                           <div className="content">
                             <h5 className="fw-5 line-clamp-2">
-                              
-                                English Speaking
-                              
+                              English Speaking
                             </h5>
 
                             <div className="author">
@@ -663,7 +651,6 @@ function Landing() {
                             </div>
                             <div className="bottom">
                               <div className="h6 price fw-5">₹10,000</div>
-                             
                             </div>
                           </div>
                         </div>
@@ -681,9 +668,7 @@ function Landing() {
                           </div>
                           <div className="content">
                             <h5 className="fw-5 line-clamp-2">
-                              
-                                Complete Web Creation
-                              
+                              Complete Web Creation
                             </h5>
 
                             <div className="author">
@@ -694,7 +679,6 @@ function Landing() {
                             </div>
                             <div className="bottom">
                               <div className="h6 price fw-5">₹50,000</div>
-                             
                             </div>
                           </div>
                         </div>

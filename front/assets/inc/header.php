@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if IE 8]><html className="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <!--<![endif]-->
@@ -37,39 +37,39 @@
     <link rel="apple-touch-icon-precomposed" href="images/logo/favicon.png" /> -->
 </head>
 
-<body class="counter-scroll">
+<body className="counter-scroll">
 
     <!-- wrapper -->
     <div id="wrapper">
         
         <!-- preload -->
-        <!-- <div class="preload preload-container">
-            <div class="middle"></div>
+        <!-- <div className="preload preload-container">
+            <div className="middle"></div>
         </div> -->
         <!-- /preload -->
         <!-- Top Bar -->
-        <div class="tf-top-bar flex items-center justify-center">
+        <div className="tf-top-bar flex items-center justify-center">
             <p>A Unit of MD Digital Duniyaa Pvt. Ltd.</p>
         </div>
         <!-- /Top Bar -->
         <!-- header -->
-        <!-- <div class="relative"> -->
-        <header id="header_main" class="header"><!--  type-absolute  style-7 -->
-                <div class="header-inner">
-                    <div class="header-inner-wrap">
-                        <div class="header-left">
-                            <a class="mobile-nav-toggler mobile-button d-lg-none flex" href="#menu"></a>
+        <!-- <div className="relative"> -->
+        <header id="header_main" className="header"><!--  type-absolute  style-7 -->
+                <div className="header-inner">
+                    <div className="header-inner-wrap">
+                        <div className="header-left">
+                            <a className="mobile-nav-toggler mobile-button d-lg-none flex" href="#menu"></a>
                             <div id="site-logo">
                                 <a href="index-2.html" rel="home">
                                     <img id="logo-header" src="images/dg-logo.svg" alt="" />
                                 </a>
                             </div>
                         </div>
-                        <div class="header-center flex-shrink-0">
-                            <nav class="main-menu">
-                                <ul class="navigation">
+                        <div className="header-center flex-shrink-0">
+                            <nav className="main-menu">
+                                <ul className="navigation">
                                 <li><a href="shop-list.html">Home</a></li>
-                                    <li class="has-children">
+                                    <li className="has-children">
                                         <a href="javascript:void(0);">Our Couress</a>
                                         <ul>
                                             <li><a href="instructor-list.html">Instructor List</a></li>
@@ -85,28 +85,28 @@
                                 </ul>
                             </nav>
                         </div>
-                        <div class="header-right justify-end">
+                        <div className="header-right justify-end">
    
-                            <a href="shop-cart.html" class="header-cart flex items-center justify-center">
-                                <i class="icon-shopcart fs-18"></i>
+                            <a href="shop-cart.html" className="header-cart flex items-center justify-center">
+                                <i className="icon-shopcart fs-18"></i>
                             </a>
-                            <div class="header-btn">
-                                <div class="header-login">
-                                    <a href="login.html" class="tf-button-default header-text">Log In</a>
+                            <div className="header-btn">
+                                <div className="header-login">
+                                    <a href="login.html" className="tf-button-default header-text">Log In</a>
                                 </div>
-                                <div class="header-register">
-                                    <a href="register.html" class="tf-button-default active header-text">Sign Up</a>
+                                <div className="header-register">
+                                    <a href="register.html" className="tf-button-default active header-text">Sign Up</a>
                                 </div>
-                                <div class="header-join d-lg-none flex">
-                                    <a href="login.html" class="fs-15">Join</a>
+                                <div className="header-join d-lg-none flex">
+                                    <a href="login.html" className="fs-15">Join</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <nav class="d-lg-none" id="menu">
-                    <a class="close" aria-label="Close menu" href="#wrapper">
-                        <i class="flaticon-close-1"></i>
+                <nav className="d-lg-none" id="menu">
+                    <a className="close" aria-label="Close menu" href="#wrapper">
+                        <i className="flaticon-close-1"></i>
                     </a>
                     <ul>
                         <li>
@@ -344,7 +344,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="current">
+                        <li className="current">
                             <span>Home</span>
                             <ul>
                                 <li>
@@ -355,7 +355,7 @@
                                 <li><a href="home-04.html">Home Page 04</a></li>
                                 <li><a href="home-05.html">Home Page 05</a></li>
                                 <li><a href="home-06.html">Home Page 06</a></li>
-                                <li class="current"><a href="home-07.html">Home Page 07</a></li>
+                                <li className="current"><a href="home-07.html">Home Page 07</a></li>
                                 <li><a href="home-08.html">Home Page 08</a></li>
                                 <li><a href="home-09.html">Home Page 09</a></li>
                                 <li><a href="home-10.html">Home Page 10</a></li>

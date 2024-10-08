@@ -54,31 +54,31 @@ const Header = () => {
 
   return (
     <>
-      <header class="main-header">
+      <header className="main-header">
         <Link to={"/my-course"}>
-          <a href="javascript:void(0)" class="logo blue-bg">
-            <span class="logo-mini">
+          <a href="javascript:void(0)" className="logo blue-bg">
+            <span className="logo-mini">
               <img src="dist/img/logo-n.png" alt="" />
             </span>
-            <span class="logo-lg">
+            <span className="logo-lg">
               <img src="assets/images/dg-logo.svg" alt="" />
             </span>
           </a>
         </Link>
 
-        <nav class="navbar blue-bg navbar-static-top">
-          <ul class="nav navbar-nav pull-left">
+        <nav className="navbar blue-bg navbar-static-top">
+          <ul className="nav navbar-nav pull-left">
             <li>
-              <a class="sidebar-toggle" onClick={handleSidebarClick}></a>
+              <a className="sidebar-toggle" onClick={handleSidebarClick}></a>
             </li>
           </ul>
 
-          <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-              <li class="dropdown user user-menu p-ph-res">
+          <div className="navbar-custom-menu">
+            <ul className="nav navbar-nav">
+              <li className="dropdown user user-menu p-ph-res">
                 <a
                   href="#"
-                  class="dropdown-toggle"
+                  className="dropdown-toggle"
                   onClick={handleToggle}
                   data-toggle="dropdown"
                 >
@@ -88,15 +88,15 @@ const Header = () => {
                         ? URL.createObjectURL(profile.image)
                         : "dist/img/img1.jpg"
                     }
-                    class="user-image"
+                    className="user-image"
                     alt="User Image"
                   />
                   <span
-                    class="hidden-xs"
+                    className="hidden-xs"
                     style={{ textTransform: "capitalize" }}
                   >
                     {profile && profile.name}{" "}
-                    <i class="fa fa-angle-double-down"></i>
+                    <i className="fa fa-angle-double-down"></i>
                   </span>
                 </a>
                 {show && (
@@ -118,7 +118,7 @@ const Header = () => {
                         style={{ color: "#635d5d" }}
                       >
                         <i
-                          class="fa fa-user"
+                          className="fa fa-user"
                           style={{ marginRight: "7px" }}
                         ></i>
                         My Profile
@@ -131,7 +131,7 @@ const Header = () => {
                         style={{ color: "#635d5d" }}
                       >
                         <i
-                          class="fa fa-graduation-cap"
+                          className="fa fa-graduation-cap"
                           style={{ marginRight: "7px" }}
                         ></i>
                         My Course
@@ -144,7 +144,7 @@ const Header = () => {
                         style={{ color: "#635d5d" }}
                       >
                         <i
-                          class="fa fa-suitcase"
+                          className="fa fa-suitcase"
                           style={{ marginRight: "7px" }}
                         ></i>
                         Wallet
@@ -157,7 +157,7 @@ const Header = () => {
                         style={{ color: "#635d5d" }}
                       >
                         <i
-                          class="fa fa-users"
+                          className="fa fa-users"
                           style={{ marginRight: "7px" }}
                         ></i>
                         KYC
@@ -170,7 +170,7 @@ const Header = () => {
                         style={{ color: "#635d5d" }}
                       >
                         <i
-                          class="fa fa-building"
+                          className="fa fa-building"
                           style={{ marginRight: "7px" }}
                         ></i>
                         Affiliate Panel
@@ -183,7 +183,7 @@ const Header = () => {
                         style={{ color: "#635d5d" }}
                       >
                         <i
-                          class="fa fa-refresh"
+                          className="fa fa-refresh"
                           style={{ marginRight: "7px" }}
                         ></i>
                         Referal
@@ -196,7 +196,7 @@ const Header = () => {
                         style={{ color: "#635d5d" }}
                       >
                         <i
-                          class="fa fa-sitemap"
+                          className="fa fa-sitemap"
                           aria-hidden="true"
                           style={{ marginRight: "7px" }}
                         ></i>
@@ -211,14 +211,14 @@ const Header = () => {
                         style={{ color: "#635d5d" }}
                       >
                         <i
-                          class="fa fa-key"
+                          className="fa fa-key"
                           aria-hidden="true"
                           style={{ marginRight: "7px" }}
                         ></i>
                         Change Password
                       </Link>
                     </li>
-                    <li role="separator" class="divider"></li>
+                    <li role="separator" className="divider"></li>
                     <li style={{ marginTop: "10px" }}>
                       <a
                         href="javascript:void(0)"
@@ -226,7 +226,7 @@ const Header = () => {
                         style={{ color: "#635d5d" }}
                       >
                         <i
-                          class="fa fa-power-off"
+                          className="fa fa-power-off"
                           style={{ marginRight: "7px" }}
                         ></i>
                         Logout

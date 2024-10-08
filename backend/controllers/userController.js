@@ -24,7 +24,7 @@ const createUser = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (user) {
-      logger.error("User with this email already exist");
+      logger.error(`User with this email ${email} already exist`);
       return res
         .status(400)
         .json({ error: "User with this email already exist" });
@@ -33,7 +33,7 @@ const createUser = async (req, res) => {
       ? await User.findOne({ referalCode })
       : null;
     if (referalCode && !referedUser) {
-      logger.error("createUser invalid referal code");
+      logger.error(`createUser invalid referal code ${referalCodess}`);
       return res.status(400).json({ error: "Invalid referal code" });
     }
 
@@ -59,7 +59,7 @@ const createUser = async (req, res) => {
       .status(200)
       .json({ message: "user created successfully", token });
   } catch (error) {
-    logger.error(`createUser ${JSON.stringify(error)}`);
+    logger.error(`createUser ${email} catch ${JSON.stringify(error)}`);
     res.status(400).json(error);
   }
 };

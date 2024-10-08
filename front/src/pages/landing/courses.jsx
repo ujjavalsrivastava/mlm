@@ -698,8 +698,8 @@ const courses = () => {
                   >
                     <div className="row courses__grid-wrap row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-sm-1">
                       {course &&
-                        course.map((row) => (
-                          <div className={style.cal}>
+                        course.map((row, idx) => (
+                          <div className={style.cal} key={`key=${idx}`}>
                             <div className="courses__item shine__animate-item">
                               <div className="courses__item-thumb">
                                 <a

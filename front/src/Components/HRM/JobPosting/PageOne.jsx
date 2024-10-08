@@ -251,8 +251,8 @@ const PageOne = (props) => {
 
       {props.step === 2 && (
         <>
-          <div class="w-100">
-            <div class="px-20 py-4">
+          <div className="w-100">
+            <div className="px-20 py-4">
               <div className="row  gap-y-2.5	">
                 <div className="col-6">
                   <label htmlFor="" className="form-label">
@@ -265,7 +265,7 @@ const PageOne = (props) => {
                       props.jobData.openings_count &&
                       props.jobData.openings_count
                     }
-                    class="form-control"
+                    className="form-control"
                     name="openings_count"
                     onChange={(e) =>
                       props.handleData(e.target.name, e.target.value)
@@ -279,7 +279,7 @@ const PageOne = (props) => {
                   </label>
                   <input
                     type="date"
-                    class="form-control"
+                    className="form-control"
                     value={
                       props.jobData.target_hire_date &&
                       props.jobData.target_hire_date
@@ -296,7 +296,7 @@ const PageOne = (props) => {
                     Currency
                   </label>
                   <select
-                    class="form-select"
+                    className="form-select"
                     aria-label="Default select example"
                     name="currency"
                     onChange={(e) =>
@@ -307,8 +307,9 @@ const PageOne = (props) => {
                       India Rupee -INR{" "}
                     </option>
                     {currency &&
-                      currency.map((row) => (
+                      currency.map((row, idx) => (
                         <option
+                          key={`key=${idx}`}
                           value={row.control_code}
                           selected={
                             props.jobData.currency &&
@@ -331,7 +332,7 @@ const PageOne = (props) => {
                     <div className="col-6">
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         value={
                           props.jobData.salary_range_from &&
                           props.jobData.salary_range_from
@@ -345,7 +346,7 @@ const PageOne = (props) => {
                     <div className="col-6">
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         value={
                           props.jobData.salary_range_to &&
                           props.jobData.salary_range_to
@@ -364,7 +365,7 @@ const PageOne = (props) => {
                     Job Type
                   </label>
                   <select
-                    class="form-control "
+                    className="form-control "
                     aria-label="Default select example"
                     name="job_type"
                     onChange={(e) =>
@@ -375,8 +376,9 @@ const PageOne = (props) => {
                       Full Time
                     </option>
                     {jobTypesList &&
-                      jobTypesList.map((row) => (
+                      jobTypesList.map((row, idx) => (
                         <option
+                          key={`key=${idx}`}
                           value={row.control_code}
                           selected={
                             props.jobData.job_type &&
@@ -396,7 +398,7 @@ const PageOne = (props) => {
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     name="job_location"
                     value={
                       props.jobData.job_location && props.jobData.job_location
@@ -405,7 +407,7 @@ const PageOne = (props) => {
                       props.handleData(e.target.name, e.target.value)
                     }
                   />
-                  {/* <select class="form-select" aria-label="Default select example" name="job_location" onChange={(e) => props.handleData(e.target.name,e.target.value)}>
+                  {/* <select className="form-select" aria-label="Default select example" name="job_location" onChange={(e) => props.handleData(e.target.name,e.target.value)}>
                  <option selected="">Location</option>
                      <option selected="">Location</option>
                  </select> */}
@@ -414,10 +416,10 @@ const PageOne = (props) => {
                  <label htmlFor="" className="form-label">Hiring Flow</label>
                  <div className="row">
                      <div className="col-2">
-                         <div class="card">
-                             <div class="card-body ">
-                                 <div class="d-flex justify-center">
-                                     <div class="flex-shrink-0">
+                         <div className="card">
+                             <div className="card-body ">
+                                 <div className="d-flex justify-center">
+                                     <div className="flex-shrink-0">
                                          <h4>Sourced</h4>
                                      </div>
                                  </div>
@@ -425,10 +427,10 @@ const PageOne = (props) => {
                          </div>
                      </div>
                      <div className="col-2">
-                         <div class="card">
-                             <div class="card-body">
-                                 <div class="d-flex justify-center">
-                                     <div class="flex-shrink-0">
+                         <div className="card">
+                             <div className="card-body">
+                                 <div className="d-flex justify-center">
+                                     <div className="flex-shrink-0">
                                          <h4>Screening</h4>
                                      </div>
                                  </div>
@@ -436,10 +438,10 @@ const PageOne = (props) => {
                          </div>
                      </div>
                      <div className="col-2">
-                         <div class="card">
-                             <div class="card-body">
-                                 <div class="d-flex justify-center" >
-                                     <div class="flex-shrink-0">
+                         <div className="card">
+                             <div className="card-body">
+                                 <div className="d-flex justify-center" >
+                                     <div className="flex-shrink-0">
                                          <h4>Interview</h4>
                                      </div>
                                  </div>
@@ -447,10 +449,10 @@ const PageOne = (props) => {
                          </div>
                      </div>
                      <div className="col-2">
-                         <div class="card">
-                             <div class="card-body">
-                                 <div class="d-flex justify-center">
-                                     <div class="flex-shrink-0">
+                         <div className="card">
+                             <div className="card-body">
+                                 <div className="d-flex justify-center">
+                                     <div className="flex-shrink-0">
                                          <h4>Preboarding</h4>
                                      </div>
                                  </div>
@@ -458,10 +460,10 @@ const PageOne = (props) => {
                          </div>
                      </div>
                      <div className="col-2">
-                         <div class="card">
-                             <div class="card-body">
-                                 <div class="d-flex justify-center">
-                                     <div class="flex-shrink-0">
+                         <div className="card">
+                             <div className="card-body">
+                                 <div className="d-flex justify-center">
+                                     <div className="flex-shrink-0">
                                          <h4>Hired</h4>
                                      </div>
                                  </div>
@@ -469,10 +471,10 @@ const PageOne = (props) => {
                          </div>
                      </div>
                      <div className="col-2">
-                         <div class="card">
-                             <div class="card-body">
-                                 <div class="d-flex justify-center">
-                                     <div class="flex-shrink-0">
+                         <div className="card">
+                             <div className="card-body">
+                                 <div className="d-flex justify-center">
+                                     <div className="flex-shrink-0">
                                          <h4>Archived</h4>
                                      </div>
                                  </div>
@@ -488,7 +490,7 @@ const PageOne = (props) => {
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     name="req_experience"
                     value={
                       props.jobData.req_experience &&
@@ -503,9 +505,9 @@ const PageOne = (props) => {
                 <div className="col-6">
                   <div className="row flex items-center justify-center">
                     <div className="col-8">
-                      <div class="form-check form-check-inline">
+                      <div className="form-check form-check-inline">
                         <input
-                          class="form-check-input"
+                          className="form-check-input"
                           type="checkbox"
                           id="inlineCheckbox1"
                           checked={
@@ -519,16 +521,19 @@ const PageOne = (props) => {
                             props.handleData(e.target.name, e.target.value)
                           }
                         />
-                        <label class="form-check-label" for="inlineCheckbox1">
+                        <label
+                          className="form-check-label"
+                          for="inlineCheckbox1"
+                        >
                           Allow applicant to apply for the same job offer{" "}
                         </label>
                       </div>
                     </div>
                     <div className="col-2">
-                      <div class="info-icon">
+                      <div className="info-icon">
                         <button type="button">
                           <i
-                            class="fa fa-info-circle text-lg"
+                            className="fa fa-info-circle text-lg"
                             aria-hidden="true"
                           ></i>
                         </button>
@@ -537,7 +542,7 @@ const PageOne = (props) => {
                     <div className="col-2">
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         checked={
                           props.jobData.apply_later_after_number &&
                           props.jobData.apply_later_after_number == "on"
@@ -556,7 +561,7 @@ const PageOne = (props) => {
                   <div className="row">
                     <div className="col-4">
                       <select
-                        class="form-select"
+                        className="form-select"
                         aria-label="Default select example"
                       >
                         <option selected="">Months</option>
@@ -567,9 +572,9 @@ const PageOne = (props) => {
                 <div className="col-6">
                   <div className="row flex items-center justify-start	">
                     <div className="col-8">
-                      <div class="form-check form-check-inline">
+                      <div className="form-check form-check-inline">
                         <input
-                          class="form-check-input"
+                          className="form-check-input"
                           type="checkbox"
                           id="inlineCheckbox2"
                           checked={
@@ -583,7 +588,10 @@ const PageOne = (props) => {
                             props.handleData(e.target.name, e.target.value)
                           }
                         />
-                        <label class="form-check-label" for="inlineCheckbox1">
+                        <label
+                          className="form-check-label"
+                          for="inlineCheckbox1"
+                        >
                           Mark the job as a priority{" "}
                         </label>
                       </div>
@@ -594,9 +602,9 @@ const PageOne = (props) => {
                 <div className="col-6 ">
                   <div className="row flex items-center justify-start	">
                     <div className="col-8">
-                      <div class="form-check form-check-inline">
+                      <div className="form-check form-check-inline">
                         <input
-                          class="form-check-input"
+                          className="form-check-input"
                           type="checkbox"
                           id="inlineCheckbox2"
                           checked={
@@ -610,7 +618,10 @@ const PageOne = (props) => {
                             props.handleData(e.target.name, e.target.value)
                           }
                         />
-                        <label class="form-check-label" for="inlineCheckbox1">
+                        <label
+                          className="form-check-label"
+                          for="inlineCheckbox1"
+                        >
                           Publish on careers site{" "}
                         </label>
                       </div>
@@ -621,9 +632,9 @@ const PageOne = (props) => {
                 <div className="col-6">
                   <div className="row flex items-center justify-start	">
                     <div className="col-8">
-                      <div class="form-check form-check-inline">
+                      <div className="form-check form-check-inline">
                         <input
-                          class="form-check-input"
+                          className="form-check-input"
                           type="checkbox"
                           id="inlineCheckbox2"
                           checked={
@@ -637,7 +648,10 @@ const PageOne = (props) => {
                             props.handleData(e.target.name, e.target.value)
                           }
                         />
-                        <label class="form-check-label" for="inlineCheckbox1">
+                        <label
+                          className="form-check-label"
+                          for="inlineCheckbox1"
+                        >
                           Publish job on internal job portal{" "}
                         </label>
                       </div>
@@ -649,9 +663,9 @@ const PageOne = (props) => {
                 <div className="col-6">
                   <div className="row flex items-center justify-start	">
                     <div className="col-8">
-                      <div class="form-check form-check-inline">
+                      <div className="form-check form-check-inline">
                         <input
-                          class="form-check-input"
+                          className="form-check-input"
                           type="checkbox"
                           id="inlineCheckbox2"
                           name="can_emp_apply"
@@ -665,7 +679,10 @@ const PageOne = (props) => {
                             props.handleData(e.target.name, e.target.value)
                           }
                         />
-                        <label class="form-check-label" for="inlineCheckbox1">
+                        <label
+                          className="form-check-label"
+                          for="inlineCheckbox1"
+                        >
                           Allow internal employees to apply
                         </label>
                       </div>
@@ -676,9 +693,9 @@ const PageOne = (props) => {
                 <div className="col-6">
                   <div className="row flex items-center justify-start	">
                     <div className="col-8">
-                      <div class="form-check form-check-inline">
+                      <div className="form-check form-check-inline">
                         <input
-                          class="form-check-input"
+                          className="form-check-input"
                           type="checkbox"
                           id="inlineCheckbox2"
                           checked={
@@ -692,7 +709,10 @@ const PageOne = (props) => {
                             props.handleData(e.target.name, e.target.value)
                           }
                         />
-                        <label class="form-check-label" for="inlineCheckbox1">
+                        <label
+                          className="form-check-label"
+                          for="inlineCheckbox1"
+                        >
                           {" "}
                           show screening question while appling for internal job
                         </label>
@@ -708,8 +728,8 @@ const PageOne = (props) => {
 
       {props.step === 3 && (
         <>
-          <div class="w-100">
-            <div class="px-20 py-4">
+          <div className="w-100">
+            <div className="px-20 py-4">
               <div className="row">
                 <div
                   className="col-6"
@@ -718,7 +738,7 @@ const PageOne = (props) => {
                   <div className="row">
                     <div className="col-10">
                       <div className="custom-card">
-                        <label class="form-label" for="exampleRadios1">
+                        <label className="form-label" for="exampleRadios1">
                           Requiter
                         </label>
                         {/* <div className="flex gap-0.5">
@@ -726,7 +746,7 @@ const PageOne = (props) => {
                                     <input type="text" name="" id="" className='form-control' />
                                 </div>
                                 <button >
-                                    <i class=" ri-close-fill text-base"></i>
+                                    <i className=" ri-close-fill text-base"></i>
                                 </button>
                             </div> */}
                         <Select
@@ -747,7 +767,7 @@ const PageOne = (props) => {
                         </h3>
                         <button type="button">
                           <i
-                            class=" ri-information-line"
+                            className=" ri-information-line"
                             aria-hidden="true"
                           ></i>
                         </button>
@@ -756,12 +776,12 @@ const PageOne = (props) => {
                     <div className="col-5"></div>
 
                     <div className="col-10">
-                      <div class=" mt-2">
-                        <div class="custom-radio">
+                      <div className=" mt-2">
+                        <div className="custom-radio">
                           .
-                          <div class="form-check">
+                          <div className="form-check">
                             <input
-                              class="form-check-input"
+                              className="form-check-input"
                               type="radio"
                               name="candidate_owner"
                               id="exampleRadios1"
@@ -770,9 +790,9 @@ const PageOne = (props) => {
                                 props.handleData(e.target.name, e.target.value)
                               }
                             />
-                            <label class="form-label" for="exampleRadios1">
+                            <label className="form-label" for="exampleRadios1">
                               Round robin assignment
-                              <p class="mb-0">
+                              <p className="mb-0">
                                 Any new candidates is assigned to a different
                                 recruiter untill everyone has equal number of
                                 active candidates owned
@@ -785,11 +805,11 @@ const PageOne = (props) => {
                     <div className="col-2"></div>
 
                     <div className="col-10">
-                      <div class=" mt-2">
-                        <div class="custom-radio">
-                          <div class="form-check">
+                      <div className=" mt-2">
+                        <div className="custom-radio">
+                          <div className="form-check">
                             <input
-                              class="form-check-input"
+                              className="form-check-input"
                               type="radio"
                               name="candidate_owner"
                               id="exampleRadios2"
@@ -798,9 +818,9 @@ const PageOne = (props) => {
                                 props.handleData(e.target.name, e.target.value)
                               }
                             />
-                            <label class="form-label" for="exampleRadios2">
+                            <label className="form-label" for="exampleRadios2">
                               Assign to individual
-                              <p class="mb-0">
+                              <p className="mb-0">
                                 Each candidate will be assigned to a selected
                                 recruiter as their owner{" "}
                               </p>
@@ -812,11 +832,11 @@ const PageOne = (props) => {
                     <div className="col-2"></div>
 
                     <div className="col-10">
-                      <div class=" mt-2">
-                        <div class="custom-radio">
-                          <div class="form-check">
+                      <div className=" mt-2">
+                        <div className="custom-radio">
+                          <div className="form-check">
                             <input
-                              class="form-check-input"
+                              className="form-check-input"
                               type="radio"
                               name="candidate_owner"
                               id="exampleRadios3"
@@ -825,9 +845,9 @@ const PageOne = (props) => {
                                 props.handleData(e.target.name, e.target.value)
                               }
                             />
-                            <label class="form-label" for="exampleRadios3">
+                            <label className="form-label" for="exampleRadios3">
                               Do not assign owner
-                              <p class="mb-0">
+                              <p className="mb-0">
                                 Candidates will not be automatically assigned to
                                 any recruiter as their owner
                               </p>
@@ -845,7 +865,7 @@ const PageOne = (props) => {
                     </div>
                     <div className="col-5"></div>
                     <div className="col-10">
-                      <div class="mt-2    ">
+                      <div className="mt-2    ">
                         {OpenHirManager ? (
                           <Select
                             isMulti
@@ -857,9 +877,9 @@ const PageOne = (props) => {
                         ) : (
                           <div
                             onClick={OpenHirManagerFun}
-                            class="custom-button"
+                            className="custom-button"
                           >
-                            <i class=" ri-add-circle-fill"></i>
+                            <i className=" ri-add-circle-fill"></i>
                             <span>Add hiring manager</span>
                           </div>
                         )}
@@ -873,7 +893,7 @@ const PageOne = (props) => {
                     </div>
                     <div className="col-5"></div>
                     <div className="col-10">
-                      <div class="mt-2    ">
+                      <div className="mt-2    ">
                         {openPanalMember ? (
                           <Select
                             isMulti
@@ -885,9 +905,9 @@ const PageOne = (props) => {
                         ) : (
                           <div
                             onClick={OpenPanalMemerFun}
-                            class="custom-button"
+                            className="custom-button"
                           >
-                            <i class=" ri-add-circle-fill"></i>
+                            <i className=" ri-add-circle-fill"></i>
                             <span>Add Panal Member</span>
                           </div>
                         )}
@@ -900,10 +920,10 @@ const PageOne = (props) => {
                   <div className="flex mb-2">
                     <h3 className="font-bold">Accessibillity & notification</h3>
                   </div>
-                  <div class="flex-shrink-0">
-                    <div class="form-check form-switch form-switch-left form-switch-md mb-2">
+                  <div className="flex-shrink-0">
+                    <div className="form-check form-switch form-switch-left form-switch-md mb-2">
                       <input
-                        class="form-check-input code-switcher"
+                        className="form-check-input code-switcher"
                         type="checkbox"
                         id="default-modal"
                         name="recr_access_to_candidate"
@@ -911,14 +931,17 @@ const PageOne = (props) => {
                           props.handleData(e.target.name, e.target.value)
                         }
                       />
-                      <label for="default-modal" class="form-label text-muted">
+                      <label
+                        for="default-modal"
+                        className="form-label text-muted"
+                      >
                         Recruiters can only access to the candidate
                         sourced/owned by them
                       </label>
                     </div>
-                    <div class="form-check form-switch form-switch-left form-switch-md mb-2">
+                    <div className="form-check form-switch form-switch-left form-switch-md mb-2">
                       <input
-                        class="form-check-input code-switcher"
+                        className="form-check-input code-switcher"
                         type="checkbox"
                         id="default-modal"
                         name="profile_access_interviewer"
@@ -926,14 +949,17 @@ const PageOne = (props) => {
                           props.handleData(e.target.name, e.target.value)
                         }
                       />
-                      <label for="default-modal" class="form-label text-muted">
+                      <label
+                        for="default-modal"
+                        className="form-label text-muted"
+                      >
                         Interviewers can only access profile of their
                         Interviewees{" "}
                       </label>
                     </div>
-                    <div class="form-check form-switch form-switch-left form-switch-md mb-2">
+                    <div className="form-check form-switch form-switch-left form-switch-md mb-2">
                       <input
-                        class="form-check-input code-switcher"
+                        className="form-check-input code-switcher"
                         type="checkbox"
                         id="default-modal"
                         name="notify_recr_cand_add"
@@ -941,16 +967,19 @@ const PageOne = (props) => {
                           props.handleData(e.target.name, e.target.value)
                         }
                       />
-                      <label for="default-modal" class="form-label text-muted">
+                      <label
+                        for="default-modal"
+                        className="form-label text-muted"
+                      >
                         Notify recruiter when new candidate is added to job
                       </label>
                       <button>
                         <i className=" ri-information-line ml-1"></i>
                       </button>
                     </div>
-                    <div class="form-check form-switch form-switch-left form-switch-md mb-2">
+                    <div className="form-check form-switch form-switch-left form-switch-md mb-2">
                       <input
-                        class="form-check-input code-switcher"
+                        className="form-check-input code-switcher"
                         type="checkbox"
                         id="default-modal"
                         name="notify_mng_cand_add"
@@ -958,7 +987,10 @@ const PageOne = (props) => {
                           props.handleData(e.target.name, e.target.value)
                         }
                       />
-                      <label for="default-modal" class="form-label text-muted">
+                      <label
+                        for="default-modal"
+                        className="form-label text-muted"
+                      >
                         Notify hiring manager when new candidate is added to job{" "}
                       </label>
                       <button>
@@ -981,10 +1013,10 @@ const PageOne = (props) => {
 
                     <div className="row ">
                       <div className="col-12 mt-3">
-                        <div class="custom-radio-2">
-                          <div class="form-check">
+                        <div className="custom-radio-2">
+                          <div className="form-check">
                             <input
-                              class="form-check-input"
+                              className="form-check-input"
                               type="radio"
                               name="interview_feedback_visible"
                               id=""
@@ -993,9 +1025,9 @@ const PageOne = (props) => {
                                 props.handleData(e.target.name, e.target.value)
                               }
                             />
-                            <label class="form-label" for="">
+                            <label className="form-label" for="">
                               Open
-                              <p class="mb-0">
+                              <p className="mb-0">
                                 Interviewers can view feedbacks from others only
                                 after they have submittted their own
                               </p>
@@ -1004,10 +1036,10 @@ const PageOne = (props) => {
                         </div>
                       </div>
                       <div className="col-12 mt-3">
-                        <div class="custom-radio-2">
-                          <div class="form-check">
+                        <div className="custom-radio-2">
+                          <div className="form-check">
                             <input
-                              class="form-check-input"
+                              className="form-check-input"
                               type="radio"
                               name="interview_feedback_visible"
                               id=""
@@ -1016,9 +1048,9 @@ const PageOne = (props) => {
                                 props.handleData(e.target.name, e.target.value)
                               }
                             />
-                            <label class="form-label" for="">
+                            <label className="form-label" for="">
                               Restricted
-                              <p class="mb-0">
+                              <p className="mb-0">
                                 Interviewers can view feedbacks given in
                                 previous & current stages, but not next stages
                               </p>
@@ -1027,10 +1059,10 @@ const PageOne = (props) => {
                         </div>
                       </div>
                       <div className="col-12 mt-3">
-                        <div class="custom-radio-2">
-                          <div class="form-check">
+                        <div className="custom-radio-2">
+                          <div className="form-check">
                             <input
-                              class="form-check-input"
+                              className="form-check-input"
                               type="radio"
                               name="interview_feedback_visible"
                               id=""
@@ -1039,9 +1071,9 @@ const PageOne = (props) => {
                                 props.handleData(e.target.name, e.target.value)
                               }
                             />
-                            <label class="form-label" for="">
+                            <label className="form-label" for="">
                               Private
-                              <p class="mb-0">
+                              <p className="mb-0">
                                 interviewrs can only view their own feedback
                               </p>
                             </label>

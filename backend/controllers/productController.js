@@ -74,7 +74,7 @@ const createProductOrder = async (req, res) => {
   );
 
   if (shareError) {
-    logger.error(`createProductOrder ${shareError}`);
+    logger.error(`createProductOrder ${userId} ${shareError}`);
   }
 
   if (!userPurchaseHistory) {
@@ -93,7 +93,9 @@ const createProductOrder = async (req, res) => {
       try {
         await distributeUserPercentage(userId, amount, userLevelShare);
       } catch (error) {
-        logger.error(`createProductOrder distributeUserPercentage ${error}`);
+        logger.error(
+          `createProductOrder distributeUserPercentage ${userId} ${error}`
+        );
       }
     }
     return res.json({ message: "Order created successfull", savedData });

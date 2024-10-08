@@ -99,31 +99,30 @@ const Purchage = () => {
 
   return (
     <>
-      <div class="content-wrapper">
-        <div class="content-header sty-one">
+      <div className="content-wrapper">
+        <div className="content-header sty-one">
           <h1>My Course</h1>
-          <ol class="breadcrumb">
+          <ol className="breadcrumb">
             <li>
               <a href="#">Home </a>
             </li>
             <li>
-              <i class="fa fa-angle-right"></i> My Courses
+              <i className="fa fa-angle-right"></i> My Courses
             </li>
           </ol>
         </div>
 
-        <div class="content">
-          <div class="row">
+        <div className="content">
+          <div className="row">
             {Array.isArray(product) &&
-              product.map((row) => (
-                <div class="col-lg-3 col-xs-6">
-                  <div class="info-box">
-                    s
-                    <div class="info-box-content">
+              product.map((row, idx) => (
+                <div className="col-lg-3 col-xs-6" key={`key=${idx}`}>
+                  <div className="info-box">
+                    <div className="info-box-content">
                       <img
                         src={row.pictures.base_link}
                         alt=""
-                        class="responsive img-fluid img-thumbnail step1"
+                        className="responsive img-fluid img-thumbnail step1"
                       />
                     </div>
                     <span style={{ textAligh: "center" }}>{row.name}</span>
@@ -131,7 +130,7 @@ const Purchage = () => {
                     <button
                       onClick={() => orderCreate(row.id, row.price)}
                       type="button"
-                      class="btn btn-primary btn-sm"
+                      className="btn btn-primary btn-sm"
                     >
                       Order Now
                     </button>
@@ -139,95 +138,95 @@ const Purchage = () => {
                 </div>
               ))}
 
-            {/* <div class="col-lg-3 col-xs-6">
-            <div class="info-box">
-            <div class="info-box-content">
-                <img src="https://www.bizgurukul.com/Biz/img/gold-bundle.png" alt="" class="responsive img-fluid img-thumbnail step1" />
+            {/* <div className="col-lg-3 col-xs-6">
+            <div className="info-box">
+            <div className="info-box-content">
+                <img src="https://www.bizgurukul.com/Biz/img/gold-bundle.png" alt="" className="responsive img-fluid img-thumbnail step1" />
                 </div>
             
               <span style={{textAligh:'center'}}>Marketing Mastery</span> 
               </div>
             </div>
 
-            <div class="col-lg-3 col-xs-6">
-            <div class="info-box">
-            <div class="info-box-content">
-                <img src="https://www.bizgurukul.com/Biz/img/sapphire.png" alt="" class="responsive img-fluid img-thumbnail step1" />
+            <div className="col-lg-3 col-xs-6">
+            <div className="info-box">
+            <div className="info-box-content">
+                <img src="https://www.bizgurukul.com/Biz/img/sapphire.png" alt="" className="responsive img-fluid img-thumbnail step1" />
                 </div>
             
               <span style={{textAligh:'center'}}>Marketing Mastery</span> 
               </div>
             </div>
 
-            <div class="col-lg-3 col-xs-6">
-            <div class="info-box">
-            <div class="info-box-content">
-                <img src="https://www.bizgurukul.com/Biz/img/platinum-bundle.png" alt="" class="responsive img-fluid img-thumbnail step1" />
+            <div className="col-lg-3 col-xs-6">
+            <div className="info-box">
+            <div className="info-box-content">
+                <img src="https://www.bizgurukul.com/Biz/img/platinum-bundle.png" alt="" className="responsive img-fluid img-thumbnail step1" />
                 </div>
             
               <span style={{textAligh:'center'}}>Marketing Mastery</span> 
               </div>
             </div> */}
 
-            {/* <div class="col-lg-3 col-xs-6">
-              <div class="info-box">
+            {/* <div className="col-lg-3 col-xs-6">
+              <div className="info-box">
                 {" "}
-                <span class="info-box-icon bg-green">
-                  <i class="icon-pencil"></i>
+                <span className="info-box-icon bg-green">
+                  <i className="icon-pencil"></i>
                 </span>
-                <div class="info-box-content">
+                <div className="info-box-content">
                   {" "}
-                  <span class="info-box-number">456</span>{" "}
-                  <span class="info-box-text">Pending Project</span>
+                  <span className="info-box-number">456</span>{" "}
+                  <span className="info-box-text">Pending Project</span>
                 </div>
               </div>
             </div> */}
 
-            {/* <div class="col-lg-3 col-xs-6">
-              <div class="info-box">
+            {/* <div className="col-lg-3 col-xs-6">
+              <div className="info-box">
                 {" "}
-                <span class="info-box-icon bg-yellow">
-                  <i class="icon-wallet"></i>
+                <span className="info-box-icon bg-yellow">
+                  <i className="icon-wallet"></i>
                 </span>
-                <div class="info-box-content">
+                <div className="info-box-content">
                   {" "}
-                  <span class="info-box-number">$41234</span>{" "}
-                  <span class="info-box-text">Total Cost</span>
+                  <span className="info-box-number">$41234</span>{" "}
+                  <span className="info-box-text">Total Cost</span>
                 </div>
               </div>
             </div> */}
 
-            {/* <div class="col-lg-3 col-xs-6">
-              <div class="info-box">
+            {/* <div className="col-lg-3 col-xs-6">
+              <div className="info-box">
                 {" "}
-                <span class="info-box-icon bg-red">
-                  <i class="icon-layers"></i>
+                <span className="info-box-icon bg-red">
+                  <i className="icon-layers"></i>
                 </span>
-                <div class="info-box-content">
+                <div className="info-box-content">
                   {" "}
-                  <span class="info-box-number">$81234</span>{" "}
-                  <span class="info-box-text">Total Earnings</span>
+                  <span className="info-box-number">$81234</span>{" "}
+                  <span className="info-box-text">Total Earnings</span>
                 </div>
               </div>
             </div> */}
           </div>
 
-          {/* <div class="row">
-            <div class="col-lg-8 col-xlg-9">
-              <div class="info-box">
-                <div class="d-flex flex-wrap">
+          {/* <div className="row">
+            <div className="col-lg-8 col-xlg-9">
+              <div className="info-box">
+                <div className="d-flex flex-wrap">
                   <div>
-                    <h5 class="text-black">Yearly Earning</h5>
+                    <h5 className="text-black">Yearly Earning</h5>
                   </div>
-                  <div class="ml-auto">
-                    <ul class="list-inline">
-                      <li class="text-aqua">
+                  <div className="ml-auto">
+                    <ul className="list-inline">
+                      <li className="text-aqua">
                         {" "}
-                        <i class="fa fa-circle"></i> Sales
+                        <i className="fa fa-circle"></i> Sales
                       </li>
-                      <li class="text-blue">
+                      <li className="text-blue">
                         {" "}
-                        <i class="fa fa-circle"></i> Earning ($)
+                        <i className="fa fa-circle"></i> Earning ($)
                       </li>
                     </ul>
                   </div>
@@ -235,22 +234,22 @@ const Purchage = () => {
                 <div id="earning"></div>
               </div>
             </div>
-            <div class="col-lg-4 col-xlg-3">
-              <div class="box box-widget widget-user">
-                <div class="widget-user-header bg-aqua-active">
-                  <h3 class="widget-user-username">Alexander Pierce</h3>
-                  <h6 class="widget-user-desc">Founder &amp; CEO</h6>
+            <div className="col-lg-4 col-xlg-3">
+              <div className="box box-widget widget-user">
+                <div className="widget-user-header bg-aqua-active">
+                  <h3 className="widget-user-username">Alexander Pierce</h3>
+                  <h6 className="widget-user-desc">Founder &amp; CEO</h6>
                 </div>
-                <div class="widget-user-image">
+                <div className="widget-user-image">
                   {" "}
                   <img
-                    class="img-circle"
+                    className="img-circle"
                     src="dist/img/img3.jpg"
                     alt="User Avatar"
                   />{" "}
                 </div>
-                <div class="box-footer">
-                  <div class="text-center">
+                <div className="box-footer">
+                  <div className="text-center">
                     <p>
                       {" "}
                       A small river named Duden flows by their place and with
@@ -258,28 +257,28 @@ const Purchage = () => {
                     </p>
                     <a
                       href="#"
-                      class="btn btn-facebook btn-rounded margin-bottom"
+                      className="btn btn-facebook btn-rounded margin-bottom"
                     >
                       Follow
                     </a>
                   </div>
-                  <div class="row margin-bottom">
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">3,200</h5>
-                        <span class="description-text">SALES</span>{" "}
+                  <div className="row margin-bottom">
+                    <div className="col-sm-4 border-right">
+                      <div className="description-block">
+                        <h5 className="description-header">3,200</h5>
+                        <span className="description-text">SALES</span>{" "}
                       </div>
                     </div>
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">13,000</h5>
-                        <span class="description-text">FOLLOWERS</span>{" "}
+                    <div className="col-sm-4 border-right">
+                      <div className="description-block">
+                        <h5 className="description-header">13,000</h5>
+                        <span className="description-text">FOLLOWERS</span>{" "}
                       </div>
                     </div>
-                    <div class="col-sm-4">
-                      <div class="description-block">
-                        <h5 class="description-header">35</h5>
-                        <span class="description-text">PRODUCTS</span>{" "}
+                    <div className="col-sm-4">
+                      <div className="description-block">
+                        <h5 className="description-header">35</h5>
+                        <span className="description-text">PRODUCTS</span>{" "}
                       </div>
                     </div>
                   </div>
@@ -287,27 +286,27 @@ const Purchage = () => {
               </div>
             </div>
           </div> */}
-          {/* <div class="row">
-            <div class="col-lg-4">
-              <div class="small-box bg-aqua">
-                <div class="inner">
-                  <div class="text-left">
+          {/* <div className="row">
+            <div className="col-lg-4">
+              <div className="small-box bg-aqua">
+                <div className="inner">
+                  <div className="text-left">
                     <h2>Total Sales</h2>
                     <h6>Todays Income</h6>
                   </div>
-                  <div class="text-right m-t-2">
+                  <div className="text-right m-t-2">
                     <h1>
                       <sup>
-                        <i class="ti-arrow-up"></i>
+                        <i className="ti-arrow-up"></i>
                       </sup>{" "}
                       $500
                     </h1>
                   </div>
-                  <div class="m-b-2">
-                    <span class="text-white">35%</span>
-                    <div class="progress bg-lightblue">
+                  <div className="m-b-2">
+                    <span className="text-white">35%</span>
+                    <div className="progress bg-lightblue">
                       <div
-                        class="progress-bar bg-white"
+                        className="progress-bar bg-white"
                         role="progressbar"
                         style={{ width: "35%", height: "6px" }}
                         aria-valuenow="25"
@@ -319,26 +318,26 @@ const Purchage = () => {
                 </div>
               </div>
             </div>
-            <div class="col-lg-4">
-              <div class="small-box bg-darkblue text-white">
-                <div class="inner">
-                  <div class="text-left">
+            <div className="col-lg-4">
+              <div className="small-box bg-darkblue text-white">
+                <div className="inner">
+                  <div className="text-left">
                     <h2>Total Sales</h2>
                     <h6>This Month Income</h6>
                   </div>
-                  <div class="text-right m-t-2">
+                  <div className="text-right m-t-2">
                     <h1>
                       <sup>
-                        <i class="ti-arrow-up"></i>
+                        <i className="ti-arrow-up"></i>
                       </sup>{" "}
                       $2500
                     </h1>
                   </div>
-                  <div class="m-b-2">
-                    <span class="text-white">55%</span>
-                    <div class="progress bg-lightblue">
+                  <div className="m-b-2">
+                    <span className="text-white">55%</span>
+                    <div className="progress bg-lightblue">
                       <div
-                        class="progress-bar bg-white"
+                        className="progress-bar bg-white"
                         role="progressbar"
                         style={{ width: "55%", height: "6px" }}
                         aria-valuenow="25"
@@ -350,26 +349,26 @@ const Purchage = () => {
                 </div>
               </div>
             </div>
-            <div class="col-lg-4">
-              <div class="small-box bg-orange">
-                <div class="inner">
-                  <div class="text-left">
+            <div className="col-lg-4">
+              <div className="small-box bg-orange">
+                <div className="inner">
+                  <div className="text-left">
                     <h2>Total Profit</h2>
                     <h6>This Year Income</h6>
                   </div>
-                  <div class="text-right m-t-2">
+                  <div className="text-right m-t-2">
                     <h1>
                       <sup>
-                        <i class="ti-arrow-up"></i>
+                        <i className="ti-arrow-up"></i>
                       </sup>{" "}
                       $8500
                     </h1>
                   </div>
-                  <div class="m-b-2">
-                    <span class="text-white">75%</span>
-                    <div class="progress bg-lightblue">
+                  <div className="m-b-2">
+                    <span className="text-white">75%</span>
+                    <div className="progress bg-lightblue">
                       <div
-                        class="progress-bar bg-white"
+                        className="progress-bar bg-white"
                         role="progressbar"
                         style={{ width: "75%", height: "6px" }}
                         aria-valuenow="25"
@@ -382,194 +381,194 @@ const Purchage = () => {
               </div>
             </div>
           </div> */}
-          {/* <div class="row">
-            <div class="col-lg-6">
-              <div class="info-box">
-                <div class="box box-warning direct-chat direct-chat-warning">
-                  <div class="box-header with-border">
-                    <h3 class="box-title text-black">Recent Chats</h3>
+          {/* <div className="row">
+            <div className="col-lg-6">
+              <div className="info-box">
+                <div className="box box-warning direct-chat direct-chat-warning">
+                  <div className="box-header with-border">
+                    <h3 className="box-title text-black">Recent Chats</h3>
                   </div>
-                  <div class="box-body">
-                    <div class="direct-chat-messages">
-                      <div class="direct-chat-msg">
-                        <div class="direct-chat-info clearfix">
+                  <div className="box-body">
+                    <div className="direct-chat-messages">
+                      <div className="direct-chat-msg">
+                        <div className="direct-chat-info clearfix">
                           {" "}
-                          <span class="direct-chat-name pull-left">
+                          <span className="direct-chat-name pull-left">
                             Alexander Pierce
                           </span>{" "}
-                          <span class="direct-chat-timestamp pull-right">
+                          <span className="direct-chat-timestamp pull-right">
                             23 Jan 2:00 pm
                           </span>{" "}
                         </div>
                         <img
-                          class="direct-chat-img"
+                          className="direct-chat-img"
                           src="dist/img/img2.jpg"
                           alt="user image"
                         />
-                        <div class="direct-chat-text">
+                        <div className="direct-chat-text">
                           {" "}
                           A small river named Duden flows by their place and
                           supplies it with the necessary.{" "}
                         </div>
                       </div>
-                      <div class="direct-chat-msg right">
-                        <div class="direct-chat-info clearfix">
+                      <div className="direct-chat-msg right">
+                        <div className="direct-chat-info clearfix">
                           {" "}
-                          <span class="direct-chat-name pull-right">
+                          <span className="direct-chat-name pull-right">
                             Sarah Bullock
                           </span>{" "}
-                          <span class="direct-chat-timestamp pull-left">
+                          <span className="direct-chat-timestamp pull-left">
                             23 Jan 2:05 pm
                           </span>{" "}
                         </div>
                         <img
-                          class="direct-chat-img"
+                          className="direct-chat-img"
                           src="dist/img/img3.jpg"
                           alt="user image"
                         />
 
-                        <div class="direct-chat-text">
+                        <div className="direct-chat-text">
                           {" "}
                           You better believe it!{" "}
                         </div>
                       </div>
-                      <div class="direct-chat-msg">
-                        <div class="direct-chat-info clearfix">
+                      <div className="direct-chat-msg">
+                        <div className="direct-chat-info clearfix">
                           {" "}
-                          <span class="direct-chat-name pull-left">
+                          <span className="direct-chat-name pull-left">
                             Alexander Pierce
                           </span>{" "}
-                          <span class="direct-chat-timestamp pull-right">
+                          <span className="direct-chat-timestamp pull-right">
                             23 Jan 5:37 pm
                           </span>{" "}
                         </div>
                         <img
-                          class="direct-chat-img"
+                          className="direct-chat-img"
                           src="dist/img/img4.jpg"
                           alt="user image"
                         />
-                        <div class="direct-chat-text">
+                        <div className="direct-chat-text">
                           {" "}
                           A small river named Duden flows by their place and
                           supplies it with the necessary.{" "}
                         </div>
                       </div>
-                      <div class="direct-chat-msg right">
-                        <div class="direct-chat-info clearfix">
+                      <div className="direct-chat-msg right">
+                        <div className="direct-chat-info clearfix">
                           {" "}
-                          <span class="direct-chat-name pull-right">
+                          <span className="direct-chat-name pull-right">
                             Sarah Bullock
                           </span>{" "}
-                          <span class="direct-chat-timestamp pull-left">
+                          <span className="direct-chat-timestamp pull-left">
                             23 Jan 6:10 pm
                           </span>{" "}
                         </div>
                         <img
-                          class="direct-chat-img"
+                          className="direct-chat-img"
                           src="dist/img/img5.jpg"
                           alt="user image"
                         />
-                        <div class="direct-chat-text"> I would love to. </div>
+                        <div className="direct-chat-text"> I would love to. </div>
                       </div>
-                      <div class="direct-chat-msg">
-                        <div class="direct-chat-info clearfix">
+                      <div className="direct-chat-msg">
+                        <div className="direct-chat-info clearfix">
                           {" "}
-                          <span class="direct-chat-name pull-left">
+                          <span className="direct-chat-name pull-left">
                             Alexander Pierce
                           </span>{" "}
-                          <span class="direct-chat-timestamp pull-right">
+                          <span className="direct-chat-timestamp pull-right">
                             23 Jan 2:00 pm
                           </span>{" "}
                         </div>
                         <img
-                          class="direct-chat-img"
+                          className="direct-chat-img"
                           src="dist/img/img6.jpg"
                           alt="user image"
                         />
-                        <div class="direct-chat-text">
+                        <div className="direct-chat-text">
                           {" "}
                           A small river named Duden flows by their place and
                           supplies it with the necessary.{" "}
                         </div>
                       </div>
-                      <div class="direct-chat-msg right">
-                        <div class="direct-chat-info clearfix">
+                      <div className="direct-chat-msg right">
+                        <div className="direct-chat-info clearfix">
                           {" "}
-                          <span class="direct-chat-name pull-right">
+                          <span className="direct-chat-name pull-right">
                             Sarah Bullock
                           </span>{" "}
-                          <span class="direct-chat-timestamp pull-left">
+                          <span className="direct-chat-timestamp pull-left">
                             23 Jan 2:05 pm
                           </span>{" "}
                         </div>
                         <img
-                          class="direct-chat-img"
+                          className="direct-chat-img"
                           src="dist/img/img3.jpg"
                           alt="user image"
                         />
 
-                        <div class="direct-chat-text">
+                        <div className="direct-chat-text">
                           {" "}
                           You better believe it!{" "}
                         </div>
                       </div>
-                      <div class="direct-chat-msg">
-                        <div class="direct-chat-info clearfix">
+                      <div className="direct-chat-msg">
+                        <div className="direct-chat-info clearfix">
                           {" "}
-                          <span class="direct-chat-name pull-left">
+                          <span className="direct-chat-name pull-left">
                             Alexander Pierce
                           </span>{" "}
-                          <span class="direct-chat-timestamp pull-right">
+                          <span className="direct-chat-timestamp pull-right">
                             23 Jan 2:00 pm
                           </span>{" "}
                         </div>
                         <img
-                          class="direct-chat-img"
+                          className="direct-chat-img"
                           src="dist/img/img6.jpg"
                           alt="user image"
                         />
-                        <div class="direct-chat-text">
+                        <div className="direct-chat-text">
                           {" "}
                           A small river named Duden flows by their place and
                           supplies it with the necessary.{" "}
                         </div>
                       </div>
-                      <div class="direct-chat-msg right">
-                        <div class="direct-chat-info clearfix">
+                      <div className="direct-chat-msg right">
+                        <div className="direct-chat-info clearfix">
                           {" "}
-                          <span class="direct-chat-name pull-right">
+                          <span className="direct-chat-name pull-right">
                             Sarah Bullock
                           </span>{" "}
-                          <span class="direct-chat-timestamp pull-left">
+                          <span className="direct-chat-timestamp pull-left">
                             23 Jan 2:05 pm
                           </span>{" "}
                         </div>
                         <img
-                          class="direct-chat-img"
+                          className="direct-chat-img"
                           src="dist/img/img3.jpg"
                           alt="user image"
                         />
 
-                        <div class="direct-chat-text">
+                        <div className="direct-chat-text">
                           {" "}
                           You better believe it!{" "}
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="box-footer">
+                  <div className="box-footer">
                     <form action="#" method="post">
-                      <div class="input-group">
+                      <div className="input-group">
                         <input
                           type="text"
                           name="message"
                           placeholder="Type Message ..."
-                          class="form-control"
+                          className="form-control"
                         />
-                        <span class="input-group-btn">
+                        <span className="input-group-btn">
                           <button
                             type="button"
-                            class="btn btn-warning btn-flat"
+                            className="btn btn-warning btn-flat"
                           >
                             Send
                           </button>
@@ -581,59 +580,59 @@ const Purchage = () => {
               </div>
             </div>
 
-            <div class="col-lg-6">
-              <div class="info-box">
-                <div class="box box-widget">
-                  <div class="box-header with-border">
-                    <div class="user-block">
+            <div className="col-lg-6">
+              <div className="info-box">
+                <div className="box box-widget">
+                  <div className="box-header with-border">
+                    <div className="user-block">
                       {" "}
                       <img
-                        class="img-circle"
+                        className="img-circle"
                         src="dist/img/img1.jpg"
                         alt="User Image"
                       />{" "}
-                      <span class="username">
+                      <span className="username">
                         <a href="#">Alexander Pierce</a>
                       </span>{" "}
-                      <span class="description">
+                      <span className="description">
                         Shared publicly - 8:15 AM Today
                       </span>{" "}
                     </div>
                   </div>
-                  <div class="box-body">
+                  <div className="box-body">
                     {" "}
                     <img
-                      class="img-responsive pad"
+                      className="img-responsive pad"
                       src="dist/img/img6.jpg"
                       alt="Photo"
                     />
                     <p>
                       I took this photo this morning. What do you guys think?
                     </p>
-                    <button type="button" class="btn btn-default btn-xs">
-                      <i class="fa fa-share"></i> Share
+                    <button type="button" className="btn btn-default btn-xs">
+                      <i className="fa fa-share"></i> Share
                     </button>
-                    <button type="button" class="btn btn-default btn-xs">
-                      <i class="fa fa-thumbs-o-up"></i> Like
+                    <button type="button" className="btn btn-default btn-xs">
+                      <i className="fa fa-thumbs-o-up"></i> Like
                     </button>
-                    <span class="pull-right text-muted">
+                    <span className="pull-right text-muted">
                       153 likes - 23 comments
                     </span>{" "}
                   </div>
-                  <div class="box-footer box-comments">
-                    <div class="box-comment">
+                  <div className="box-footer box-comments">
+                    <div className="box-comment">
                       {" "}
                       <img
-                        class="img-circle img-sm"
+                        className="img-circle img-sm"
                         src="dist/img/img3.jpg"
                         alt="User Image"
                       />
-                      <div class="comment-text">
+                      <div className="comment-text">
                         {" "}
-                        <span class="username">
+                        <span className="username">
                           {" "}
                           Maria Gonzales{" "}
-                          <span class="text-muted pull-right">
+                          <span className="text-muted pull-right">
                             12:15 PM Today
                           </span>{" "}
                         </span>{" "}
@@ -642,18 +641,18 @@ const Purchage = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="box-footer">
+                  <div className="box-footer">
                     <form action="#" method="post">
                       <img
-                        class="img-responsive img-circle img-sm"
+                        className="img-responsive img-circle img-sm"
                         src="dist/img/img4.jpg"
                         alt="Alt Text"
                       />
 
-                      <div class="img-push">
+                      <div className="img-push">
                         <input
                           type="text"
-                          class="form-control input-sm"
+                          className="form-control input-sm"
                           placeholder="Press enter to post comment"
                         />
                       </div>
@@ -663,216 +662,216 @@ const Purchage = () => {
               </div>
             </div>
 
-            <div class="col-lg-4 m-b-2">
+            <div className="col-lg-4 m-b-2">
               <div
                 id="carouselExampleControls3"
-                class="carousel slide"
+                className="carousel slide"
                 data-ride="carousel"
               >
-                <div class="carousel-inner" role="listbox">
-                  <div class="carousel-item active">
+                <div className="carousel-inner" role="listbox">
+                  <div className="carousel-item active">
                     {" "}
                     <img
                       src="dist/img/img7.jpg"
-                      class="img-responsive img-rounded"
+                      className="img-responsive img-rounded"
                       alt="User Image"
                     />
                   </div>
-                  <div class="carousel-item">
+                  <div className="carousel-item">
                     {" "}
                     <img
                       src="dist/img/img8.jpg"
-                      class="img-responsive img-rounded"
+                      className="img-responsive img-rounded"
                       alt="User Image"
                     />{" "}
                   </div>
-                  <div class="carousel-item">
+                  <div className="carousel-item">
                     {" "}
                     <img
                       src="dist/img/img9.jpg"
-                      class="img-responsive img-rounded"
+                      className="img-responsive img-rounded"
                       alt="User Image"
                     />{" "}
                   </div>
                 </div>
                 <a
-                  class="carousel-control-prev"
+                  className="carousel-control-prev"
                   href="#carouselExampleControls3"
                   role="button"
                   data-slide="prev"
                 >
                   {" "}
                   <span
-                    class="carousel-control-prev-icon"
+                    className="carousel-control-prev-icon"
                     aria-hidden="true"
                   ></span>{" "}
-                  <span class="sr-only">Previous</span>{" "}
+                  <span className="sr-only">Previous</span>{" "}
                 </a>{" "}
                 <a
-                  class="carousel-control-next"
+                  className="carousel-control-next"
                   href="#carouselExampleControls3"
                   role="button"
                   data-slide="next"
                 >
                   {" "}
                   <span
-                    class="carousel-control-next-icon"
+                    className="carousel-control-next-icon"
                     aria-hidden="true"
                   ></span>{" "}
-                  <span class="sr-only">Next</span>{" "}
+                  <span className="sr-only">Next</span>{" "}
                 </a>{" "}
               </div>
             </div>
-            <div class="col-lg-4">
-              <div class="soci-wid-box bg-twitter m-b-3">
+            <div className="col-lg-4">
+              <div className="soci-wid-box bg-twitter m-b-3">
                 <div
                   id="carouselExampleControls"
-                  class="carousel slide"
+                  className="carousel slide"
                   data-ride="carousel"
                 >
-                  <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item active">
-                      <div class="col-lg-12 text-center">
-                        <div class="sco-icon">
-                          <i class="ti-twitter-alt"></i>
+                  <div className="carousel-inner" role="listbox">
+                    <div className="carousel-item active">
+                      <div className="col-lg-12 text-center">
+                        <div className="sco-icon">
+                          <i className="ti-twitter-alt"></i>
                         </div>
                         <p>
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Integer nec odio praesent libero sed cursus
                           ante.
                         </p>
-                        <p class="text-italic pt-1">- John Doe -</p>
+                        <p className="text-italic pt-1">- John Doe -</p>
                       </div>
                     </div>
-                    <div class="carousel-item">
-                      <div class="col-lg-12 text-center">
-                        <div class="sco-icon">
-                          <i class="ti-twitter-alt"></i>
+                    <div className="carousel-item">
+                      <div className="col-lg-12 text-center">
+                        <div className="sco-icon">
+                          <i className="ti-twitter-alt"></i>
                         </div>
                         <p>
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Integer nec odio praesent libero sed cursus
                           ante.
                         </p>
-                        <p class="text-italic pt-1">- John Doe -</p>
+                        <p className="text-italic pt-1">- John Doe -</p>
                       </div>
                     </div>
-                    <div class="carousel-item">
-                      <div class="col-lg-12 text-center">
-                        <div class="sco-icon">
-                          <i class="ti-twitter-alt"></i>
+                    <div className="carousel-item">
+                      <div className="col-lg-12 text-center">
+                        <div className="sco-icon">
+                          <i className="ti-twitter-alt"></i>
                         </div>
                         <p>
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Integer nec odio praesent libero sed cursus
                           ante.
                         </p>
-                        <p class="text-italic pt-1">- John Doe -</p>
+                        <p className="text-italic pt-1">- John Doe -</p>
                       </div>
                     </div>
                   </div>
                   <a
-                    class="carousel-control-prev"
+                    className="carousel-control-prev"
                     href="#carouselExampleControls"
                     role="button"
                     data-slide="prev"
                   >
                     {" "}
                     <span
-                      class="carousel-control-prev-icon"
+                      className="carousel-control-prev-icon"
                       aria-hidden="true"
                     ></span>{" "}
-                    <span class="sr-only">Previous</span>{" "}
+                    <span className="sr-only">Previous</span>{" "}
                   </a>{" "}
                   <a
-                    class="carousel-control-next"
+                    className="carousel-control-next"
                     href="#carouselExampleControls"
                     role="button"
                     data-slide="next"
                   >
                     {" "}
                     <span
-                      class="carousel-control-next-icon"
+                      className="carousel-control-next-icon"
                       aria-hidden="true"
                     ></span>{" "}
-                    <span class="sr-only">Next</span>{" "}
+                    <span className="sr-only">Next</span>{" "}
                   </a>{" "}
                 </div>
               </div>
             </div>
-            <div class="col-lg-4">
-              <div class="soci-wid-box bg-facebook m-b-3">
+            <div className="col-lg-4">
+              <div className="soci-wid-box bg-facebook m-b-3">
                 <div
                   id="carouselExampleControls1"
-                  class="carousel slide"
+                  className="carousel slide"
                   data-ride="carousel"
                 >
-                  <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item active">
-                      <div class="col-lg-12 text-center">
-                        <div class="sco-icon">
-                          <i class="ti-facebook"></i>
+                  <div className="carousel-inner" role="listbox">
+                    <div className="carousel-item active">
+                      <div className="col-lg-12 text-center">
+                        <div className="sco-icon">
+                          <i className="ti-facebook"></i>
                         </div>
                         <p>
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Integer nec odio praesent libero sed cursus
                           ante.
                         </p>
-                        <p class="text-italic pt-1">- John Doe -</p>
+                        <p className="text-italic pt-1">- John Doe -</p>
                       </div>
                     </div>
-                    <div class="carousel-item">
-                      <div class="col-lg-12 text-center">
-                        <div class="sco-icon">
-                          <i class="ti-facebook"></i>
+                    <div className="carousel-item">
+                      <div className="col-lg-12 text-center">
+                        <div className="sco-icon">
+                          <i className="ti-facebook"></i>
                         </div>
                         <p>
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Integer nec odio praesent libero sed cursus
                           ante.
                         </p>
-                        <p class="text-italic pt-1">- John Doe -</p>
+                        <p className="text-italic pt-1">- John Doe -</p>
                       </div>
                     </div>
-                    <div class="carousel-item">
-                      <div class="col-lg-12 text-center">
-                        <div class="sco-icon">
-                          <i class="ti-facebook"></i>
+                    <div className="carousel-item">
+                      <div className="col-lg-12 text-center">
+                        <div className="sco-icon">
+                          <i className="ti-facebook"></i>
                         </div>
                         <p>
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Integer nec odio praesent libero sed cursus
                           ante.
                         </p>
-                        <p class="text-italic pt-1">- John Doe -</p>
+                        <p className="text-italic pt-1">- John Doe -</p>
                       </div>
                     </div>
                   </div>
                   <a
-                    class="carousel-control-prev"
+                    className="carousel-control-prev"
                     href="#carouselExampleControls1"
                     role="button"
                     data-slide="prev"
                   >
                     {" "}
                     <span
-                      class="carousel-control-prev-icon"
+                      className="carousel-control-prev-icon"
                       aria-hidden="true"
                     ></span>{" "}
-                    <span class="sr-only">Previous</span>{" "}
+                    <span className="sr-only">Previous</span>{" "}
                   </a>{" "}
                   <a
-                    class="carousel-control-next"
+                    className="carousel-control-next"
                     href="#carouselExampleControls1"
                     role="button"
                     data-slide="next"
                   >
                     {" "}
                     <span
-                      class="carousel-control-next-icon"
+                      className="carousel-control-next-icon"
                       aria-hidden="true"
                     ></span>{" "}
-                    <span class="sr-only">Next</span>{" "}
+                    <span className="sr-only">Next</span>{" "}
                   </a>{" "}
                 </div>
               </div>

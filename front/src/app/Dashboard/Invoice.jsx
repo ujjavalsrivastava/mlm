@@ -91,7 +91,7 @@ const Invoice = () => {
 
                 {data &&
                   data.map((row, i) => (
-                    <tr>
+                    <tr key={`key=${i}`}>
                       <th scope="row">{i + 1}</th>
                       <td>Digital Entrepreneurship Bundles</td>
                       <td>2499</td>
@@ -138,7 +138,8 @@ const Invoice = () => {
                     </p>
                     <p>
                       <strong>Invoice Date: </strong>
-                      {data[0]?.timestamp && convertInvoiceDateFormat(data[0]?.timestamp)}
+                      {data[0]?.timestamp &&
+                        convertInvoiceDateFormat(data[0]?.timestamp)}
                     </p>
                     <p>
                       <strong>Invoice Amount: </strong> ₹2948.82

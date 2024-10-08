@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { fetchProfile } from "../../store/profileReducer";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,6 @@ const header = () => {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile?.data || {});
   const logout = () => {
-
     const userConfirmed = window.confirm("Are you sure you want to proceed?");
     if (userConfirmed) {
       localStorage.removeItem("token");
@@ -19,7 +18,6 @@ const header = () => {
       // User clicked Cancel
       console.log("User canceled.");
     }
-   
   };
   const [showSidebar, setShowSidebar] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState([]);
@@ -68,16 +66,16 @@ const header = () => {
 
   return (
     <>
-      <div class="tf-top-bar flex items-center justify-center">
+      <div className="tf-top-bar flex items-center justify-center">
         <p>A Unit of MD Digital Duniyaa Pvt. Ltd.</p>
       </div>
 
-      <header id="header_main" class="header">
-        <div class="header-inner">
-          <div class="header-inner-wrap">
-            <div class="header-left">
+      <header id="header_main" className="header">
+        <div className="header-inner">
+          <div className="header-inner-wrap">
+            <div className="header-left">
               <a
-                class="mobile-nav-toggler mobile-button d-lg-none flex"
+                className="mobile-nav-toggler mobile-button d-lg-none flex"
                 href="#"
                 onClick={() => handleNavbar(true)}
               ></a>
@@ -91,13 +89,13 @@ const header = () => {
                 </Link>
               </div>
             </div>
-            <div class="header-center flex-shrink-0">
-              <nav class="main-menu">
-                <ul class="navigation">
+            <div className="header-center flex-shrink-0">
+              <nav className="main-menu">
+                <ul className="navigation">
                   <li>
                     <Link to={"/"}>Home</Link>
                   </li>
-                  <li >
+                  <li>
                     <Link to="/#course">Our Course</Link>
                   </li>
                   <li>
@@ -109,47 +107,47 @@ const header = () => {
                 </ul>
               </nav>
             </div>
-            <div class="header-right justify-end">
-           
-              <div class="header-btn">
-                
-      {profile?._id ? (
-         <div class="header-register">
-         <Link to={"/my-course"}>
-           <a href="#" class="tf-button-default active header-text">
-             My Account
-           </a>
-         </Link>
-       </div>
-      ) : (
-<>
-<div class="header-login">
-                  <Link to={"/login"}>
-                    <a href="#" class="tf-button-default header-text">
-                      Log In
-                    </a>
-                  </Link>
-                </div>
-<div class="header-register">
-        <Link to={"/register"}>
-          <a href="#" class="tf-button-default active header-text">
-            Sign Up
-          </a>
-        </Link>
-      </div>
-      <div class="header-join d-lg-none flex">
-        <Link to={"/login"}>
-          <a href="#" class="fs-15">
-            Join
-          </a>
-        </Link>
-      </div>
-</>
-        
-
-      )}
-
-             
+            <div className="header-right justify-end">
+              <div className="header-btn">
+                {profile?._id ? (
+                  <div className="header-register">
+                    <Link to={"/my-course"}>
+                      <a
+                        href="#"
+                        className="tf-button-default active header-text"
+                      >
+                        My Account
+                      </a>
+                    </Link>
+                  </div>
+                ) : (
+                  <>
+                    <div className="header-login">
+                      <Link to={"/login"}>
+                        <a href="#" className="tf-button-default header-text">
+                          Log In
+                        </a>
+                      </Link>
+                    </div>
+                    <div className="header-register">
+                      <Link to={"/register"}>
+                        <a
+                          href="#"
+                          className="tf-button-default active header-text"
+                        >
+                          Sign Up
+                        </a>
+                      </Link>
+                    </div>
+                    <div className="header-join d-lg-none flex">
+                      <Link to={"/login"}>
+                        <a href="#" className="fs-15">
+                          Join
+                        </a>
+                      </Link>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -162,18 +160,20 @@ const header = () => {
           }}
         >
           <a
-            class="close"
+            className="close"
             aria-label="Close menu"
             href="#"
             onClick={() => handleNavbar(false)}
           >
-            <i class="flaticon-close-1"></i>
+            <i className="flaticon-close-1"></i>
           </a>
           <p className="menu_heading_element">{menuHeading}</p>
           <hr />
           <ul>
             {menu.map((menuItem) => (
-              <>{renderTitle(menuItem)}</>
+              <React.Fragment key={`key=${idx}`}>
+                {renderTitle(menuItem)}
+              </React.Fragment>
             ))}
           </ul>
         </nav>

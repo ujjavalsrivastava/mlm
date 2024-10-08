@@ -27,41 +27,41 @@ const SideBar = () => {
 
   return (
     <>
-      <aside class="main-sidebar">
-        <div class="sidebar">
-          <div class="user-panel">
-            <div class="image text-center">
+      <aside className="main-sidebar">
+        <div className="sidebar">
+          <div className="user-panel">
+            <div className="image text-center">
               <img
                 src={profile?.image ? URL.createObjectURL(profile.image) : logo}
-                class="img-circle"
+                className="img-circle"
                 alt="User Image"
               />
             </div>
-            <div class="info">
+            <div className="info">
               <p style={{ textTransform: "capitalize" }}>
                 {profile && profile.name}
               </p>
               <a href="#">
-                <i class="fa fa-cog"></i>
+                <i className="fa fa-cog"></i>
               </a>
               <a href="#">
-                <i class="fa fa-envelope-o"></i>
+                <i className="fa fa-envelope-o"></i>
               </a>
               <a href="javascript:void(0)" onClick={logout}>
-                <i class="fa fa-power-off"></i>
+                <i className="fa fa-power-off"></i>
               </a>
             </div>
           </div>
 
-          <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">PERSONAL</li>
+          <ul className="sidebar-menu" data-widget="tree">
+            <li className="header">PERSONAL</li>
             {menuItems.map((item) => (
               <li
                 key={item.title}
                 className={item.url === pathname ? "selected" : ""}
               >
                 <Link to={item.url}>
-                  <i class={item.icon} style={{ marginRight: "7px" }}></i>
+                  <i className={item.icon} style={{ marginRight: "7px" }}></i>
                   {item.title}
                 </Link>
               </li>
@@ -72,7 +72,7 @@ const SideBar = () => {
                 <li className={pathname === "/level" ? "selected" : ""}>
                   <Link to={"/level"}>
                     <i
-                      class="fa fa-level-up"
+                      className="fa fa-level-up"
                       aria-hidden="true"
                       style={{ marginRight: "7px" }}
                     ></i>

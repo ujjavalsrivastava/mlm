@@ -27,7 +27,9 @@ const getUserProductsAndBalance = async (req, res) => {
     UserPurchase.findOne({ userId })
   );
   if (error) {
-    logger.error(`getUserProductsAndBalance ${JSON.stringify(error)}`);
+    logger.error(
+      `getUserProductsAndBalance ${userId} ${JSON.stringify(error)}`
+    );
     return res.status(400).json({ error });
   }
   res.json(productsAndBalance);
@@ -58,7 +60,9 @@ const getUserPercentDistribution = async (req, res) => {
     });
   }
   if (error) {
-    logger.error(`getUserPercentDistribution ${JSON.stringify(error)}`);
+    logger.error(
+      `getUserPercentDistribution ${userId} ${JSON.stringify(error)}`
+    );
     return res.status(400).json({ error });
   }
   res.json({ oneDayEarning, oneWeekEarning, oneMonthEarning, overallEarning });
@@ -76,7 +80,7 @@ const getUserAccountAndPurcheseHistory = async (req, res) => {
 
   if (productPurchaseError || percentDistributionError) {
     logger.error(
-      `getUserAccountAndPurcheseHistory ${JSON.stringify({
+      `getUserAccountAndPurcheseHistory ${userId} ${JSON.stringify({
         percentDistributionError,
         productPurchaseError,
       })}`
@@ -98,7 +102,7 @@ const getUserTotalEarning = async (req, res) => {
     );
 
     if (error) {
-      logger.error(`getUserTotalEarning ${error}`);
+      logger.error(`getUserTotalEarning ${userId} ${error}`);
       return res.status(400).json(error);
     }
 
@@ -116,7 +120,7 @@ const getUserTotalEarning = async (req, res) => {
     return res.json(distributions);
   }
   logger.error(
-    `getUserTotalEarning "userIds should be comma seperated user ids in query params"`
+    `getUserTotalEarning ${userId} userIds should be comma seperated user ids in query params`
   );
   res.status(400).json({
     error: "userIds should be comma seperated user ids in query params",

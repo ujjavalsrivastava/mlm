@@ -1,11 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLowerProfiles } from "../../store/lowerLevel";
+import { useLocation } from "react-router-dom";
+
 import "./Tree.css";
 import { axios } from "../../helper/httpHelper";
 
 const Tree = () => {
   const lowerProfile = useSelector((state) => state.levels);
+
+  const { search } = useLocation();
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const query = new URLSearchParams(search);
+    const userId = query.get("user");
+    if (Array.isArray(lowerProfile?.data)) {
+      if (userId) {
+        const findUser = lowerProfile.data.find((u) => u.id === userId);
+        findUser && setData([findUser]);
+      } else {
+        setData(lowerProfile.data);
+      }
+    }
+  }, [lowerProfile, search]);
 
   const [showBal, setShowBal] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -17,7 +36,6 @@ const Tree = () => {
     setShowModal(true);
   };
 
-  console.log(showModal);
   useEffect(() => {
     if (lowerProfile.status !== "succeeded") {
       dispatch(fetchLowerProfiles());
@@ -58,9 +76,9 @@ const Tree = () => {
   return (
     <>
       <div className="content-wrapper treeContainerElement">
-        <div class="content-header sty-one">
-          <h1 class="text-black">Hierarchy</h1>
-          <ol class="breadcrumb">
+        <div className="content-header sty-one">
+          <h1 className="text-black">Hierarchy</h1>
+          <ol className="breadcrumb">
             <li>
               <a href="#" style={{ color: "black" }}>
                 Home / Hierarchy
@@ -69,9 +87,9 @@ const Tree = () => {
           </ol>
         </div>
         <div className="custom-tree tree-sidebar">
-          <div class="org-chart">
-            {lowerProfile?.data?.map((rootNode) => (
-              <ul>{renderNode(rootNode)}</ul>
+          <div className="org-chart">
+            {data?.map((rootNode, idx) => (
+              <ul key={`key=${idx}`}>{renderNode(rootNode)}</ul>
             ))}
           </div>
         </div>

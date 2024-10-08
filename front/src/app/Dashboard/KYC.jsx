@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { axios } from "../../helper/httpHelper";
 import { toast } from "react-toastify";
- 
+
 const requiredFields = [
   { field: "fullname", name: "Fullname" },
   { field: "mobile", name: "Mobile Number" },
@@ -65,10 +65,10 @@ const KYC = () => {
 
   return (
     <>
-      <div class="content-wrapper">
-        <div class="content-header sty-one">
-          <h1 class="text-black">KYC</h1>
-          <ol class="breadcrumb">
+      <div className="content-wrapper">
+        <div className="content-header sty-one">
+          <h1 className="text-black">KYC</h1>
+          <ol className="breadcrumb">
             <li>
               <a href="#" style={{ color: "black" }}>
                 Home / KYC Details{" "}
@@ -77,21 +77,21 @@ const KYC = () => {
           </ol>
         </div>
 
-        <div class="content">
-          <div class="row m-t-3">
-            <div class="col-lg-12">
-              <div class="card ">
-                <div class="card-header bg-blue">
-                  <h5 class="text-white m-b-0">User KYC</h5>
+        <div className="content">
+          <div className="row m-t-3">
+            <div className="col-lg-12">
+              <div className="card ">
+                <div className="card-header bg-blue">
+                  <h5 className="text-white m-b-0">User KYC</h5>
                 </div>
-                <div class="card-body">
+                <div className="card-body">
                   <form onSubmit={saveKycData}>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Full Name</label>
+                    <div className="row">
+                      <div className="col-md-4">
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Full Name</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="fullname"
                             placeholder="Full name..."
@@ -101,11 +101,11 @@ const KYC = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-4">
-                        <div class="form-group has-feedback">
-                          <label class="control-label">E-mail</label>
+                      <div className="col-md-4">
+                        <div className="form-group has-feedback">
+                          <label className="control-label">E-mail</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="email"
                             disabled
@@ -115,11 +115,11 @@ const KYC = () => {
                           />
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Mobile Number</label>
+                      <div className="col-md-4">
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Mobile Number</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="number"
                             name="mobile"
                             placeholder="Mobile..."
@@ -128,11 +128,11 @@ const KYC = () => {
                           />
                         </div>
                       </div>
-                      <div class="col-md-4" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Document Type</label>
+                      <div className="col-md-4" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Document Type</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="document"
                             value={kyc.document}
@@ -140,11 +140,11 @@ const KYC = () => {
                           />
                         </div>
                       </div>
-                      <div class="col-md-4" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Addhar Number</label>
+                      <div className="col-md-4" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Addhar Number</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="number"
                             name="addharNo"
                             value={kyc.addharNo}
@@ -153,11 +153,11 @@ const KYC = () => {
                           />
                         </div>
                       </div>
-                      <div class="col-md-4" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Addhar Name</label>
+                      <div className="col-md-4" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Addhar Name</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="addharName"
                             value={kyc.addharName}
@@ -166,11 +166,11 @@ const KYC = () => {
                           />
                         </div>
                       </div>
-                      <div class="col-md-4" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Pan Number</label>
+                      <div className="col-md-4" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Pan Number</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="panNo"
                             value={kyc.panNo}
@@ -179,11 +179,11 @@ const KYC = () => {
                           />
                         </div>
                       </div>
-                      <div class="col-md-4" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Pan Name</label>
+                      <div className="col-md-4" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Pan Name</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="panName"
                             value={kyc.panName}
@@ -193,11 +193,11 @@ const KYC = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-4" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Bank Name</label>
+                      <div className="col-md-4" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Bank Name</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="BankName"
                             value={kyc.BankName}
@@ -207,13 +207,13 @@ const KYC = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-4" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">
+                      <div className="col-md-4" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">
                             Account Holder Name
                           </label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="accHolderName"
                             value={kyc.accHolderName}
@@ -222,11 +222,13 @@ const KYC = () => {
                           />
                         </div>
                       </div>
-                      <div class="col-md-4" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Account Number</label>
+                      <div className="col-md-4" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">
+                            Account Number
+                          </label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="number"
                             name="accNo"
                             value={kyc.accNo}
@@ -235,11 +237,11 @@ const KYC = () => {
                           />
                         </div>
                       </div>
-                      <div class="col-md-4" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">IFSC code</label>
+                      <div className="col-md-4" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">IFSC code</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="ifscCode"
                             value={kyc.ifscCode}
@@ -249,19 +251,19 @@ const KYC = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-12">
+                      <div className="col-md-12">
                         <hr />
 
                         {/* <h6>Bank Detatils</h6> */}
-                        <div class="card-header bg-blue">
-                          <h6 class="text-white m-b-0">Bank Detatils</h6>
+                        <div className="card-header bg-blue">
+                          <h6 className="text-white m-b-0">Bank Detatils</h6>
                         </div>
                       </div>
-                      <div class="col-md-4" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Bank Name</label>
+                      <div className="col-md-4" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Bank Name</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="Inbank"
                             value={kyc.Inbank}
@@ -269,13 +271,13 @@ const KYC = () => {
                           />
                         </div>
                       </div>
-                      <div class="col-md-4" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">
+                      <div className="col-md-4" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">
                             Account Holder Name
                           </label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="InbankName"
                             value={kyc.InbankName}
@@ -283,11 +285,13 @@ const KYC = () => {
                           />
                         </div>
                       </div>
-                      <div class="col-md-4" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Account Number</label>
+                      <div className="col-md-4" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">
+                            Account Number
+                          </label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="number"
                             name="InaccountNumber"
                             value={kyc.InaccountNumber}
@@ -295,11 +299,11 @@ const KYC = () => {
                           />
                         </div>
                       </div>
-                      <div class="col-md-4" style={{ marginTop: "22px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">IFSC Code</label>
+                      <div className="col-md-4" style={{ marginTop: "22px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">IFSC Code</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="InifscCode"
                             value={kyc.InifscCode}
@@ -307,13 +311,13 @@ const KYC = () => {
                           />
                         </div>
                       </div>
-                      <div class="col-md-4" style={{ marginTop: "22px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">
+                      <div className="col-md-4" style={{ marginTop: "22px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">
                             Upload Cancel Cheque / Passbook / Bank
                           </label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="file"
                             name="file"
                             onChange={handleFile}
@@ -321,27 +325,30 @@ const KYC = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-4" style={{ marginTop: "22px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">OTP Code</label>
+                      <div className="col-md-4" style={{ marginTop: "22px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">OTP Code</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="text"
                             name="otp"
                             onChange={handleChange}
                           />
                         </div>
                       </div>
-                      <div class="col-md-12 p-3 " style={{ marginTop: "20px" }}>
+                      <div
+                        className="col-md-12 p-3 "
+                        style={{ marginTop: "20px" }}
+                      >
                         <button
                           type="submit"
-                          class="btn btn-success"
+                          className="btn btn-success"
                           disabled={error}
                         >
                           Update Details
                         </button>
                       </div>
-                      <div class="col-md-12 p-3">&nbsp;</div>
+                      <div className="col-md-12 p-3">&nbsp;</div>
                     </div>
                   </form>
                 </div>

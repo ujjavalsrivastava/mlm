@@ -1,10 +1,10 @@
             <!-- section why -->
-            <section class="section-why tf-spacing-23 pt-0">
-                <div class="tf-container">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="icons-box wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="icons has-ellipse">
+            <section className="section-why tf-spacing-23 pt-0">
+                <div className="tf-container">
+                    <div className="row">
+                        <div className="col-sm-4">
+                            <div className="icons-box wow fadeInUp" data-wow-delay="0.1s">
+                                <div className="icons has-ellipse">
                                     <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -64,9 +64,9 @@
                                     </svg>
 
                                 </div>
-                                <div class="content">
+                                <div className="content">
                                     <h4>
-                                        <a class="fw-5" href="#">
+                                        <a className="fw-5" href="#">
                                             Why Digital Duniyaa
                                         </a>
                                     </h4>
@@ -76,9 +76,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="icons-box wow fadeInUp" data-wow-delay="0.2s">
-                                <div class="icons has-ellipse">
+                        <div className="col-sm-4">
+                            <div className="icons-box wow fadeInUp" data-wow-delay="0.2s">
+                                <div className="icons has-ellipse">
                                     <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -108,9 +108,9 @@
                                     </svg>
 
                                 </div>
-                                <div class="content">
+                                <div className="content">
                                     <h4>
-                                        <a class="fw-5" href="#">
+                                        <a className="fw-5" href="#">
                                             Our Vision
                                         </a>
                                     </h4>
@@ -120,9 +120,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="icons-box wow fadeInUp" data-wow-delay="0.45s">
-                                <div class="icons has-ellipse">
+                        <div className="col-sm-4">
+                            <div className="icons-box wow fadeInUp" data-wow-delay="0.45s">
+                                <div className="icons has-ellipse">
                                 <svg width="50" height="61" viewBox="0 0 50 51" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -162,9 +162,9 @@
                                         </svg>
 
                                 </div>
-                                <div class="content">
+                                <div className="content">
                                     <h4>
-                                        <a class="fw-5" href="#">
+                                        <a className="fw-5" href="#">
                                             About Us
                                         </a>
                                     </h4>

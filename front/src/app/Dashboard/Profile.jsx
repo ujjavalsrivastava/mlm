@@ -72,10 +72,10 @@ const Profile = () => {
 
   return (
     <>
-      <div class="content-wrapper">
-        <div class="content-header sty-one">
-          <h1 class="text-black">Profile</h1>
-          <ol class="breadcrumb">
+      <div className="content-wrapper">
+        <div className="content-header sty-one">
+          <h1 className="text-black">Profile</h1>
+          <ol className="breadcrumb">
             <li>
               <a href="#" style={{ color: "black" }}>
                 Home / Profile
@@ -84,28 +84,28 @@ const Profile = () => {
           </ol>
         </div>
 
-        <div class="content">
-          <div class="row m-t-3">
-            <div class="col-lg-12">
-              <div class="card ">
-                <div class="card-header bg-blue">
-                  <h5 class="text-white m-b-0">Sponsor Information</h5>
+        <div className="content">
+          <div className="row m-t-3">
+            <div className="col-lg-12">
+              <div className="card ">
+                <div className="card-header bg-blue">
+                  <h5 className="text-white m-b-0">Sponsor Information</h5>
                 </div>
-                <div class="card-body">
+                <div className="card-body">
                   <form>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Sponsor Name</label>
-                          <input class="form-control" type="text" />
+                    <div className="row">
+                      <div className="col-md-6">
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Sponsor Name</label>
+                          <input className="form-control" type="text" />
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group has-feedback">
-                          <label class="control-label">
+                      <div className="col-md-6">
+                        <div className="form-group has-feedback">
+                          <label className="control-label">
                             Sponsor Mobile No.
                           </label>
-                          <input class="form-control" type="text" />
+                          <input className="form-control" type="text" />
                         </div>
                       </div>
                     </div>
@@ -114,25 +114,25 @@ const Profile = () => {
               </div>
             </div>
             <hr />
-            <div class="col-lg-12">
-              <div class="card ">
+            <div className="col-lg-12">
+              <div className="card ">
                 <div
-                  class="card-header"
+                  className="card-header"
                   style={{ background: "rgb(88 103 221 / 72%)" }}
                 >
-                  <h5 class="text-white m-b-0">Personal Information</h5>
+                  <h5 className="text-white m-b-0">Personal Information</h5>
                   <p style={{ color: "white" }}>
                     Kindly complete your KYC, to change the name.
                   </p>
                 </div>
-                <div class="card-body">
+                <div className="card-body">
                   <form onSubmit={saveProfile}>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Name</label>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Name</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             name="name"
                             type="text"
                             required
@@ -142,11 +142,11 @@ const Profile = () => {
                           />
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Login Id</label>
+                      <div className="col-md-6">
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Login Id</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             value={profile && profile.email}
                             type="text"
                             disabled
@@ -154,11 +154,11 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Email Id</label>
+                      <div className="col-md-6" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Email Id</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             value={profile && profile.email}
                             type="text"
                             name="email"
@@ -167,11 +167,11 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Mobile No</label>
+                      <div className="col-md-6" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Mobile No</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             name="mobile"
                             value={profile && profile.mobile}
                             onChange={handle}
@@ -180,11 +180,11 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Gender</label>
+                      <div className="col-md-6" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Gender</label>
                           <select
-                            class="form-control"
+                            className="form-control"
                             name="gender"
                             onChange={handle}
                           >
@@ -202,11 +202,11 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Date of Birth</label>
+                      <div className="col-md-6" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Date of Birth</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             value={profile && profile.dob}
                             type="date"
                             name="dob"
@@ -215,11 +215,11 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Country</label>
+                      <div className="col-md-6" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Country</label>
                           <select
-                            class="form-control"
+                            className="form-control"
                             name="country"
                             onChange={handle}
                           >
@@ -232,18 +232,19 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">State</label>
+                      <div className="col-md-6" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">State</label>
                           <select
-                            class="form-control"
+                            className="form-control"
                             name="state"
                             onChange={handle}
                           >
                             <option>Select Option</option>
                             {Array.isArray(state) &&
-                              state.map((row) => (
+                              state.map((row, idx) => (
                                 <option
+                                  key={`key=${idx}`}
                                   selected={
                                     row.name == profile.state ? true : false
                                   }
@@ -255,11 +256,11 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">City</label>
+                      <div className="col-md-6" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">City</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             value={profile && profile.city}
                             type="text"
                             name="city"
@@ -268,11 +269,11 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Pin Code</label>
+                      <div className="col-md-6" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Pin Code</label>
                           <input
-                            class="form-control"
+                            className="form-control"
                             value={profile && profile.pincode}
                             type="number"
                             name="pincode"
@@ -281,11 +282,11 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Occupation</label>
+                      <div className="col-md-6" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Occupation</label>
                           <select
-                            class="form-control"
+                            className="form-control"
                             name="occupation"
                             onChange={handle}
                           >
@@ -414,11 +415,11 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-6" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Language</label>
+                      <div className="col-md-6" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Language</label>
                           <select
-                            class="form-control"
+                            className="form-control"
                             name="occupation"
                             onChange={handle}
                           >
@@ -427,11 +428,11 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-12" style={{ marginTop: "20px" }}>
-                        <div class="form-group has-feedback">
-                          <label class="control-label">Address</label>
+                      <div className="col-md-12" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Address</label>
                           <textarea
-                            class="form-control"
+                            className="form-control"
                             name="address"
                             onChange={handle}
                             value={profile && profile.address}
@@ -439,13 +440,13 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      <div class="col-md-12 p-3">
-                        <button type="submit" class="btn btn-success">
+                      <div className="col-md-12 p-3">
+                        <button type="submit" className="btn btn-success">
                           Submit
                         </button>
                       </div>
 
-                      <div class="col-md-12 p-3">&nbsp;</div>
+                      <div className="col-md-12 p-3">&nbsp;</div>
                     </div>
                   </form>
                 </div>

@@ -1,27 +1,27 @@
-<section class="section-faq-page tf-spacing-23 pb-0">
-                <div class="tf-container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="page-faq-content faq-1 ">
+<section className="section-faq-page tf-spacing-23 pb-0">
+                <div className="tf-container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="page-faq-content faq-1 ">
 
-                                <div class="heading-section">
-                                    <h2 class="font-cardo wow fadeInUp" data-wow-delay="0s">Frequently Asked Questions</h2>
-                                    <p class="fs-15 wow fadeInUp" data-wow-delay="0s">Answers to the burning questions in your mind.</p>
+                                <div className="heading-section">
+                                    <h2 className="font-cardo wow fadeInUp" data-wow-delay="0s">Frequently Asked Questions</h2>
+                                    <p className="fs-15 wow fadeInUp" data-wow-delay="0s">Answers to the burning questions in your mind.</p>
                                 </div>
-                                <div class="tf-accordion-default tf-accordion " id="accordionExample">
-                                    <div class="tf-accordion-item wow fadeInUp" data-wow-delay="0s">
-                                        <h3 class="tf-accordion-header">
-                                            <div class="tf-accordion-button" type="button" data-bs-toggle="collapse"
+                                <div className="tf-accordion-default tf-accordion " id="accordionExample">
+                                    <div className="tf-accordion-item wow fadeInUp" data-wow-delay="0s">
+                                        <h3 className="tf-accordion-header">
+                                            <div className="tf-accordion-button" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#collapseOne" aria-expanded="false"
                                                 aria-controls="collapseOne">
-                                                <span class="rectangle-314"></span>
+                                                <span className="rectangle-314"></span>
                                                 What is Digital Duniyaa?
                                             </div>
                                         </h3>
-                                        <div id="collapseOne" class="tf-accordion-collapse collapse show"
+                                        <div id="collapseOne" className="tf-accordion-collapse collapse show"
                                             data-bs-parent="#accordionExample">
-                                            <div class="tf-accordion-content">
-                                                <p class="fs-15">
+                                            <div className="tf-accordion-content">
+                                                <p className="fs-15">
                                                 MD Digital Duniyaa pvt ltd. is a leading digital solutions company, 
                                                 dedicated to empowering youth. We are giving digital income opportunities to the youth by skilling them. Our services include digital marketing, web design, social media management, branding, sales, and academic tuition classes. 
 
@@ -29,18 +29,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tf-accordion-item wow fadeInUp" data-wow-delay="0s">
-                                        <h3 class="tf-accordion-header">
-                                            <span class="tf-accordion-button collapsed" type="button"
+                                    <div className="tf-accordion-item wow fadeInUp" data-wow-delay="0s">
+                                        <h3 className="tf-accordion-header">
+                                            <span className="tf-accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                                 aria-expanded="true" aria-controls="collapseTwo">
-                                                <span class="rectangle-314"></span>
+                                                <span className="rectangle-314"></span>
                                                 What opportunity does Digital Duniyaa provide?
                                             </span>
                                         </h3>
-                                        <div id="collapseTwo" class="tf-accordion-collapse collapse"
+                                        <div id="collapseTwo" className="tf-accordion-collapse collapse"
                                             data-bs-parent="#accordionExample">
-                                            <div class="tf-accordion-content">
+                                            <div className="tf-accordion-content">
                                                 <p>
 
                                                 Digital Duniyaa offers numerous opportunities for skilled youth, 
@@ -51,18 +51,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tf-accordion-item wow fadeInUp" data-wow-delay="0s">
-                                        <h3 class="tf-accordion-header">
-                                            <span class="tf-accordion-button collapsed" type="button"
+                                    <div className="tf-accordion-item wow fadeInUp" data-wow-delay="0s">
+                                        <h3 className="tf-accordion-header">
+                                            <span className="tf-accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                                 aria-expanded="true" aria-controls="collapseThree">
-                                                <span class="rectangle-314"></span>
+                                                <span className="rectangle-314"></span>
                                                 What kind of skill-based courses or classes do you provide?
                                             </span>
                                         </h3>
-                                        <div id="collapseThree" class="tf-accordion-collapse collapse"
+                                        <div id="collapseThree" className="tf-accordion-collapse collapse"
                                             data-bs-parent="#accordionExample">
-                                            <div class="tf-accordion-content">
+                                            <div className="tf-accordion-content">
                                                 <p>
 
                                                 Digital Duniyaa is providing you Skill based courses like Digital Marketing, 
@@ -72,18 +72,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tf-accordion-item wow fadeInUp" data-wow-delay="0s">
-                                        <h3 class="tf-accordion-header">
-                                            <span class="tf-accordion-button collapsed" type="button"
+                                    <div className="tf-accordion-item wow fadeInUp" data-wow-delay="0s">
+                                        <h3 className="tf-accordion-header">
+                                            <span className="tf-accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseFour"
                                                 aria-expanded="true" aria-controls="collapseFour">
-                                                <span class="rectangle-314"></span>
+                                                <span className="rectangle-314"></span>
                                                 Is Digital Duniyaa government verified?
                                             </span>
                                         </h3>
-                                        <div id="collapseFour" class="tf-accordion-collapse collapse"
+                                        <div id="collapseFour" className="tf-accordion-collapse collapse"
                                             data-bs-parent="#accordionExample">
-                                            <div class="tf-accordion-content">
+                                            <div className="tf-accordion-content">
                                                 <p>
 
                                                 Yes, of course! Digital Duniyaa is registered as MD Digital Duniyaa Pvt. Ltd. under the Companies Act 2013, 
@@ -93,18 +93,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tf-accordion-item wow fadeInUp" data-wow-delay="0s">
-                                        <h3 class="tf-accordion-header">
-                                            <span class="tf-accordion-button collapsed" type="button"
+                                    <div className="tf-accordion-item wow fadeInUp" data-wow-delay="0s">
+                                        <h3 className="tf-accordion-header">
+                                            <span className="tf-accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseFive"
                                                 aria-expanded="true" aria-controls="collapseFive">
-                                                <span class="rectangle-314"></span>
+                                                <span className="rectangle-314"></span>
                                                 What is our customer support number?
                                             </span>
                                         </h3>
-                                        <div id="collapseFive" class="tf-accordion-collapse collapse"
+                                        <div id="collapseFive" className="tf-accordion-collapse collapse"
                                             data-bs-parent="#accordionExample">
-                                            <div class="tf-accordion-content">
+                                            <div className="tf-accordion-content">
                                                 <p>
                                                 If you need any assistance, you can contact our customer support number +91 9170355968 which is 
                                                 available from Monday to Sunday(9:30 a.m. to 06:00 p.m.)

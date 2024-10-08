@@ -259,12 +259,12 @@ const register = () => {
 
     const rzp1 = new window.Razorpay(options);
 
-    rzp1.on('payment.failed', (response) => {
-      console.log('Payment failed:', response.error);
-      toast.error('Payment failed:', response.error);
-     // return;
+    rzp1.on("payment.failed", (response) => {
+      console.log("Payment failed:", response.error);
+      toast.error("Payment failed:", response.error);
+      // return;
       // Handle failed payment on the frontend
-  });
+    });
 
     rzp1.open();
   };
@@ -291,24 +291,24 @@ const register = () => {
 
   return (
     <React.Fragment>
-      <div class="main-content page-register">
-        <section class="section-page-register login-wrap tf-spacing-4">
-          <div class="tf-container">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="img-left ">
+      <div className="main-content page-register">
+        <section className="section-page-register login-wrap tf-spacing-4">
+          <div className="tf-container">
+            <div className="row">
+              <div className="col-lg-6">
+                <div className="img-left ">
                   <img
-                    class=" ls-is-cached lazyloaded"
+                    className=" ls-is-cached lazyloaded"
                     src="assets/images/login-img.jpg"
                     alt=""
                   />
                 </div>
               </div>
-              <div class="col-lg-6">
-                <div class="content-right">
-                  <div class="signup_head">
+              <div className="col-lg-6">
+                <div className="content-right">
+                  <div className="signup_head">
                     <div
-                      class={
+                      className={
                         level == 1
                           ? "sign_head_card personal_head present_head"
                           : "sign_head_card personal_head present_head testimgblur"
@@ -317,20 +317,20 @@ const register = () => {
                       <img
                         onClick={() => checklevel(1)}
                         src={process}
-                        class="personal_image"
+                        className="personal_image"
                         style={{ width: "40px" }}
                       />
-                      <h6 class="">Personal info</h6>
+                      <h6 className="">Personal info</h6>
                     </div>
-                    <div class="sign_head_card">
+                    <div className="sign_head_card">
                       <img
                         src={line}
-                        class="head_line"
+                        className="head_line"
                         style={{ width: "60px" }}
                       />
                     </div>
                     <div
-                      class={
+                      className={
                         level == 2
                           ? "sign_head_card course_head fade_head"
                           : "sign_head_card course_head fade_head testimgblur"
@@ -339,20 +339,20 @@ const register = () => {
                       <img
                         src={process}
                         onClick={() => checklevel(2)}
-                        class="course_image"
+                        className="course_image"
                         style={{ width: "40px" }}
                       />
                       <h6>Course Selection</h6>
                     </div>
-                    <div class="sign_head_card">
+                    <div className="sign_head_card">
                       <img
                         src={line}
-                        class="head_line"
+                        className="head_line"
                         style={{ width: "60px" }}
                       />
                     </div>
                     <div
-                      class={
+                      className={
                         level == 3
                           ? "sign_head_card payment_head fade_head"
                           : "sign_head_card payment_head fade_head testimgblur"
@@ -361,16 +361,16 @@ const register = () => {
                       <img
                         src={process}
                         onClick={() => checklevel(3)}
-                        class="payment_image"
+                        className="payment_image"
                         style={{ width: "40px" }}
                       />
                       <h6>Payment info</h6>
                     </div>
                   </div>
-                  <h2 class="login-title fw-7 ">Create A New Account</h2>
-                  <div class="register">
-                    <p class="fw-5 fs-15 ">Already have an account?</p>
-                    <Link to={"/login"} class="fw-5 fs-15">
+                  <h2 className="login-title fw-7 ">Create A New Account</h2>
+                  <div className="register">
+                    <p className="fw-5 fs-15 ">Already have an account?</p>
+                    <Link to={"/login"} className="fw-5 fs-15">
                       Sign In
                     </Link>
                   </div>
@@ -380,26 +380,29 @@ const register = () => {
                         onSubmit={submitLogin}
                         className="form-login form-checkout"
                       >
-                        <div class="cols">
-                          <fieldset class="tf-field field-username">
+                        <div className="cols">
+                          <fieldset className="tf-field field-username">
                             <input
                               type="text"
-                              class="tf-input style-1"
+                              className="tf-input style-1"
                               onChange={handle}
                               name="referalCode"
                               value={referral}
                               placeholder="Referral Code"
                             />
-                            <label class="tf-field-label fs-15" for="field1">
+                            <label
+                              className="tf-field-label fs-15"
+                              for="field1"
+                            >
                               Referral Code
                             </label>
                           </fieldset>
                         </div>
-                        <div class="cols">
-                          <fieldset class="tf-field field-email ">
+                        <div className="cols">
+                          <fieldset className="tf-field field-email ">
                             <input
                               type="text"
-                              class="tf-input style-1"
+                              className="tf-input style-1"
                               onChange={handle}
                               id="fast-name"
                               value={data.name}
@@ -407,14 +410,17 @@ const register = () => {
                               placeholder="Name..."
                               autocomplete="off"
                             />
-                            <label class="tf-field-label fs-15" for="field2">
+                            <label
+                              className="tf-field-label fs-15"
+                              for="field2"
+                            >
                               Name
                             </label>
                           </fieldset>
-                          <fieldset class="tf-field field-pass ">
+                          <fieldset className="tf-field field-pass ">
                             <input
                               type="number"
-                              class="tf-input style-1"
+                              className="tf-input style-1"
                               onChange={handle}
                               onBlur={handleEmail}
                               id="last-name"
@@ -425,13 +431,16 @@ const register = () => {
                               autocomplete="off"
                             />
 
-                            <label class="tf-field-label fs-15" for="field3">
+                            <label
+                              className="tf-field-label fs-15"
+                              for="field3"
+                            >
                               Mobile
                             </label>
                           </fieldset>
                         </div>
-                        <div class="cols">
-                          <fieldset class="tf-field field-pass-again ">
+                        <div className="cols">
+                          <fieldset className="tf-field field-pass-again ">
                             <input
                               type="email"
                               onChange={handle}
@@ -440,15 +449,18 @@ const register = () => {
                               value={data.email}
                               name="email"
                               placeholder="email..."
-                              class="tf-input style-1"
+                              className="tf-input style-1"
                               autocomplete="off"
                             />
 
-                            <label class="tf-field-label fs-15" for="field4">
+                            <label
+                              className="tf-field-label fs-15"
+                              for="field4"
+                            >
                               Email
                             </label>
                           </fieldset>
-                          <fieldset class="tf-field field-pass-again ">
+                          <fieldset className="tf-field field-pass-again ">
                             <input
                               type="email"
                               onChange={handle}
@@ -457,23 +469,26 @@ const register = () => {
                               value={data.cemail}
                               name="cemail"
                               placeholder="email..."
-                              class="tf-input style-1"
+                              className="tf-input style-1"
                               autocomplete="off"
                             />
 
-                            <label class="tf-field-label fs-15" for="field4">
+                            <label
+                              className="tf-field-label fs-15"
+                              for="field4"
+                            >
                               Confirm Email
                             </label>
                           </fieldset>
                         </div>
-                        <div class="cols">
-                          <fieldset class="tf-field field-pass-again ">
+                        <div className="cols">
+                          <fieldset className="tf-field field-pass-again ">
                             <div
                               id="selectgender"
-                              class="tf-select mb-50 tf-select-label"
+                              className="tf-select mb-50 tf-select-label"
                             >
                               <select
-                                class="default"
+                                className="default"
                                 name="gender"
                                 onChange={handle}
                                 style={{ marginTop: "-5px" }}
@@ -493,24 +508,25 @@ const register = () => {
                                   Female
                                 </option>
                               </select>
-                              <label class="select-label" for="">
+                              <label className="select-label" for="">
                                 Gender
                               </label>
                             </div>
                           </fieldset>
-                          <fieldset class="tf-field field-pass-again ">
+                          <fieldset className="tf-field field-pass-again ">
                             <div
                               id="selectstate"
-                              class="tf-select mb-50 tf-select-label"
+                              className="tf-select mb-50 tf-select-label"
                             >
                               <select
-                                class="default"
+                                className="default"
                                 name="state"
                                 onChange={handle}
                               >
                                 {state &&
-                                  state.map((row) => (
+                                  state.map((row, idx) => (
                                     <option
+                                      key={`key=${idx}`}
                                       selected={
                                         data.state == row.name ? true : false
                                       }
@@ -519,17 +535,17 @@ const register = () => {
                                     </option>
                                   ))}
                               </select>
-                              <label class="select-label" for="">
+                              <label className="select-label" for="">
                                 State
                               </label>
                             </div>
                           </fieldset>
                         </div>
                         {/* end cols */}
-                        <div class="cols">
-                          <fieldset class="tf-field field-pass-again ">
+                        <div className="cols">
+                          <fieldset className="tf-field field-pass-again ">
                             <input
-                              class="tf-input style-1"
+                              className="tf-input style-1"
                               type="password"
                               id="password"
                               name="password"
@@ -539,13 +555,16 @@ const register = () => {
                               autocomplete="off"
                             />
 
-                            <label class="tf-field-label fs-15" for="field4">
+                            <label
+                              className="tf-field-label fs-15"
+                              for="field4"
+                            >
                               Password
                             </label>
                           </fieldset>
-                          <fieldset class="tf-field field-pass-again ">
+                          <fieldset className="tf-field field-pass-again ">
                             <input
-                              class="tf-input style-1"
+                              className="tf-input style-1"
                               type="password"
                               id="confirm-password"
                               name="cpassword"
@@ -555,57 +574,60 @@ const register = () => {
                               autocomplete="off"
                             />
 
-                            <label class="tf-field-label fs-15" for="field4">
+                            <label
+                              className="tf-field-label fs-15"
+                              for="field4"
+                            >
                               Confirm Password
                             </label>
                           </fieldset>
                         </div>
                         <button
-                          class=" button-submit tf-btn w-100 "
+                          className=" button-submit tf-btn w-100 "
                           type="submit"
                         >
                           Proceed to Course Selection
-                          <i class="icon-arrow-top-right"></i>
+                          <i className="icon-arrow-top-right"></i>
                         </button>
                       </form>
                     </>
                   ) : null}
 
-                  <div class="">
+                  <div className="">
                     {level == 2 ? (
                       <>
-                        <div class="course-item hover-img style-2 h240">
-                          <div class="features image-wrap">
+                        <div className="course-item hover-img style-2 h240">
+                          <div className="features image-wrap">
                             <img
-                              class="lazyload"
+                              className="lazyload"
                               data-src="assets/images/courses/courses-02.jpg"
                               src="assets/images/courses/courses-02.jpg"
                             />
                           </div>
-                          <div class="content">
-                            <h5 class="fw-5 line-clamp-2">
+                          <div className="content">
+                            <h5 className="fw-5 line-clamp-2">
                               <a href="#"> Advance Digital Marketing</a>
                             </h5>
 
-                            <div class="author">
+                            <div className="author">
                               By:
-                              <a href="#" class="author">
+                              <a href="#" className="author">
                                 Digital Duniyaa
                               </a>
                             </div>
-                            <div class="bottom">
-                              <div class="h6  fw-5">₹2948.82</div>
+                            <div className="bottom">
+                              <div className="h6  fw-5">₹2948.82</div>
                             </div>
                           </div>
                         </div>
 
                         <button
-                          class=" button-submit tf-btn w-100 "
+                          className=" button-submit tf-btn w-100 "
                           type="button"
                           onClick={() => setlevel(level + 1)}
                         >
                           Select Course Boundle
-                          <i class="icon-arrow-top-right"></i>
+                          <i className="icon-arrow-top-right"></i>
                         </button>
                       </>
                     ) : null}
@@ -616,15 +638,15 @@ const register = () => {
                           <img
                             src="assets/images/raza.png"
                             alt="img"
-                            class="injectable center"
+                            className="injectable center"
                           />
                           <button
-                            class=" button-submit tf-btn w-100 "
+                            className=" button-submit tf-btn w-100 "
                             type="button"
                             onClick={() => orderCreate("2948")}
                           >
                             Make Payment for 2948
-                            <i class="icon-arrow-top-right"></i>
+                            <i className="icon-arrow-top-right"></i>
                           </button>
                         </div>
                       </>

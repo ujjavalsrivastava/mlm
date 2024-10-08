@@ -1,38 +1,38 @@
 </div>
             
             <!-- Footer -->
-            <footer id="footer" class="footer style-2">
-                <div class="footer-wrap">
-                    <div class="footer-body">
-                        <div class="tf-container">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="footer-body-wrap flex justify-between">
-                                        <div class="footer-more-infor">
-                                            <div class="footer-logo" style="visibility: hidden;">
+            <footer id="footer" className="footer style-2">
+                <div className="footer-wrap">
+                    <div className="footer-body">
+                        <div className="tf-container">
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className="footer-body-wrap flex justify-between">
+                                        <div className="footer-more-infor">
+                                            <div className="footer-logo" style="visibility: hidden;">
                                                 <a href="#">
                                                     <img src="images/logo/logo.svg" alt="" />
                                                 </a>
                                             </div>
-                                            <p class="pb-3">MD Digital Duniyaa Pvt. Ltd. is a leading digital solutions company dedicated to 
+                                            <p className="pb-3">MD Digital Duniyaa Pvt. Ltd. is a leading digital solutions company dedicated to 
                                                 empowering youth by providing digital income opportunities through skill development courses and classes.</p>
-                                            <ul class="tf-social-icon flex items-center gap-10 pt-3">
+                                            <ul className="tf-social-icon flex items-center gap-10 pt-3">
                                                 <li>
-                                                    <a href="#"><i class="flaticon-facebook-1"></i></a>
+                                                    <a href="#"><i className="flaticon-facebook-1"></i></a>
                                                 </li>
                                                 <li>
-                                                    <a href="#"><i class="icon-twitter"></i></a>
+                                                    <a href="#"><i className="icon-twitter"></i></a>
                                                 </li>
                                                 <li>
-                                                    <a href="#"><i class="flaticon-instagram"></i></a>
+                                                    <a href="#"><i className="flaticon-instagram"></i></a>
                                                 </li>
                                                 <li>
-                                                    <a href="#"><i class="flaticon-linkedin-1"></i></a>
+                                                    <a href="#"><i className="flaticon-linkedin-1"></i></a>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="footer-menu-list">
-                                            <h5 class="fw-5">Company</h5>
+                                        <div className="footer-menu-list">
+                                            <h5 className="fw-5">Company</h5>
                                             <ul>
                                                 <li><a href="about.html">About</a></li>
                                                 <li><a href="course-grid-basic.html">Courses</a></li>
@@ -41,8 +41,8 @@
                                                 <li><a href="become-teacher.html">Become a teacher</a></li>
                                             </ul>
                                         </div>
-                                        <div class="footer-menu-list">
-                                            <h5 class="fw-5">Useful Links</h5>
+                                        <div className="footer-menu-list">
+                                            <h5 className="fw-5">Useful Links</h5>
                                             <ul>
                                                 <li><a href="#">Testimonials</a></li>
                                                 <li><a href="pricing.html">Pricing</a></li>
@@ -59,11 +59,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="footer-bottom">
-                        <div class="tf-container">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="footer-bottom-wrap flex justify-center items-center">
+                    <div className="footer-bottom">
+                        <div className="tf-container">
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className="footer-bottom-wrap flex justify-center items-center">
                                         <p>© 2024 DigitalDuniyaa.in (A Unit of MD Digital Duniyaa Pvt. Ltd.). All Rights Reserved</p>
                                     </div>
                                 </div>
@@ -79,23 +79,23 @@
         <!-- /wrapper -->
 
         <!-- open-search -->
-        <div class="offcanvas offcanvas-top offcanvas-search" id="canvasSearch">
-            <i class="flaticon-close-1 btn-close" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></i>
-            <div class="tf-container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="offcanvas-body">
-                            <form action="#" class="form-search-courses">
-                                <div class="icon">
-                                    <i class="icon-keyboard"></i>
+        <div className="offcanvas offcanvas-top offcanvas-search" id="canvasSearch">
+            <i className="flaticon-close-1 btn-close" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></i>
+            <div className="tf-container">
+                <div className="row">
+                    <div className="col-12">
+                        <div className="offcanvas-body">
+                            <form action="#" className="form-search-courses">
+                                <div className="icon">
+                                    <i className="icon-keyboard"></i>
                                 </div>
                                 <fieldset>
-                                    <input class="" type="text" placeholder="Search for anything" name="text"
+                                    <input className="" type="text" placeholder="Search for anything" name="text"
                                         tabindex="2" value="" aria-required="true" required="">
                                 </fieldset>
-                                <div class="button-submit">
-                                    <button class="" type="submit">
-                                        <i class="icon-search fs-20"></i>
+                                <div className="button-submit">
+                                    <button className="" type="submit">
+                                        <i className="icon-search fs-20"></i>
                                     </button>
                                 </div>
                             </form>
@@ -108,8 +108,8 @@
 
         <!-- /wrapper -->
         <!-- go top button -->
-        <div class="progress-wrap active-progress">
-            <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <div className="progress-wrap active-progress">
+            <svg className="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
                 <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
                     style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 286.138;">
                 </path>

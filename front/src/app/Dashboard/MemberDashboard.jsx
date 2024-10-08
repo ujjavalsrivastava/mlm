@@ -9,7 +9,7 @@ const MemberDashboard = () => {
   const [todayDirectTeam, setTodayDirectTeam] = useState(0);
   const [group, setgroup] = useState(0);
   const [showBal, setShowBal] = useState(0);
-  
+
   const lowerProfiles = useSelector((state) => state.levels);
   const [usersTotalEarnings, setUsersTotalEarnings] = useState([]);
   const [AllTimeDirectTeam, setAllTimeDirectTeam] = useState(0);
@@ -76,8 +76,8 @@ const MemberDashboard = () => {
     groupStatus();
     if (!user?._id) {
       dispatch(fetchProfile());
-    }else{
-      showBalance(user?._id)
+    } else {
+      showBalance(user?._id);
     }
 
     if (lowerProfiles.status !== "succeeded") {
@@ -86,137 +86,131 @@ const MemberDashboard = () => {
   }, []);
   return (
     <>
-      <div class="content-wrapper">
-        <div class="content-header sty-one">
+      <div className="content-wrapper">
+        <div className="content-header sty-one">
           <h1>Welcome {user && user.name}! </h1>
-          <ol class="breadcrumb">
+          <ol className="breadcrumb">
             <li>
               <a href="#" style={{ color: "black" }}>
                 Home / Affiliate Panel{" "}
               </a>
             </li>
             {/* <li>
-              <i class="fa fa-angle-right"></i> Dashboard
+              <i className="fa fa-angle-right"></i> Dashboard
             </li> */}
           </ol>
         </div>
 
-        <div class="content">
-          <div class="row">
-            <div class="col-12">
-              <div class="info-box">
-                <div class="row">
-                  <div class="col-lg-3 col-sm-6 col-xs-12">
+        <div className="content">
+          <div className="row">
+            <div className="col-12">
+              <div className="info-box">
+                <div className="row">
+                  <div className="col-lg-3 col-sm-6 col-xs-12">
                     <div>
-                      <i class="ti-face-smile f-20 text-blue"></i>
-                      <div class="info-box-content">
-                        <h1 class="f-25 text-black">
+                      <i className="ti-face-smile f-20 text-blue"></i>
+                      <div className="info-box-content">
+                        <h1 className="f-25 text-black">
                           {showBal && showBal.oneDayEarning.toFixed(2)}
                         </h1>
-                        <span class="progress-description">
+                        <span className="progress-description">
                           Today's Earning
                         </span>
                       </div>
-                    
                     </div>
                   </div>
-                  <div class="col-lg-3 col-sm-6 col-xs-12">
+                  <div className="col-lg-3 col-sm-6 col-xs-12">
                     <div>
-                      <i class="ti-bar-chart f-20 text-danger"></i>
-                      <div class="info-box-content">
-                        <h1 class="f-25 text-black">
+                      <i className="ti-bar-chart f-20 text-danger"></i>
+                      <div className="info-box-content">
+                        <h1 className="f-25 text-black">
                           {showBal && showBal.oneWeekEarning.toFixed(2)}
                         </h1>
-                        <span class="progress-description">
+                        <span className="progress-description">
                           Last 7 Days Earning
                         </span>
                       </div>
-                      
                     </div>
                   </div>
-                  <div class="col-lg-3 col-sm-6 col-xs-12">
+                  <div className="col-lg-3 col-sm-6 col-xs-12">
                     <div>
-                      <i class="ti-panel f-20 text-info"></i>
-                      <div class="info-box-content">
-                        <h1 class="f-25 text-black">
+                      <i className="ti-panel f-20 text-info"></i>
+                      <div className="info-box-content">
+                        <h1 className="f-25 text-black">
                           {showBal && showBal.oneMonthEarning.toFixed(2)}
                         </h1>
-                        <span class="progress-description">
+                        <span className="progress-description">
                           Last 30 Days Earning
                         </span>
                       </div>
-                     
                     </div>
                   </div>
-                  <div class="col-lg-3 col-sm-6 col-xs-12">
+                  <div className="col-lg-3 col-sm-6 col-xs-12">
                     <div>
-                      <i class="ti-wallet f-20 text-green"></i>
-                      <div class="info-box-content">
-                        <h1 class="f-25 text-black">
+                      <i className="ti-wallet f-20 text-green"></i>
+                      <div className="info-box-content">
+                        <h1 className="f-25 text-black">
                           {showBal && showBal.overallEarning.toFixed(2)}
                         </h1>
-                        <span class="progress-description">
+                        <span className="progress-description">
                           All Time Earning
                         </span>
                       </div>
-                     
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="info-box">
-                <div class="row">
-                  <div class="col-lg-3 col-sm-6 col-xs-12">
+              <div className="info-box">
+                <div className="row">
+                  <div className="col-lg-3 col-sm-6 col-xs-12">
                     <div>
-                      <i class="ti-face-smile f-20 text-blue"></i>
-                      <div class="info-box-content">
-                        <h1 class="f-25 text-black">
+                      <i className="ti-face-smile f-20 text-blue"></i>
+                      <div className="info-box-content">
+                        <h1 className="f-25 text-black">
                           {todayDirectTeam.toFixed(2)}
                         </h1>
-                        <span class="progress-description">
+                        <span className="progress-description">
                           Today Direct Team
                         </span>
                       </div>
-                      
                     </div>
                   </div>
-                  <div class="col-lg-3 col-sm-6 col-xs-12">
+                  <div className="col-lg-3 col-sm-6 col-xs-12">
                     <div>
-                      <i class="ti-bar-chart f-20 text-danger"></i>
-                      <div class="info-box-content">
-                        <h1 class="f-25 text-black">
+                      <i className="ti-bar-chart f-20 text-danger"></i>
+                      <div className="info-box-content">
+                        <h1 className="f-25 text-black">
                           {AllTimeDirectTeam.toFixed(2)}
                         </h1>
-                        <span class="progress-description">
+                        <span className="progress-description">
                           All Time Direct Team
                         </span>
                       </div>
-                     
                     </div>
                   </div>
-                  <div class="col-lg-3 col-sm-6 col-xs-12">
+                  <div className="col-lg-3 col-sm-6 col-xs-12">
                     <div>
-                      <i class="ti-panel f-20 text-info"></i>
-                      <div class="info-box-content">
-                        <h1 class="f-25 text-black">
+                      <i className="ti-panel f-20 text-info"></i>
+                      <div className="info-box-content">
+                        <h1 className="f-25 text-black">
                           {group && group.todayGroupUser.toFixed(2)}
                         </h1>
-                        <span class="progress-description">Today Team</span>
+                        <span className="progress-description">Today Team</span>
                       </div>
-                  
                     </div>
                   </div>
-                  <div class="col-lg-3 col-sm-6 col-xs-12">
+                  <div className="col-lg-3 col-sm-6 col-xs-12">
                     <div>
-                      <i class="ti-wallet f-20 text-green"></i>
-                      <div class="info-box-content">
-                        <h1 class="f-25 text-black">
+                      <i className="ti-wallet f-20 text-green"></i>
+                      <div className="info-box-content">
+                        <h1 className="f-25 text-black">
                           {group && group.totalGroupUser.toFixed(2)}
                         </h1>
-                        <span class="progress-description">All Team Size</span>
+                        <span className="progress-description">
+                          All Team Size
+                        </span>
                       </div>
-                  
                     </div>
                   </div>
                 </div>
@@ -224,24 +218,24 @@ const MemberDashboard = () => {
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-lg-8">
-              <div class="info-box">
-                {/* <div class="col-12">
-                  <div class="d-flex flex-wrap">
+          <div className="row">
+            <div className="col-lg-8">
+              <div className="info-box">
+                {/* <div className="col-12">
+                  <div className="d-flex flex-wrap">
                     <div>
                       <h5>Area Chart</h5>
                     </div>
-                    <div class="ml-auto">
-                      <ul class="list-inline">
-                        <li class="text-purple">
-                          <i class="fa fa-circle"></i> India
+                    <div className="ml-auto">
+                      <ul className="list-inline">
+                        <li className="text-purple">
+                          <i className="fa fa-circle"></i> India
                         </li>
-                        <li class="text-muted">
-                          <i class="fa fa-circle"></i> USA
+                        <li className="text-muted">
+                          <i className="fa fa-circle"></i> USA
                         </li>
-                        <li class="text-info">
-                          <i class="fa fa-circle"></i> UK
+                        <li className="text-info">
+                          <i className="fa fa-circle"></i> UK
                         </li>
                       </ul>
                     </div>
@@ -250,30 +244,30 @@ const MemberDashboard = () => {
                 <div id="area"></div>
               </div>
             </div>
-            <div class="col-lg-4 m-b-3">
+            <div className="col-lg-4 m-b-3">
               <div>
-                <div class="box box-widget widget-user-2">
-                  <div class="widget-user-header bg-yellow">
+                <div className="box box-widget widget-user-2">
+                  <div className="widget-user-header bg-yellow">
                     <h5 style={{ color: "white" }}>Your Recent Sales</h5>
                     {/* <h5>Checkout my contacts here</h5> */}
                   </div>
                   <ul
-                    class="products-list product-list-in-box scroll"
+                    className="products-list product-list-in-box scroll"
                     style={{ height: "311px" }}
                   >
-                    {lowerLevels.map((lUser) => (
-                      <li class="item">
-                        <div class="product-img">
+                    {lowerLevels.map((lUser, idx) => (
+                      <li className="item" key={`key=${idx}`}>
+                        <div className="product-img">
                           <img
                             src="./dist/img/img1.jpg"
                             alt="Product Image"
                             style={{ borderRadius: "50%" }}
                           />
                         </div>
-                        <div class="product-info">
+                        <div className="product-info">
                           <a
                             href="#"
-                            class="product-title"
+                            className="product-title"
                             style={{
                               color: "black",
                               fontWeight: "bold",
@@ -282,13 +276,13 @@ const MemberDashboard = () => {
                           >
                             {lUser.name}
                           </a>
-                          <span class="product-description">
+                          <span className="product-description">
                             <a href="#" style={{ color: "black" }}>
                               {usersTotalEarnings.length
                                 ? `₹${
-                                    usersTotalEarnings.find(
-                                      (u) => u.userId === lUser._id
-                                    )?.totalEarning.toFixed(2) || 0
+                                    usersTotalEarnings
+                                      .find((u) => u.userId === lUser._id)
+                                      ?.totalEarning.toFixed(2) || 0
                                   }` || "₹0"
                                 : "₹0"}
                             </a>
@@ -297,13 +291,13 @@ const MemberDashboard = () => {
                       </li>
                     ))}
 
-                    { (lowerLevels.length ==10) ? ( <span class="product-description">
-                       <a href="#" style={{ color: "black" }}>
-                        Data Not Found
-                       </a>
-                     </span>):null
-                      
-                    }
+                    {lowerLevels.length == 10 ? (
+                      <span className="product-description">
+                        <a href="#" style={{ color: "black" }}>
+                          Data Not Found
+                        </a>
+                      </span>
+                    ) : null}
                   </ul>
                 </div>
               </div>

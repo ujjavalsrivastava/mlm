@@ -46,10 +46,10 @@ const ProfileUpload = () => {
   };
   return (
     <>
-      <div class="content-wrapper">
-        <div class="content-header sty-one">
-          <h1 class="text-black">Profile</h1>
-          <ol class="breadcrumb">
+      <div className="content-wrapper">
+        <div className="content-header sty-one">
+          <h1 className="text-black">Profile</h1>
+          <ol className="breadcrumb">
             <li>
               <a href="#" style={{ color: "black" }}>
                 Home / Profile Upload{" "}
@@ -58,22 +58,22 @@ const ProfileUpload = () => {
           </ol>
         </div>
 
-        <div class="content">
-          <div class="row m-t-3">
-            <div class="col-lg-12">
-              <div class="card ">
-                <div class="card-header bg-blue">
-                  <h5 class="text-white m-b-0">User Profile</h5>
+        <div className="content">
+          <div className="row m-t-3">
+            <div className="col-lg-12">
+              <div className="card ">
+                <div className="card-header bg-blue">
+                  <h5 className="text-white m-b-0">User Profile</h5>
                 </div>
-                <div class="card-body">
+                <div className="card-body">
                   <form onSubmit={handleSubmit}>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group has-feedback">
-                          <label class="custom-file center-block block">
+                    <div className="row">
+                      <div className="col-md-12">
+                        <div className="form-group has-feedback">
+                          <label className="custom-file center-block block">
                             <input
                               id="file"
-                              class="custom-file-input"
+                              className="custom-file-input"
                               type="file"
                               accept=".jpg, .jpeg, .png"
                               required
@@ -84,10 +84,10 @@ const ProfileUpload = () => {
                       </div>
                       <br />
                       <br />
-                      <div class="col-md-12">
+                      <div className="col-md-12">
                         <button
                           type="submit"
-                          class="btn btn-success"
+                          className="btn btn-success"
                           disabled={loading}
                         >
                           {loading
