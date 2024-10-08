@@ -33,10 +33,10 @@
       return e;
     },
     s = (e) =>
-      ({}.toString
+      ({}).toString
         .call(e)
         .match(/\s([a-zA-Z]+)/)[1]
-        .toLowerCase()),
+        .toLowerCase(),
     i = () => "mm-" + a++;
   let a = 0;
   const o = (e) => ("mm-clone-" == e.slice(0, 9) ? e : `mm-clone-${e}`),
@@ -760,11 +760,7 @@
                     t.unshift(
                       i
                         ? `<span>${n}</span>`
-                        : `<a \n                                    href="#${
-                            s.id
-                          }" \n                                    title="${this.i18n(
-                            this.conf.screenReader.openSubmenu
-                          )}"\n                                    >${n}</a>`
+                        : `<a \n                                    href="#${s.id}" \n                                    title="${this.i18n(this.conf.screenReader.openSubmenu)}"\n                                    >${n}</a>`
                     );
                 }
                 i = !1;

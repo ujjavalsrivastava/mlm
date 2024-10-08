@@ -1,6 +1,6 @@
 import Profile from "../../app/Dashboard/Profile";
 import changePassword from "../../app/Dashboard/changePassword";
-import Dashboard from "../../app/Dashboard/Dashboard";
+import Dashboard from "../../app/Dashboard/Wallets";
 import MemberDashboard from "../../app/Dashboard/MemberDashboard";
 import referal from "../../app/Dashboard/referal";
 import Tree from "../../app/tree/Tree";
@@ -15,7 +15,7 @@ import TeamSize from "../../app/Dashboard/TeamSize";
 import PassiveIncome from "../../app/Dashboard/PassiveIncome";
 import Rewards from "../../app/Dashboard/Rewards";
 import Invoice from "../../app/Dashboard/Invoice";
-
+import Wallets from "../../app/Dashboard/Wallets";
 export const authRoutes = [
 
   { path: "/dashboard", Component: Dashboard },
@@ -35,5 +35,5 @@ export const authRoutes = [
   { path: "/passive-income", Component: PassiveIncome },
   { path: "/rewards", Component: Rewards },
   { path: "/invoice", Component: Invoice },
-  
+  { path: "/wallet", Component: Wallets },
 ];

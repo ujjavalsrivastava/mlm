@@ -144,23 +144,23 @@
               return "undefined" == typeof l
                 ? this.options.state
                 : this.options.disabled ||
-                  this.options.readonly ||
-                  (this.options.state &&
-                    !this.options.radioAllOff &&
-                    this.$element.is(":radio"))
-                ? this.$element
-                : (this.$element.is(":radio")
-                    ? g('[name="' + this.$element.attr("name") + '"]').trigger(
-                        "setPreviousOptions.bootstrapSwitch"
-                      )
-                    : this.$element.trigger(
-                        "setPreviousOptions.bootstrapSwitch"
-                      ),
-                  this.options.indeterminate && this.indeterminate(!1),
-                  this.$element
-                    .prop("checked", !!l)
-                    .trigger("change.bootstrapSwitch", m),
-                  this.$element);
+                    this.options.readonly ||
+                    (this.options.state &&
+                      !this.options.radioAllOff &&
+                      this.$element.is(":radio"))
+                  ? this.$element
+                  : (this.$element.is(":radio")
+                      ? g(
+                          '[name="' + this.$element.attr("name") + '"]'
+                        ).trigger("setPreviousOptions.bootstrapSwitch")
+                      : this.$element.trigger(
+                          "setPreviousOptions.bootstrapSwitch"
+                        ),
+                    this.options.indeterminate && this.indeterminate(!1),
+                    this.$element
+                      .prop("checked", !!l)
+                      .trigger("change.bootstrapSwitch", m),
+                    this.$element);
             },
           },
           {
@@ -169,10 +169,10 @@
               return this.options.disabled || this.options.readonly
                 ? this.$element
                 : this.options.indeterminate
-                ? (this.indeterminate(!1), this.state(!0))
-                : this.$element
-                    .prop("checked", !this.options.state)
-                    .trigger("change.bootstrapSwitch", l);
+                  ? (this.indeterminate(!1), this.state(!0))
+                  : this.$element
+                      .prop("checked", !this.options.state)
+                      .trigger("change.bootstrapSwitch", l);
             },
           },
           {
@@ -197,8 +197,8 @@
               return "undefined" == typeof l
                 ? this.options.animate
                 : this.options.animate === !!l
-                ? this.$element
-                : this.toggleAnimate();
+                  ? this.$element
+                  : this.toggleAnimate();
             },
           },
           {
@@ -217,8 +217,8 @@
               return "undefined" == typeof l
                 ? this.options.disabled
                 : this.options.disabled === !!l
-                ? this.$element
-                : this.toggleDisabled();
+                  ? this.$element
+                  : this.toggleDisabled();
             },
           },
           {
@@ -238,8 +238,8 @@
               return "undefined" == typeof l
                 ? this.options.readonly
                 : this.options.readonly === !!l
-                ? this.$element
-                : this.toggleReadonly();
+                  ? this.$element
+                  : this.toggleReadonly();
             },
           },
           {
@@ -259,8 +259,8 @@
               return "undefined" == typeof l
                 ? this.options.indeterminate
                 : this.options.indeterminate === !!l
-                ? this.$element
-                : this.toggleIndeterminate();
+                  ? this.$element
+                  : this.toggleIndeterminate();
             },
           },
           {
@@ -281,8 +281,8 @@
               return "undefined" == typeof l
                 ? this.options.inverse
                 : this.options.inverse === !!l
-                ? this.$element
-                : this.toggleInverse();
+                  ? this.$element
+                  : this.toggleInverse();
             },
           },
           {
@@ -514,12 +514,12 @@
                 return l.options.indeterminate
                   ? "-" + l._handleWidth / 2 + "px"
                   : m
-                  ? l.options.inverse
-                    ? o[1]
-                    : o[0]
-                  : l.options.inverse
-                  ? o[0]
-                  : o[1];
+                    ? l.options.inverse
+                      ? o[1]
+                      : o[0]
+                    : l.options.inverse
+                      ? o[0]
+                      : o[1];
               });
             },
           },
