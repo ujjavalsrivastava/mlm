@@ -45,10 +45,10 @@ const header = () => {
 
   const handleMenuClick = (menuItem) => {
     if (menuItem.sub) {
-      setSelectedMenu((p) => [...p, menuItem.title]);
-      setMenu(menuItem.sub);
+      setSelectedMenu((p) => [...p, menuItem?.title]);
+      setMenu(menuItem?.sub);
     } else {
-      navigate(menuItem.url);
+      navigate(menuItem?.url);
       handleNavbar(false);
     }
   };
@@ -170,7 +170,7 @@ const header = () => {
           <p className="menu_heading_element">{menuHeading}</p>
           <hr />
           <ul>
-            {menu.map((menuItem) => (
+            {menu.map((menuItem,idx) => (
               <React.Fragment key={`key=${idx}`}>
                 {renderTitle(menuItem)}
               </React.Fragment>
