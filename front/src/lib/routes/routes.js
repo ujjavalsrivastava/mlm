@@ -16,6 +16,8 @@ import PassiveIncome from "../../app/Dashboard/PassiveIncome";
 import Rewards from "../../app/Dashboard/Rewards";
 import Invoice from "../../app/Dashboard/Invoice";
 import Wallets from "../../app/Dashboard/Wallets";
+import WalletsAdmin from "../../app/Dashboard/WalletsAdmin";
+
 export const authRoutes = [
 
   { path: "/dashboard", Component: Dashboard },
@@ -36,4 +38,5 @@ export const authRoutes = [
   { path: "/rewards", Component: Rewards },
   { path: "/invoice", Component: Invoice },
   { path: "/wallet", Component: Wallets },
+  { path: "/wallet-admin", Component: WalletsAdmin },
 ];
