@@ -144,9 +144,10 @@ const handleWithdrawRequest = async (req, res) => {
     return res.status(400).json({ error: "Insufficient Balance" });
   }
   const reqData = { user: userId, amount, message };
-  const withdraw = await Withdraw(reqData).save();
-  return res.status(200).json({ message: "Withdrawal Request has been sent wait for Approval" });
-  res.json(withdraw);
+  await Withdraw(reqData).save();
+  return res
+    .status(200)
+    .json({ message: "Withdrawal Request has been sent wait for Approval" });
 };
 
 const handleUserWithdrawRequest = async (req, res) => {
@@ -157,7 +158,8 @@ const handleUserWithdrawRequest = async (req, res) => {
     query = {};
   }
   const data = await Withdraw.find(query).populate("user").populate("approvar");
-  res.json(data);
+  const bankDetails = await BankDetails.findOne({ user: userId });
+  res.json({ ...data, kyc: bankDetails });
 };
 
 module.exports = {

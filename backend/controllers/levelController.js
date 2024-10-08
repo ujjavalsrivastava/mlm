@@ -11,15 +11,10 @@ const {
   collectUserIdsByLevel,
 } = require("../utils/helper");
 const PercentDistribution = require("../models/percentage-distribution-model");
-const { Types } = require("mongoose");
 
 const getLowerLevelUsers = async (req, res) => {
-  let { userId } = req.body;
-  const { _id, role } = req.user;
-  if (!userId) {
-    userId = _id;
-  }
-
+  let userId = getUserId(req);
+  const { role } = req.user;
   if (role === "user") {
     let user = await User.findById(userId).exec();
     user = await populateLowerLevel(user);
@@ -43,10 +38,7 @@ const getLowerLevelUsers = async (req, res) => {
 };
 
 const getUpperLevelUsers = async (req, res) => {
-  let { userId } = req.body;
-  if (!userId) {
-    userId = req.user._id;
-  }
+  let userId = getUserId(req);
   let user = await User.aggregate(parentPipelineUpToLevel(userId, 8)).exec();
   res.json({ user });
 };
@@ -113,21 +105,6 @@ const getUserGroupStatus = async (req, res) => {
       }
     });
   });
-
-  // const currentDayEarning = await PercentDistribution.aggregate(
-  //   totalAmountPipeline(todaysUsers.map((u) => u._id))
-  // );
-
-  // let totalTeamEarning = totalEarning.reduce(
-  //   (pre, curr) => pre + curr.totalAmount,
-  //   0
-  // );
-  // todayTeamEarning = currentDayEarning.reduce(
-  //   (pre, curr) => pre + curr.totalAmount,
-  //   0
-  // );
-
-  //  7 day and 30 day team earning
 
   return res.json({
     totalGroupUser,
