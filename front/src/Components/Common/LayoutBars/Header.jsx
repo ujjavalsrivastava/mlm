@@ -138,7 +138,25 @@ const Header = () => {
                       </Link>
                     </li>
                     <li style={{ marginTop: "10px" }}>
-                      <Link
+                      {
+          
+                        (profile.role == 'admin')?(
+
+                          <Link
+                          to={"/wallet-admin"}
+                          onClick={handleToggle}
+                          style={{ color: "#635d5d" }}
+                        >
+                          <i
+                            className="fa fa-suitcase"
+                            style={{ marginRight: "7px" }}
+                          ></i>
+                          Wallet
+                        </Link>
+
+                        ):(
+
+                       <Link
                         to={"/wallet"}
                         onClick={handleToggle}
                         style={{ color: "#635d5d" }}
@@ -149,6 +167,12 @@ const Header = () => {
                         ></i>
                         Wallet
                       </Link>
+
+                        )
+
+                        
+                      }
+                      
                     </li>
                     <li style={{ marginTop: "10px" }}>
                       <Link
