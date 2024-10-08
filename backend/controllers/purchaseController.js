@@ -131,7 +131,7 @@ const handleWithdrawRequest = async (req, res) => {
   const userId = getUserId(req);
   const { amount, message } = req.body;
 
-  const bankDetails = await BankDetails.findOne({ user: userId });
+  const bankDetails = await BankDetails.findOne({ email: req.user?.email });
   for (let kycDetail of requiredKycFields) {
     if (!bankDetails[kycDetail]) {
       return res
@@ -145,6 +145,7 @@ const handleWithdrawRequest = async (req, res) => {
   }
   const reqData = { user: userId, amount, message };
   const withdraw = await Withdraw(reqData).save();
+  return res.status(200).json({ message: "Withdrawal Request has been sent wait for Approval" });
   res.json(withdraw);
 };
 

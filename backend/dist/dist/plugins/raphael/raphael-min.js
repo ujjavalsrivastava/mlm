@@ -151,10 +151,10 @@
     "undefined" != typeof module && module.exports
       ? (module.exports = k)
       : "undefined" != typeof define
-      ? define("eve", [], function () {
-          return k;
-        })
-      : (a.eve = k);
+        ? define("eve", [], function () {
+            return k;
+          })
+        : (a.eve = k);
 })(this),
   (function (a, b) {
     "function" == typeof define && define.amd
@@ -223,8 +223,8 @@
                 (f[3] = { x: +a[2], y: +a[3] }))
             : (f[0] = { x: +a[e - 2], y: +a[e - 1] })
           : e - 4 == d
-          ? (f[3] = f[2])
-          : d || (f[0] = { x: +a[d], y: +a[d + 1] }),
+            ? (f[3] = f[2])
+            : d || (f[0] = { x: +a[d], y: +a[d + 1] }),
           c.push([
             "C",
             (-f[0].x + 6 * f[1].x + f[2].x) / 6,
@@ -870,12 +870,12 @@
           "finite" == b
             ? !Y[z](+a)
             : "array" == b
-            ? a instanceof Array
-            : ("null" == b && null === a) ||
-              (b == typeof a && null !== a) ||
-              ("object" == b && a === Object(a)) ||
-              ("array" == b && Array.isArray && Array.isArray(a)) ||
-              W.call(a).slice(8, -1).toLowerCase() == b
+              ? a instanceof Array
+              : ("null" == b && null === a) ||
+                (b == typeof a && null !== a) ||
+                ("object" == b && a === Object(a)) ||
+                ("array" == b && Array.isArray && Array.isArray(a)) ||
+                W.call(a).slice(8, -1).toLowerCase() == b
         );
       }),
       (c.angle = function (a, b, d, e, f, g) {
@@ -1001,21 +1001,21 @@
             (a.b = b.b),
             (a.hex = b.hex))
           : c.is(a, "object") && "h" in a && "s" in a && "l" in a
-          ? ((b = c.hsl2rgb(a)),
-            (a.r = b.r),
-            (a.g = b.g),
-            (a.b = b.b),
-            (a.hex = b.hex))
-          : (c.is(a, "string") && (a = c.getRGB(a)),
-            c.is(a, "object") && "r" in a && "g" in a && "b" in a
-              ? ((b = c.rgb2hsl(a)),
-                (a.h = b.h),
-                (a.s = b.s),
-                (a.l = b.l),
-                (b = c.rgb2hsb(a)),
-                (a.v = b.b))
-              : ((a = { hex: "none" }),
-                (a.r = a.g = a.b = a.h = a.s = a.v = a.l = -1))),
+            ? ((b = c.hsl2rgb(a)),
+              (a.r = b.r),
+              (a.g = b.g),
+              (a.b = b.b),
+              (a.hex = b.hex))
+            : (c.is(a, "string") && (a = c.getRGB(a)),
+              c.is(a, "object") && "r" in a && "g" in a && "b" in a
+                ? ((b = c.rgb2hsl(a)),
+                  (a.h = b.h),
+                  (a.s = b.s),
+                  (a.l = b.l),
+                  (b = c.rgb2hsb(a)),
+                  (a.v = b.b))
+                : ((a = { hex: "none" }),
+                  (a.r = a.g = a.b = a.h = a.s = a.v = a.l = -1))),
         (a.toString = xb),
         a
       );
@@ -1071,10 +1071,10 @@
             0 == g
               ? null
               : f == a
-              ? (b - c) / g
-              : f == b
-              ? (c - a) / g + 2
-              : (a - b) / g + 4),
+                ? (b - c) / g
+                : f == b
+                  ? (c - a) / g + 2
+                  : (a - b) / g + 4),
           (d = (60 * ((d + 360) % 6)) / 360),
           (e = 0 == g ? 0 : g / f),
           { h: d, s: e, b: f, toString: vb }
@@ -1091,10 +1091,10 @@
             0 == i
               ? null
               : g == a
-              ? (b - c) / i
-              : g == b
-              ? (c - a) / i + 2
-              : (a - b) / i + 4),
+                ? (b - c) / i
+                : g == b
+                  ? (c - a) / i + 2
+                  : (a - b) / i + 4),
           (d = (60 * ((d + 360) % 6)) / 360),
           (f = (g + h) / 2),
           (e = 0 == i ? 0 : 0.5 > f ? i / (2 * f) : i / (2 - 2 * f)),
@@ -1163,24 +1163,26 @@
                 i[3] && "%" == i[3].slice(-1) && (f /= 100),
                 c.hsb2rgb(b, d, e, f))
               : j[6]
-              ? ((i = j[6][J](eb)),
-                (b = _(i[0])),
-                "%" == i[0].slice(-1) && (b *= 2.55),
-                (d = _(i[1])),
-                "%" == i[1].slice(-1) && (d *= 2.55),
-                (e = _(i[2])),
-                "%" == i[2].slice(-1) && (e *= 2.55),
-                ("deg" == i[0].slice(-3) || "°" == i[0].slice(-1)) &&
-                  (b /= 360),
-                "hsla" == j[1].toLowerCase().slice(0, 4) && (f = _(i[3])),
-                i[3] && "%" == i[3].slice(-1) && (f /= 100),
-                c.hsl2rgb(b, d, e, f))
-              : ((j = { r: b, g: d, b: e, toString: g }),
-                (j.hex =
-                  "#" +
-                  (16777216 | e | (d << 8) | (b << 16)).toString(16).slice(1)),
-                c.is(f, "finite") && (j.opacity = f),
-                j))
+                ? ((i = j[6][J](eb)),
+                  (b = _(i[0])),
+                  "%" == i[0].slice(-1) && (b *= 2.55),
+                  (d = _(i[1])),
+                  "%" == i[1].slice(-1) && (d *= 2.55),
+                  (e = _(i[2])),
+                  "%" == i[2].slice(-1) && (e *= 2.55),
+                  ("deg" == i[0].slice(-3) || "°" == i[0].slice(-1)) &&
+                    (b /= 360),
+                  "hsla" == j[1].toLowerCase().slice(0, 4) && (f = _(i[3])),
+                  i[3] && "%" == i[3].slice(-1) && (f /= 100),
+                  c.hsl2rgb(b, d, e, f))
+                : ((j = { r: b, g: d, b: e, toString: g }),
+                  (j.hex =
+                    "#" +
+                    (16777216 | e | (d << 8) | (b << 16))
+                      .toString(16)
+                      .slice(1)),
+                  c.is(f, "finite") && (j.opacity = f),
+                  j))
           : { r: -1, g: -1, b: -1, hex: "none", error: 1, toString: g };
       }, c)),
       (c.hsb = f(function (a, b, d) {
@@ -1915,39 +1917,39 @@
                     k.translate(q - n, r - p))
                   : k.translate(t[1], t[2])
                 : "r" == v
-                ? 2 == u
-                  ? ((s = s || a.getBBox(1)),
-                    k.rotate(t[1], s.x + s.width / 2, s.y + s.height / 2),
-                    (e += t[1]))
-                  : 4 == u &&
-                    (w
-                      ? ((q = x.x(t[2], t[3])),
-                        (r = x.y(t[2], t[3])),
-                        k.rotate(t[1], q, r))
-                      : k.rotate(t[1], t[2], t[3]),
-                    (e += t[1]))
-                : "s" == v
-                ? 2 == u || 3 == u
-                  ? ((s = s || a.getBBox(1)),
-                    k.scale(
-                      t[1],
-                      t[u - 1],
-                      s.x + s.width / 2,
-                      s.y + s.height / 2
-                    ),
-                    (h *= t[1]),
-                    (i *= t[u - 1]))
-                  : 5 == u &&
-                    (w
-                      ? ((q = x.x(t[3], t[4])),
-                        (r = x.y(t[3], t[4])),
-                        k.scale(t[1], t[2], q, r))
-                      : k.scale(t[1], t[2], t[3], t[4]),
-                    (h *= t[1]),
-                    (i *= t[2]))
-                : "m" == v &&
-                  7 == u &&
-                  k.add(t[1], t[2], t[3], t[4], t[5], t[6]),
+                  ? 2 == u
+                    ? ((s = s || a.getBBox(1)),
+                      k.rotate(t[1], s.x + s.width / 2, s.y + s.height / 2),
+                      (e += t[1]))
+                    : 4 == u &&
+                      (w
+                        ? ((q = x.x(t[2], t[3])),
+                          (r = x.y(t[2], t[3])),
+                          k.rotate(t[1], q, r))
+                        : k.rotate(t[1], t[2], t[3]),
+                      (e += t[1]))
+                  : "s" == v
+                    ? 2 == u || 3 == u
+                      ? ((s = s || a.getBBox(1)),
+                        k.scale(
+                          t[1],
+                          t[u - 1],
+                          s.x + s.width / 2,
+                          s.y + s.height / 2
+                        ),
+                        (h *= t[1]),
+                        (i *= t[u - 1]))
+                      : 5 == u &&
+                        (w
+                          ? ((q = x.x(t[3], t[4])),
+                            (r = x.y(t[3], t[4])),
+                            k.scale(t[1], t[2], q, r))
+                          : k.scale(t[1], t[2], t[3], t[4]),
+                        (h *= t[1]),
+                        (i *= t[2]))
+                    : "m" == v &&
+                      7 == u &&
+                      k.add(t[1], t[2], t[3], t[4], t[5], t[6]),
                 (j.dirtyT = 1),
                 (a.matrix = k);
             }
@@ -1974,8 +1976,8 @@
             return 5 == a.length
               ? [b, 1, 1, a[3], a[4]]
               : 3 == a.length
-              ? [b, 1, 1]
-              : [b, 1];
+                ? [b, 1, 1]
+                : [b, 1];
         }
       },
       Pb = (c._equaliseTransform = function (a, b) {
@@ -2283,28 +2285,29 @@
                 };
               }
             : A.doc.attachEvent
-            ? function (a, b, c, d) {
-                var e = function (a) {
-                  a = a || A.win.event;
-                  var b =
-                      A.doc.documentElement.scrollTop || A.doc.body.scrollTop,
-                    e =
-                      A.doc.documentElement.scrollLeft || A.doc.body.scrollLeft,
-                    f = a.clientX + e,
-                    g = a.clientY + b;
-                  return (
-                    (a.preventDefault = a.preventDefault || Rb),
-                    (a.stopPropagation = a.stopPropagation || Tb),
-                    c.call(d, a, f, g)
-                  );
-                };
-                a.attachEvent("on" + b, e);
-                var f = function () {
-                  return a.detachEvent("on" + b, e), !0;
-                };
-                return f;
-              }
-            : void 0;
+              ? function (a, b, c, d) {
+                  var e = function (a) {
+                    a = a || A.win.event;
+                    var b =
+                        A.doc.documentElement.scrollTop || A.doc.body.scrollTop,
+                      e =
+                        A.doc.documentElement.scrollLeft ||
+                        A.doc.body.scrollLeft,
+                      f = a.clientX + e,
+                      g = a.clientY + b;
+                    return (
+                      (a.preventDefault = a.preventDefault || Rb),
+                      (a.stopPropagation = a.stopPropagation || Tb),
+                      c.call(d, a, f, g)
+                    );
+                  };
+                  a.attachEvent("on" + b, e);
+                  var f = function () {
+                    return a.detachEvent("on" + b, e), !0;
+                  };
+                  return f;
+                }
+              : void 0;
         })(),
         Xb = [],
         Yb = function (a) {
@@ -2721,18 +2724,18 @@
             (k = a
               ? n
               : b
-              ? m
-              : c.findDotsAtSegment(
-                  g,
-                  h,
-                  i[0],
-                  i[1],
-                  i[2],
-                  i[3],
-                  i[4],
-                  i[5],
-                  1
-                )),
+                ? m
+                : c.findDotsAtSegment(
+                    g,
+                    h,
+                    i[0],
+                    i[1],
+                    i[2],
+                    i[3],
+                    i[4],
+                    i[5],
+                    1
+                  )),
             k.alpha && (k = { x: k.x, y: k.y, alpha: k.alpha }),
             k
           );
@@ -2809,10 +2812,10 @@
           1 / d > a
             ? (b = c * a * a)
             : 2 / d > a
-            ? ((a -= 1.5 / d), (b = c * a * a + 0.75))
-            : 2.5 / d > a
-            ? ((a -= 2.25 / d), (b = c * a * a + 0.9375))
-            : ((a -= 2.625 / d), (b = c * a * a + 0.984375)),
+              ? ((a -= 1.5 / d), (b = c * a * a + 0.75))
+              : 2.5 / d > a
+                ? ((a -= 2.25 / d), (b = c * a * a + 0.9375))
+                : ((a -= 2.625 / d), (b = c * a * a + 0.984375)),
           b
         );
       },
@@ -4149,8 +4152,8 @@
                       b in this.attrs
                         ? this.attrs[b]
                         : c.is(this.paper.customAttributes[b], "function")
-                        ? this.paper.customAttributes[b].def
-                        : c._availableAttrs[b]);
+                          ? this.paper.customAttributes[b].def
+                          : c._availableAttrs[b]);
                 return l - 1 ? h : h[g[0]];
               }
               if (null == d && c.is(b, "array")) {
@@ -4812,8 +4815,8 @@
                       "butt" == i["stroke-linecap"]
                         ? "flat"
                         : "square" == i["stroke-linecap"]
-                        ? "square"
-                        : "round"),
+                          ? "square"
+                          : "round"),
                   i["stroke-dasharray"])
                 ) {
                   var T = {
@@ -5125,8 +5128,8 @@
                       b in this.attrs
                         ? this.attrs[b]
                         : c.is(this.paper.customAttributes[b], "function")
-                        ? this.paper.customAttributes[b].def
-                        : c._availableAttrs[b]);
+                          ? this.paper.customAttributes[b].def
+                          : c._availableAttrs[b]);
                 return m - 1 ? h : h[g[0]];
               }
               if (this.attrs && null == d && c.is(b, "array")) {
@@ -5436,8 +5439,8 @@
                     (j.top = g + "px"),
                     (j.position = "absolute"))
                   : b.firstChild
-                  ? b.insertBefore(i, b.firstChild)
-                  : b.appendChild(i),
+                    ? b.insertBefore(i, b.firstChild)
+                    : b.appendChild(i),
                 (h.renderfix = function () {}),
                 h
               );

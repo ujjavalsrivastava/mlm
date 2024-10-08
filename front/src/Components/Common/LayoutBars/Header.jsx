@@ -139,7 +139,7 @@ const Header = () => {
                     </li>
                     <li style={{ marginTop: "10px" }}>
                       <Link
-                        to={"/my-course"}
+                        to={"/wallet"}
                         onClick={handleToggle}
                         style={{ color: "#635d5d" }}
                       >

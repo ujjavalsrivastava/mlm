@@ -21,9 +21,15 @@ const kycUpdate = async (req, res) => {
     InifscCode,
   } = req.body;
   try {
-    const bank = await bankKycModel.findOne({
+    console.log(user.email);
+    let bank = '';
+     bank = await bankKycModel.findOne({
       email: user.email,
     });
+
+    if(!bank){
+       bank = new bankKycModel();
+    }
 
     bank.fullname = fullname;
     bank.email = email;
