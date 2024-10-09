@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const WalletsAdmin = () => {
   const state = useSelector((state) => state);
   const [showModal, setShowModal] = useState(false);
-  const [withdrolReq, setWithdrolReq] = useState({
+  const [withdrolApprovel, setWithdrolApprovel] = useState({
     amount:"",message:""
   });
   const [history, setHistory] = useState([]);
@@ -27,19 +27,20 @@ const WalletsAdmin = () => {
   
   const getStatusColor = (status) => {
     switch (status) {
-      case 'approve':
+      case 'accepted':
         return 'green';
       case 'pending':
         return 'red';
-      case 'Pending':
+      case 'Reject':
         return 'orange';
       default:
         return 'black';
     }
   };
 
-  const handleRowAction  =(status,id)=> {
-    alert(status)
+  const handleRowAction  =(id)=> {
+    setWithdrolApprovel({requestId : id});
+    setShowModal(true);
   }
   const capitalizeFirstLetter = (string) => {
     return string.replace(/\b\w/g, char => char.toUpperCase());
@@ -60,6 +61,17 @@ const WalletsAdmin = () => {
       selector: row => row.user.mobile,
       sortable: true,
     },
+
+    {
+      name: 'Account No',
+      selector: row => row.kyc.accNo,
+      sortable: true,
+    },
+    {
+      name: 'Ifsc No',
+      selector: row => row.kyc.ifscCode,
+      sortable: true,
+    },
   
     {
       name: 'Amount',
@@ -67,10 +79,11 @@ const WalletsAdmin = () => {
       sortable: true,
     },
     {
-      name: 'Remarks',
+      name: 'User Remarks',
       selector: row => row.message,
       sortable: true,
     },
+   
     {
       name: 'Status',
       selector: row => row.status,
@@ -85,7 +98,7 @@ const WalletsAdmin = () => {
         name: 'Actions',
         selector: row => row.status,
         cell: (row) => (
-          <button onClick={() => handleRowAction(row.status,row._id)}>
+          <button onClick={() => handleRowAction(row._id)}>
             Action
           </button>
         ),
@@ -97,36 +110,39 @@ const WalletsAdmin = () => {
  
 
   const handle = (e) => {
-    setWithdrolReq((pre) => ({
+    setWithdrolApprovel((pre) => ({
       ...pre,
       [e.target.name]: e.target.value,
     }));
   };
 
-
+console.log(withdrolApprovel);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!withdrolReq.amount) {
-      toast.error("Enter Amount is Required");
+    
+    if (!withdrolApprovel.status) {
+      toast.error("Enter Status is Required");
       return;
     }
-
-    if (!withdrolReq.message) {
+    if (!withdrolApprovel.adminRemark) {
       toast.error("Enter Message is Required");
       return;
     }
    
     try {
-      const response = await axios.post("user/withdrawal-request", withdrolReq);
+
+      const userConfirmed = window.confirm("Are you sure "+withdrolApprovel.status);
+      if (userConfirmed) {
+      
+      const response = await axios.post("user/withdrawal-approval", withdrolApprovel);
       if (response) {
         toast.success(response.data.message);
         setShowModal(false);
-        withdrolReq.amount = '';
-        withdrolReq.message = '';
         fetchWithdrolHis();
       } else {
         toast.error(response.data.message);
       }
+    } 
     } catch (error) {
     const errorData = error.response.data.error;
     const errorDatafield = error.response.data.field;
@@ -144,7 +160,7 @@ const fetchWithdrolHis = async()=>{
       if(row.status == 'pending'){
         inproAmt +=row.amount;
       }
-      if(row.status == 'approve'){
+      if(row.status == 'accepted'){
         redeem +=row.amount;
       }
       
@@ -180,7 +196,71 @@ console.log('history' + history);
 
         <div class="content">
           
-
+        <div
+            className={`modal fade ${showModal ? "show" : ""}`}
+            style={{ display: showModal ? "block" : "none" }}
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+           >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+              Approve for Request
+              </h5>
+              <button
+                onClick={() => setShowModal(false)}
+                type="button"
+                className="close closebtn"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true" style={{ fontWeight: "bold" }}>
+                  &times;
+                </span>
+              </button>
+            </div>
+            <div className="modal-body">
+            <form onSubmit={handleSubmit}>
+                    <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group has-feedback">
+                          <label class="control-label">Approve/Reject</label>
+                          <select class="form-control" name="status" onChange={handle}>
+                          <option value="">Select Option</option>
+                            <option>accepted</option>
+                            <option>Reject</option>
+                          </select>
+                         
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group has-feedback">
+                          <label class="control-label">
+                           Enter Message
+                          </label>
+                          <input class="form-control"  name="adminRemark" onChange={handle} type="text" />
+                        </div>
+                      </div>
+                      <br />
+                      <br />
+                      <div class="col-md-12">
+                        <button
+                          type="submit"
+                          class="btn btn-success"
+                          
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+            </div>
+          </div>
+        </div>
+      </div>
 
               <DataTable
                 title="Withdrawal Status"

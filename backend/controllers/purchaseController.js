@@ -143,7 +143,7 @@ const handleWithdrawRequest = async (req, res) => {
   if (userAccount.currentAmount < amount) {
     return res.status(400).json({ error: "Insufficient Balance" });
   }
-  const reqData = { user: userId, amount, message };
+  const reqData = { user: userId, amount, message,kyc:bankDetails._id };
   await Withdraw(reqData).save();
   return res
     .status(200)
@@ -154,12 +154,16 @@ const handleUserWithdrawRequest = async (req, res) => {
   const role = req.user.role;
   const userId = getUserId(req);
   let query = { user: userId };
+  let data = [];
   if (role === "admin") {
     query = {};
+     data = await Withdraw.find(query).populate("user").populate("admin").populate("kyc");
+  }else{
+     data = await Withdraw.find(query).populate("user").populate("admin");
   }
-  const data = await Withdraw.find(query).populate("user").populate("approvar");
-  const bankDetails = await BankDetails.findOne({ user: userId });
-  res.json({ ...data, kyc: bankDetails });
+  
+ 
+  res.json(data);
 };
 
 const handleWithdrawalApproval = async (req, res) => {

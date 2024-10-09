@@ -11,7 +11,7 @@ const Wallets = () => {
     amount:"",message:""
   });
   const [history, setHistory] = useState([]);
-
+     console.log({history})
   const [Inprocess, setInprocess] = useState(0);
   const [redeem, setredeem] = useState(0);
 
@@ -47,19 +47,38 @@ const Wallets = () => {
       selector: row => row.amount,
       sortable: true,
     },
+   
     {
-      name: 'Remarks',
-      selector: row => row.message,
+      name: 'Admin Remarks',
+      selector: row => row.adminRemark,
       sortable: true,
     },
     {
       name: 'Status',
       selector: row => row.status,
       sortable: true,
+      cell: (row) => (
+        <div style={{ color: getStatusColor(row.status) }}>
+          {capitalizeFirstLetter(row.status)}
+        </div>
+      ),
     },
   ];
-
- 
+  const capitalizeFirstLetter = (string) => {
+    return string.replace(/\b\w/g, char => char.toUpperCase());
+  };
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'accepted':
+        return 'green';
+      case 'pending':
+        return 'red';
+      case 'Reject':
+        return 'orange';
+      default:
+        return 'black';
+    }
+  };
   
   const wallet = async (id) => {
     const response = await axios.get("user/percent-earning?userId=" + id);
@@ -111,6 +130,7 @@ const Wallets = () => {
 const fetchWithdrolHis = async()=>{
   try {
     const response = await axios.get("user/withdrawal-request");
+    console.log(response);
     setHistory(response.data);
     let inproAmt = 0;
     let redeem = 0;
@@ -118,7 +138,7 @@ const fetchWithdrolHis = async()=>{
       if(row.status == 'pending'){
         inproAmt +=row.amount;
       }
-      if(row.status == 'approve'){
+      if(row.status == 'accepted'){
         redeem +=row.amount;
       }
       
@@ -206,13 +226,13 @@ console.log('history' + history);
 
 
           <div
-        className={`modal fade ${showModal ? "show" : ""}`}
-        style={{ display: showModal ? "block" : "none" }}
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
+            className={`modal fade ${showModal ? "show" : ""}`}
+            style={{ display: showModal ? "block" : "none" }}
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+           >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -266,6 +286,8 @@ console.log('history' + history);
         </div>
       </div>
 
+{
+  Array.isArray(history) &&
 
           <DataTable
       title="Withdrawal Status"
@@ -273,7 +295,7 @@ console.log('history' + history);
       data={history}
       pagination
     />
-      
+  }
          
         </div>
       </div>

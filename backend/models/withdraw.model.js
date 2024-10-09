@@ -7,6 +7,7 @@ const withdrawSchema = new Schema({
   admin: { type: Types.ObjectId, ref: "User", default: null },
   message: { type: String, default: null },
   adminRemark: { type: String, default: null },
+  kyc:  { type: Types.ObjectId, ref: "bankDetails", required: true },
 });
 
 const Withdraw = model("Withdraw", withdrawSchema);

@@ -3,7 +3,7 @@ const typeString = { type: String, default: null };
 const typeNumber = { type: Number, default: null };
 
 const bank = new Schema({
-  user: { type: Types.ObjectId, ref: "User", required: false, unique: true },
+  user: { type: Types.ObjectId, ref: "User", required: true, unique: true },
   fullname: typeString,
   email: typeString,
   mobile: typeNumber,
