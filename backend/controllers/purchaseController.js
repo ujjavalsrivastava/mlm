@@ -143,7 +143,7 @@ const handleWithdrawRequest = async (req, res) => {
   if (userAccount.currentAmount < amount) {
     return res.status(400).json({ error: "Insufficient Balance" });
   }
-  const reqData = { user: userId, amount, message,kyc:bankDetails._id };
+  const reqData = { user: userId, amount, message,kyc:bankDetails._id,currentAmount:userAccount.currentAmount};
   await Withdraw(reqData).save();
   return res
     .status(200)

@@ -72,6 +72,11 @@ const WalletsAdmin = () => {
       selector: row => row.kyc.ifscCode,
       sortable: true,
     },
+    {
+      name: 'Currnt Amount',
+      selector: row => row.currentAmount.toFixed(2),
+      sortable: true,
+    },
   
     {
       name: 'Amount',
