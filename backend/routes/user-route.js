@@ -32,10 +32,12 @@ const {
   getUserTotalEarning,
   handleWithdrawRequest,
   handleUserWithdrawRequest,
+  handleWithdrawalApproval,
 } = require("../controllers/purchaseController");
 const { tryCatch, asyncHandler } = require("../utils/helper");
 const { getUserCourses } = require("../controllers/productController");
 const { uploadProfilePicture } = require("../utils/storage");
+const { adminAuth } = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -83,6 +85,11 @@ router.post(
 router.get(
   "/withdrawal-request",
   tryCatch(asyncHandler(handleUserWithdrawRequest))
+);
+router.post(
+  "/withdrawal-approval",
+  adminAuth,
+  tryCatch(asyncHandler(handleWithdrawalApproval))
 );
 
 module.exports = router;

@@ -123,8 +123,7 @@ function tryCatch(fn) {
     try {
       await fn(req, res, next);
     } catch (error) {
-      logger.error(`tryCatch ${req?.user?._id} ${JSON.stringify(error)}`);
-      console.log("error in tryCatch", JSON.stringify(error));
+      logger.error(`tryCatch ${req?.user} ${JSON.stringify(error)}`);
       next(error);
     }
   };
@@ -187,7 +186,7 @@ const asyncHandler = (requestHandler) => {
   return (req, res, next) => {
     Promise.resolve(requestHandler(req, res, next)).catch((err) => {
       next(err);
-      logger.error(`asyncHandler ${JSON.stringify(err)}`);
+      logger.error(`asyncHandler ${JSON.stringify(err)} ${req.user}`);
     });
   };
 };

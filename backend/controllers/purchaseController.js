@@ -162,6 +162,46 @@ const handleUserWithdrawRequest = async (req, res) => {
   res.json({ ...data, kyc: bankDetails });
 };
 
+const handleWithdrawalApproval = async (req, res) => {
+  const userId = getUserId(req);
+  const { requestId, status, adminRemark } = req.body;
+  try {
+    const data = await Withdraw.findById(requestId).populate("user");
+    if (data) {
+      data.status = status;
+      data.adminRemark = adminRemark;
+      data.admin = userId;
+      await data.save();
+      const requestUserId = data.user?._id;
+      if (status === "accepted") {
+        const [percentDistribution, userPurchase] = await Promise.all([
+          PercentDistribution.findOne({ userId: requestUserId }),
+          UserPurchase.findOne({ userId: requestUserId }),
+        ]);
+        if (percentDistribution && userPurchase) {
+          const amount = -data.amount;
+          const percentData = {
+            senderId: userId,
+            receiverId: requestUserId,
+            percent: 100,
+            amount,
+          };
+          percentDistribution.purchaseHistory.push(percentData);
+          userPurchase.currentAmount += amount;
+          percentDistribution.save();
+          userPurchase.save();
+        }
+      }
+      return res.json({
+        message: "Status updated successfully",
+      });
+    }
+  } catch (error) {
+    logger.error("handleWIthdrawalApproval requestId not found");
+    res.status(400).json({ error: "requestId not found" });
+  }
+};
+
 module.exports = {
   handleProductPurchase,
   getUserAccountAndPurcheseHistory,
@@ -170,4 +210,5 @@ module.exports = {
   getUserTotalEarning,
   handleWithdrawRequest,
   handleUserWithdrawRequest,
+  handleWithdrawalApproval,
 };
