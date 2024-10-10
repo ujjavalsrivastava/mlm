@@ -135,9 +135,10 @@ const updateProfile = async (req, res) => {
 const changePassword = async (req, res) => {
   const user = req.user;
   const { newPassword, oldPassword } = req.body;
+console.log(newPassword);
   if (!newPassword || !oldPassword)
     return res.status(404).json({ error: "old and new password required" });
-  if (newPassword.trim().length > 5)
+  if (newPassword.trim().length < 5)
     return res
       .status(404)
       .json({ error: "Password should be greater than 5 character" });
