@@ -51,7 +51,7 @@ router.get("/check-refrealcode", tryCatch(asyncHandler(checkRrefrealcode)));
 router.get("/profile", tryCatch(asyncHandler(getUserProfile)));
 router.get("/courses", tryCatch(asyncHandler(getUserCourses)));
 router.post("/profile", tryCatch(asyncHandler(updateProfile)));
-router.put("/change-password", tryCatch(asyncHandler(changePassword)));
+router.post("/change-password", tryCatch(asyncHandler(changePassword)));
 router.get("/lower-users", tryCatch(asyncHandler(getLowerLevelUsers)));
 router.get("/upper-users", tryCatch(asyncHandler(getUpperLevelUsers)));
 router.post("/purchase", tryCatch(asyncHandler(handleProductPurchase)));
