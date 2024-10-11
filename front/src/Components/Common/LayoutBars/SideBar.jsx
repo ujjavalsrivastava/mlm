@@ -69,6 +69,16 @@ const SideBar = () => {
 
             {profile && profile.role == "admin" ? (
               <>
+               <li className={pathname === "/assoc-report" ? "selected" : ""}>
+                  <Link to={"/assoc-report"}>
+                    <i
+                      className="fa fa-level-up"
+                      aria-hidden="true"
+                      style={{ marginRight: "7px" }}
+                    ></i>
+                    Associate Report
+                  </Link>
+                </li>
                 <li className={pathname === "/level" ? "selected" : ""}>
                   <Link to={"/level"}>
                     <i
@@ -79,6 +89,8 @@ const SideBar = () => {
                     Update Level
                   </Link>
                 </li>
+
+               
               </>
             ) : null}
           </ul>

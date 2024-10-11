@@ -177,7 +177,14 @@ function countUsersAtEachLevel(
 }
 
 const getUserLevelStatus = async (req, res) => {
-  const user = req.user;
+  const { _id } = req.query;
+  let user =[];
+  if(_id){
+     user = await User.findOne({ _id });
+  }else{
+     user = req.user;
+  }
+
   const allLowerLevelUsers = await populateLowerLevel(user, 0, 8);
   const data = countUsersAtEachLevel(allLowerLevelUsers, 1);
   res.json({ ...data });
@@ -376,6 +383,17 @@ const checkRrefrealcode = async (req, res) => {
   }
 };
 
+const associateList = async(req,res)=>{
+  try{
+    const user = await User.find({ parentId:null });
+
+    res.json({ user });
+   // return res.status(200).send({ message: "User not found", data: user });
+} catch (error) {
+  res.status(500).send({ message: error});
+}
+}
+
 module.exports = {
   contectForm,
   checkRrefrealcode,
@@ -393,4 +411,5 @@ module.exports = {
   handleForgotPassword,
   verifyResetCode,
   handleRewardStore,
+  associateList,
 };
