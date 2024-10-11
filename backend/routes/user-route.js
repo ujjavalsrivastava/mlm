@@ -16,6 +16,7 @@ const {
   verifyResetCode,
   contectForm,
   handleRewardStore,
+  associateList
 } = require("../controllers/userController");
 
 const {
@@ -90,6 +91,12 @@ router.post(
   "/withdrawal-approval",
   adminAuth,
   tryCatch(asyncHandler(handleWithdrawalApproval))
+);
+
+router.get(
+  "/associate-list",
+  adminAuth,
+  tryCatch(asyncHandler(associateList))
 );
 
 module.exports = router;
