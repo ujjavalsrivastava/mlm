@@ -276,7 +276,7 @@ const handleForgotPassword = async (req, res) => {
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,
       port: process.env.MAIL_PORT,
-      secure: false,
+      secure: process.env.MAIL_ENCRYPTION === 'ssl', 
       auth: {
         user: process.env.MAIL_USERNAME,
         pass: process.env.MAIL_PASSWORD,
@@ -297,7 +297,7 @@ const handleForgotPassword = async (req, res) => {
       .send({ message: "Password reset code sent to your email", status: 200 });
   } catch (error) {
     logger.error(`forgotPasswordMail ${email} ${JSON.stringify(error)}`);
-    res.status(500).send({ message: "Server error" });
+    res.status(500).send({ message: error });
   }
 };
 
