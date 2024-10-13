@@ -79,6 +79,16 @@ const SideBar = () => {
                     Associate Report
                   </Link>
                 </li>
+                <li className={pathname === "/direct-team-report" ? "selected" : ""}>
+                  <Link to={"/direct-team-report"}>
+                    <i
+                      className="fa fa-level-up"
+                      aria-hidden="true"
+                      style={{ marginRight: "7px" }}
+                    ></i>
+                    Direct Team Report
+                  </Link>
+                </li>
                 <li className={pathname === "/level" ? "selected" : ""}>
                   <Link to={"/level"}>
                     <i

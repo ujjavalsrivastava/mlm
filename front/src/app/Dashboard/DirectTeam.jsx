@@ -5,8 +5,9 @@ import { axios } from "../../helper/httpHelper";
 import { fetchProfile } from "../../store/profileReducer";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import $ from 'jquery';
-const AssocReport = () => {
+const DirectTeam = () => {
   const state = useSelector((state) => state);
   const [showModal, setShowModal] = useState(false);
 
@@ -46,8 +47,42 @@ const AssocReport = () => {
                   </>
     ),
     },
-   
 
+    {
+      name: 'Today Team Size',
+      selector: row => row._id,
+      cell: (row) => (
+          <div id={`today_team_size_${row._id}`}>
+        <button   onClick={() => handletotalMember(row._id)}>
+          Show Balance
+        </button>
+        </div>
+      ),
+    },
+
+    {
+      name: 'All Team Size',
+      selector: row => row._id,
+      cell: (row) => (
+          <div id={`all_team_size_${row._id}`}>
+        <button    onClick={() => handletotalMember(row._id)}>
+          Show Balance
+        </button>
+        </div>
+      ),
+    },
+   
+    {
+      name: 'Today Earning',
+      selector: row => row._id,
+      cell: (row) => (
+          <div id={`today_bal_${row._id}`}>
+        <button    onClick={() => handleShowBal(row._id )}>
+          Show Balance
+        </button>
+        </div>
+      ),
+    },
     {
         name: 'Total Earning',
         selector: row => row._id,
@@ -61,16 +96,18 @@ const AssocReport = () => {
       },
 
       {
-        name: 'Complete Leve',
-        selector: row => row._id,
+        name: 'Joing Date',
+        selector: row => row.createdAt,
         cell: (row) => (
-            <div id={`level_${row._id}`}>
-          <button onClick={() => handleLeve(row._id,this)}>
-            Show Level
-          </button>
-          </div>
+            
+          <span>
+            {moment(row.createdAt).format('DD/MM/YYYY')}
+          </span>
+          
         ),
       },
+
+      
 
       {
         name: 'Hirarcy',
@@ -83,17 +120,7 @@ const AssocReport = () => {
         ),
       },
 
-      {
-        name: 'Added Downline Member',
-        selector: row => row._id,
-        cell: (row) => (
-        <div id={`member_${row._id}`}>
-          <button onClick={() => handletotalMember(row._id)}>
-            Show Member
-          </button>
-          </div>
-        ),
-      },
+      
   ];
 
  
@@ -101,7 +128,9 @@ const AssocReport = () => {
     const response = await axios.get("user/percent-earning?userId=" + id);
     console.log(response)
     const totalvalue =response.data.overallEarning.toFixed(2) ;
+    const todayvalue =response.data.oneDayEarning.toFixed(2) ;
     $('#bal_'+id).text(totalvalue);
+    $('#today_bal_'+id).text(totalvalue);
   
   }
 
@@ -112,7 +141,7 @@ const AssocReport = () => {
     const len = totalvalue?.totalByLevel
     ? Object.keys(totalvalue?.totalByLevel).length
     : 0;
-    $('#level_'+id).text(len -1);
+    $('#level_'+id).text(len);
  
   }
   
@@ -121,8 +150,10 @@ const AssocReport = () => {
     const response = await axios.get("user/group-status?userId=" + id);
    
     const totalvalue =response.data?.totalGroupUser.toFixed(2);
+    const todayvalue =response.data?.todayGroupUser.toFixed(2);
   
-    $('#member_'+id).text(totalvalue);
+    $('#today_team_size_'+id).text(todayvalue);
+    $('#all_team_size_'+id).text(totalvalue);
  
   }
  
@@ -131,7 +162,7 @@ console.log(data);
 
 const fetchWithdrolHis = async()=>{
   try {
-    const response = await axios.get("user/associate-list");
+    const response = await axios.get("user/associate-list?type=direct");
     setHistory(response.data.user);
  
   } catch (error) {
@@ -181,4 +212,4 @@ const fetchWithdrolHis = async()=>{
   );
 };
 
-export default AssocReport;
+export default DirectTeam;

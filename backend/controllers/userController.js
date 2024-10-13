@@ -385,7 +385,14 @@ const checkRrefrealcode = async (req, res) => {
 
 const associateList = async(req,res)=>{
   try{
-    const user = await User.find({ parentId:null });
+    const { type } = req.query;
+   let user = [];
+   if(type){
+     user = await User.find();
+   }else{
+     user = await User.find({ parentId:null });
+   }
+   
 
     res.json({ user });
    // return res.status(200).send({ message: "User not found", data: user });

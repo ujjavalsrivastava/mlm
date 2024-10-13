@@ -18,6 +18,9 @@ import Invoice from "../../app/Dashboard/Invoice";
 import Wallets from "../../app/Dashboard/Wallets";
 import WalletsAdmin from "../../app/Dashboard/WalletsAdmin";
 import AssocReport from "../../app/Dashboard/AssocReport";
+import DirectTeam from "../../app/Dashboard/DirectTeam";
+
+
 
 export const authRoutes = [
 
@@ -41,5 +44,6 @@ export const authRoutes = [
   { path: "/wallet", Component: Wallets },
   { path: "/wallet-admin", Component: WalletsAdmin },
   { path: "/assoc-report", Component: AssocReport },
+  { path: "/direct-team-report", Component: DirectTeam },
   
 ];
