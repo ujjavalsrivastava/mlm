@@ -1,7 +1,7 @@
 import { default as createAxios } from "axios";
 
 const axios = createAxios.create({
-  baseURL: `http://localhost:3000/api`,
+  baseURL: `/api`,
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${localStorage.getItem("token")}`,
