@@ -386,7 +386,7 @@ const checkRrefrealcode = async (req, res) => {
 const associateList = async (req, res) => {
   const { type } = req.query;
   let user = [];
-  if (type) {
+  if (type === "direct") {
     user = await User.find().populate("parentId");
   } else {
     user = await User.find({ parentId: null });
