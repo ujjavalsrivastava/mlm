@@ -19,14 +19,19 @@ const changePassword = () => {
         toast.error("New password and confim password not match");
         return false;
       }
-      const response = await axios.post("user/change-password", data);
+      const response = await axios.put("user/change-password", data);
       console.log(response);
       if (response.data?.code == "802") {
         toast.error(response.data.error);
       } else {
-        localStorage.clear();
-        window.location.assign("/login");
         toast.success(response.data.message);
+        setTimeout(() => {
+          localStorage.clear();
+          window.location.assign("/login");
+        }, 3000);
+    
+        
+        
       }
     } catch (error) {
       toast.error(error?.response?.data?.error);
