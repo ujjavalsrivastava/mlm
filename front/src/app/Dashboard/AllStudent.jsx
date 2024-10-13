@@ -6,9 +6,12 @@ import { fetchProfile } from "../../store/profileReducer";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import { fetchAllUsers } from "../../store/users";
 import $ from 'jquery';
 const AllStudent = () => {
   const state = useSelector((state) => state);
+  const usersData = useSelector((state) => state.users);
+
   const [showModal, setShowModal] = useState(false);
 
   const [history, setHistory] = useState([]);
@@ -18,6 +21,7 @@ const AllStudent = () => {
 
   const [showBal, setShowBal] = useState(0);
   const [data, setData] = useState([]);
+  const dispatch = useDispatch();
   
 
   // const data = [
@@ -171,12 +175,12 @@ const fetchWithdrolHis = async()=>{
   }
 }
   
+useEffect(() => {
+  if (usersData.status !== "succeeded") dispatch(fetchAllUsers());
+}, []);
 
+const usersList = usersData.data?.user;
 
-  useEffect(()=>{
- 
-    fetchWithdrolHis();
-  },[])
   return (
     <>
       <div class="content-wrapper">
@@ -199,7 +203,7 @@ const fetchWithdrolHis = async()=>{
               <DataTable
                 title="Withdrawal Status"
                 columns={columns}
-                data={history}
+                data={usersList}
                 pagination
                 />
         }
