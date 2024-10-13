@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 
 import "./Tree.css";
 import { axios } from "../../helper/httpHelper";
+import { findUserById } from "../../utils/helper";
 
 const Tree = () => {
   const lowerProfile = useSelector((state) => state.levels);
@@ -17,9 +18,19 @@ const Tree = () => {
     const query = new URLSearchParams(search);
     const userId = query.get("user");
     if (Array.isArray(lowerProfile?.data)) {
+      console.log("lowerProfile", lowerProfile.data);
+
       if (userId) {
         const findUser = lowerProfile.data.find((u) => u.id === userId);
-        findUser && setData([findUser]);
+        console.log({ findUser });
+        if (findUser) {
+          setData([findUser]);
+        } else {
+          const getUser = findUserById(lowerProfile.data, userId);
+          console.log({ getUser });
+
+          getUser && setData([getUser]);
+        }
       } else {
         setData(lowerProfile.data);
       }
