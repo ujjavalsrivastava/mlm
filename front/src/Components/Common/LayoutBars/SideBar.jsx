@@ -33,7 +33,7 @@ const SideBar = () => {
             <div className="image text-center">
               <img
                 src={profile?.image ? URL.createObjectURL(profile.image) : logo}
-                className="img-circle"
+                className="img-circle sidebar-profile-image"
                 alt="User Image"
               />
             </div>
@@ -69,7 +69,7 @@ const SideBar = () => {
 
             {profile && profile.role == "admin" ? (
               <>
-               <li className={pathname === "/assoc-report" ? "selected" : ""}>
+                <li className={pathname === "/assoc-report" ? "selected" : ""}>
                   <Link to={"/assoc-report"}>
                     <i
                       className="fa fa-level-up"
@@ -79,7 +79,11 @@ const SideBar = () => {
                     Associate Report
                   </Link>
                 </li>
-                <li className={pathname === "/direct-team-report" ? "selected" : ""}>
+                <li
+                  className={
+                    pathname === "/direct-team-report" ? "selected" : ""
+                  }
+                >
                   <Link to={"/direct-team-report"}>
                     <i
                       className="fa fa-level-up"
@@ -99,8 +103,6 @@ const SideBar = () => {
                     Update Level
                   </Link>
                 </li>
-
-               
               </>
             ) : null}
           </ul>

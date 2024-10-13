@@ -21,11 +21,7 @@ const DirectTeam = () => {
   const [showBal, setShowBal] = useState(0);
   const [data, setData] = useState([]);
 
-  // const data = [
-  //   { id: 1, amount: '0', status: 'Pending' },
-  //   { id: 2, amount: '0', status: 'Pending' },
-  //   { id: 3, amount: '0', status: 'Pending' },
-  // ];
+
 
   const columns = [
     {

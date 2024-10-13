@@ -1,13 +1,15 @@
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
+const mongoSanitize = require("express-mongo-sanitize");
+const morgan = require("morgan");
 require("dotenv").config({ path: ".env" });
 const levelPercent = require("./routes/level-percentage");
 const kycRoute = require("./routes/kyc-route");
 const { userRoutes, productRoutes, videoRoutes } = require("./routes");
 const connectDB = require("./config/connection");
-const path = require("path");
-const morgan = require("morgan");
 const logger = require("./config/logger");
+
 (async () => {
   const PORT = process.env.APP_PORT;
   const chalk = (await import("chalk")).default;
@@ -23,7 +25,8 @@ const logger = require("./config/logger");
       credentials: true,
     })
   );
-  app.use(express.json());
+  app.use(express.json({ limit: "1kb", strict: true }));
+  app.use(mongoSanitize());
   // Define custom tokens for method, url, and status
   morgan.token("status", (req, res) => {
     const status = res.statusCode;
