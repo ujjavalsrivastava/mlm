@@ -98,7 +98,7 @@ const loginHandler = async (req, res) => {
   res.json({ message: "Login Successful", token, code: 801 });
 };
 
-const getUserProfile = (req, res) => {
+const getUserProfile = async (req, res) => {
   res.json(req.user);
 };
 
@@ -135,7 +135,7 @@ const updateProfile = async (req, res) => {
 const changePassword = async (req, res) => {
   const user = req.user;
   const { newPassword, oldPassword } = req.body;
-console.log(newPassword);
+  console.log(newPassword);
   if (!newPassword || !oldPassword)
     return res.status(404).json({ error: "old and new password required" });
   if (newPassword.trim().length < 5)
@@ -178,11 +178,11 @@ function countUsersAtEachLevel(
 
 const getUserLevelStatus = async (req, res) => {
   const { _id } = req.query;
-  let user =[];
-  if(_id){
-     user = await User.findOne({ _id });
-  }else{
-     user = req.user;
+  let user = [];
+  if (_id) {
+    user = await User.findOne({ _id });
+  } else {
+    user = req.user;
   }
 
   const allLowerLevelUsers = await populateLowerLevel(user, 0, 8);
@@ -383,23 +383,16 @@ const checkRrefrealcode = async (req, res) => {
   }
 };
 
-const associateList = async(req,res)=>{
-  try{
-    const { type } = req.query;
-   let user = [];
-   if(type){
-     user = await User.find();
-   }else{
-     user = await User.find({ parentId:null });
-   }
-   
-
-    res.json({ user });
-   // return res.status(200).send({ message: "User not found", data: user });
-} catch (error) {
-  res.status(500).send({ message: error});
-}
-}
+const associateList = async (req, res) => {
+  const { type } = req.query;
+  let user = [];
+  if (type) {
+    user = await User.find().populate("parentId");
+  } else {
+    user = await User.find({ parentId: null });
+  }
+  res.json({ user });
+};
 
 module.exports = {
   contectForm,

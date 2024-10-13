@@ -2,7 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const { kycUpdate, fetchkyc } = require("../controllers/kycController");
 const { auth } = require("../middleware/auth");
-const { tryCatch, asyncHandler } = require("../utils/helper");
+const { asyncHandler } = require("../utils/helper");
 
 const router = express.Router();
 
@@ -22,9 +22,9 @@ router.post(
   "/kyc-update",
   auth,
   upload.single("file"),
-  tryCatch(asyncHandler(kycUpdate))
+  asyncHandler(kycUpdate)
 );
 
-router.get("/kyc", auth, tryCatch(asyncHandler(fetchkyc)));
+router.get("/kyc", auth, asyncHandler(fetchkyc));
 
 module.exports = router;

@@ -118,17 +118,6 @@ const distributeUserPercentage = async (
   }
 };
 
-function tryCatch(fn) {
-  return async (req, res, next) => {
-    try {
-      await fn(req, res, next);
-    } catch (error) {
-      logger.error(`tryCatch ${req?.user} ${JSON.stringify(error)}`);
-      next(error);
-    }
-  };
-}
-
 const getUserId = (req) => req.query?.userId || req.user?._id;
 
 function flattenUsers(userArray) {
@@ -182,14 +171,13 @@ const totalAmountPipeline = (userIds) => [
   },
 ];
 
-const asyncHandler = (requestHandler) => {
-  return (req, res, next) => {
-    Promise.resolve(requestHandler(req, res, next)).catch((err) => {
-      next(err);
-      logger.error(`asyncHandler ${JSON.stringify(err)} ${req.user}`);
-    });
-  };
-};
+const asyncHandler = (requestHandler) => (req, res, next) =>
+  Promise.resolve(requestHandler(req, res, next)).catch((err) => {
+    next(err);
+    logger.error(
+      `asyncHandler ${req.originalUrl} ${req.user} ${JSON.stringify(err)}`
+    );
+  });
 
 const collectUserIdsByLevel = (user, level = 1, result = {}) => {
   if (!result[level]) {
@@ -298,7 +286,6 @@ module.exports = {
   parentPipelineUpToLevel,
   distributeUserPercentage,
   handlePromiseError,
-  tryCatch,
   getUserId,
   flattenUsers,
   usersJoinedToday,
