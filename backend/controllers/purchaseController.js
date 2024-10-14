@@ -37,7 +37,8 @@ const getUserProductsAndBalance = async (req, res) => {
 
 const getUserPercentDistribution = async (req, res) => {
   const userId = getUserId(req);
-
+const {from} =  req.query;
+console.log(from);
   const [error, percentDistribution] = await handlePromiseError(
     PercentDistribution.findOne({ userId })
   );
@@ -45,11 +46,11 @@ const getUserPercentDistribution = async (req, res) => {
   let oneWeekEarning = 0;
   let oneMonthEarning = 0;
   let overallEarning = 0;
-  let totalWithdrawal = 0;
+  
   if (percentDistribution?.purchaseHistory?.length) {
     percentDistribution.purchaseHistory.forEach((h) => {
-      if (h.amount < 0) {
-        totalWithdrawal -= h.amount;
+      if (h.amount < 0 && from !=='member')  {
+       
         return;
       }
       if (h.createdAt > oneDayAgo()) {
@@ -75,7 +76,7 @@ const getUserPercentDistribution = async (req, res) => {
     oneWeekEarning,
     oneMonthEarning,
     overallEarning,
-    totalWithdrawal,
+    
   });
 };
 const getUserAccountAndPurcheseHistory = async (req, res) => {

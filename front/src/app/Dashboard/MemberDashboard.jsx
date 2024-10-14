@@ -11,6 +11,7 @@ const MemberDashboard = () => {
   const [showBal, setShowBal] = useState(0);
 
   const lowerProfiles = useSelector((state) => state.levels);
+  
   const [usersTotalEarnings, setUsersTotalEarnings] = useState([]);
   const [AllTimeDirectTeam, setAllTimeDirectTeam] = useState(0);
   const user = useSelector((state) => state.profile?.data || {});
@@ -66,20 +67,17 @@ const MemberDashboard = () => {
     }
   };
 
-  const showBalance = async (id) => {
-    const response = await axios.get("user/percent-earning?userId=" + id);
+  const showBalance = async () => {
+    const response = await axios.get(`user/percent-earning`);
     setShowBal(response.data);
   };
 
   useEffect(() => {
     fetchPurchage();
     groupStatus();
-    if (!user?._id) {
-      dispatch(fetchProfile());
-    } else {
-      showBalance(user?._id);
-    }
-
+    
+    
+    showBalance();
     if (lowerProfiles.status !== "succeeded") {
       dispatch(fetchLowerProfiles());
     }
