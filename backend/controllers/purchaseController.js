@@ -45,9 +45,11 @@ const getUserPercentDistribution = async (req, res) => {
   let oneWeekEarning = 0;
   let oneMonthEarning = 0;
   let overallEarning = 0;
+  let totalWithdrawal = 0;
   if (percentDistribution?.purchaseHistory?.length) {
     percentDistribution.purchaseHistory.forEach((h) => {
       if (h.amount < 0) {
+        totalWithdrawal -= h.amount;
         return;
       }
       if (h.createdAt > oneDayAgo()) {
@@ -68,7 +70,13 @@ const getUserPercentDistribution = async (req, res) => {
     );
     return res.status(400).json({ error });
   }
-  res.json({ oneDayEarning, oneWeekEarning, oneMonthEarning, overallEarning });
+  res.json({
+    oneDayEarning,
+    oneWeekEarning,
+    oneMonthEarning,
+    overallEarning,
+    totalWithdrawal,
+  });
 };
 const getUserAccountAndPurcheseHistory = async (req, res) => {
   const userId = getUserId(req);
