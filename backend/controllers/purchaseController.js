@@ -47,6 +47,9 @@ const getUserPercentDistribution = async (req, res) => {
   let overallEarning = 0;
   if (percentDistribution?.purchaseHistory?.length) {
     percentDistribution.purchaseHistory.forEach((h) => {
+      if (h.amount < 0) {
+        return;
+      }
       if (h.createdAt > oneDayAgo()) {
         oneDayEarning += h.amount;
       }
@@ -143,7 +146,13 @@ const handleWithdrawRequest = async (req, res) => {
   if (userAccount.currentAmount < amount) {
     return res.status(400).json({ error: "Insufficient Balance" });
   }
-  const reqData = { user: userId, amount, message,kyc:bankDetails._id,currentAmount:userAccount.currentAmount};
+  const reqData = {
+    user: userId,
+    amount,
+    message,
+    kyc: bankDetails._id,
+    currentAmount: userAccount.currentAmount,
+  };
   await Withdraw(reqData).save();
   return res
     .status(200)
@@ -157,12 +166,14 @@ const handleUserWithdrawRequest = async (req, res) => {
   let data = [];
   if (role === "admin") {
     query = {};
-     data = await Withdraw.find(query).populate("user").populate("admin").populate("kyc");
-  }else{
-     data = await Withdraw.find(query).populate("user").populate("admin");
+    data = await Withdraw.find(query)
+      .populate("user")
+      .populate("admin")
+      .populate("kyc");
+  } else {
+    data = await Withdraw.find(query).populate("user").populate("admin");
   }
-  
- 
+
   res.json(data);
 };
 
