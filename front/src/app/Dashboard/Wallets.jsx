@@ -80,8 +80,8 @@ const Wallets = () => {
     }
   };
   
-  const wallet = async (id) => {
-    const response = await axios.get("user/percent-earning?userId=" + id);
+  const wallet = async () => {
+    const response = await axios.get("user/percent-earning?from=member");
     setShowBal(response.data);
   };
 
@@ -156,13 +156,8 @@ const fetchWithdrolHis = async()=>{
   
 console.log('history' + history);
   useEffect(()=>{
- 
-    if (!user?._id) {
-      dispatch(fetchProfile());
-     
-    }else{
-      wallet(user?._id)
-    }
+    wallet()
+   
     fetchWithdrolHis();
   },[])
   return (

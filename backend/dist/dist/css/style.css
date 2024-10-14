@@ -6716,3 +6716,8 @@ canvas {
 .sidebar-menu li.selected {
   background-color: #29313b;
 }
+
+.user-panel > .image .sidebar-profile-image {
+  width: 45px;
+  height: 45px;
+}
