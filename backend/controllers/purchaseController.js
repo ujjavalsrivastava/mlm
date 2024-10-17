@@ -194,28 +194,30 @@ const handleWithdrawalApproval = async (req, res) => {
         .status(400)
         .json({ error: `withdraw request is in ${data.status} state` });
     }
-    if (data && status === "accepted") {
+    if (data) {
       data.status = status;
       data.adminRemark = adminRemark;
       data.admin = userId;
       await data.save();
-      const requestUserId = data.user?._id;
-      const [percentDistribution, userPurchase] = await Promise.all([
-        PercentDistribution.findOne({ userId: requestUserId }),
-        UserPurchase.findOne({ userId: requestUserId }),
-      ]);
-      if (percentDistribution && userPurchase) {
-        const amount = -data.amount;
-        const percentData = {
-          senderId: userId,
-          receiverId: requestUserId,
-          percent: 100,
-          amount,
-        };
-        percentDistribution.purchaseHistory.push(percentData);
-        userPurchase.currentAmount += amount;
-        percentDistribution.save();
-        userPurchase.save();
+      if (status === "accepted") {
+        const requestUserId = data.user?._id;
+        const [percentDistribution, userPurchase] = await Promise.all([
+          PercentDistribution.findOne({ userId: requestUserId }),
+          UserPurchase.findOne({ userId: requestUserId }),
+        ]);
+        if (percentDistribution && userPurchase) {
+          const amount = -data.amount;
+          const percentData = {
+            senderId: userId,
+            receiverId: requestUserId,
+            percent: 100,
+            amount,
+          };
+          percentDistribution.purchaseHistory.push(percentData);
+          userPurchase.currentAmount += amount;
+          percentDistribution.save();
+          userPurchase.save();
+        }
       }
       return res.json({
         message: "Status updated successfully",
