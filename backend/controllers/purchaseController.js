@@ -191,6 +191,11 @@ const handleWithdrawalApproval = async (req, res) => {
   const { requestId, status, adminRemark } = req.body;
   try {
     const data = await Withdraw.findById(requestId).populate("user");
+    if (data && data.status !== "pending") {
+      return res
+        .status(400)
+        .json({ error: `withdraw request is in ${data.status} state` });
+    }
     if (data) {
       data.status = status;
       data.adminRemark = adminRemark;
