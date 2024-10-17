@@ -37,8 +37,8 @@ const getUserProductsAndBalance = async (req, res) => {
 
 const getUserPercentDistribution = async (req, res) => {
   const userId = getUserId(req);
-const {from} =  req.query;
-console.log(from);
+  const { from } = req.query;
+  console.log(from);
   const [error, percentDistribution] = await handlePromiseError(
     PercentDistribution.findOne({ userId })
   );
@@ -46,11 +46,10 @@ console.log(from);
   let oneWeekEarning = 0;
   let oneMonthEarning = 0;
   let overallEarning = 0;
-  
+
   if (percentDistribution?.purchaseHistory?.length) {
     percentDistribution.purchaseHistory.forEach((h) => {
-      if (h.amount < 0 && from !=='member')  {
-       
+      if (h.amount < 0 && from !== "member") {
         return;
       }
       if (h.createdAt > oneDayAgo()) {
@@ -76,7 +75,6 @@ console.log(from);
     oneWeekEarning,
     oneMonthEarning,
     overallEarning,
-    
   });
 };
 const getUserAccountAndPurcheseHistory = async (req, res) => {
@@ -196,30 +194,28 @@ const handleWithdrawalApproval = async (req, res) => {
         .status(400)
         .json({ error: `withdraw request is in ${data.status} state` });
     }
-    if (data) {
+    if (data && status === "accepted") {
       data.status = status;
       data.adminRemark = adminRemark;
       data.admin = userId;
       await data.save();
       const requestUserId = data.user?._id;
-      if (status === "accepted") {
-        const [percentDistribution, userPurchase] = await Promise.all([
-          PercentDistribution.findOne({ userId: requestUserId }),
-          UserPurchase.findOne({ userId: requestUserId }),
-        ]);
-        if (percentDistribution && userPurchase) {
-          const amount = -data.amount;
-          const percentData = {
-            senderId: userId,
-            receiverId: requestUserId,
-            percent: 100,
-            amount,
-          };
-          percentDistribution.purchaseHistory.push(percentData);
-          userPurchase.currentAmount += amount;
-          percentDistribution.save();
-          userPurchase.save();
-        }
+      const [percentDistribution, userPurchase] = await Promise.all([
+        PercentDistribution.findOne({ userId: requestUserId }),
+        UserPurchase.findOne({ userId: requestUserId }),
+      ]);
+      if (percentDistribution && userPurchase) {
+        const amount = -data.amount;
+        const percentData = {
+          senderId: userId,
+          receiverId: requestUserId,
+          percent: 100,
+          amount,
+        };
+        percentDistribution.purchaseHistory.push(percentData);
+        userPurchase.currentAmount += amount;
+        percentDistribution.save();
+        userPurchase.save();
       }
       return res.json({
         message: "Status updated successfully",
