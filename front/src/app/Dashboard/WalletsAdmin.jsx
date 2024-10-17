@@ -103,9 +103,14 @@ const WalletsAdmin = () => {
         name: 'Actions',
         selector: row => row.status,
         cell: (row) => (
+          
+          (row.status == 'pending') ?
+          
           <button onClick={() => handleRowAction(row._id)}>
             Action
           </button>
+          :null
+          
         ),
       },
   ];
