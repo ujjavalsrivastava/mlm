@@ -1,4 +1,5 @@
 const bankKycModel = require("../models/bank-details-model");
+const { getUserId } = require("../utils/helper");
 
 const kycUpdate = async (req, res) => {
   const user = req.user;
@@ -21,10 +22,10 @@ const kycUpdate = async (req, res) => {
     InifscCode,
   } = req.body;
   try {
-    console.log(user.email);
+    const userId =  getUserId(req);
     let bank = '';
      bank = await bankKycModel.findOne({
-      email: user.email,
+      user: userId,
     });
 
     if(!bank){
@@ -57,8 +58,9 @@ const kycUpdate = async (req, res) => {
 };
 
 const fetchkyc = async (req, res) => {
-  const user = req.user;
-  let bank = await bankKycModel.findOne({ email: user.email });
+
+  const userId =  getUserId(req);
+  let bank = await bankKycModel.findOne({ user: userId });
 
   res.json({ message: "fetch Successful", bank, code: 801 });
 };

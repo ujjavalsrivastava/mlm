@@ -71,7 +71,9 @@ const handleRewardStore = async (req, res) => {
   try {
     await UserPurchase({ userId, currentAmount: 0 }).save();
     await PercentDistribution({ userId }).save();
-    await bankDetails({ email: user.email, user: userId }).save();
+    if(user.email && userId){
+      await bankDetails({ email: user.email, user: userId }).save();
+    }
     await rewardsHandler(referedUser);
     res.json({ message: "stored successfully" });
   } catch (error) {
