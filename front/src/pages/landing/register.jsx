@@ -204,7 +204,10 @@ const register = () => {
     const response = await axios.post("user/register", data);
     setStoreToken(response.data.token);
     localStorage.setItem("token", response.data.token);
-    await axios.get("user/store-reward");
+    if(response.data.token){
+      await axios.get("user/store-reward",{headers:{Authorization:`Bearer ${response.data.token}`}});
+    }
+
   };
 
   const token = localStorage.getItem("token");
