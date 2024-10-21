@@ -95,7 +95,7 @@ const KYC = () => {
                             type="text"
                             name="fullname"
                             placeholder="Full name..."
-                            value={kyc.fullname}
+                            value={kyc?.fullname}
                             onChange={handleChange}
                           />
                         </div>
@@ -111,7 +111,7 @@ const KYC = () => {
                             disabled
                             placeholder="Email..."
                             onChange={handleChange}
-                            value={kyc.email}
+                            value={kyc?.email}
                           />
                         </div>
                       </div>
@@ -123,7 +123,7 @@ const KYC = () => {
                             type="number"
                             name="mobile"
                             placeholder="Mobile..."
-                            value={kyc.mobile}
+                            value={kyc?.mobile}
                             onChange={handleChange}
                           />
                         </div>
@@ -135,7 +135,7 @@ const KYC = () => {
                             className="form-control"
                             type="text"
                             name="document"
-                            value={kyc.document}
+                            value={kyc?.document}
                             onChange={handleChange}
                           />
                         </div>
@@ -147,7 +147,7 @@ const KYC = () => {
                             className="form-control"
                             type="number"
                             name="addharNo"
-                            value={kyc.addharNo}
+                            value={kyc?.addharNo}
                             placeholder="Addhar number..."
                             onChange={handleChange}
                           />
@@ -160,7 +160,7 @@ const KYC = () => {
                             className="form-control"
                             type="text"
                             name="addharName"
-                            value={kyc.addharName}
+                            value={kyc?.addharName}
                             placeholder="Addhar Name..."
                             onChange={handleChange}
                           />
@@ -173,7 +173,7 @@ const KYC = () => {
                             className="form-control"
                             type="text"
                             name="panNo"
-                            value={kyc.panNo}
+                            value={kyc?.panNo}
                             placeholder="Pan Number..."
                             onChange={handleChange}
                           />
@@ -186,7 +186,7 @@ const KYC = () => {
                             className="form-control"
                             type="text"
                             name="panName"
-                            value={kyc.panName}
+                            value={kyc?.panName}
                             placeholder="Pan Name..."
                             onChange={handleChange}
                           />
@@ -200,7 +200,7 @@ const KYC = () => {
                             className="form-control"
                             type="text"
                             name="BankName"
-                            value={kyc.BankName}
+                            value={kyc?.BankName}
                             placeholder="Bank Name..."
                             onChange={handleChange}
                           />
@@ -216,7 +216,7 @@ const KYC = () => {
                             className="form-control"
                             type="text"
                             name="accHolderName"
-                            value={kyc.accHolderName}
+                            value={kyc?.accHolderName}
                             placeholder="Account Holder Name..."
                             onChange={handleChange}
                           />
@@ -231,7 +231,7 @@ const KYC = () => {
                             className="form-control"
                             type="number"
                             name="accNo"
-                            value={kyc.accNo}
+                            value={kyc?.accNo}
                             placeholder="Account Number..."
                             onChange={handleChange}
                           />
@@ -244,7 +244,7 @@ const KYC = () => {
                             className="form-control"
                             type="text"
                             name="ifscCode"
-                            value={kyc.ifscCode}
+                            value={kyc?.ifscCode}
                             placeholder="IFSC Code..."
                             onChange={handleChange}
                           />
@@ -266,7 +266,7 @@ const KYC = () => {
                             className="form-control"
                             type="text"
                             name="Inbank"
-                            value={kyc.Inbank}
+                            value={kyc?.Inbank}
                             onChange={handleChange}
                           />
                         </div>
@@ -280,7 +280,7 @@ const KYC = () => {
                             className="form-control"
                             type="text"
                             name="InbankName"
-                            value={kyc.InbankName}
+                            value={kyc?.InbankName}
                             onChange={handleChange}
                           />
                         </div>
@@ -294,7 +294,7 @@ const KYC = () => {
                             className="form-control"
                             type="number"
                             name="InaccountNumber"
-                            value={kyc.InaccountNumber}
+                            value={kyc?.InaccountNumber}
                             onChange={handleChange}
                           />
                         </div>
@@ -306,12 +306,12 @@ const KYC = () => {
                             className="form-control"
                             type="text"
                             name="InifscCode"
-                            value={kyc.InifscCode}
+                            value={kyc?.InifscCode}
                             onChange={handleChange}
                           />
                         </div>
                       </div>
-                      <div className="col-md-4" style={{ marginTop: "22px" }}>
+                      {/* <div className="col-md-4" style={{ marginTop: "22px" }}>
                         <div className="form-group has-feedback">
                           <label className="control-label">
                             Upload Cancel Cheque / Passbook / Bank
@@ -323,9 +323,9 @@ const KYC = () => {
                             onChange={handleFile}
                           />
                         </div>
-                      </div>
+                      </div> */}
 
-                      <div className="col-md-4" style={{ marginTop: "22px" }}>
+                      {/* <div className="col-md-4" style={{ marginTop: "22px" }}>
                         <div className="form-group has-feedback">
                           <label className="control-label">OTP Code</label>
                           <input
@@ -335,7 +335,7 @@ const KYC = () => {
                             onChange={handleChange}
                           />
                         </div>
-                      </div>
+                      </div> */}
                       <div
                         className="col-md-12 p-3 "
                         style={{ marginTop: "20px" }}
