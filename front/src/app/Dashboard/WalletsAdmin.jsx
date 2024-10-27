@@ -58,13 +58,28 @@ const WalletsAdmin = () => {
     },
     {
       name: 'Mobile',
-      selector: row => row.user.mobile,
+      selector: row => row.kyc.mobile,
       sortable: true,
     },
-
+    {
+      name: 'Bank Name',
+      selector: row => row.kyc.Inbank,
+      sortable: true,
+    },
+    {
+      name: 'Bank Branch',
+      selector: row => row.kyc?.InbankBranch,
+      sortable: true,
+    },
+    
     {
       name: 'Account No',
       selector: row => row.kyc.accNo,
+      sortable: true,
+    },
+    {
+      name: 'Account Holder Name',
+      selector: row => row.kyc.InbankName,
       sortable: true,
     },
     {

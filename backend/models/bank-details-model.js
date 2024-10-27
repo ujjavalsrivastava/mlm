@@ -17,6 +17,7 @@ const bank = new Schema({
   accNo: typeString,
   ifscCode: typeString,
   Inbank: typeString,
+  InbankBranch: typeString,
   InbankName: typeString,
   InaccountNumber: typeNumber,
   InifscCode: typeString,

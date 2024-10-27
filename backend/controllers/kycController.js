@@ -18,6 +18,7 @@ const kycUpdate = async (req, res) => {
     ifscCode,
     InaccountNumber,
     Inbank,
+    InbankBranch,
     InbankName,
     InifscCode,
   } = req.body;
@@ -45,6 +46,8 @@ const kycUpdate = async (req, res) => {
     bank.accNo = accNo;
     bank.ifscCode = ifscCode;
     bank.Inbank = Inbank;
+    bank.InbankBranch = InbankBranch;
+    
     bank.InbankName = InbankName;
     bank.InaccountNumber = InaccountNumber;
     bank.InifscCode = InifscCode;
