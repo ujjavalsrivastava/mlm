@@ -13,6 +13,13 @@ const requiredFields = [
   { field: "accHolderName", name: "Account Holder Name" },
   { field: "accNo", name: "Account Number" },
   { field: "ifscCode", name: "IFSC code" },
+
+  { field: "Inbank", name: "Bank Name" },
+  { field: "InbankBranch", name: "Bank Branch" },
+  { field: "InbankName", name: "Account Holder Name" },
+  { field: "InaccountNumber", name: "Account No" },
+  { field: "InifscCode", name: "IFSC code" },
+  
 ];
 
 const KYC = () => {
@@ -271,6 +278,21 @@ const KYC = () => {
                           />
                         </div>
                       </div>
+
+                      <div className="col-md-4" style={{ marginTop: "20px" }}>
+                        <div className="form-group has-feedback">
+                          <label className="control-label">Bank Branch</label>
+                          <input
+                            className="form-control"
+                            type="text"
+                            name="InbankBranch"
+                            value={kyc?.InbankBranch}
+                            onChange={handleChange}
+                          />
+                        </div>
+                      </div>
+
+                      
                       <div className="col-md-4" style={{ marginTop: "20px" }}>
                         <div className="form-group has-feedback">
                           <label className="control-label">
