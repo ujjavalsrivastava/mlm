@@ -27,8 +27,15 @@ const KYC = () => {
   const [error, setError] = useState(false);
   const [file, setFile] = useState(false);
 
+  const search = window.location.search;
+const params = new URLSearchParams(search);
+const userId = params.get('userId');
+console.log('userId '+userId);
+
+
   const fetchUserKyc = async () => {
-    const userKyc = await axios.get("/kyc");
+   
+    const userKyc = (userId) ?  await axios.get(`/kyc?userId=${userId}`) : await axios.get(`/kyc`);
     console.log({ userKyc });
 
     if (userKyc.data?.bank) {
