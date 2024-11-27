@@ -209,6 +209,26 @@ const register = () => {
     }
 
   };
+  const [pass1, setpass1] = useState('password');
+  const setPasswordFun1 = ()=>{
+
+    if(pass1 == 'password'){
+      setpass1('text');
+    }else{
+      setpass1('password');
+    }
+   
+  }
+  const [pass2, setpass2] = useState('password');
+  const setPasswordFun2 = ()=>{
+
+    if(pass2 == 'password'){
+      setpass2('text');
+    }else{
+      setpass2('password');
+    }
+   
+  }
 
   const token = localStorage.getItem("token");
   const checklogin = () => {
@@ -549,7 +569,7 @@ const register = () => {
                           <fieldset className="tf-field field-pass-again ">
                             <input
                               className="tf-input style-1"
-                              type="password"
+                              type={pass1}
                               id="password"
                               name="password"
                               onChange={handle}
@@ -557,7 +577,11 @@ const register = () => {
                               placeholder="password"
                               autocomplete="off"
                             />
-
+<a href="javascript:void(0)" onClick={()=>setPasswordFun1()} style={{    display: 'ruby-text',
+    position: 'relative',
+    bottom: '-32px',
+    right: '25px',
+}}> <i class="fa fa-eye-slash" aria-hidden="true"></i></a> 
                             <label
                               className="tf-field-label fs-15"
                               for="field4"
@@ -568,7 +592,7 @@ const register = () => {
                           <fieldset className="tf-field field-pass-again ">
                             <input
                               className="tf-input style-1"
-                              type="password"
+                              type={pass2}
                               id="confirm-password"
                               name="cpassword"
                               onChange={handle}
@@ -576,7 +600,11 @@ const register = () => {
                               placeholder="Confirm Password"
                               autocomplete="off"
                             />
-
+<a href="javascript:void(0)" onClick={()=>setPasswordFun2()} style={{    display: 'ruby-text',
+    position: 'relative',
+    bottom: '-32px',
+    right: '25px',
+}}> <i class="fa fa-eye-slash" aria-hidden="true"></i></a> 
                             <label
                               className="tf-field-label fs-15"
                               for="field4"

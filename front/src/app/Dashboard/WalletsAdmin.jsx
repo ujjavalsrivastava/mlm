@@ -76,6 +76,8 @@ const WalletsAdmin = () => {
       name: 'Account No',
       selector: row => row.kyc.accNo,
       sortable: true,
+       width: '200px'
+    
     },
     {
       name: 'Account Holder Name',
