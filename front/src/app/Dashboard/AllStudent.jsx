@@ -83,6 +83,16 @@ const AllStudent = () => {
       ),
     },
 
+    
+
+    {
+      name: 'Kyc',
+      selector: row => row._id,
+      cell: (row) => (
+          <Link to={`/kyc?userId=${row._id}`}>View</Link>
+      ),
+    },
+
     {
       name: 'Today Team Size',
       selector: row => row._id,
@@ -189,6 +199,7 @@ useEffect(() => {
 }, []);
 
 const usersList = usersData.data?.user;
+console.log(JSON.stringify(usersList));
 
   return (
     <>
