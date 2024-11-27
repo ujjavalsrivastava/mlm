@@ -6,8 +6,19 @@ import { toast } from "react-toastify";
 
 const login = () => {
   const [data, setData] = useState(null);
+  const [pass, setpass] = useState('password');
 
   const navigate = useNavigate();
+
+  const setPasswordFun = ()=>{
+
+    if(pass == 'password'){
+      setpass('text');
+    }else{
+      setpass('password');
+    }
+   
+  }
 
   const handle = (e) => {
     setData((pre) => ({
@@ -91,7 +102,7 @@ const login = () => {
                     <div className="cols">
                       <fieldset className="tf-field field-pass ">
                         <input
-                          type="password"
+                          type={pass}
                           onChange={handle}
                           id="email"
                           required
@@ -99,7 +110,11 @@ const login = () => {
                           placeholder="password..."
                           className="tf-input style-1"
                         />
-
+               <a href="javascript:void(0)" onClick={()=>setPasswordFun()} style={{    display: 'ruby-text',
+    position: 'relative',
+    bottom: '-32px',
+    right: '25px',
+}}> <i class="fa fa-eye-slash" aria-hidden="true"></i></a> 
                         <label className="tf-field-label fs-15" for="field2">
                           Password
                         </label>

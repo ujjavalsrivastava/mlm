@@ -61,6 +61,15 @@ const AllStudent = () => {
     ),
       
     },
+    {
+      name: 'Mobile',
+      cell: (row) => (
+        <>
+      <span style={{padding:'10px'}}>{row.mobile}</span>
+                  </>
+    ),
+      
+    },
 
     {
       name: 'Joing Date',
@@ -201,7 +210,7 @@ const usersList = usersData.data?.user;
         {
   Array.isArray(history) &&
               <DataTable
-                title="Withdrawal Status"
+                title="All Student"
                 columns={columns}
                 data={usersList}
                 pagination
